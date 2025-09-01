@@ -19,17 +19,11 @@ public class ParserData : MonoBehaviour
     Button damageButton;
     [SerializeField]
     Button healButton;
-    List<GameObject> allyDamage;
-    List<GameObject> allyHeal;
-    List<GameObject> enemyDamage;
-    List<GameObject> enemyHeal;
-    void Start()
-    {
-        allyDamage = new List<GameObject>();
-        enemyDamage = new List<GameObject>();
-        allyHeal = new List<GameObject>();
-        enemyHeal = new List<GameObject>();
-    }
+    List<GameObject> allyDamage = new List<GameObject>();
+    List<GameObject> allyHeal = new List<GameObject>();
+    List<GameObject> enemyDamage= new List<GameObject>();
+    List<GameObject> enemyHeal = new List<GameObject>();
+    
     public void OnClickParser()
     {
         if (!init)

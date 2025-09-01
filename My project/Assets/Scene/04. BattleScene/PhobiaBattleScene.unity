@@ -848,16 +848,16 @@ RectTransform:
   m_GameObject: {fileID: 647921419}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.68965507, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.689655, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1125179975}
   - {fileID: 825686543}
-  m_Father: {fileID: 1834680535}
+  m_Father: {fileID: 149938043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -102.47154, y: -172.68}
+  m_AnchoredPosition: {x: 695.07275, y: -172.68}
   m_SizeDelta: {x: 677.7932, y: 385.3664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &647921421
@@ -908,7 +908,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &664244755
 GameObject:
@@ -1152,6 +1152,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1295059875377714720, guid: 93a2da44f4bd23747aeb980811f49692, type: 3}
       insertIndex: 2
       addedObject: {fileID: 1834680535}
+    - targetCorrespondingSourceObject: {fileID: 1295059875377714720, guid: 93a2da44f4bd23747aeb980811f49692, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 647921420}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93a2da44f4bd23747aeb980811f49692, type: 3}
 --- !u!1 &800635998
@@ -1259,7 +1262,6 @@ GameObject:
   - component: {fileID: 825686547}
   - component: {fileID: 825686546}
   - component: {fileID: 825686545}
-  - component: {fileID: 825686544}
   m_Layer: 5
   m_Name: Heal Button
   m_TagString: Untagged
@@ -1287,24 +1289,6 @@ RectTransform:
   m_AnchoredPosition: {x: -119.99979, y: 188.99974}
   m_SizeDelta: {x: 110.3802, y: 42.4049}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &825686544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 825686542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831184b0c2090d44fb6b560db1dc17d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleParser: {fileID: 0}
-  battleLog: {fileID: 0}
-  maxButton: {fileID: 0}
-  minButton: {fileID: 0}
-  damageButton: {fileID: 0}
-  healButton: {fileID: 0}
 --- !u!114 &825686545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,7 +1333,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 825686544}
+      - m_Target: {fileID: 1834680539}
         m_TargetAssemblyTypeName: ParserData, Assembly-CSharp
         m_MethodName: HealButton
         m_Mode: 1
@@ -2079,7 +2063,6 @@ GameObject:
   - component: {fileID: 1125179979}
   - component: {fileID: 1125179978}
   - component: {fileID: 1125179977}
-  - component: {fileID: 1125179976}
   m_Layer: 5
   m_Name: Damage Button
   m_TagString: Untagged
@@ -2107,24 +2090,6 @@ RectTransform:
   m_AnchoredPosition: {x: -259.99985, y: 188.99974}
   m_SizeDelta: {x: 110.3802, y: 42.4049}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1125179976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125179974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831184b0c2090d44fb6b560db1dc17d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleParser: {fileID: 0}
-  battleLog: {fileID: 0}
-  maxButton: {fileID: 0}
-  minButton: {fileID: 0}
-  damageButton: {fileID: 0}
-  healButton: {fileID: 0}
 --- !u!114 &1125179977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2169,7 +2134,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1125179976}
+      - m_Target: {fileID: 1834680539}
         m_TargetAssemblyTypeName: ParserData, Assembly-CSharp
         m_MethodName: DamageButton
         m_Mode: 1
@@ -3288,8 +3253,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 647921420}
+  m_Children: []
   m_Father: {fileID: 149938043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

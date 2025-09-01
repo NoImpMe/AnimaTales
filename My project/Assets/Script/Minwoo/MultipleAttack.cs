@@ -10,35 +10,35 @@ public class MultipleAttack : MonoBehaviour
         this.bm = bm;
     }
     
-    public IEnumerator MultiAllySkill(int skillnum)
+    public IEnumerator MultiAllySkill(AnimaActions anima, int skillnum)
     {
         yield return null; 
     }
-    public IEnumerator MultiEnemySkill(EnemyActions enemy, int skillnum) 
+    public IEnumerator MultiEnemySkill(EnemyActions enemy) 
     {
         yield return null;
     }
-    public IEnumerator MultiAllyHeal(int skillnum)
+    public IEnumerator MultiAllyHeal(AnimaActions anima, int skillnum)
     {
         yield return null;
     }
-    public IEnumerator MultiEnemyHeal(EnemyActions enemy, int skillnum)
+    public IEnumerator MultiEnemyHeal(EnemyActions enemy)
     {
         yield return null;
     }
-    public IEnumerator MultiAllyBuff(int skillnum) 
+    public IEnumerator MultiAllyBuff(AnimaActions anima, int skillnum) 
     {
         yield return null;
     }
-    public IEnumerator MultiEnemyBuff(EnemyActions enemy, int skillnum) 
+    public IEnumerator MultiEnemyBuff(EnemyActions enemy) 
     {
         yield return null;
     }
-    public IEnumerator MultiAllyDebuff(int skillnum) 
+    public IEnumerator MultiAllyDebuff(AnimaActions anima, int skillnum) 
     {
         yield return null;
     }
-    public IEnumerator MultiEnemyDebuff(EnemyActions enemy, int skillnum)
+    public IEnumerator MultiEnemyDebuff(EnemyActions enemy)
     {
         yield return null;
     }
