@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -11,6 +12,8 @@ public class EnemyActions : MonoBehaviour
     public string performance = "";
     public float damage;
     public float heal;
+    public List<float> damages;
+    public List<float> heals;
     public class ActionWeight
     {
         public ActionType actionType;
@@ -79,6 +82,7 @@ public class EnemyActions : MonoBehaviour
     }
     public IEnumerator Skill(EnemyActions enemy, AnimaActions ally, HealthBar allyHealthBar, ParserBar damageBar)
     {
+
         if (!enemy.animaData.Animadie && !ally.animaData.Animadie)
         {
             damage = CalcSkillDamage(enemy.animaData.Damage, ally);
@@ -87,6 +91,25 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(damage);
         }
         
+    }
+    public IEnumerator MultiSkill(EnemyActions enemy, List<AnimaActions> ally, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    {
+        if (!enemy.animaData.Animadie)
+        {
+            damages = new List<float>();
+            damage = 0f;
+            for (int i = 0; i < ally.Count; i++)
+            {
+                if (!ally[i].animaData.Animadie)
+                {
+                    damages.Add(CalcSkillDamage(enemy.animaData.Damage, ally[i]));
+                    allyHealthBar[i].TakeDamage(damages[i]);
+                    ally[i].TakeDamage(damages[i]);
+                    damage += damages[i];
+                }
+            }
+            yield return damageBar.PutDamage(damage);
+        }
     }
     public IEnumerator Heal(EnemyActions healer, EnemyActions target, HealthBar enemyHealthBar, ParserBar healBar)
     {
@@ -98,6 +121,31 @@ public class EnemyActions : MonoBehaviour
             yield return healBar.PutDamage(heal);
         }
     }
+
+    public IEnumerator MultiHeal(EnemyActions healer, List<EnemyActions> target, List<HealthBar> enemyHealthBar, ParserBar healBar)
+    {
+        if (!healer.animaData.Animadie)
+        {
+            heals = new List<float>();
+            heal = 0f;
+            for(int i = 0; i < target.Count; i++)
+            {
+                if (!target[i].animaData.Animadie)
+                {
+                    heals.Add(CalcHealAmount(healer.animaData.Damage, target[i]));
+                    enemyHealthBar[i].TakeHeal(heals[i]);
+                    target[i].TakeHeal(heal);
+                    heal += heals[i];
+                }
+            }
+            yield return healBar.PutDamage(heal);
+        }
+    }
+    public IEnumerator MultiIncreaseAbility(EnemyActions buffer, List<EnemyActions> target, string[] abi)
+    {
+        yield return null;
+    }
+
     public IEnumerator IncreaseAbility(EnemyActions buffer, EnemyActions target, string[] abi)
     {
         foreach (string stat in abi)
