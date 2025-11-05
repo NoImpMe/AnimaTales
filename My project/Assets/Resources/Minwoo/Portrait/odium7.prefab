@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3990752175182442653}
   - component: {fileID: 8470150338775378527}
+  - component: {fileID: -4398997665770208166}
   m_Layer: 0
   m_Name: odium7
   m_TagString: Untagged
@@ -87,3 +88,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4398997665770208166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728263903405620552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc106772d254904697d240d707c6618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  performance: Skill
+  damage: 462.06247
+  heal: 0
+  maxDamage: 462.06247
+  maxHeal: 0
+  isBoss: 0

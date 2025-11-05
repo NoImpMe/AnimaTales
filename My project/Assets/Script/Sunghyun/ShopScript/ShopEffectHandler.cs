@@ -8,8 +8,8 @@ public static class ShopEffectHandler
         {
             return;
         }
-        
-        PlayerInfo playerInfo = GameObject.FindObjectOfType<BattleManager>()?.playerInfo;
+
+        PlayerInfo playerInfo = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo;
         if (playerInfo == null)
         {
             return;
@@ -67,6 +67,13 @@ public static class ShopEffectHandler
         else if (itemData.targetType == TargetType.All)
         {
             foreach (var anima in playerInfo.battleAnima)
+            {
+                if (!anima.Animadie)
+                {
+                    anima.Stamina = anima.Maxstamina;
+                }
+            }
+            foreach (var anima in playerInfo.haveAnima)
             {
                 if (!anima.Animadie)
                 {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5642795413939710463}
   - component: {fileID: 9081403042647697576}
   - component: {fileID: 4632018235114768643}
+  - component: {fileID: -7203990408894865105}
   m_Layer: 0
   m_Name: odium0
   m_TagString: Untagged
@@ -101,5 +102,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animaData: {fileID: 0}
-  damageNumber: {fileID: 0}
   damage: 165.61781
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+--- !u!114 &-7203990408894865105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941261635715895443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc94a69880ff074eb763c4e880a97a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  damage: 0
+  heal: 133.2
+  maxDamage: 0
+  maxHeal: 134.40001

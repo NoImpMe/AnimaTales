@@ -12,13 +12,17 @@ public class AnimaSlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandle
     
     [SerializeField] private Material grayscaleMaterial;
 
-    private AnimaDataSO animaData;
+    [SerializeField]private AnimaDataSO animaData;
     private InventorySlotType slotType;
     private Action<AnimaDataSO> onClickCallback;
 
     private static Dictionary<string, Sprite> spriteCache = new Dictionary<string, Sprite>();
 
-    public AnimaDataSO AnimaData => animaData;
+    public AnimaDataSO AnimaData
+    {
+        get => animaData;
+        set => animaData = value;
+    }
     public InventorySlotType SlotType => slotType;
 
     public void SetData(AnimaDataSO data, InventorySlotType type, Action<AnimaDataSO> onClick)
@@ -28,6 +32,11 @@ public class AnimaSlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandle
         onClickCallback = onClick;
 
         UpdateUI();
+    }
+    public void SetData(AnimaDataSO data, InventorySlotType type)
+    {
+        animaData = data;
+        slotType = type;
     }
 
     private void UpdateUI()

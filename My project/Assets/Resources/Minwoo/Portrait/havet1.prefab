@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2938892468506884588}
   - component: {fileID: 5226558233732451804}
   - component: {fileID: 7563774550853647445}
+  - component: {fileID: -4236743480660921923}
+  - component: {fileID: 3809898200652485146}
   m_Layer: 0
   m_Name: havet1
   m_TagString: Untagged
@@ -103,3 +105,42 @@ MonoBehaviour:
   animaData: {fileID: 0}
   performance: 
   damage: 0
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+--- !u!114 &-4236743480660921923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075397892901523544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc106772d254904697d240d707c6618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  performance: Attack
+  damage: 150.43701
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+--- !u!114 &3809898200652485146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075397892901523544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc106772d254904697d240d707c6618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  performance: 
+  damage: 0
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0

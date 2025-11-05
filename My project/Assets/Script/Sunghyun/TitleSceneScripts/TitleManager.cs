@@ -56,7 +56,8 @@ public class TitleManager : MonoBehaviour
     private void OnNewGameClick()
     {
         PlayButtonSound();
-        LoadScene("MapScene");
+        
+        LoadScene("Stage0Scene");
     }
 
     private void OnCorridorClick()

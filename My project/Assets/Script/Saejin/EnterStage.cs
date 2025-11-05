@@ -8,8 +8,8 @@ public class EnterStage : MonoBehaviour, IPointerClickHandler
 {
     public string sceneToLoad;
     public string sceneToLoadBoss;
-    private List<string> stageNames = new List<string> { "FelixFieldScene", "PhobiaFieldScene", "OdiumFieldScene", "AmareFieldScene", "IrascorFieldScene", "LacrimaFieldScene", "HavetFieldScene" };
-    private List<string> bossStageNames = new List<string> { "FelixBossFieldScene", "PhobiaBossFieldScene", "OdiumBossFieldScene", "AmareBossFieldScene", "IrascorBossFieldScene", "LacrimaBossFieldScene", "HavetBossFieldScene" };
+    private List<string> stageNames = new List<string> { "FelixFieldScene", "PhobiaFieldScene", "AmareFieldScene", "IrascorFieldScene", "LacrimaFieldScene", "HavetFieldScene" };
+    private List<string> bossStageNames = new List<string> { "FelixBossFieldScene", "PhobiaBossFieldScene", "AmareBossFieldScene", "IrascorBossFieldScene", "LacrimaBossFieldScene", "HavetBossFieldScene" };
     private StageNode stageNode;
     private StageNode prevNode;
     private SpawnStage spawnStage;

@@ -13,6 +13,7 @@ public class AnimaInventoryManager : MonoBehaviour
     public event Action OnAnimaInventoryChanged;
     public event Action<AnimaDataSO> OnPartyAddFailed;
 
+    private MixManager mixManager;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -89,7 +90,7 @@ public class AnimaInventoryManager : MonoBehaviour
 
         var fromType = fromSlot.SlotType;
         var toType = toSlot.SlotType;
-
+        
         var fromList = fromType == InventorySlotType.Inventory ? playerInfo.haveAnima : playerInfo.battleAnima;
         var toList = toType == InventorySlotType.Inventory ? playerInfo.haveAnima : playerInfo.battleAnima;
 
@@ -102,7 +103,7 @@ public class AnimaInventoryManager : MonoBehaviour
         int fromIndex = fromAnima != null ? fromList.IndexOf(fromAnima) : -1;
         int toIndex = toAnima != null ? toList.IndexOf(toAnima) : -1;
 
-        if (fromList != toList)
+        if (fromType != toType)
         {
             if (fromType == InventorySlotType.Inventory && toType == InventorySlotType.Party)
             {
@@ -149,6 +150,48 @@ public class AnimaInventoryManager : MonoBehaviour
                     }
                 }
             }
+            else if (fromType == InventorySlotType.Inventory && toType == InventorySlotType.Main)
+            {
+                if (mixManager == null) mixManager = GameObject.Find("MixManager").GetComponent<MixManager>();
+                playerInfo.haveAnima.Remove(fromAnima);
+                mixManager.mainAnima = fromAnima;
+                toSlot.AnimaData = fromAnima;
+            }
+            else if (fromType == InventorySlotType.Inventory && toType == InventorySlotType.Sub)
+            {
+                if (mixManager == null) mixManager = GameObject.Find("MixManager").GetComponent<MixManager>();
+                playerInfo.haveAnima.Remove(fromAnima);
+                mixManager.subAnima = fromAnima;
+                toSlot.AnimaData = fromAnima;
+            }
+            else if (fromType == InventorySlotType.Main && toType == InventorySlotType.Sub)
+            {
+                var tmp = mixManager.subAnima;
+                mixManager.subAnima = mixManager.mainAnima;
+                toSlot.AnimaData = mixManager.mainAnima;
+                mixManager.mainAnima = tmp;
+                fromSlot.AnimaData = tmp;
+            }
+            else if (fromType == InventorySlotType.Sub && toType == InventorySlotType.Main)
+            {
+                var tmp = mixManager.subAnima;
+                mixManager.subAnima = mixManager.mainAnima;
+                fromSlot.AnimaData = mixManager.mainAnima;
+                mixManager.mainAnima = tmp;
+                toSlot.AnimaData = tmp;
+            }
+            else if (fromType == InventorySlotType.Main && toType == InventorySlotType.Inventory)
+            {
+                playerInfo.haveAnima.Add(fromAnima);
+                fromSlot.AnimaData = null;
+                mixManager.mainAnima = null;
+            }
+            else if (fromType == InventorySlotType.Sub && toType == InventorySlotType.Inventory)
+            {
+                playerInfo.haveAnima.Add(fromAnima);
+                fromSlot.AnimaData = null;
+                mixManager.subAnima = null;
+            }
         }
         else if (fromAnima != null && toAnima != null && fromIndex >= 0 && toIndex >= 0)
         {
@@ -159,33 +202,8 @@ public class AnimaInventoryManager : MonoBehaviour
 
         OnAnimaInventoryChanged?.Invoke();
     }
-
-    public void MoveToParty(AnimaDataSO anima)
+    public void InvenChanged()
     {
-        if (anima == null || playerInfo.battleAnima.Contains(anima)) return;
-        if (playerInfo.battleAnima.Count >= playerInfo.maxAnimaNum) return;
-
-        if (IsAnimaDefeated(anima))
-        {
-            OnPartyAddFailed?.Invoke(anima);
-            return;
-        }
-
-        if (playerInfo.haveAnima.Remove(anima))
-        {
-            playerInfo.battleAnima.Add(anima);
-            OnAnimaInventoryChanged?.Invoke();
-        }
-    }
-
-    public void MoveToInventory(AnimaDataSO anima)
-    {
-        if (anima == null || playerInfo.haveAnima.Contains(anima)) return;
-
-        if (playerInfo.battleAnima.Remove(anima))
-        {
-            playerInfo.haveAnima.Add(anima);
-            OnAnimaInventoryChanged?.Invoke();
-        }
+        OnAnimaInventoryChanged?.Invoke();
     }
 }

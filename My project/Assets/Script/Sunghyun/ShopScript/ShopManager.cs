@@ -67,19 +67,17 @@ public class ShopManager : MonoBehaviour
 
     private bool ProcessItemPurchase(ShopItemData item)
     {
-        if (!GoldManager.Instance.SpendGold(item.price))
+        if (!VillageDataManager.Instance.PurchaseItem(villageID, item.itemID))
+        {
+            ShowFeedback("품절 상태입니다.");
+            return false;
+        }
+        if (GoldManager.Instance.GetCurrentGold() < item.price)
         {
             ShowFeedback($"골드가 부족합니다.");
             return false;
         }
-
-        if (!VillageDataManager.Instance.PurchaseItem(villageID, item.itemID))
-        {
-            ShowFeedback("품절 상태입니다.");
-            GoldManager.Instance.AddGold(item.price);
-            return false;
-        }
-
+        GoldManager.Instance.SpendGold(item.price);
         remainingCounts[item.itemID] = shopState.GetRemainingCount(item.itemID);
 
         ShopUIManager.Instance.UpdateItemSlot(item.itemID, remainingCounts[item.itemID]);

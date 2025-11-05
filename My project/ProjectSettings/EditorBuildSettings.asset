@@ -27,44 +27,38 @@ EditorBuildSettings:
     path: Assets/Scene/04. BattleScene/GameClearScene.unity
     guid: 02bc8b28c2e9c1e4995cf5b09bd6dc27
   - enabled: 1
-    path: Assets/Scene/03. FieldScene/AmareBossFieldScene.unity
-    guid: 53ddde849aca99e41b224235f660154d
-  - enabled: 1
-    path: Assets/Scene/03. FieldScene/AmareFieldScene.unity
+    path: Assets/Scene/03. FieldScene/Stage0Scene.unity
     guid: a8a132c268f22b941a9e9128f2a6887a
   - enabled: 1
-    path: Assets/Scene/03. FieldScene/FelixBossFieldScene.unity
-    guid: db910f62b9bef504ba4db618f62ff3a5
+    path: Assets/Scene/04. BattleScene/FelixBossBattleScene.unity
+    guid: 32fb81ea3fe33064db11e8967e0a39a2
+  - enabled: 1
+    path: Assets/Scene/04. BattleScene/AmareBossBattleScene.unity
+    guid: 95f0c9cfa52250448b76c57b33b11530
+  - enabled: 1
+    path: Assets/Scene/04. BattleScene/HavetBossBattleScene.unity
+    guid: 8a3a942ae68d0eb49a8511f321c6c41f
+  - enabled: 1
+    path: Assets/Scene/04. BattleScene/IrascorBossBattleScene.unity
+    guid: 713b0cd52f15e524bbf7146b4022d75e
+  - enabled: 1
+    path: Assets/Scene/04. BattleScene/LacrimaBossBattleScene.unity
+    guid: adaf8f193faf53745b5dadff899c194d
+  - enabled: 1
+    path: Assets/Scene/04. BattleScene/PhobiaBossBattleScene.unity
+    guid: 67ef84dd26e438344bd7b44bc7eafd07
   - enabled: 1
     path: Assets/Scene/03. FieldScene/FelixFieldScene.unity
     guid: 6ff53bc4afb7da14dbe2ae5dc7bae158
   - enabled: 1
-    path: Assets/Scene/03. FieldScene/HavetBossFieldScene.unity
-    guid: f00be14fc5cf9fd4a916d9e829909d68
-  - enabled: 1
     path: Assets/Scene/03. FieldScene/HavetFieldScene.unity
     guid: 0a991cd24e5191a43b4b00d06bf3bc02
-  - enabled: 1
-    path: Assets/Scene/03. FieldScene/IrascorBossFieldScene.unity
-    guid: 9620b80f2e36a1e46b00a5ee7c6e6abd
   - enabled: 1
     path: Assets/Scene/03. FieldScene/IrascorFieldScene.unity
     guid: 6d158403d64f8c64495cf3c096cf53f4
   - enabled: 1
-    path: Assets/Scene/03. FieldScene/LacrimaBossFieldScene.unity
-    guid: 1a874bf5b02a36545bc47edd2406aa25
-  - enabled: 1
     path: Assets/Scene/03. FieldScene/LacrimaFieldScene.unity
     guid: 473ef06420a092f408b355b0e8025f4a
-  - enabled: 1
-    path: Assets/Scene/03. FieldScene/OdiumBossFieldScene.unity
-    guid: 51aeb892c76efa64fbab7d7b551e6994
-  - enabled: 1
-    path: Assets/Scene/03. FieldScene/OdiumFieldScene.unity
-    guid: 18fff5d4c4a6981439f878b3ae6faf9c
-  - enabled: 1
-    path: Assets/Scene/03. FieldScene/PhobiaBossFieldScene.unity
-    guid: 866aed53b8eff734fb0c99129447b5ad
   - enabled: 1
     path: Assets/Scene/03. FieldScene/PhobiaFieldScene.unity
     guid: 200e97c3ba00f3d419e624ab9ab73bb0
@@ -74,9 +68,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/04. BattleScene/AmareEliteBattleScene.unity
     guid: 4d9cbb0bb33ae904f869b59a48657fe4
-  - enabled: 1
-    path: Assets/Scene/04. BattleScene/BossBattleScene.unity
-    guid: 884bfe815eeea4a4a86070487e36145f
   - enabled: 1
     path: Assets/Scene/04. BattleScene/FelixBattleScene.unity
     guid: b40b32c0609f2764ebfbfc72a89e1bf1

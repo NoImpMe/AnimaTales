@@ -84,8 +84,9 @@ public class InnManager : MonoBehaviour
             InitializePrice();
         }
         
-        if (GoldManager.Instance.SpendGold(currentPrice))
+        if (GoldManager.Instance.GetCurrentGold() >= currentPrice)
         {
+            GoldManager.Instance.SpendGold(currentPrice);
             InnEffectHandler.ApplyInnEffect();
             
             IncreasePrice();

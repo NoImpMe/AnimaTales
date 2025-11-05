@@ -1,14 +1,22 @@
 using BansheeGz.BGDatabase;
+using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GoldManager : MonoBehaviour
 {
     public static GoldManager Instance { get; private set; }
     
     private TextMeshProUGUI goldText;
+    public TextMeshProUGUI GoldText
+    {
+        get => goldText;
+        set => goldText = value;
+    }
+
     [SerializeField] private string goldTextObjectName = "GoldText";
     [SerializeField] private string goldFormat = "{0:N0}";
 
@@ -69,27 +77,31 @@ public class GoldManager : MonoBehaviour
         if (amount <= 0) return;
         
         currentGold += amount;
+        entity = goldTable.FirstOrDefault(e => e.Get<string>("name").Equals("GoldData"));
         entity.Set<int>("Gold", currentGold);
         OnGoldChanged?.Invoke(currentGold);
-        //UpdateGoldDisplay();
     }
     
-    public bool SpendGold(int amount)
+    public IEnumerator SpendGold(int amount)
     {
-        if (amount <= 0) return false;
-        
-        if (currentGold >= amount)
+        float elapsed = 0f;
+        float duration = 1f;
+        int resultGold = currentGold - amount;
+        float value;
+        while (elapsed < duration)
         {
-            currentGold -= amount;
-            entity.Set<int>("Gold", currentGold);
-            OnGoldChanged?.Invoke(currentGold);
-            UpdateGoldDisplay();
-            return true;
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            value = Mathf.Lerp(currentGold, resultGold, t);
+            goldText.text = string.Format(goldFormat, value);
+            yield return null;
         }
+        goldText.text = string.Format(goldFormat, resultGold);
+        entity = goldTable.FirstOrDefault(e => e.Get<string>("name").Equals("GoldData"));
+        entity.Set<int>("Gold", currentGold);
+        OnGoldChanged?.Invoke(currentGold);
         
-        return false;
     }
-    
     public int GetCurrentGold()
     {
         return currentGold;

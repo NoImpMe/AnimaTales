@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8741915437813626903}
   - component: {fileID: 747900795632553773}
   - component: {fileID: 6297106516486240568}
+  - component: {fileID: 9214067266707116751}
   m_Layer: 5
   m_Name: Anima Slot Image
   m_TagString: Untagged
@@ -75,6 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &9214067266707116751
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172800852884235667}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1469583162124449101
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,3 +327,4 @@ MonoBehaviour:
   backgroundImage: {fileID: 8316160753301634916}
   button: {fileID: 7899178198436097108}
   grayscaleMaterial: {fileID: 2100000, guid: 124019c4e80f9c4499b3d4093867a3b0, type: 2}
+  animaData: {fileID: 0}

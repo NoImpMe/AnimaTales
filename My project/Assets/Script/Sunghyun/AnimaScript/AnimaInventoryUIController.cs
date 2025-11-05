@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AnimaInventoryUIController : MonoBehaviour
 {
@@ -7,13 +9,13 @@ public class AnimaInventoryUIController : MonoBehaviour
     [SerializeField] private GameObject animaSlotPrefab;
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform PartySlotParent;
-
+    [SerializeField] private Transform mainSlotParent;
+    [SerializeField] private Transform subSlotParent;
     [Header("디테일 패널")]
     [SerializeField] private AnimaInventoryDetailUI detailUI;
-
     private List<AnimaSlotUI> inventorySlots = new List<AnimaSlotUI>();
     private List<AnimaSlotUI> PartySlots = new List<AnimaSlotUI>();
-
+    private MixManager mixManager;
     private void Start()
     {
         if (AnimaInventoryManager.Instance != null)
@@ -36,7 +38,6 @@ public class AnimaInventoryUIController : MonoBehaviour
         CreatePartySlots();
         CreateInventorySlots();
     }
-
     private void CreatePartySlots()
     {
         foreach (Transform child in PartySlotParent)
@@ -74,7 +75,6 @@ public class AnimaInventoryUIController : MonoBehaviour
             inventorySlots.Add(slotUI);
         }
     }
-
     private void RefreshUI()
     {
         UpdatePartySlots();

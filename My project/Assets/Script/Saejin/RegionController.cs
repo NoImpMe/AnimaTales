@@ -8,4 +8,6 @@ public class RegionController : MonoBehaviour
     public bool isVillaged = false;
     [Tooltip("이 영역과 해제할 타일 영역")]
     public List<RegionController> neighbors;
+    public string type;
+    public bool isSelected = false;
 }

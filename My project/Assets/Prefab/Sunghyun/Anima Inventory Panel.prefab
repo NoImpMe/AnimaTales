@@ -1171,10 +1171,10 @@ RectTransform:
   - {fileID: 588858771128437868}
   m_Father: {fileID: 1355206500310201694}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 654, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -92, y: -60}
+  m_SizeDelta: {x: -780, y: -780}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1225442946346242749
 MonoBehaviour:
@@ -3742,8 +3742,8 @@ RectTransform:
   m_Children:
   - {fileID: 4144669039959061219}
   - {fileID: 7506037800651434545}
-  - {fileID: 6770869686189514384}
   - {fileID: 1498167801233996117}
+  - {fileID: 6770869686189514384}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3804,6 +3804,8 @@ MonoBehaviour:
   animaSlotPrefab: {fileID: 4664585725116571752, guid: 1707dbbc5b2dfe8419a8cd884b9f70c9, type: 3}
   inventorySlotParent: {fileID: 4080926730551521672}
   PartySlotParent: {fileID: 861107456802308239}
+  mainSlotParent: {fileID: 0}
+  subSlotParent: {fileID: 0}
   detailUI: {fileID: 3820408077572496888}
 --- !u!1 &8023192588413690384
 GameObject:

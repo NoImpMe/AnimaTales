@@ -1,12 +1,10 @@
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DontDesManager : MonoBehaviour
 {
     public static DontDesManager Instance { get; private set; }
-    [SerializeField] RegionManager regionPrefab;
+    [SerializeField] GameObject regionManager;
     public GameObject manager;
     public GameObject mapScreen;
     public GameObject grid;
@@ -24,8 +22,7 @@ public class DontDesManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(manager);
-            DontDestroyOnLoad(mapScreen);
-
+            DontDestroyOnLoad(regionManager);
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
@@ -34,7 +31,6 @@ public class DontDesManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            Destroy(mapScreen);
         }
     }
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -54,16 +50,14 @@ public class DontDesManager : MonoBehaviour
         {
             mapScreen.SetActive(true);
             Camera.main.transform.position = new Vector3(0f, 0f, -10);
-            EnterStage es = stageNode.GetComponent<EnterStage>();
-            es.SetLineColor(stageNode);
-        }
-        if (lastUnloaded.EndsWith("EliteBattleScene"))
-        {
-            Destroy(grid);
-            Destroy(tileManager);
+            if(stageNode != null)
+            {
+                EnterStage es = stageNode.GetComponent<EnterStage>();
+                es.SetLineColor(stageNode);
+            }
         }
 
-        if (lastUnloaded.EndsWith("BattleScene")|| lastUnloaded.Equals("VillageScene") && scene.name != "MapScene")
+        if (lastUnloaded != null && (lastUnloaded.EndsWith("BattleScene") || lastUnloaded.Equals("VillageScene"))) 
         {
             if (grid == null)
             {
@@ -118,39 +112,9 @@ public class DontDesManager : MonoBehaviour
             var regionManager = GameObject.Find("RegionManager");
             tileManager = regionManager;
             var tManager = tileManager.GetComponent<RegionManager>();
-
-            if (scene.name.StartsWith("Felix"))
-            {
-                tManager.stageType = 0;
-            }
-            else if (scene.name.StartsWith("Phobia"))
-            {
-                tManager.stageType = 1;
-            }
-            else if (scene.name.StartsWith("Odium"))
-            {
-                tManager.stageType = 2;
-            }
-            else if (scene.name.StartsWith("Amare"))
-            {
-                tManager.stageType = 3;
-            }
-            else if (scene.name.StartsWith("Irascor"))
-            {
-                tManager.stageType = 4;
-            }
-            else if (scene.name.StartsWith("Lacrima"))
-            {
-                tManager.stageType = 5;
-            }
-            else if (scene.name.StartsWith("Havet"))
-            {
-                tManager.stageType = 6;
-            }
-            mapScreen.SetActive(false);
             DontDestroyOnLoad(tileManager);
+            
         }
-
         if (scene.name.EndsWith("BattleScene"))
         {
             grid.SetActive(false);
@@ -172,7 +136,7 @@ public class DontDesManager : MonoBehaviour
         stageNode = node;
     }
 
-    public void SetTile(RegionController target, RegionManager m)
+    public void SetTile(RegionController target)
     {
         tile = target;
         

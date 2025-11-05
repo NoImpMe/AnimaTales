@@ -282,11 +282,11 @@ public class SpawnStage : MonoBehaviour
 
     void setType()
     {
-        List<int> types = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
+        List<int> types = new List<int> { 0, 1, 2, 3, 4, 5 };
         int selectType;
-        selectType = Random.Range(0, types.Count);
+        selectType = Random.Range(0, 6);
         startNode.type = selectType;
-        selectType = Random.Range(0, types.Count);
+        selectType = Random.Range(0, 6);
         sections[8][0].type = selectType;
         for (int i = 0; i < sections.Count; i++)
         {
