@@ -147,15 +147,15 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         });
         int numberOfObjectsToAdd = Random.Range(1, 4);
             int mood = 0;
-            if (level <= 8)
+            if (level < 7)
             {
                 mood = 2;
             }
-            else if (level <= 12)
+            else if (level < 11)
             {
                 mood = 3;
             }
-            else if (level <= 16)
+            else if (level < 16)
             {
                 mood = 4;
             }
@@ -169,7 +169,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             }
             for (int i = 0; i < numberOfObjectsToAdd; i++)
             {
-                int randomIndex = Random.Range(mood - 1, mood + 2);
+                int randomIndex = Random.Range(1, mood + 2);
                 enemyObjPrefab.Add(Resources.Load<GameObject>("Minwoo/Portrait/" + objectfileList[randomIndex]));
                 enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
                 enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy{i}"));
@@ -281,19 +281,19 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
                 objectfileList.Add(entity.Get<string>("Objectfile"));
         });
         int mood = 0;
-        if (level <= 8)
+        if (level < 7)
         {
             mood = 3;
         }
-        else if (level <= 12)
+        else if (level < 11)
         {
             mood = 4;
         }
-        else if (level <= 16)
+        else if (level < 16)
         {
             mood = 5;
         }
-        else if (level <= 20)
+        else if (level < 20)
         {
             mood = 6;
         }
@@ -436,5 +436,28 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             index = enemyParserInstance[0].name.IndexOf("(Clone)");
             enemyParserInstance[0].name = enemyParserInstance[0].name.Substring(0, index);
         }
+    }
+    public void AmareSpawn(string charmedAnima)
+    {
+        enemyObjPrefab.Add(Resources.Load<GameObject>("Minwoo/Portrait/" + charmedAnima));
+        enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
+        enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy1"));
+        enemyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Enemy1Name"));
+        battleEnemyAnima.Add(charmedAnima);
+        enemyInstance.Add(Instantiate(enemyObjPrefab[1], new Vector3(5.3f, 1.5f, 0), Quaternion.identity));
+        enemyInstance[1].GetComponent<SpriteRenderer>().sortingOrder = -1;
+        int index = enemyInstance[1].name.IndexOf("(Clone)");
+        enemyInstance[1].name = enemyInstance[1].name.Substring(0, index) + "4";
+        enemyInstance[1].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        enemyHpInstance.Add(Instantiate(enemyHpPrefab[1], Vector3.zero, Quaternion.identity, canvas.transform));
+        enemyHpInstance[1].GetComponent<RectTransform>().anchoredPosition = new Vector3((380f) + (200f), -22f, 0f);
+        enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[1], canvas.transform));
+        index = enemyHpInstance[1].name.IndexOf("(Clone)");
+        enemyHpInstance[1].name = enemyHpInstance[1].name.Substring(0, index) + "1";
+        index = enemyInfoInstance[1].name.IndexOf("(Clone)");
+        enemyInfoInstance[1].name = enemyInfoInstance[1].name.Substring(0, index);
+        enemyParserInstance.Add(Instantiate(enemyParserPrefab[1], battleParser.transform));
+        index = enemyParserInstance[1].name.IndexOf("(Clone)");
+        enemyParserInstance[1].name = enemyParserInstance[1].name.Substring(0, index);
     }
 }

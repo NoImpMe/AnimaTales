@@ -12,11 +12,10 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Button quitGameButton;
 
     [Header("오디오")]
-    [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioClip buttonClickSound;
     
     [Header("씬 전환 효과")]
-    [SerializeField] private FadeEffect fadeEffect;
+    [SerializeField] private FadeEffect fadePanel;
     
     [Header("옵션 설정")]
     [SerializeField] private GameObject optionsPanel;
@@ -30,53 +29,29 @@ public class TitleManager : MonoBehaviour
         _sfxSource = gameObject.AddComponent<AudioSource>();
     }
 
-    private void Start()
-    {
-        SetupButtonEvents();
-
-        if (bgmSource != null && bgmSource.clip != null)
-            bgmSource.Play();
-    }
-
-    private void SetupButtonEvents()
-    {
-        if (newGameButton != null)
-            newGameButton.onClick.AddListener(OnNewGameClick);
-
-        if (corridorButton != null)
-            corridorButton.onClick.AddListener(OnCorridorClick);
-
-        if (optionsButton != null)
-            optionsButton.onClick.AddListener(OnOptionsClick);
-
-        if (quitGameButton != null)
-            quitGameButton.onClick.AddListener(OnQuitGameClick);
-    }
-
-    private void OnNewGameClick()
+    public void OnNewGameClick()
     {
         PlayButtonSound();
-        
-        LoadScene("Stage0Scene");
+        SetButtonsInteractable(false);
+        StartCoroutine(fadePanel.LoadSceneWithFade("Stage0Scene"));
     }
 
-    private void OnCorridorClick()
+    public void OnCorridorClick()
     {
         PlayButtonSound();
         SceneManager.sceneUnloaded -= sceneManagerCorridor.OnSceneUnloaded;
         SceneManager.sceneUnloaded += sceneManagerCorridor.OnSceneUnloaded; 
         sceneManagerCorridor.sceneName = "TitleScene";
-        LoadScene("CorridorScene");
+        StartCoroutine(fadePanel.LoadSceneWithFade("CorridorScene"));
     }
 
-    private void OnOptionsClick()
+    public void OnOptionsClick()
     {
         PlayButtonSound();
         ToggleOptionsPanel();
-
     }
 
-    private void OnQuitGameClick()
+    public void OnQuitGameClick()
     {
         PlayButtonSound();
 
@@ -93,20 +68,7 @@ public class TitleManager : MonoBehaviour
             _sfxSource.PlayOneShot(buttonClickSound);
     }
     
-    private void LoadScene(string sceneName)
-    {
-        StartCoroutine(LoadSceneWithFade(sceneName));
-    }
     
-    private IEnumerator LoadSceneWithFade(string sceneName)
-    {
-        SetButtonsInteractable(false);
-    
-        if (fadeEffect != null)
-            yield return fadeEffect.FadeIn();
-    
-        SceneManager.LoadScene(sceneName);
-    }
 
     private void SetButtonsInteractable(bool interactable)
     {

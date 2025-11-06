@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 public class SceneManagerInBattle : MonoBehaviour
 {
     private GameObject regionManager;
+    private FadeEffect fadePanel;
+
+    private void Start()
+    {
+        fadePanel = GameObject.Find("Fade Panel").GetComponent<FadeEffect>();
+    }
     public void backToTiles()
     {
         regionManager = GameObject.Find("RegionManager");
@@ -10,32 +16,32 @@ public class SceneManagerInBattle : MonoBehaviour
         var num = regionScr.stageType;
         Scene scene = SceneManager.GetActiveScene();
         if (scene.name.EndsWith("LastBossScene")){
-            SceneManager.LoadScene("TitleScene");
+            StartCoroutine(fadePanel.LoadSceneWithFade("TitleScene"));
         }
         else
         {
             switch (num)
             {
                 case 0:
-                    SceneManager.LoadScene("Stage0Scene");
+                    StartCoroutine(fadePanel.LoadSceneWithFade("Stage0Scene"));
                     break;
                 case 1:
-                    SceneManager.LoadScene("Stage1Scene");
+                    StartCoroutine(fadePanel.LoadSceneWithFade("Stage1Scene"));
                     break;
                 case 2:
-                    SceneManager.LoadScene("Stage2Scene");
+                    StartCoroutine(fadePanel.LoadSceneWithFade("Stage2Scene"));
                     break;
                 case 3:
-                    SceneManager.LoadScene("Stage3Scene");
+                    StartCoroutine(fadePanel.LoadSceneWithFade("Stage3Scene"));
                     break;
                 case 4:
-                    SceneManager.LoadScene("Stage4Scene");
+                    StartCoroutine(fadePanel.LoadSceneWithFade("Stage4Scene"));
                     break;
                 case 5:
-                    SceneManager.LoadScene("Stage5Scene");
+                    StartCoroutine(fadePanel.LoadSceneWithFade("Stage5Scene"));
                     break;
                 case 6:
-                    SceneManager.LoadScene("Stage6Scene");
+                    StartCoroutine(fadePanel.LoadSceneWithFade("Stage6Scene"));
                     break;
             }
         }
@@ -43,7 +49,7 @@ public class SceneManagerInBattle : MonoBehaviour
 
     public void resetGame()
     {
-        SceneManager.LoadScene("TitleScene");
+        StartCoroutine(fadePanel.LoadSceneWithFade("TitleScene"));
         GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo.Initialize();
     }
 }

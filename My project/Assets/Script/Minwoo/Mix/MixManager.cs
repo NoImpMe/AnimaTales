@@ -77,7 +77,7 @@ public class MixManager : MonoBehaviour
         matchedMixData = mixDatas.Where(x => x.Main == mainAnima.Name && x.Sub == subAnima.Name).ToList();
         float odds = Random.Range(0f, 1f);
         var inven = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>();
-        if( odds < matchedMixData[0].Odds )
+        if( matchedMixData.Count != 0 && odds < matchedMixData[0].Odds )
         {
             resultText.text = "교감 성공!!";
             resultImage.sprite = Resources.Load<Sprite>($"Minwoo/Portrait/{matchedMixData[0].Result}");

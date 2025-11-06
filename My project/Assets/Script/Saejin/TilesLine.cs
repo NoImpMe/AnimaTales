@@ -44,7 +44,7 @@ public class TilesLine : MonoBehaviour
     {
         if (regionController == null) return;
 
-        if (!regionController.isCleared)
+        if (!regionController.isCleared && lines != null)
         {
             float t = (Mathf.Sin(Time.time * blinkSpeed) + 1f) * 0.5f;
             Color blinkCol = Color.Lerp(Color.white, Color.yellow, t);
@@ -55,10 +55,7 @@ public class TilesLine : MonoBehaviour
         }
         else if(!regionController.isVillaged)
         {
-            foreach (var lr in lines)
-            {
-                lr.startColor = lr.endColor = Color.black;
-            }
+            lines = null;
         }
     }
 }

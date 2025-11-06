@@ -10,6 +10,7 @@ public class AnimaDataSO : ScriptableObject
     public bool isAlly = false;
     public bool turnCheck = false;
     public bool isTomb = false;
+    public bool isBoss = false;
     public int level = 1;
     public string Name; 
     public float Maxstamina = 1;

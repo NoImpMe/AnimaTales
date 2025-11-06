@@ -8,7 +8,7 @@ public class InteractableBuilding : MonoBehaviour
     [SerializeField] private string buildingName;
     [SerializeField] private BuildingType buildingType;
     [SerializeField] private Vector3 nameDisplayOffset = new Vector3(0, 1.5f, 0);
-    
+    [SerializeField] private FadeEffect fadePanel;
     private VillageController _villageController;
     
     public enum BuildingType
@@ -53,14 +53,13 @@ public class InteractableBuilding : MonoBehaviour
     
     private void LoadCorridorScene()
     {
-        SceneManager.LoadScene("CorridorScene");
+        StartCoroutine(fadePanel.LoadSceneWithFade("CorridorScene"));
     }
-    
+
     private void LoadMixScene()
     {
-        SceneManager.LoadScene("MixScene");
+        StartCoroutine(fadePanel.LoadSceneWithFade("MixScene"));
     }
-    
     private void OnMouseEnter()
     {
         if (EventSystem.current.IsPointerOverGameObject())

@@ -31,6 +31,7 @@ public class MultipleAttack : MonoBehaviour
         bm.BattleLogManager.AddLog($"{anima.animaData.Name} used \"{anima.animaData.skillName[skillNum]}\" on Enemys for {Mathf.Ceil(anima.maxDamage)}damage", true);
         bm.AllyDamageText[bm.AllyActions.IndexOf(anima)].text = Mathf.Ceil(bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(anima.animaData);
 
         bm.Turn[bm.TurnIndex++].transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         List<int> enemyList = new List<int>();
@@ -65,7 +66,6 @@ public class MultipleAttack : MonoBehaviour
                 }
             }
         }
-        BuffUpdate(anima.animaData);
     }
     public IEnumerator MultiEnemySkill(EnemyActions enemy) 
     {
@@ -87,6 +87,8 @@ public class MultipleAttack : MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
         bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
+
         bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         List<int> allyList = new List<int>();
 
@@ -119,7 +121,6 @@ public class MultipleAttack : MonoBehaviour
                 }
             }
         }
-        BuffUpdate(enemy.animaData);
     }
     public IEnumerator MultiAllyHeal(AnimaActions anima, int skillNum)
     {
@@ -360,14 +361,9 @@ public class MultipleAttack : MonoBehaviour
             }
         }
 
-        if (bm.EnemyActions.Count == 0)
+        if (bm.EnemyActions.Count == 0 || enemy.animaData.isBoss)
         {
-            foreach (var ally in bm.AllyActions)
-            {
-                ally.animaData.location = -1;
-            }
             bm.stat = BattleState.win;
-            bm.TurnIndex = 0;
             if (bm.RunningCoroutine != null)
             {
                 StopCoroutine(bm.RunningCoroutine);

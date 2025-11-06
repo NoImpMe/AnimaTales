@@ -1,15 +1,16 @@
-using System.Collections.Generic;
-using UnityEngine;
-using DamageNumbersPro;
-using TMPro;
-using UnityEngine.EventSystems;
-using System.Collections;
-using UnityEngine.SceneManagement;
 using BansheeGz.BGDatabase;
-using UnityEngine.UI;
-using Unity.VisualScripting;
+using DamageNumbersPro;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static Unity.Burst.Intrinsics.X86.Avx;
 public class BattleManager : MonoBehaviour, IBattleManager
 {
     [SerializeField]
@@ -17,6 +18,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     public bool isElite = false;
     public bool isBoss = false;
     public bool IsBoss => isBoss;
+    private int bossStage = 0;
     public CameraManager CameraManager => cameraManager;
     [SerializeField]
     Transform turnUI;
@@ -182,6 +184,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     MultipleAttack multipleAttack;   
     void Start()
     {
+        if (isBoss) bossStage += 1;
         playerInfo = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo;
         eventSystem = EventSystem.current;
         pointerEventData = new PointerEventData(eventSystem);
@@ -403,6 +406,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 if (enemyActions[i].animaData.Name == "tombstone0") enemyActions[i].animaData.isTomb = true;
                 enemyActions[i].animaData.location = i;
                 enemyActions[i].animaData.enemyIndex = i;
+                enemyActions[i].animaData.isBoss = true;
                 var enemyStatus = GameObject.Find($"Enemy{i}");
                 var enemyParser = GameObject.Find($"Enemy{i}Name");
                 enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + enemyActions[i].animaData.Objectfile);
@@ -491,7 +495,75 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
 
         RoundSetting();
-        
+        if (isBoss && roundNum > 1)
+        {
+            //Buff buff;
+            int selectAlly = selectNoDieAnima();
+
+            switch (enemyBattleSetting.Stage)
+            {
+                case "Felix":
+                    yield return singleAttack.FelixRoundSkill(enemyActions[0], selectAlly);
+                    break;
+                case "Phobia":
+                    yield return singleAttack.PhobiaRoundSkill(enemyActions[0], turnList, selectAlly);
+                    break;
+                case "Amare":
+                    if (enemyActions.Count > 1)
+                    {
+                        DestroyImmediate(enemyBattleSetting.EnemyHpInstance[1]);
+                        enemyBattleSetting.EnemyHpInstance.RemoveAt(1);
+                        enemyHealthBar.RemoveAt(1);
+                        enemyActions.RemoveAt(1);
+                        DestroyImmediate(enemyBattleSetting.EnemyInstance[1]);
+                        DestroyImmediate(enemyBattleSetting.EnemyInfoInstance[1]);
+                        enemyBattleSetting.EnemyInstance.RemoveAt(1);
+                        enemyBattleSetting.EnemyInfoInstance.RemoveAt(1);
+                        enemyBattleSetting.EnemyParserInstance.RemoveAt(1);
+                        enemyAnimaNum -= 1;
+                    }
+                    while (enemyBattleSetting.EnemyInfoInstance.Count != 1)
+                    {
+                        yield return null;
+                    }
+                    int rannum = Random.Range(0, playerInfo.haveAnima.Count);
+
+                    if (PlayerInfo.haveAnima.Count > 0)
+                    {
+                        enemyBattleSetting.AmareSpawn(playerInfo.haveAnima[rannum].Objectfile);
+                    }
+                    enemy.Add(enemyBattleSetting.EnemyObjPrefab[1]);
+                    enemyActions.Add(enemy[1].AddComponent<EnemyActions>());
+                    enemyActions[1].DN = Resources.Load<DamageNumber>("Minwoo/DamageNumber");
+                    enemyActions[1].HN = Resources.Load<DamageNumber>("Minwoo/HealNumber");
+                    enemyActions[1].InitializeWeights();
+                    enemyActions[1].animaData = ScriptableObject.CreateInstance<AnimaDataSO>();
+                    enemyActions[1].animaData.Initialize(enemyBattleSetting.BattleEnemyAnima[1], playerInfo.haveAnima[rannum].level);
+                    enemyActions[1].animaData.location = 1;
+                    enemyActions[1].animaData.enemyIndex = 1;
+                    var enemyStatus = GameObject.Find($"Enemy{1}");
+                    var enemyParser = GameObject.Find($"Enemy{1}Name");
+                    enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + enemyActions[1].animaData.Objectfile);
+                    enemyHealthBar.Add(GameObject.Find($"EnemyAnimaHP{1}").transform.Find("HP").GetComponent<HealthBar>());
+                    enemyDamageBar.Add(enemyParser.transform.Find($"E{1}Damage").transform.Find($"E{1} Damage Bar").GetComponent<ParserBar>());
+                    enemyHealBar.Add(enemyParser.transform.Find($"E{1}Heal").transform.Find($"E{1} Heal Bar").GetComponent<ParserBar>());
+                    enemyHealthBar[1].Initialize(enemyActions[1].animaData.Maxstamina, enemyActions[1].animaData.Stamina);
+                    enemyDamageBar[1].Initialize();
+                    enemyHealBar[1].Initialize();
+                    enemyParser.GetComponent<TextMeshProUGUI>().text = enemyActions[1].animaData.Name;
+                    enemyDamageText.Add(enemyParser.transform.Find($"E{1}Damage").GetComponent<TextMeshProUGUI>());
+                    enemyHealText.Add(enemyParser.transform.Find($"E{1}Heal").GetComponent<TextMeshProUGUI>());
+                    GameObject.Find($"EnemyAnimaHP{1}").transform.Find("LV UI").transform.Find("Current LV").GetComponent<TextMeshProUGUI>().text = enemyActions[1].animaData.level.ToString();
+                    enemyAnimaNum += 1;
+                    break;
+                case "Irascor":
+                    yield return multipleAttack.IrascorRoundSkill(enemyActions[0]);
+                    break;
+                case "Havet":
+                    yield return multipleAttack.HavetRoundSkill(enemyActions[0]);
+                    break;
+            }
+        }
         turnManager = null;
         turnManager = ScriptableObject.CreateInstance<TurnManager>();
         turnManager.ResetTurnList();
@@ -515,33 +587,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         turnIndex = 0;
         
         TurnUISetting(turnList);
-        if (isBoss && roundNum > 1)
-        {
-            //Buff buff;
-            int selectAlly = selectNoDieAnima();
-
-            switch (enemyBattleSetting.Stage)
-            {
-                case "Felix":
-                    yield return singleAttack.FelixRoundSkill(enemyActions[0], selectAlly);
-                    break;
-                case "Phobia":
-                    yield return singleAttack.PhobiaRoundSkill(enemyActions[0],turnList, selectAlly);
-                    break;
-                case "Amare":
-                    yield return singleAttack.AmareRoundSkill(enemyActions[0], selectAlly);
-                    //buff = new Buff(matchedSkill[2].Affect, matchedSkill[2].Weight, matchedSkill[2].Turn, allyActions[selectAlly].animaData, 1);
-                    //buffManager.AddOrRenuwBuff(buff);
-                    break;
-                case "Irascor":
-                    yield return multipleAttack.IrascorRoundSkill(enemyActions[0]);
-                    break;
-                case "Havet":
-                    yield return multipleAttack.HavetRoundSkill(enemyActions[0]);
-                    break;
-            }
-
-        }
+        
         SetState(turnList);
     }
     public void TurnUISetting(List<AnimaDataSO> turnList)
@@ -1128,21 +1174,32 @@ public class BattleManager : MonoBehaviour, IBattleManager
     
     public void WinBattle()
     {
-        
-        Instantiate(Resources.Load<GameObject>("Minwoo/Battle Win UI"), canvas.transform);
-        for(int i = 0; i< allyActions.Count; i++)
+        if (!isBoss)
         {
-            GameObject animaImage = GameObject.Find("Entry Anima List").transform.Find($"Anima {i}").gameObject;
-            animaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + allyActions[i].animaData.Objectfile);
-            animaImage.SetActive(true);
+            Instantiate(Resources.Load<GameObject>("Minwoo/Battle Win UI"), canvas.transform);
+            for (int i = 0; i < allyActions.Count; i++)
+            {
+                GameObject animaImage = GameObject.Find("Entry Anima List").transform.Find($"Anima {i}").gameObject;
+                animaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + allyActions[i].animaData.Objectfile);
+                animaImage.SetActive(true);
+            }
+            for (int i = 0; i < dropAnima.Count; i++)
+            {
+                GameObject dropAnimaImage = GameObject.Find("Drop Anima List").transform.Find($"Anima {i}").gameObject;
+                dropAnimaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + dropAnima[i].Objectfile);
+                dropAnimaImage.SetActive(true);
+            }
         }
-        for (int i = 0; i < dropAnima.Count; i++) 
+        else if (isBoss && bossStage != 6)
         {
-            GameObject dropAnimaImage = GameObject.Find("Drop Anima List").transform.Find($"Anima {i}").gameObject;
-            dropAnimaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + dropAnima[i].Objectfile);
-            dropAnimaImage.SetActive(true);
+            Instantiate(Resources.Load<GameObject>("Minwoo/Boss Battle Win UI"), canvas.transform);
         }
-        
+        else
+        {
+            Instantiate(Resources.Load<GameObject>("Minwoo/Game Clear UI"), canvas.transform);
+        }
+
+
     }
     public void LoseBattle()
     {

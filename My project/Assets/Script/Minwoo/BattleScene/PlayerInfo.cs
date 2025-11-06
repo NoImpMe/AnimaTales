@@ -11,7 +11,7 @@ public class PlayerInfo : ScriptableObject
     public AnimaDataSO animaData;
     public bool onBossStage = false;
     int tmp = 0;
-    public int maxLevel = 0;
+    public int maxLevel = 5;
     public void Initialize()
     {
 

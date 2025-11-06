@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Collections;
 
 public class RegionManager : MonoBehaviour
 {
@@ -17,17 +20,19 @@ public class RegionManager : MonoBehaviour
     public EnterTiles enterTiles;
     private GameObject managerOB;
     private DontDesManager manager;
-
+    private List<string> tileType = new List<string> {"Amare", "Felix", "Havet","Irascor","Lacrima","Phobia"};
     [SerializeField] RegionManager regionPrefab;
+    [SerializeField]
+    private FadeEffect fadePanel;
 
-    void Start()
+    public void StageInit(int stageNum)
     {
         int randomSelectTile = Random.Range(0, 1);
         cameraSet = GameObject.Find("Main Camera");
         var camSet = cameraSet.GetComponent<CameraController>();
         if (randomSelectTile == 0)
         {
-            tileMap = Resources.Load<GameObject>("Minwoo/TileMap/Stage0");
+            tileMap = Resources.Load<GameObject>($"Minwoo/TileMap/Stage{stageNum}");
             stageType = 0;
             GameObject map = Instantiate(tileMap, new Vector3(0, 0, 0), Quaternion.identity);
             map.name = "Tiles";
@@ -80,104 +85,128 @@ public class RegionManager : MonoBehaviour
 
         var target = hit.collider.GetComponentInParent<RegionController>();
         if (target == null || !target.gameObject.activeSelf) return;
-
-        EnterBattle(target);
+        fadePanel = GameObject.Find("FadePanel").GetComponent<FadeEffect>();
+        StartCoroutine(EnterBattle(target));
     }
 
-    void EnterBattle(RegionController target)
+    IEnumerator EnterBattle(RegionController target)
     {
         if (target.isCleared && !target.isVillaged)
         {
-            return;
+            yield return null;
         }
         else if (target.isVillaged)
         {
+            manager.SetTile(target);
+            currentRegion = target;
             string villageID = target.name;
             VillageDataManager.Instance.SetCurrentVillageID(villageID);
-            SceneManager.LoadScene("VillageScene");
+            yield return StartCoroutine(fadePanel.LoadSceneWithFade("VillageScene"));
+            for (int i = 0; i < tileType.Count; i++)
+            {
+                GameObject.Find($"{tileType[i]}").SetActive(false);
+            }
         }
         else if (target.name.StartsWith("EliteBattle"))
         {
+            manager.SetTile(target);
+            target.isCleared = true;
+            currentRegion = target;
             switch (target.type)
             {
                 case "Felix":
-                    SceneManager.LoadScene("FelixEliteBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("FelixEliteBattleScene"));
                     break;
                 case "Phobia":
-                    SceneManager.LoadScene("PhobiaEliteBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("PhobiaEliteBattleScene"));
                     break;
                 case "Amare":
-                    SceneManager.LoadScene("AmareEliteBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("AmareEliteBattleScene"));
                     break;
                 case "Irascor":
-                    SceneManager.LoadScene("IrascorEliteBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("IrascorEliteBattleScene"));
                     break;
                 case "Lacrima":
-                    SceneManager.LoadScene("LacrimaEliteBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("LacrimaEliteBattleScene"));
                     break;
                 case "Havet":
-                    SceneManager.LoadScene("HavetEliteBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("HavetEliteBattleScene"));
                     break;
             }
         }
         else if (target.name.StartsWith("Boss"))
         {
+            manager.SetTile(target);
+            target.isCleared = true;
+            currentRegion = target;
             switch (target.type)
             {
                 case "Felix":
-                    SceneManager.LoadScene("FelixBossBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("FelixBossBattleScene"));
                     break;
                 case "Phobia":
-                    SceneManager.LoadScene("PhobiaBossBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("PhobiaBossBattleScene"));
                     break;
                 case "Amare":
-                    SceneManager.LoadScene("AmareBossBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("AmareBossBattleScene"));
                     break;
                 case "Irascor":
-                    SceneManager.LoadScene("IrascorBossBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("IrascorBossBattleScene"));
                     break;
                 case "Lacrima":
-                    SceneManager.LoadScene("LacrimaBossBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("LacrimaBossBattleScene"));
                     break;
                 case "Havet":
-                    SceneManager.LoadScene("HavetBossBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("HavetBossBattleScene"));
                     break;
             }
+            target.GetComponentInParent<IsVisitedField>().isVisited = true;
+            target.transform.parent.parent.GetComponent<StageController>().ShowNextField();
+        }
+        else if (target.name.StartsWith("Start"))
+        {
+            manager.SetTile(target);
+            target.isCleared = true;
+            currentRegion = target;
+            target.GetComponentInParent<IsVisitedField>().isSelected = true;
+            target.transform.parent.parent.GetComponent<StageController>().EnterNewField();
+            target.GetComponentInParent<IsVisitedField>().isVisited = true;
+            SetNextTile(target);
         }
         else
         {
+            manager.SetTile(target);
+            target.isCleared = true;
+            currentRegion = target;
             switch (target.type)
             {
                 case "Felix":
-                    SceneManager.LoadScene("FelixBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("FelixBattleScene"));
                     break;
                 case "Phobia":
-                    SceneManager.LoadScene("PhobiaBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("PhobiaBattleScene"));
                     break;
                 case "Amare":
-                    SceneManager.LoadScene("AmareBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("AmareBattleScene"));
                     break;
                 case "Irascor":
-                    SceneManager.LoadScene("IrascorBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("IrascorBattleScene"));
                     break;
                 case "Lacrima":
-                    SceneManager.LoadScene("LacrimaBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("LacrimaBattleScene"));
                     break;
                 case "Havet":
-                    SceneManager.LoadScene("HavetBattleScene");
+                    yield return StartCoroutine(fadePanel.LoadSceneWithFade("HavetBattleScene"));
                     break;
             }
         }
-        manager.SetTile(target);
-        target.isCleared = true;
-        currentRegion = target;
+        
     }
 
     public void SetNextTile(RegionController target)
     {
         foreach (var nb in target.neighbors)
         {
-            
             nb.gameObject.SetActive(true);
         }
     }

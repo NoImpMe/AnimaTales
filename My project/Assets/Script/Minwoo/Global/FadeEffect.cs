@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FadeEffect : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class FadeEffect : MonoBehaviour
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
             
         canvasGroup.alpha = 0f;
+        canvasGroup.gameObject.GetComponent<Image>().color = Color.black;
         canvasGroup.blocksRaycasts = false;
     }
     
@@ -49,5 +51,11 @@ public class FadeEffect : MonoBehaviour
         
         canvasGroup.alpha = 0f;
         canvasGroup.blocksRaycasts = false;
+    }
+
+    public IEnumerator LoadSceneWithFade(string sceneName)
+    {
+        yield return FadeIn();
+        SceneManager.LoadScene(sceneName);
     }
 }

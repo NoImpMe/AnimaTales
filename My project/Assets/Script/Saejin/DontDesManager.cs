@@ -23,6 +23,7 @@ public class DontDesManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(manager);
             DontDestroyOnLoad(regionManager);
+            regionManager.GetComponent<RegionManager>().StageInit(0);
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
@@ -38,23 +39,11 @@ public class DontDesManager : MonoBehaviour
         if (scene.name == "TitleScene")
         {
             Destroy(manager);
-            mapScreen.SetActive(true);
-            Destroy(mapScreen);
             Destroy(this);
             Destroy(gameObject);
             Destroy(grid);
             Destroy(tileManager);
             return;
-        }
-        if (scene.name == "MapScene")
-        {
-            mapScreen.SetActive(true);
-            Camera.main.transform.position = new Vector3(0f, 0f, -10);
-            if(stageNode != null)
-            {
-                EnterStage es = stageNode.GetComponent<EnterStage>();
-                es.SetLineColor(stageNode);
-            }
         }
 
         if (lastUnloaded != null && (lastUnloaded.EndsWith("BattleScene") || lastUnloaded.Equals("VillageScene"))) 

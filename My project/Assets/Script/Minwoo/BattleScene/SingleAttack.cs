@@ -24,7 +24,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{anima.animaData.Name} hit {bm.EnemyActions[selectEnemy].animaData.Name} for {Mathf.Ceil(anima.damage)}damage", true);
         bm.AllyDamageText[bm.AllyActions.IndexOf(anima)].text = Mathf.Ceil(bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)].thisPoint).ToString();
         DamageParserUpdate();
-
+        BuffUpdate(anima.animaData);
         if (bm.EnemyActions[selectEnemy].animaData.Animadie)
         {
             if (anima.animaData.Speed < bm.EnemyActions[selectEnemy].animaData.Speed)
@@ -41,7 +41,7 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(anima.animaData);
+        
 
     }
     public IEnumerator SingleAllySkill(AnimaActions anima, int selectEnemy, int skillNum)
@@ -55,6 +55,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{anima.animaData.Name} used \"{anima.animaData.skillName[skillNum]}\" on {bm.EnemyActions[selectEnemy].animaData.Name} for {Mathf.Ceil(anima.damage)}damage", true);
         bm.AllyDamageText[bm.AllyActions.IndexOf(anima)].text = Mathf.Ceil(bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(anima.animaData);
         if (bm.EnemyActions[selectEnemy].animaData.Animadie)
         {
             if (anima.animaData.Speed < bm.EnemyActions[selectEnemy].animaData.Speed)
@@ -71,7 +72,8 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(anima.animaData);
+        
+
     }
 
     public IEnumerator SingleEnemyAttack(EnemyActions enemy, int selectAlly)
@@ -88,6 +90,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} hit {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -104,7 +107,7 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
+
     }
     public IEnumerator SingleEnemySkill(EnemyActions enemy, int selectAlly)
     {
@@ -120,6 +123,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -136,9 +140,10 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
+        
+
     }
-    
+
     public IEnumerator SingleAllyHeal(AnimaActions anima, int selectAlly, int skillNum)
     {
         PrepareAttack(anima);
@@ -230,6 +235,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -246,7 +252,6 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
     }
     public IEnumerator PhobiaSingleAttack(EnemyActions enemy, int selectAlly)
     {
@@ -262,6 +267,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -278,7 +284,7 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
+        
     }
     public IEnumerator LacrimaSingleAttack(EnemyActions enemy, int selectAlly)
     {
@@ -294,6 +300,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -310,7 +317,7 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
+        
     }
     public IEnumerator AmareSingleAttack(EnemyActions enemy, int selectAlly)
     {
@@ -326,6 +333,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -342,7 +350,7 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
+        
     }
     public IEnumerator IrascorSingleAttack(EnemyActions enemy, int selectAlly)
     {
@@ -358,6 +366,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -374,7 +383,7 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
+        
     }
     public IEnumerator HavetSingleAttack(EnemyActions enemy, int selectAlly)
     {
@@ -390,6 +399,8 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
+        BuffUpdate(enemy.animaData);
+
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
@@ -406,7 +417,6 @@ public class SingleAttack:MonoBehaviour
         {
             bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
-        BuffUpdate(enemy.animaData);
     }
     public IEnumerator FelixRoundSkill(EnemyActions enemy, int selectAlly)
     {
@@ -584,14 +594,9 @@ public class SingleAttack:MonoBehaviour
             }
         }
 
-        if (bm.EnemyActions.Count == 0)
+        if (bm.EnemyActions.Count == 0 || enemy.animaData.isBoss)
         {
-            foreach (var ally in bm.AllyActions)
-            {
-                ally.animaData.location = -1;
-            }
             bm.stat = BattleState.win;
-            bm.TurnIndex = 0;
             if (bm.RunningCoroutine != null)
             {
                 StopCoroutine(bm.RunningCoroutine);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class AnimaInventoryManager : MonoBehaviour
 {
@@ -153,6 +154,10 @@ public class AnimaInventoryManager : MonoBehaviour
             else if (fromType == InventorySlotType.Inventory && toType == InventorySlotType.Main)
             {
                 if (mixManager == null) mixManager = GameObject.Find("MixManager").GetComponent<MixManager>();
+                if (mixManager.mainAnima != null)
+                {
+                    playerInfo.haveAnima.Add(toAnima);
+                }
                 playerInfo.haveAnima.Remove(fromAnima);
                 mixManager.mainAnima = fromAnima;
                 toSlot.AnimaData = fromAnima;
@@ -160,6 +165,10 @@ public class AnimaInventoryManager : MonoBehaviour
             else if (fromType == InventorySlotType.Inventory && toType == InventorySlotType.Sub)
             {
                 if (mixManager == null) mixManager = GameObject.Find("MixManager").GetComponent<MixManager>();
+                if(mixManager.subAnima != null)
+                {
+                    playerInfo.haveAnima.Add(toAnima);
+                }
                 playerInfo.haveAnima.Remove(fromAnima);
                 mixManager.subAnima = fromAnima;
                 toSlot.AnimaData = fromAnima;
