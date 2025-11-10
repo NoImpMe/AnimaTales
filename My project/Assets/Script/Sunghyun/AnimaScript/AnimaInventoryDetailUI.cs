@@ -38,7 +38,7 @@ public class AnimaInventoryDetailUI : MonoBehaviour
             gameObject.SetActive(true);
         }
     
-        string imagePath = "Minwoo/Portrait/" + anima.Objectfile;
+        string imagePath = "Anima_Sprites/" + anima.Objectfile;
         if (portraitImage != null)
         {
             if (!portraitCache.TryGetValue(imagePath, out Sprite sprite))
@@ -79,7 +79,7 @@ public class AnimaInventoryDetailUI : MonoBehaviour
         if (spText != null) spText.text = anima.Speed.ToString();
 
         if (skill1NameText != null) skill1NameText.text = anima.skillName[0];
-        if (skill2NameText != null) skill2NameText.text = "";
+        if (anima.skillName.Count > 1) skill2NameText.text = anima.skillName[1];
     
         if (skill1DescriptionText != null) skill1DescriptionText.text = "";
         if (skill2DescriptionText != null) skill2DescriptionText.text = "";

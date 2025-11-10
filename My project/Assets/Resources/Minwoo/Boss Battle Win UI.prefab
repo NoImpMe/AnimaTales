@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1468237851330586384}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &878994623380629159
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +145,7 @@ GameObject:
   - component: {fileID: 3161729774159266367}
   - component: {fileID: 4229791940128340326}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Reroll0Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,6 +489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2723176301396942304}
+  - component: {fileID: 634631694747453148}
   m_Layer: 5
   m_Name: Boss Battle Win UI
   m_TagString: Untagged
@@ -512,6 +525,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &634631694747453148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173173061360072344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caeffef35c272c4ebc3e807212b38c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitys:
+  - {fileID: 7626048040159623572}
+  - {fileID: 6144199953770759625}
+  - {fileID: 3264066583784947384}
+  abilityTxt:
+  - {fileID: 4883973843503171127}
+  - {fileID: 8831067490141917516}
+  - {fileID: 4908756497712612868}
+  rerolls:
+  - {fileID: 938229294401800030}
+  - {fileID: 3896645840937521399}
+  - {fileID: 8556599106945218314}
+  rerollTxt:
+  - {fileID: 4229791940128340326}
+  - {fileID: 3421986496459234773}
+  - {fileID: 3158706169342880081}
 --- !u!1 &2194348877655613812
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +711,7 @@ GameObject:
   - component: {fileID: 4337294870028649753}
   - component: {fileID: 4883973843503171127}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Ability0Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,7 +955,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4290168609363013004}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4026549123326528180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,7 +1088,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2891196031138960233}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4519815467068169517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1221,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8624034611393144797}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4593003067738319068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1354,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7973031935991192941}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7187753672235699794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1487,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 698326687458245473}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7651901866151470834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1648,7 @@ GameObject:
   - component: {fileID: 4735083653195122146}
   - component: {fileID: 4908756497712612868}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Ability2Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1683,7 +1784,7 @@ GameObject:
   - component: {fileID: 4788637165695778696}
   - component: {fileID: 3158706169342880081}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Reroll2Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1819,7 +1920,7 @@ GameObject:
   - component: {fileID: 8291486180234361107}
   - component: {fileID: 8831067490141917516}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Ability1Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1955,7 +2056,7 @@ GameObject:
   - component: {fileID: 7837024639047586267}
   - component: {fileID: 3421986496459234773}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Reroll1Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

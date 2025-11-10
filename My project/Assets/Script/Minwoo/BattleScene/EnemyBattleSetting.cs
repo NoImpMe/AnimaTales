@@ -170,7 +170,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             for (int i = 0; i < numberOfObjectsToAdd; i++)
             {
                 int randomIndex = Random.Range(1, mood + 2);
-                enemyObjPrefab.Add(Resources.Load<GameObject>("Minwoo/Portrait/" + objectfileList[randomIndex]));
+                enemyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + objectfileList[randomIndex]));
                 enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
                 enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy{i}"));
                 enemyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Enemy{i}Name"));
@@ -305,7 +305,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         for (int i = 0; i < 1; i++)
         {
             int randomIndex = Random.Range(mood, mood + 1);
-            enemyObjPrefab.Add(Resources.Load<GameObject>("Minwoo/Portrait/" + objectfileList[randomIndex]));
+            enemyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + objectfileList[randomIndex]));
             enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
             enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy{i}"));
             enemyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Enemy{i}Name"));
@@ -389,7 +389,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         for (int i = 0; i < objectfileList.Count; i++)
         {
             
-            enemyObjPrefab.Add(Resources.Load<GameObject>("Minwoo/Portrait/" + objectfileList[i]));
+            enemyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + objectfileList[i]));
             enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
             enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy{i}"));
             enemyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Enemy{i}Name"));
@@ -439,7 +439,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
     }
     public void AmareSpawn(string charmedAnima)
     {
-        enemyObjPrefab.Add(Resources.Load<GameObject>("Minwoo/Portrait/" + charmedAnima));
+        enemyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + charmedAnima));
         enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
         enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy1"));
         enemyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Enemy1Name"));

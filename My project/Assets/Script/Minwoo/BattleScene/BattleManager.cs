@@ -56,7 +56,12 @@ public class BattleManager : MonoBehaviour, IBattleManager
     public List<HealthBar> AllyHealthBar => allyHealthBar;
     List<HealthBar> enemyHealthBar;
     public List<HealthBar> EnemyHealthBar => enemyHealthBar;
+    List<ShieldBar> allyShieldBar;
+    public List<ShieldBar> AllyShieldBar => allyShieldBar;
+    List<ShieldBar> enemyShieldBar;
+    public List<ShieldBar> EnemyShieldBar => enemyShieldBar;
     List<ParserBar> allyDamageBar;
+
     public List<ParserBar> AllyDamageBar => allyDamageBar;
     List<ParserBar> enemyDamageBar;
     public List<ParserBar> EnemyDamageBar => enemyDamageBar;
@@ -231,6 +236,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         allyActions = new List<AnimaActions>();
         allyBattleSetting = gameObject.AddComponent<AllyBattleSetting>();
         allyHealthBar = new List<HealthBar>();
+        allyShieldBar = new List<ShieldBar>();
         allyDamageBar = new List<ParserBar>();
         allyHealBar = new List<ParserBar>();
         allyDamageText = new List<TextMeshProUGUI>();
@@ -255,6 +261,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             enemy = new List<GameObject>();
             enemyActions = new List<EnemyActions>();
             enemyHealthBar = new List<HealthBar>();
+            enemyShieldBar = new List<ShieldBar>();
             enemyDamageBar = new List<ParserBar>();
             enemyHealBar = new List<ParserBar>();
             enemyDamageText = new List<TextMeshProUGUI>();
@@ -336,9 +343,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
             allyActions[i].animaData.location = i;
             var allyStatus = GameObject.Find($"Ally{i}");
             var allyParser = GameObject.Find($"Ally{i}Name");
-            allyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite= Resources.Load<Sprite>("Minwoo/Portrait/" + allyActions[i].animaData.Objectfile);
+            allyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite= Resources.Load<Sprite>("Anima_Sprites/" + allyActions[i].animaData.Objectfile);
             allyHealthBar.Add(GameObject.Find($"AllyAnimaHP{i}").transform.Find("HP").GetComponent<HealthBar>());
-            
+            //allyShieldBar.Add(GameObject.Find($"AllyAnimaSD{i}").transform.Find("SD").GetComponent<ShieldBar>());
             allyDamageBar.Add(allyParser.transform.Find($"A{i}Damage").transform.Find($"A{i} Damage Bar").GetComponent<ParserBar>());
             allyHealBar.Add(allyParser.transform.Find($"A{i}Heal").transform.Find($"A{i} Heal Bar").GetComponent<ParserBar>());
             allyHealthBar[i].Initialize(allyActions[i].animaData.Maxstamina, allyActions[i].animaData.Stamina);
@@ -374,8 +381,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 enemyActions[i].animaData.enemyIndex = i;
                 var enemyStatus = GameObject.Find($"Enemy{i}");
                 var enemyParser = GameObject.Find($"Enemy{i}Name");
-                enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + enemyActions[i].animaData.Objectfile);
+                enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + enemyActions[i].animaData.Objectfile);
                 enemyHealthBar.Add(GameObject.Find($"EnemyAnimaHP{i}").transform.Find("HP").GetComponent<HealthBar>());
+                //enemyShieldBar.Add(GameObject.Find($"EnemyAnimaSD{i}").transform.Find("SD").GetComponent<ShieldBar>());
                 enemyDamageBar.Add(enemyParser.transform.Find($"E{i}Damage").transform.Find($"E{i} Damage Bar").GetComponent<ParserBar>());
                 enemyHealBar.Add(enemyParser.transform.Find($"E{i}Heal").transform.Find($"E{i} Heal Bar").GetComponent<ParserBar>());
                 enemyHealthBar[i].Initialize(enemyActions[i].animaData.Maxstamina, enemyActions[i].animaData.Stamina);
@@ -409,8 +417,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 enemyActions[i].animaData.isBoss = true;
                 var enemyStatus = GameObject.Find($"Enemy{i}");
                 var enemyParser = GameObject.Find($"Enemy{i}Name");
-                enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + enemyActions[i].animaData.Objectfile);
+                enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + enemyActions[i].animaData.Objectfile);
                 enemyHealthBar.Add(GameObject.Find($"EnemyAnimaHP{i}").transform.Find("HP").GetComponent<HealthBar>());
+                //enemyShieldBar.Add(GameObject.Find($"EnemyAnimaSD{i}").transform.Find("SD").GetComponent<ShieldBar>());
                 enemyDamageBar.Add(enemyParser.transform.Find($"E{i}Damage").transform.Find($"E{i} Damage Bar").GetComponent<ParserBar>());
                 enemyHealBar.Add(enemyParser.transform.Find($"E{i}Heal").transform.Find($"E{i} Heal Bar").GetComponent<ParserBar>());
                 enemyHealthBar[i].Initialize(enemyActions[i].animaData.Maxstamina, enemyActions[i].animaData.Stamina);
@@ -454,8 +463,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 enemyActions[i].animaData.enemyIndex = i;
                 var enemyStatus = GameObject.Find($"Enemy{i}");
                 var enemyParser = GameObject.Find($"Enemy{i}Name");
-                enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + enemyActions[i].animaData.Objectfile);
+                enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + enemyActions[i].animaData.Objectfile);
                 enemyHealthBar.Add(GameObject.Find($"EnemyAnimaHP{i}").transform.Find("HP").GetComponent<HealthBar>());
+                //enemyShieldBar.Add(GameObject.Find($"EnemyAnimaSD{i}").transform.Find("SD").GetComponent<ShieldBar>());
                 enemyDamageBar.Add(enemyParser.transform.Find($"E{i}Damage").transform.Find($"E{i} Damage Bar").GetComponent<ParserBar>());
                 enemyHealBar.Add(enemyParser.transform.Find($"E{i}Heal").transform.Find($"E{i} Heal Bar").GetComponent<ParserBar>());
                 enemyHealthBar[i].Initialize(enemyActions[i].animaData.Maxstamina, enemyActions[i].animaData.Stamina);
@@ -543,7 +553,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     enemyActions[1].animaData.enemyIndex = 1;
                     var enemyStatus = GameObject.Find($"Enemy{1}");
                     var enemyParser = GameObject.Find($"Enemy{1}Name");
-                    enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + enemyActions[1].animaData.Objectfile);
+                    enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + enemyActions[1].animaData.Objectfile);
                     enemyHealthBar.Add(GameObject.Find($"EnemyAnimaHP{1}").transform.Find("HP").GetComponent<HealthBar>());
                     enemyDamageBar.Add(enemyParser.transform.Find($"E{1}Damage").transform.Find($"E{1} Damage Bar").GetComponent<ParserBar>());
                     enemyHealBar.Add(enemyParser.transform.Find($"E{1}Heal").transform.Find($"E{1} Heal Bar").GetComponent<ParserBar>());
@@ -613,7 +623,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                         turn.Add(UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Minwoo/Player Turn Slot"), turnUI.transform.position, Quaternion.identity, turnUI));
                         int index = turn[i].name.IndexOf("(Clone)");
                         turn[i].name = turn[i].name.Substring(0, index) + "" + i;
-                        turnUI.transform.Find($"Player Turn Slot{i}").transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + tmpturnList[i].Objectfile);
+                        turnUI.transform.Find($"Player Turn Slot{i}").transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + tmpturnList[i].Objectfile);
                         isTurn.Add(UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Minwoo/IsTurn"), turnUI.transform.Find($"Player Turn Slot{i}").transform.position, Quaternion.identity, turnUI.transform.Find($"Player Turn Slot{i}")));
                         index = isTurn[i].name.IndexOf("(Clone)");
                         isTurn[i].name = isTurn[i].name.Substring(0, index) + "" + i;
@@ -625,7 +635,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                         turn[i].transform.Rotate(0, 180f, 0);
                         int index = turn[i].name.IndexOf("(Clone)");
                         turn[i].name = turn[i].name.Substring(0, index) + "" + i;
-                        turnUI.transform.Find($"Enemy Turn Slot{i}").transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + tmpturnList[i].Objectfile);
+                        turnUI.transform.Find($"Enemy Turn Slot{i}").transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + tmpturnList[i].Objectfile);
                         isTurn.Add(Instantiate(Resources.Load<GameObject>("Minwoo/IsTurn"), turnUI.transform.Find($"Enemy Turn Slot{i}").transform.position, Quaternion.identity, turnUI.transform.Find($"Enemy Turn Slot{i}")));
                         index = isTurn[i].name.IndexOf("(Clone)");
                         isTurn[i].name = isTurn[i].name.Substring(0, index) + "" + i;
@@ -643,7 +653,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 turn.Add(UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Minwoo/Player Turn Slot"), turnUI.transform.position, Quaternion.identity, turnUI));
                 int index = turn[tmp].name.IndexOf("(Clone)");
                 turn[tmp].name = turn[tmp].name.Substring(0, index) + "" + tmp;
-                turnUI.transform.Find($"Player Turn Slot{tmp}").transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + turnList[i].Objectfile);
+                turnUI.transform.Find($"Player Turn Slot{tmp}").transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + turnList[i].Objectfile);
                 isTurn.Add(UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Minwoo/IsTurn"), turnUI.transform.Find($"Player Turn Slot{tmp}").transform.position, Quaternion.identity, turnUI.transform.Find($"Player Turn Slot{tmp}")));
                 index = isTurn[tmp].name.IndexOf("(Clone)");
                 isTurn[tmp].name = isTurn[tmp].name.Substring(0, index) + "" + tmp;
@@ -655,7 +665,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 turn[tmp].transform.Rotate(0, 180f, 0);
                 int index = turn[tmp].name.IndexOf("(Clone)");
                 turn[tmp].name = turn[tmp].name.Substring(0, index) + "" + tmp;
-                turnUI.transform.Find($"Enemy Turn Slot{tmp}").transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + turnList[i].Objectfile);
+                turnUI.transform.Find($"Enemy Turn Slot{tmp}").transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + turnList[i].Objectfile);
                 isTurn.Add(Instantiate(Resources.Load<GameObject>("Minwoo/IsTurn"), turnUI.transform.Find($"Enemy Turn Slot{tmp}").transform.position, Quaternion.identity, turnUI.transform.Find($"Enemy Turn Slot{tmp}")));
                 index = isTurn[tmp].name.IndexOf("(Clone)");
                 isTurn[tmp].name = isTurn[tmp].name.Substring(0, index) + "" + tmp;
@@ -703,7 +713,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             }
             Instantiate(Resources.Load<GameObject>("Minwoo/Arrow_down"), new Vector2(allyBattleSetting.AllyInstance[allyActions[index].animaData.location].transform.position.x, allyBattleSetting.AllyInstance[allyActions[index].animaData.location].transform.position.y + 1.2f), Quaternion.identity);
             arrow = GameObject.Find("Arrow_down(Clone)");
-            GameObject.Find("Anima Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + turnList[0].Objectfile);
+            GameObject.Find("Anima Portrait").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + turnList[0].Objectfile);
             GameObject.Find("Currunt Anima Name").GetComponent<TextMeshProUGUI>().text = turnList[0].Name;
             skillButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skill\n";
             for(int i = 0; i < turnList[0].skillName.Count ; i++)
@@ -780,6 +790,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
             case "SingleHeal":
                 runningCoroutine = StartCoroutine(PlayerSingleHeal( 0));
                 break;
+            case "SingleShield":
+                runningCoroutine = StartCoroutine(PlayerSingleShield(0));
+                break;
             case "SingleBuff":
                 runningCoroutine = StartCoroutine(PlayerSingleBuff(0));
                 break;
@@ -792,12 +805,16 @@ public class BattleManager : MonoBehaviour, IBattleManager
             case "MultiHeal":
                 runningCoroutine = StartCoroutine(PlayerMultiHeal(0));
                 break;
+            case "MultiShield":
+                runningCoroutine = StartCoroutine(PlayerMultiShield(0));
+                break;
             case "MultiBuff":
                 runningCoroutine = StartCoroutine(PlayerMultiBuff(0));
                 break;
             case "MultiDebuff":
                 runningCoroutine = StartCoroutine(PlayerMultiDebuff(0));
                 break;
+            
         }
         
         
@@ -806,7 +823,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         attackButton.interactable = false;
         skillButton.interactable = false;
-        matchedSkill = skills.Where(s => s.name == skill1.transform.Find("Skill Text1").GetComponent<TextMeshProUGUI>().text).ToList();
+        matchedSkill = skills.Where(s => s.name == skill2.transform.Find("Skill Text1").GetComponent<TextMeshProUGUI>().text).ToList();
         switch (matchedSkill[0].Type)
         {
             case "SingleAttack":
@@ -814,6 +831,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 break;
             case "SingleHeal":
                 runningCoroutine = StartCoroutine(PlayerSingleHeal( 1));
+                break;
+            case "SingleShield":
+                runningCoroutine = StartCoroutine(PlayerSingleShield(1));
                 break;
             case "SingleBuff":
                 runningCoroutine = StartCoroutine(PlayerSingleBuff(1));
@@ -826,6 +846,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 break;
             case "MultiHeal":
                 runningCoroutine = StartCoroutine(PlayerMultiHeal(1));
+                break;
+            case "MultiShield":
+                runningCoroutine = StartCoroutine(PlayerMultiShield(1));
                 break;
             case "MultiBuff":
                 runningCoroutine = StartCoroutine(PlayerMultiBuff(1));
@@ -862,7 +885,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         
         tmpAnima = PresentAllyTurn();
         
-        yield return StartCoroutine(singleAttack.SingleAllySkill(tmpAnima, selectEnemy, skillNum));
+        yield return StartCoroutine(singleAttack.SingleAllySkill(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
            
         if (enemyActions.Count > 0 && turnList.Count == 0)
         {
@@ -879,7 +902,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         yield return MultiAttackCursorInit();
         tmpAnima  = PresentAllyTurn();
 
-        yield return StartCoroutine(multipleAttack.MultiAllySkill(tmpAnima, skillNum));
+        yield return StartCoroutine(multipleAttack.MultiAllySkill(tmpAnima, skillNum, matchedSkill[0].Weight));
         if (enemyActions.Count > 0 && turnList.Count == 0)
         {
             runningCoroutine = StartCoroutine(BattleStart());
@@ -896,7 +919,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         yield return BuffCursorInit();
 
         tmpAnima = PresentAllyTurn();
-        yield return StartCoroutine(singleAttack.SingleAllyHeal(tmpAnima, selectEnemy, skillNum));
+        yield return StartCoroutine(singleAttack.SingleAllyHeal(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
         if (enemyActions.Count > 0 && turnList.Count == 0)
         {
             runningCoroutine = StartCoroutine(BattleStart());
@@ -912,7 +935,39 @@ public class BattleManager : MonoBehaviour, IBattleManager
         yield return MultiBuffCursorInit();
 
         tmpAnima = PresentAllyTurn();
-        yield return StartCoroutine(multipleAttack.MultiAllyHeal(tmpAnima, skillNum));
+        yield return StartCoroutine(multipleAttack.MultiAllyHeal(tmpAnima, skillNum, matchedSkill[0].Weight));
+        if (enemyActions.Count > 0 && turnList.Count == 0)
+        {
+            runningCoroutine = StartCoroutine(BattleStart());
+        }
+        else if (enemyActions.Count > 0 && turnList.Count != 0)
+        {
+            runningCoroutine = null;
+            SetState(turnList);
+        }
+    }
+    IEnumerator PlayerSingleShield(int skillNum)
+    {
+        yield return BuffCursorInit();
+
+        tmpAnima = PresentAllyTurn();
+        yield return StartCoroutine(singleAttack.SingleAllyShield(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
+        if (enemyActions.Count > 0 && turnList.Count == 0)
+        {
+            runningCoroutine = StartCoroutine(BattleStart());
+        }
+        else if (enemyActions.Count > 0 && turnList.Count != 0)
+        {
+            runningCoroutine = null;
+            SetState(turnList);
+        }
+    }
+    IEnumerator PlayerMultiShield(int skillNum)
+    {
+        yield return MultiBuffCursorInit();
+
+        tmpAnima = PresentAllyTurn();
+        yield return StartCoroutine(multipleAttack.MultiAllyShield(tmpAnima, skillNum, matchedSkill[0].Weight));
         if (enemyActions.Count > 0 && turnList.Count == 0)
         {
             runningCoroutine = StartCoroutine(BattleStart());
@@ -927,7 +982,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return BuffCursorInit();
         tmpAnima = PresentAllyTurn();
-        yield return StartCoroutine(singleAttack.SingleAllyBuff(tmpAnima, selectEnemy, skillNum));
+        yield return StartCoroutine(singleAttack.SingleAllyBuff(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
         Buff buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, allyActions[selectEnemy].animaData, 0);
         buffManager.AddOrRenuwBuff(buff);
         if (enemyActions.Count > 0 && turnList.Count == 0)
@@ -944,7 +999,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return MultiBuffCursorInit();
         tmpAnima = PresentAllyTurn();
-        yield return StartCoroutine(multipleAttack.MultiAllyBuff(tmpAnima, skillNum));
+        yield return StartCoroutine(multipleAttack.MultiAllyBuff(tmpAnima, skillNum, matchedSkill[0].Weight));
         Buff buff;
         for (int i = 0; i < allyActions.Count; i++)
         {
@@ -968,7 +1023,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return AttackCursorInit();
         tmpAnima = PresentAllyTurn();
-        yield return StartCoroutine(singleAttack.SingleAllyDebuff(tmpAnima, selectEnemy, skillNum));
+        yield return StartCoroutine(singleAttack.SingleAllyDebuff(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
         Buff buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
         buffManager.AddOrRenuwBuff(buff);
         if (enemyActions.Count > 0 && turnList.Count == 0)
@@ -986,7 +1041,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         yield return MultiAttackCursorInit();
 
         tmpAnima = PresentAllyTurn();
-        yield return StartCoroutine(multipleAttack.MultiAllyDebuff(tmpAnima, skillNum));
+        yield return StartCoroutine(multipleAttack.MultiAllyDebuff(tmpAnima, skillNum, matchedSkill[0].Weight));
         Buff buff;
         for (int i = 0; i < enemyActions.Count; i++)
         {
@@ -1027,29 +1082,29 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     switch (matchedSkill[0].Type)
                     {
                         case "SingleAttack":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemySkill(enemy, selectAlly));
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemySkill(enemy, selectAlly, matchedSkill[0].Weight));
                             break;
                         case "SingleHeal":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyHeal(enemy, selectEnemy));
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyHeal(enemy, selectEnemy, matchedSkill[0].Weight));
                             break;
                         case "SingleBuff":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyBuff(enemy, selectEnemy));
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyBuff(enemy, selectEnemy, matchedSkill[0].Weight));
                             buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 0);
                             buffManager.AddOrRenuwBuff(buff);
                             break;
                         case "SingleDebuff":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyDebuff(enemy, selectAlly));
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyDebuff(enemy, selectAlly, matchedSkill[0].Weight));
                             buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, allyActions[selectAlly].animaData, 1);
                             buffManager.AddOrRenuwBuff(buff);
                             break;
                         case "MultiAttack":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemySkill(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemySkill(enemy, matchedSkill[0].Weight));
                             break;
                         case "MultiHeal":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyHeal(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyHeal(enemy, matchedSkill[0].Weight));
                             break;
                         case "MultiBuff":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyBuff(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyBuff(enemy, matchedSkill[0].Weight));
                             for (int i = 0; i < enemyActions.Count; i++)
                             {
                                 buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[i].animaData, 0);
@@ -1057,7 +1112,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                             }
                             break;
                         case "MultiDebuff":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyDebuff(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyDebuff(enemy, matchedSkill[0].Weight));
                             for (int i = 0; i < allyActions.Count; i++)
                             {
                                 if (allyActions[i].animaData.Animadie) continue;
@@ -1113,32 +1168,32 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     switch (matchedSkill[1].Type)
                     {
                         case "FelixMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.FelixMultiSkill(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.FelixMultiSkill(enemy, matchedSkill[1].Weight));
                             //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
                             //buffManager.AddOrRenuwBuff(buff);
                             break;
                         case "PhobiaMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.PhobiaMultiSkill(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.PhobiaMultiSkill(enemy, matchedSkill[1].Weight));
                             //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
                             //buffManager.AddOrRenuwBuff(buff);
                             break;
                         case "LacrimaMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.LacrimaMultiSkill(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.LacrimaMultiSkill(enemy, matchedSkill[1].Weight));
                             //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
                             //buffManager.AddOrRenuwBuff(buff);
                             break;
                         case "AmareMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.AmareMultiSkill(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.AmareMultiSkill(enemy, matchedSkill[1].Weight));
                             //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
                             //buffManager.AddOrRenuwBuff(buff);
                             break;
                         case "IrascorMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.IrascorMultiSkill(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.IrascorMultiSkill(enemy, matchedSkill[1].Weight));
                             //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
                             //buffManager.AddOrRenuwBuff(buff);
                             break;
                         case "HavetMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.HavetMultiSkill(enemy));
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.HavetMultiSkill(enemy, matchedSkill[1].Weight));
                             //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
                             //buffManager.AddOrRenuwBuff(buff);
                             break;
@@ -1180,13 +1235,13 @@ public class BattleManager : MonoBehaviour, IBattleManager
             for (int i = 0; i < allyActions.Count; i++)
             {
                 GameObject animaImage = GameObject.Find("Entry Anima List").transform.Find($"Anima {i}").gameObject;
-                animaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + allyActions[i].animaData.Objectfile);
+                animaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + allyActions[i].animaData.Objectfile);
                 animaImage.SetActive(true);
             }
             for (int i = 0; i < dropAnima.Count; i++)
             {
                 GameObject dropAnimaImage = GameObject.Find("Drop Anima List").transform.Find($"Anima {i}").gameObject;
-                dropAnimaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Minwoo/Portrait/" + dropAnima[i].Objectfile);
+                dropAnimaImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + dropAnima[i].Objectfile);
                 dropAnimaImage.SetActive(true);
             }
         }

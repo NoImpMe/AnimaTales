@@ -4,7 +4,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
 
 public class GoldManager : MonoBehaviour
 {

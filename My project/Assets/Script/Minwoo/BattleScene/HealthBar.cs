@@ -17,7 +17,7 @@ public class HealthBar : MonoBehaviour
     }
     public IEnumerator UpdateHealthBar()
     {
-        yield return StartCoroutine(healthBarController.SmoothHealthChange(healthBarController.healthBarFill.fillAmount, currentHealth/maxHealth, 1.3f));
+        yield return StartCoroutine(healthBarController.SmoothHealthChange(healthBarController.healthBarFill.fillAmount, currentHealth/maxHealth, 1.0f));
     }
 
     public IEnumerator TakeDamage(float damage)
@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour
         {
             currentHealth = 0; 
         }
-        yield return StartCoroutine(healthBarController.SmoothHealthChange(healthBarController.healthBarFill.fillAmount, currentHealth / maxHealth, 1.3f));
+        yield return StartCoroutine(healthBarController.SmoothHealthChange(healthBarController.healthBarFill.fillAmount, currentHealth / maxHealth, 1.0f));
         
     }
     public IEnumerator TakeHeal(float damage)
@@ -37,6 +37,6 @@ public class HealthBar : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        yield return StartCoroutine(healthBarController.SmoothHealthChange(healthBarController.healthBarFill.fillAmount, currentHealth / maxHealth, 1.3f));
+        yield return StartCoroutine(healthBarController.SmoothHealthChange(healthBarController.healthBarFill.fillAmount, currentHealth / maxHealth, 1.0f));
     }
 }

@@ -24,7 +24,7 @@ public class ParserBar : MonoBehaviour
         {
             thisPoint = 0;
         }
-        StartCoroutine(parserBarController.SmoothPointChange(parserBarController.parserBarFill.fillAmount, thisPoint / maxPoint, 1.3f));
+        StartCoroutine(parserBarController.SmoothPointChange(parserBarController.parserBarFill.fillAmount, thisPoint / maxPoint, 1.0f));
 
         yield return null;
     }

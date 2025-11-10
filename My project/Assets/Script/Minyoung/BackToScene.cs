@@ -21,16 +21,6 @@ public class BackToScene : MonoBehaviour
     {
         gameManager = GameObject.Find("Game Manager");
         var gameM = gameManager.GetComponent<SceneManagerCorridor>();   
-        StartCoroutine(LoadTileSceneWithFade(gameM.tileSceneName));
-    }
-    private IEnumerator LoadTileSceneWithFade(string sceneName)
-    {
-        if (fadePanel != null)
-            yield return fadePanel.FadeIn();
-        for (int i = 0; i < 6; i++)
-        {
-            GameObject.Find("Tiles").transform.Find($"{tileType[i]}").gameObject.SetActive(true);
-        }
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(fadePanel.LoadSceneWithFade(gameM.tileSceneName));
     }
 }

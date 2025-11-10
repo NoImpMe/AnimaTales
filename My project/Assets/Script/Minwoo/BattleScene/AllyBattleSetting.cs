@@ -118,7 +118,7 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
         var animaTable = database.GetMeta("Anima");
         for(int i = 0; i < playerinfo.battleAnima.Count ; i++)
         {
-            allyObjPrefab.Add(Resources.Load<GameObject>("Minwoo/Portrait/" + playerinfo.battleAnima[i].Objectfile));
+            allyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + playerinfo.battleAnima[i].Objectfile));
             allyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/AllyAnimaHP"));
             allyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Ally{i}"));
             allyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Ally{i}Name"));

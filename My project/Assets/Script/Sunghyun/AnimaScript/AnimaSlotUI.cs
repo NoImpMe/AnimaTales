@@ -45,7 +45,7 @@ public class AnimaSlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandle
 
         if (animaData != null)
         {
-            string imagePath = "Minwoo/Portrait/" + animaData.Objectfile;
+            string imagePath = "Anima_Sprites/" + animaData.Objectfile;
             
             if (!spriteCache.TryGetValue(imagePath, out Sprite sprite))
             {

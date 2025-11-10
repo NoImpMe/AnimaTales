@@ -112,12 +112,12 @@ public class EnemyActions : MonoBehaviour
         }
         
     }
-    public IEnumerator Skill(EnemyActions enemy, AnimaActions ally, IAllyBattleSetting allyPos, HealthBar allyHealthBar, ParserBar damageBar)
+    public IEnumerator Skill(EnemyActions enemy, AnimaActions ally, IAllyBattleSetting allyPos, HealthBar allyHealthBar, ParserBar damageBar, float weight)
     {
 
         if (!enemy.animaData.Animadie && !ally.animaData.Animadie)
         {
-            damage = CalcSkillDamage(enemy.animaData.Damage, ally);
+            damage = CalcSkillDamage(enemy.animaData.Damage, ally, weight);
             dn.Spawn(new Vector2(allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.x - 0.1f, allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.y + 0.1f), damage);
             yield return allyHealthBar.TakeDamage(damage);
             ally.TakeDamage(damage);
@@ -127,7 +127,7 @@ public class EnemyActions : MonoBehaviour
     }
   
     
-    public IEnumerator MultiSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    public IEnumerator MultiSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -137,7 +137,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]);
+                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i], weight);
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     if (maxDamage < damage)
                     {
@@ -151,11 +151,11 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(maxDamage);
         }
     }
-    public IEnumerator Heal(EnemyActions healer, EnemyActions target, IEnemyBattleSetting targetPos, HealthBar enemyHealthBar, ParserBar healBar)
+    public IEnumerator Heal(EnemyActions healer, EnemyActions target, IEnemyBattleSetting targetPos, HealthBar enemyHealthBar, ParserBar healBar, float weight)
     {
         if (!healer.animaData.Animadie && !target.animaData.Animadie)
         {
-            heal = CalcHealAmount(healer.animaData.Damage, target);
+            heal = CalcHealAmount(healer.animaData.Damage, target, weight);
             hn.Spawn(new Vector2(targetPos.EnemyInstance[targetPos.BattleManager.EnemyActions.IndexOf(target)].transform.position.x - 0.1f, targetPos.EnemyInstance[targetPos.BattleManager.EnemyActions.IndexOf(target)].transform.position.y + 0.1f), heal);
             yield return enemyHealthBar.TakeHeal(heal);
             target.TakeHeal(heal);
@@ -163,7 +163,7 @@ public class EnemyActions : MonoBehaviour
         }
     }
 
-    public IEnumerator MultiHeal(EnemyActions healer, List<EnemyActions> target, IEnemyBattleSetting targetPos, List<HealthBar> enemyHealthBar, ParserBar healBar)
+    public IEnumerator MultiHeal(EnemyActions healer, List<EnemyActions> target, IEnemyBattleSetting targetPos, List<HealthBar> enemyHealthBar, ParserBar healBar, float weight)
     {
         if (!healer.animaData.Animadie)
         {
@@ -172,7 +172,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!target[i].animaData.Animadie)
                 {
-                    heal = CalcHealAmount(healer.animaData.Damage, target[i]);
+                    heal = CalcHealAmount(healer.animaData.Damage, target[i], weight);
                     hn.Spawn(new Vector2(targetPos.EnemyInstance[i].transform.position.x - 0.1f, targetPos.EnemyInstance[i].transform.position.y + 0.1f), heal);
                     if (maxHeal < heal)
                     {
@@ -185,7 +185,7 @@ public class EnemyActions : MonoBehaviour
             yield return healBar.PutDamage(maxHeal);
         }
     }
-    public IEnumerator MultiIncreaseAbility(EnemyActions buffer, List<EnemyActions> target, string[] abi)
+    public IEnumerator MultiIncreaseAbility(EnemyActions buffer, List<EnemyActions> target, string[] abi, float weight)
     {
         for(int i = 0; i < target.Count; i++)
         {
@@ -194,13 +194,13 @@ public class EnemyActions : MonoBehaviour
                 switch (stat)
                 {
                     case "strength":
-                        StrengthUp(buffer, target[i]); 
+                        StrengthUp(buffer, target[i], weight); 
                         break;
                     case "speed":
-                        SpeedUp(buffer, target[i]);
+                        SpeedUp(buffer, target[i], weight);
                         break;
                     case "defense":
-                        DefenseUp(buffer, target[i]);
+                        DefenseUp(buffer, target[i], weight);
                         break;
                 }
             }
@@ -208,97 +208,97 @@ public class EnemyActions : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
 
-    public IEnumerator IncreaseAbility(EnemyActions buffer, EnemyActions target, string[] abi)
+    public IEnumerator IncreaseAbility(EnemyActions buffer, EnemyActions target, string[] abi, float weight)
     {
         foreach (string stat in abi)
         {
             switch (stat)
             {
                 case "strength":
-                    yield return StrengthUp(buffer, target);
+                    yield return StrengthUp(buffer, target, weight);
                     break;
                 case "speed":
-                    yield return SpeedUp(buffer, target);
+                    yield return SpeedUp(buffer, target, weight);
                     break;
                 case "defense":
-                    yield return DefenseUp(buffer, target);
+                    yield return DefenseUp(buffer, target, weight);
                     break;
             }
         }
     }
-    private IEnumerator StrengthUp(EnemyActions buffer, EnemyActions target)
+    private IEnumerator StrengthUp(EnemyActions buffer, EnemyActions target, float weight)
     {
         if (!buffer.animaData.Animadie && !target.animaData.Animadie)
         {
             target.animaData.tmpAbility["strength"] = target.animaData.Damage;
-            target.animaData.Damage *= CalcBuffRatio(buffer.damage);
+            target.animaData.Damage *= CalcBuffRatio(buffer.damage, weight);
         }
         yield return null;
     }
-    private IEnumerator StrengthDown(EnemyActions debuffer, AnimaActions target)
+    private IEnumerator StrengthDown(EnemyActions debuffer, AnimaActions target, float weight)
     {
         if (!debuffer.animaData.Animadie && !target.animaData.Animadie)
         {
             target.animaData.tmpAbility["strength"] = target.animaData.Damage;
-            target.animaData.Damage *= CalcDebuffRatio(debuffer.damage);
+            target.animaData.Damage *= CalcDebuffRatio(debuffer.damage, weight);
         }
         yield return null;
     }
-    private IEnumerator SpeedUp(EnemyActions buffer, EnemyActions target)
+    private IEnumerator SpeedUp(EnemyActions buffer, EnemyActions target, float weight)
     {
         if (!buffer.animaData.Animadie && !target.animaData.Animadie)
         {
             target.animaData.tmpAbility["speed"] = target.animaData.Speed;
-            target.animaData.Speed *= CalcBuffRatio(buffer.damage);
+            target.animaData.Speed *= CalcBuffRatio(buffer.damage, weight);
         }
         yield return null;
     }
-    private IEnumerator SpeedDown(EnemyActions debuffer, AnimaActions target)
+    private IEnumerator SpeedDown(EnemyActions debuffer, AnimaActions target, float weight)
     {
         if (!debuffer.animaData.Animadie && !target.animaData.Animadie)
         {
             target.animaData.tmpAbility["speed"] = target.animaData.Speed;
-            target.animaData.Speed *= CalcDebuffRatio(debuffer.damage);
+            target.animaData.Speed *= CalcDebuffRatio(debuffer.damage, weight);
         }
         yield return null;
     }
-    private IEnumerator DefenseUp(EnemyActions buffer, EnemyActions target)
+    private IEnumerator DefenseUp(EnemyActions buffer, EnemyActions target, float weight)
     {
         if (!buffer.animaData.Animadie && !target.animaData.Animadie)
         {
             target.animaData.tmpAbility["defense"] = target.animaData.Defense;
-            target.animaData.Defense *= CalcBuffRatio(buffer.damage);
+            target.animaData.Defense *= CalcBuffRatio(buffer.damage, weight);
         }
         yield return null;
     }
-    private IEnumerator DefenseDown(EnemyActions debuffer, AnimaActions target)
+    private IEnumerator DefenseDown(EnemyActions debuffer, AnimaActions target, float weight)
     {
         if (!debuffer.animaData.Animadie && !target.animaData.Animadie)
         {
             target.animaData.tmpAbility["defense"] = target.animaData.Defense;
-            target.animaData.Defense *= CalcDebuffRatio(debuffer.damage);
+            target.animaData.Defense *= CalcDebuffRatio(debuffer.damage, weight);
         }
         yield return null;
     }
-    public IEnumerator DecreaseAbility(EnemyActions debuffer, AnimaActions target, string[] abi)
+    public IEnumerator DecreaseAbility(EnemyActions debuffer, AnimaActions target, string[] abi, float weight)
     {
         foreach (string stat in abi)
         {
             switch (stat)
             {
                 case "strength":
-                    yield return StrengthDown(debuffer, target);
+                    yield return StrengthDown(debuffer, target, weight);
                     break;
                 case "speed":
-                    yield return SpeedDown(debuffer, target);
+                    yield return SpeedDown(debuffer, target, weight);
                     break;
                 case "defense":
-                    yield return DefenseDown(debuffer, target);
+                    yield return DefenseDown(debuffer, target, weight);
                     break;
             }
         }
     }
-    public IEnumerator MultiDecreaseAbility(EnemyActions debuffer, List<AnimaActions> target, string[] abi)
+    public IEnumerator MultiDecreaseAbility(EnemyActions debuffer, List<AnimaActions> target, string[] abi, float weight)
     {
         for (int i = 0; i < target.Count; i++)
         {
@@ -307,13 +307,13 @@ public class EnemyActions : MonoBehaviour
                 switch (stat)
                 {
                     case "strength":
-                        StrengthDown(debuffer, target[i]);
+                        StrengthDown(debuffer, target[i], weight);
                         break;
                     case "speed":
-                        SpeedDown(debuffer, target[i]);
+                        SpeedDown(debuffer, target[i], weight);
                         break;
                     case "defense":
-                        DefenseDown(debuffer, target[i]);
+                        DefenseDown(debuffer, target[i], weight);
                         break;
                 }
             }
@@ -325,26 +325,33 @@ public class EnemyActions : MonoBehaviour
         return damage * (1 - ally.animaData.Defense * 0.002f) * Random.Range(0.95f, 1.11f);
     }
 
-    private float CalcSkillDamage(float damage, AnimaActions ally)
+    private float CalcSkillDamage(float damage, AnimaActions ally, float weight)
     {
         return damage * (1 - ally.animaData.Defense * 0.002f) * Random.Range(0.95f, 1.11f) * 1.13f;
     }
-    private float CalcHealAmount(float damage, EnemyActions target)
+    private float CalcHealAmount(float damage, EnemyActions target, float weight)
     {
         float a = damage * Random.Range(0.95f, 1.11f) * 1.13f;
         float b = target.animaData.Maxstamina * 0.4f;
         return a >= b ? b : a;
     }
-    private float CalcBuffRatio(float damage)
+    private float CalcBuffRatio(float damage, float weight)
     {
         return 0.0004f * damage + 1.02f;
     }
-    private float CalcDebuffRatio(float damage)
+    private float CalcDebuffRatio(float damage, float weight)
     {
         return -0.0002f * damage + 0.94f;
     }
     public void TakeDamage(float damage)
     {
+        if (this.animaData.Shield > 0)
+        {
+            float remainDamage = Mathf.Min(this.animaData.Shield, damage);
+            this.animaData.Shield -= remainDamage;
+            damage -= remainDamage;
+        }
+
         this.animaData.Stamina -= damage;
         
         if (this.animaData.Stamina <= 0)
@@ -352,6 +359,10 @@ public class EnemyActions : MonoBehaviour
             Die();
         }
         
+    }
+    public void TakeShield(float shield)
+    {
+        this.animaData.Shield += shield;
     }
     public void TakeHeal(float heal)
     {
@@ -433,7 +444,7 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(damage);
         }
     }
-    public IEnumerator FelixSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    public IEnumerator FelixSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -443,7 +454,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]);
+                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i], weight);
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     if (maxDamage < damage)
                     {
@@ -457,7 +468,7 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(maxDamage);
         }
     }
-    public IEnumerator PhobiaSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    public IEnumerator PhobiaSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -467,7 +478,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]);
+                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i], weight);
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     if (maxDamage < damage)
                     {
@@ -481,7 +492,7 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(maxDamage);
         }
     }
-    public IEnumerator LacrimaSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    public IEnumerator LacrimaSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -491,7 +502,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]);
+                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i], weight);
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     if (maxDamage < damage)
                     {
@@ -505,7 +516,7 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(maxDamage);
         }
     }
-    public IEnumerator AmareSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    public IEnumerator AmareSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -515,7 +526,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]);
+                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i], weight);
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     if (maxDamage < damage)
                     {
@@ -529,7 +540,7 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(maxDamage);
         }
     }
-    public IEnumerator IrascorSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    public IEnumerator IrascorSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -539,7 +550,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]);
+                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i], weight);
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     if (maxDamage < damage)
                     {
@@ -553,7 +564,7 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(maxDamage);
         }
     }
-    public IEnumerator HavetSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar)
+    public IEnumerator HavetSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -563,7 +574,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]);
+                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i], weight);
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     if (maxDamage < damage)
                     {
@@ -620,7 +631,7 @@ public class EnemyActions : MonoBehaviour
             {
                 if (!ally[i].animaData.Animadie)
                 {
-                    damage = CalcSkillDamage(enemy.animaData.Damage, ally[i]) / 6;
+                    damage = CalcAttackDamage(enemy.animaData.Damage, ally[i]) / 6;
                     dn.Spawn(new Vector2(allyPos.AllyInstance[i].transform.position.x - 0.1f, allyPos.AllyInstance[i].transform.position.y + 0.1f), damage);
                     ally[i].TakeDamage(damage);
                     yield return allyHealthBar[i].TakeDamage(damage);

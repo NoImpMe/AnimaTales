@@ -1,0 +1,865 @@
+fileFormatVersion: 2
+guid: 617a0f76c7a96d148aee6106d9904f9b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5273195955697501492
+    second: Lacrima0_0
+  - first:
+      213: -9157341624992133375
+    second: Lacrima0_1
+  - first:
+      213: 4277626663726880961
+    second: Lacrima0_2
+  - first:
+      213: -8657441664708169631
+    second: Lacrima0_3
+  - first:
+      213: -562554587129007498
+    second: Lacrima0_4
+  - first:
+      213: 4931333061973996714
+    second: Lacrima0_5
+  - first:
+      213: 922026616641879652
+    second: Lacrima0_6
+  - first:
+      213: 4743535774793412929
+    second: Lacrima0_7
+  - first:
+      213: 6025230566908673463
+    second: Lacrima0_8
+  - first:
+      213: -8605165157797417011
+    second: Lacrima0_9
+  - first:
+      213: 6311111460570731873
+    second: Lacrima0_10
+  - first:
+      213: -6522196276894758655
+    second: Lacrima0_11
+  - first:
+      213: 6421597650657446075
+    second: Lacrima0_12
+  - first:
+      213: 6913238504905081898
+    second: Lacrima0_13
+  - first:
+      213: 4213374915091903548
+    second: Lacrima0_14
+  - first:
+      213: -5209620543517212359
+    second: Lacrima0_15
+  - first:
+      213: 9043518979353242979
+    second: Lacrima0_16
+  - first:
+      213: -8371866929100871908
+    second: Lacrima0_17
+  - first:
+      213: -3384508434680559403
+    second: Lacrima0_18
+  - first:
+      213: -4845200939901049844
+    second: Lacrima0_19
+  - first:
+      213: 5177511826496036443
+    second: Lacrima0_20
+  - first:
+      213: 2086669556697895822
+    second: Lacrima0_21
+  - first:
+      213: 1210631716875383371
+    second: Lacrima0_22
+  - first:
+      213: -325510846713113240
+    second: Lacrima0_23
+  - first:
+      213: 8486932098755886016
+    second: Lacrima0_24
+  - first:
+      213: -4511520248525351099
+    second: Lacrima0_25
+  - first:
+      213: 2779866565332765828
+    second: Lacrima0_26
+  - first:
+      213: 6270575892125408283
+    second: Lacrima0_27
+  - first:
+      213: -3061708959828425052
+    second: Lacrima0_28
+  - first:
+      213: -3107011459166623251
+    second: Lacrima0_29
+  - first:
+      213: -8596659295092789290
+    second: Lacrima0_30
+  - first:
+      213: 3964648974067859205
+    second: Lacrima0_31
+  - first:
+      213: 6024906439458860147
+    second: Lacrima0_32
+  - first:
+      213: -1980582492175113065
+    second: Lacrima0_33
+  - first:
+      213: 6727119286215479774
+    second: Lacrima0_34
+  - first:
+      213: -4915170537772882454
+    second: Lacrima0_35
+  - first:
+      213: 100047207752967401
+    second: Lacrima0_36
+  - first:
+      213: -7837961702248417935
+    second: Lacrima0_37
+  - first:
+      213: 9121325553599262716
+    second: Lacrima0_38
+  - first:
+      213: 4488359503312680964
+    second: Lacrima0_39
+  - first:
+      213: 4162146297820090345
+    second: Lacrima0_40
+  - first:
+      213: -4938984989417776247
+    second: Lacrima0_41
+  - first:
+      213: -1548708857984743663
+    second: Lacrima0_42
+  - first:
+      213: -944496105244922363
+    second: Lacrima0_43
+  - first:
+      213: -5325132685037355798
+    second: Lacrima0_44
+  - first:
+      213: 6838538851948983901
+    second: Lacrima0_45
+  - first:
+      213: 5580364964742341405
+    second: Lacrima0_46
+  - first:
+      213: -7798159072040189951
+    second: Lacrima0_47
+  - first:
+      213: 7500866864889413676
+    second: Lacrima0_48
+  - first:
+      213: -7768006986782611967
+    second: Lacrima0_49
+  - first:
+      213: 7639315272017050278
+    second: Lacrima0_50
+  - first:
+      213: -5339278376177592726
+    second: Lacrima0_51
+  - first:
+      213: 2059858766397780023
+    second: Lacrima0_52
+  - first:
+      213: -8023739190054178493
+    second: Lacrima0_53
+  - first:
+      213: -5245740594513011008
+    second: Lacrima0_54
+  - first:
+      213: -8665965230469085731
+    second: Lacrima0_55
+  - first:
+      213: -6304046447606006075
+    second: Lacrima0_56
+  - first:
+      213: 1739334415212299233
+    second: Lacrima0_57
+  - first:
+      213: 6126408505898663297
+    second: Lacrima0_58
+  - first:
+      213: -1616768154437436338
+    second: Lacrima0_59
+  - first:
+      213: 5709030934876186540
+    second: Lacrima0_60
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lacrima0_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1550
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27e1a8967dccb5341882f55aed9e0942
+      internalID: 1835061702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_1
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 1550
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8029bb01d0399d040a370d05d4d6d13c
+      internalID: 884153024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_2
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 1550
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e36ac47b5d4ece04aacef8f47e455e6b
+      internalID: 423815998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_3
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 1550
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cff43f2f7b853bc48ab684f3117bb57f
+      internalID: -491576134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_4
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 1550
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347dfcbd1f07d7e448e0a0ea086afc0b
+      internalID: -1439056302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_5
+      rect:
+        serializedVersion: 2
+        x: 2582
+        y: 1550
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01d1d318666c67f49aa021dc41619715
+      internalID: -1520190657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1034
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1195aaf0447302e4ba829846cf4c7e8c
+      internalID: -2094580630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_7
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 1034
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d8cf1a12b41b7f4b81cc8d34502cb2d
+      internalID: -465288734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_8
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 1034
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 635380da29aa4fe49bf65c5af7189ebc
+      internalID: 285031998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_9
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 1034
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 898c533f48ec7f64aab211520c343860
+      internalID: -451028562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_10
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 1034
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f13903bcba8820d41a9ad8e619cbbd5d
+      internalID: -1500271692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_11
+      rect:
+        serializedVersion: 2
+        x: 2582
+        y: 1034
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b55d3497e94804a46b2133352ef0b47c
+      internalID: -211171811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_12
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 518
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95d5b4193195380459ebf1daaa16db07
+      internalID: -351668187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_13
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 518
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44fd6630a9ba2a42ae0475c0578d0f0
+      internalID: -708498648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_14
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 518
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1fbf1c7c43074c4db0e38ef56cab73b
+      internalID: -590066951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_15
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 518
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a750bef8d00d9754ba929cfea6de6472
+      internalID: 403785298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_16
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 518
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc1929a00cbe54141b3e7b6291f39834
+      internalID: -142595897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_17
+      rect:
+        serializedVersion: 2
+        x: 2582
+        y: 518
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a961e4e0ce88a844bc3f77111eb6d32
+      internalID: -1024923779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_18
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09999dc18f72fa43817dd8d09622d95
+      internalID: 1281900065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_19
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 2
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 202c34bddf803474aa0c537ec888b9b9
+      internalID: 2111103825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_20
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 2
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44c4437809cb50f4aa8e2d419abf2229
+      internalID: 876350863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_21
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 2
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57c78b8946c5d5b4d9f618393f7caaab
+      internalID: -1002563729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_22
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 2
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b1fec45a6c0efd4883b9c95d19ae6b4
+      internalID: 672935509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lacrima0_23
+      rect:
+        serializedVersion: 2
+        x: 2582
+        y: 2
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d8f7393dc86ba54d801e62b1b46491b
+      internalID: -1447376688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: aa8a8c2c4433d924987f2d5aea612702
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lacrima0_0: 1835061702
+      Lacrima0_1: 884153024
+      Lacrima0_10: -1500271692
+      Lacrima0_11: -211171811
+      Lacrima0_12: -351668187
+      Lacrima0_13: -708498648
+      Lacrima0_14: -590066951
+      Lacrima0_15: 403785298
+      Lacrima0_16: -142595897
+      Lacrima0_17: -1024923779
+      Lacrima0_18: 1281900065
+      Lacrima0_19: 2111103825
+      Lacrima0_2: 423815998
+      Lacrima0_20: 876350863
+      Lacrima0_21: -1002563729
+      Lacrima0_22: 672935509
+      Lacrima0_23: -1447376688
+      Lacrima0_3: -491576134
+      Lacrima0_4: -1439056302
+      Lacrima0_5: -1520190657
+      Lacrima0_6: -2094580630
+      Lacrima0_7: -465288734
+      Lacrima0_8: 285031998
+      Lacrima0_9: -451028562
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

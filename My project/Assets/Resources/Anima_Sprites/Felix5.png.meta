@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: e4ee18c52d88a77428bfb343bb39166c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2635711640102654648
+    second: Felix5_0
+  - first:
+      213: 1823300290324649863
+    second: Felix5_1
+  - first:
+      213: -5435831247472328325
+    second: Felix5_2
+  - first:
+      213: 7259909039294398957
+    second: Felix5_3
+  - first:
+      213: -3754422808719845108
+    second: Felix5_4
+  - first:
+      213: 6954938334319812801
+    second: Felix5_5
+  - first:
+      213: -494952574132486211
+    second: Felix5_6
+  - first:
+      213: 3058088570304822574
+    second: Felix5_7
+  - first:
+      213: -7388407093430622065
+    second: Felix5_8
+  - first:
+      213: -830452242092498160
+    second: Felix5_9
+  - first:
+      213: 7489276054347367817
+    second: Felix5_10
+  - first:
+      213: -4720839484309980246
+    second: Felix5_11
+  - first:
+      213: 9029245554406316517
+    second: Felix5_12
+  - first:
+      213: 7039107605579513497
+    second: Felix5_13
+  - first:
+      213: -599626370618286715
+    second: Felix5_14
+  - first:
+      213: -7796789896207228878
+    second: Felix5_15
+  - first:
+      213: 6322353805234418536
+    second: Felix5_16
+  - first:
+      213: 7590438877241094288
+    second: Felix5_17
+  - first:
+      213: 3078410667234459022
+    second: Felix5_18
+  - first:
+      213: 1198242835585886200
+    second: Felix5_19
+  - first:
+      213: -6883465309491416378
+    second: Felix5_20
+  - first:
+      213: -7679662456055113927
+    second: Felix5_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Felix5_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 1556
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84da1595a321c6bd0800000000000000
+      internalID: -2635711640102654648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_1
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1556
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 787daab24f9ad4910800000000000000
+      internalID: 1823300290324649863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_2
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 1556
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b71817bd74c0094b0800000000000000
+      internalID: -5435831247472328325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_3
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 1556
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de14acc7ec060c460800000000000000
+      internalID: 7259909039294398957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_4
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 1556
+        width: 484
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0911a5e85c95ebc0800000000000000
+      internalID: -3754422808719845108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_5
+      rect:
+        serializedVersion: 2
+        x: 2601
+        y: 1549
+        width: 483
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c021e3f097e48060800000000000000
+      internalID: 6954938334319812801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_6
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 1033
+        width: 480
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbffa2691439129f0800000000000000
+      internalID: -494952574132486211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_7
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1033
+        width: 480
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2d73bc2a53807a20800000000000000
+      internalID: 3058088570304822574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_8
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 1033
+        width: 484
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f88671cd4ea177990800000000000000
+      internalID: -7388407093430622065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_9
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 1040
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0136623f514a974f0800000000000000
+      internalID: -830452242092498160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_10
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 1040
+        width: 484
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985c63c34e04fe760800000000000000
+      internalID: 7489276054347367817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_11
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 1040
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aabb01840853c7eb0800000000000000
+      internalID: -4720839484309980246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_12
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 524
+        width: 483
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e9d9242ef25e4d70800000000000000
+      internalID: 9029245554406316517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_13
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 524
+        width: 480
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e315e821fefa160800000000000000
+      internalID: 7039107605579513497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 524
+        width: 480
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58d175d2ef2bda7f0800000000000000
+      internalID: -599626370618286715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_15
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 524
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 230a63806ec3cc390800000000000000
+      internalID: -7796789896207228878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_16
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 524
+        width: 484
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8633651e9438db750800000000000000
+      internalID: 6322353805234418536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_17
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 524
+        width: 484
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 090354761f7a65960800000000000000
+      internalID: 7590438877241094288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_18
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 1
+        width: 480
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8d78451136b8ba20800000000000000
+      internalID: 3078410667234459022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_19
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1
+        width: 480
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f7e0c9a28301a010800000000000000
+      internalID: 1198242835585886200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_20
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 1
+        width: 487
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c23a0c65c40970a0800000000000000
+      internalID: -6883465309491416378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Felix5_21
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 1
+        width: 484
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9375eef4fab5c6590800000000000000
+      internalID: -7679662456055113927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Felix5_0: -2635711640102654648
+      Felix5_1: 1823300290324649863
+      Felix5_10: 7489276054347367817
+      Felix5_11: -4720839484309980246
+      Felix5_12: 9029245554406316517
+      Felix5_13: 7039107605579513497
+      Felix5_14: -599626370618286715
+      Felix5_15: -7796789896207228878
+      Felix5_16: 6322353805234418536
+      Felix5_17: 7590438877241094288
+      Felix5_18: 3078410667234459022
+      Felix5_19: 1198242835585886200
+      Felix5_2: -5435831247472328325
+      Felix5_20: -6883465309491416378
+      Felix5_21: -7679662456055113927
+      Felix5_3: 7259909039294398957
+      Felix5_4: -3754422808719845108
+      Felix5_5: 6954938334319812801
+      Felix5_6: -494952574132486211
+      Felix5_7: 3058088570304822574
+      Felix5_8: -7388407093430622065
+      Felix5_9: -830452242092498160
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

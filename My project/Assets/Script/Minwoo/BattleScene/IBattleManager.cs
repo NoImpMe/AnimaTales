@@ -50,7 +50,8 @@ public interface IBattleManager
     List<TextMeshProUGUI> EnemyHealText { get; }
     List<HealthBar> AllyHealthBar { get; }
     List<HealthBar> EnemyHealthBar { get; }
-
+    List<ShieldBar> AllyShieldBar { get; }
+    List<ShieldBar> EnemyShieldBar { get; }
     List<SkillData> MatchedSkill { get; }
     BGMetaEntity AnimaTable { get; }
     BattleLogManager BattleLogManager { get; }

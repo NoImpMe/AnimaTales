@@ -8,7 +8,7 @@ public class ParserBarController : MonoBehaviour
 
     public void UpdatePoint(float newHealthPercentage)
     {
-        StartCoroutine(SmoothPointChange(parserBarFill.fillAmount, newHealthPercentage, 1.3f));
+        StartCoroutine(SmoothPointChange(parserBarFill.fillAmount, newHealthPercentage, 1.0f));
     }
 
     public IEnumerator SmoothPointChange(float startFillAmount, float targetFillAmount, float duration)

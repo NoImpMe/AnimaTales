@@ -102,10 +102,7 @@ public class RegionManager : MonoBehaviour
             string villageID = target.name;
             VillageDataManager.Instance.SetCurrentVillageID(villageID);
             yield return StartCoroutine(fadePanel.LoadSceneWithFade("VillageScene"));
-            for (int i = 0; i < tileType.Count; i++)
-            {
-                GameObject.Find($"{tileType[i]}").SetActive(false);
-            }
+            
         }
         else if (target.name.StartsWith("EliteBattle"))
         {

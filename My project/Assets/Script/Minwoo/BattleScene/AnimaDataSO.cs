@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using BansheeGz.BGDatabase;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class AnimaDataSO : ScriptableObject
@@ -12,9 +10,10 @@ public class AnimaDataSO : ScriptableObject
     public bool isTomb = false;
     public bool isBoss = false;
     public int level = 1;
-    public string Name; 
+    public string Name;
     public float Maxstamina = 1;
     public float Stamina = 1;
+    public float Shield = 0;
     public float Damage = 1;
     public int DropGold = 1;
     public float Speed = 1;
