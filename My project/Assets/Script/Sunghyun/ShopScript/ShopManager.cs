@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using JetBrains.Annotations;
 
 public class ShopManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class ShopManager : MonoBehaviour
     private VillageShopState shopState;
     private Dictionary<string, int> remainingCounts = new Dictionary<string, int>();
     private Coroutine feedbackCoroutine;
+    [SerializeField] private AudioClip itemClip;
+
     
     private void Start()
     {
@@ -50,6 +53,7 @@ public class ShopManager : MonoBehaviour
                 if (ProcessItemPurchase(item))
                 {
                     ShopEffectHandler.ApplyEffect(item);
+                    AudioManager.Instance.PlaySFX(itemClip);
                     ShowFeedback($"'{item.itemName}'을(를)\n사용했습니다.");
                 }
                 break;

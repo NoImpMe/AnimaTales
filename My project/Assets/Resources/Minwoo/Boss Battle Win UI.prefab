@@ -553,6 +553,8 @@ MonoBehaviour:
   - {fileID: 4229791940128340326}
   - {fileID: 3421986496459234773}
   - {fileID: 3158706169342880081}
+  rerollClip: {fileID: 8300000, guid: 974a0369b619b2b4bbc7242e82484dce, type: 3}
+  selectClip: {fileID: 8300000, guid: 4967dbef8688d6148b5ee1b2058e4733, type: 3}
 --- !u!1 &2194348877655613812
 GameObject:
   m_ObjectHideFlags: 0

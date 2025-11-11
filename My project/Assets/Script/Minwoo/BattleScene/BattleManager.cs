@@ -1,5 +1,6 @@
 using BansheeGz.BGDatabase;
 using DamageNumbersPro;
+using Gamekit3D;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ public class BattleManager : MonoBehaviour, IBattleManager
 {
     [SerializeField]
     CameraManager cameraManager;
+    AudioClip bgmClip;
+    AudioClip btnClip;
+    AudioClip winClip;
+    AudioClip loseClip;
     public bool isElite = false;
     public bool isBoss = false;
     public bool IsBoss => isBoss;
@@ -189,6 +194,10 @@ public class BattleManager : MonoBehaviour, IBattleManager
     MultipleAttack multipleAttack;   
     void Start()
     {
+        btnClip = Resources.Load<AudioClip>("Minwoo/Sounds/SFX/AttackButtonSFX");
+        winClip = Resources.Load<AudioClip>("Minwoo/Sounds/SFX/BattleWinSFX");
+        loseClip = Resources.Load<AudioClip>("Minwoo/Sounds/SFX/BattleLoseSFX"); 
+        AudioManager.Instance.PlayBGM(bgmClip);
         if (isBoss) bossStage += 1;
         playerInfo = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo;
         eventSystem = EventSystem.current;
@@ -211,6 +220,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         AnimaActionUISetting();
         AllyBattlePrepare();
         EnemyBattlePrepare();
+        AudioManager.Instance.PlayBGM(bgmClip);
         StartCoroutine(BattleStart());
     }
     
@@ -281,10 +291,6 @@ public class BattleManager : MonoBehaviour, IBattleManager
         else if (isBoss)
         {
             enemyBattleSetting.Stage = SceneManager.GetActiveScene().name.Substring(0, SceneManager.GetActiveScene().name.IndexOf("BossBattle"));
-            if(enemyBattleSetting.Stage == "Havet")
-            {
-
-            }
             enemyBattleSetting.SpawnBoss();
             setEnemyanima();
             setEnemyActions();
@@ -298,7 +304,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
             setEnemyActions();
             initializeEnemyAnima();
         }
-            
+        string bgm = enemyBattleSetting.Stage + ((isElite) ? "Elite" : "") + ((isBoss) ? "Boss" : "") + "BGM";
+        bgmClip = Resources.Load<AudioClip>($"Minwoo/Sounds/BGM/BattleBGM");
     }
     void setAllyanima()
     {
@@ -1231,6 +1238,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         if (!isBoss)
         {
+            AudioManager.Instance.PlaySFX(winClip);
             Instantiate(Resources.Load<GameObject>("Minwoo/Battle Win UI"), canvas.transform);
             for (int i = 0; i < allyActions.Count; i++)
             {
@@ -1258,6 +1266,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     public void LoseBattle()
     {
+        AudioManager.Instance.PlaySFX(loseClip);
         Instantiate(Resources.Load<GameObject>("Minwoo/Game Over UI"), canvas.transform);
     }
     AnimaActions PresentAllyTurn()
@@ -1277,6 +1286,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     IEnumerator AttackCursorInit()
     {
+        AudioManager.Instance.PlaySFX(btnClip);
         arrow = GameObject.Find("Arrow_down(Clone)");
         DestroyImmediate(arrow);
         index = 0;
@@ -1286,16 +1296,19 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             if (index != 2 && index < (enemyAnimaNum - 1) && Input.GetKeyUp(KeyCode.RightArrow))
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 index++;
                 GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(enemyBattleSetting.EnemyInstance[index].transform.position.x, enemyBattleSetting.EnemyInstance[index].transform.position.y + 1.2f);
             }
             if (index != 0 && Input.GetKeyUp(KeyCode.LeftArrow))
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 index--;
                 GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(enemyBattleSetting.EnemyInstance[index].transform.position.x, enemyBattleSetting.EnemyInstance[index].transform.position.y + 1.2f);
             }
             else if (Input.GetKeyDown(KeyCode.Z) && !attackButton.interactable)
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = index;
                 DestroyImmediate(arrow);
                 yield return new WaitForSeconds(Time.deltaTime * 30);
@@ -1303,6 +1316,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
                 yield return new WaitForSeconds(Time.deltaTime * 30);
                 isZKeyPressed = false;
@@ -1318,6 +1332,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     IEnumerator MultiAttackCursorInit()
     {
+        AudioManager.Instance.PlaySFX(btnClip);
         arrow = GameObject.Find("Arrow_down(Clone)");
         DestroyImmediate(arrow);
         List<GameObject> tmp = new List<GameObject>();
@@ -1330,6 +1345,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             if (Input.GetKeyDown(KeyCode.Z) && !attackButton.interactable)
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = index;
                 for(int i = 0; i < tmp.Count;)
                 {
@@ -1341,7 +1357,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
-                foreach(var aa in tmp)
+                AudioManager.Instance.PlaySFX(btnClip);
+                foreach (var aa in tmp)
                 {
                     DestroyImmediate(aa);
                 }
@@ -1359,6 +1376,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     IEnumerator BuffCursorInit()
     {
+        AudioManager.Instance.PlaySFX(btnClip);
         arrow = GameObject.Find("Arrow_down(Clone)");
         DestroyImmediate(arrow);
         index = 0;
@@ -1368,16 +1386,19 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             if (index != 2 && index < (allyAnimaNum - 1) && Input.GetKeyUp(KeyCode.RightArrow))
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 index++;
                 GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[index].transform.position.x, allyBattleSetting.AllyInstance[index].transform.position.y + 1.2f);
             }
             if (index != 0 && Input.GetKeyUp(KeyCode.LeftArrow))
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 index--;
                 GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[index].transform.position.x, allyBattleSetting.AllyInstance[index].transform.position.y + 1.2f);
             }
             else if (Input.GetKeyDown(KeyCode.Z) && !attackButton.interactable)
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = index;
                 DestroyImmediate(arrow);
                 yield return new WaitForSeconds(Time.deltaTime * 30);
@@ -1385,6 +1406,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
                 yield return new WaitForSeconds(Time.deltaTime * 30);
                 isZKeyPressed = false;
@@ -1400,6 +1422,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     IEnumerator MultiBuffCursorInit()
     {
+        AudioManager.Instance.PlaySFX(btnClip);
         arrow = GameObject.Find("Arrow_down(Clone)");
         DestroyImmediate(arrow);
         List<GameObject> tmp = new List<GameObject>();
@@ -1414,6 +1437,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             {
                 for (int i = 0; i < tmp.Count;)
                 {
+                    AudioManager.Instance.PlaySFX(btnClip);
                     DestroyImmediate(tmp[i]);
                     tmp.RemoveAt(i);
                 }
@@ -1422,6 +1446,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
+                AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
                 yield return new WaitForSeconds(Time.deltaTime * 30);
                 isZKeyPressed = false;

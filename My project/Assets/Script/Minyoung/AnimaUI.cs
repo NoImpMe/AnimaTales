@@ -1,8 +1,6 @@
-using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static AnimaEntry;
 
 public class AnimaUI : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class AnimaUI : MonoBehaviour
 
     [Header("탭 버튼 (전체 + 감정 8개)")]
     [SerializeField] private Toggle[] emotionToggles;
+    [SerializeField] private AudioClip btnClip;
 
     private EmotionType? currentFilter = null;
 
@@ -72,12 +71,9 @@ public class AnimaUI : MonoBehaviour
 
     private void ShowDetail(AnimaEntry anima)
     {
+        AudioManager.Instance.PlaySFX(btnClip);
         bool discovered = anima.meeted >= 1;
         detailPanel.Display(anima, discovered);
     }
 
-    public void OnBackButton()
-    {
-        gameObject.SetActive(false);
-    }
 }

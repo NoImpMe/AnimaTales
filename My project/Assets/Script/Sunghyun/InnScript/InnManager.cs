@@ -26,7 +26,7 @@ public class InnManager : MonoBehaviour
     private bool isInitialized = false;
     
     public event Action OnInnUsed;
-    
+    [SerializeField] AudioClip innClip;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -88,7 +88,7 @@ public class InnManager : MonoBehaviour
         {
             GoldManager.Instance.SpendGold(currentPrice);
             InnEffectHandler.ApplyInnEffect();
-            
+            AudioManager.Instance.PlaySFX(innClip);
             IncreasePrice();
             
             OnInnUsed?.Invoke();

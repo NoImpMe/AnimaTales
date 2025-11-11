@@ -16,6 +16,10 @@ public class AbilityCreator : MonoBehaviour
     TextMeshProUGUI[] rerollTxt = new TextMeshProUGUI[3];
     int[] rerollCnts = new int[] { 1, 1, 1};
     int[] ranNums = new int[3];
+    [SerializeField]
+    private AudioClip rerollClip;
+    [SerializeField]
+    private AudioClip selectClip;
     void Start()
     {
         ranNums[0] = Random.Range(0, 3);
@@ -39,13 +43,14 @@ public class AbilityCreator : MonoBehaviour
     }
     public void Reroll()
     {
-        GameObject selectedButton = EventSystem.current.currentSelectedGameObject;
+        AudioManager.Instance.PlaySFX(rerollClip);
+        GameObject selectedButton = EventSystem.current.currentSelectedGameObject;        
         int selectNum = int.Parse(selectedButton.name.Substring(7, 8));
         //GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo
     }
 
     public void SelectAbility()
     {
-        
+        AudioManager.Instance.PlayBGM(selectClip);  
     }
 }

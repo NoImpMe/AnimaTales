@@ -184,7 +184,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
                     enemyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                     int index = enemyInstance[i].name.IndexOf("(Clone)");
                     enemyInstance[i].name = enemyInstance[i].name.Substring(0, index) + (i + 3);
-                    enemyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                    //enemyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     enemyHpInstance.Add(Instantiate(enemyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                     enemyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i * 380f) - 380f, -22f, 0f);
                     enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[i], canvas.transform));
@@ -206,7 +206,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
                     enemyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                     int index = enemyInstance[i].name.IndexOf("(Clone)");
                     enemyInstance[i].name = enemyInstance[i].name.Substring(0, index) + (i + 3);
-                    enemyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                    //enemyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     enemyHpInstance.Add(Instantiate(enemyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                     enemyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i * 380f) - 200f, -22f, 0f);
                     enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[i], canvas.transform));
@@ -226,7 +226,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
                 enemyInstance[0].GetComponent<SpriteRenderer>().sortingOrder = -1;
                 int index = enemyInstance[0].name.IndexOf("(Clone)");
                 enemyInstance[0].name = enemyInstance[0].name.Substring(0, index) + 3;
-                enemyInstance[0].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);//-195f 185f 
+                //enemyInstance[0].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);//-195f 185f 
                 enemyHpInstance.Add(Instantiate(enemyHpPrefab[0], Vector3.zero, Quaternion.identity, canvas.transform));
                 enemyHpInstance[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, -22f, 0f);
                 enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[0], canvas.transform));
@@ -319,7 +319,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             enemyInstance[0].GetComponent<SpriteRenderer>().sortingOrder = -1;
             int index = enemyInstance[0].name.IndexOf("(Clone)");
             enemyInstance[0].name = enemyInstance[0].name.Substring(0, index) + 3;
-            enemyInstance[0].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            //enemyInstance[0].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
             enemyHpInstance.Add(Instantiate(enemyHpPrefab[0], Vector3.zero, Quaternion.identity, canvas.transform));
             enemyHpInstance[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, -22f, 0f);
             enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[0], canvas.transform));
@@ -404,7 +404,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
                 enemyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                 int index = enemyInstance[i].name.IndexOf("(Clone)");
                 enemyInstance[i].name = enemyInstance[i].name.Substring(0, index) + (i + 3);
-                enemyInstance[i].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                //enemyInstance[i].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
                 enemyHpInstance.Add(Instantiate(enemyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                 enemyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i * 380f)+ (200f * i), -22f, 0f);
                 enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[i], canvas.transform));
@@ -424,7 +424,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             enemyInstance[0].GetComponent<SpriteRenderer>().sortingOrder = -1;
             int index = enemyInstance[0].name.IndexOf("(Clone)");
             enemyInstance[0].name = enemyInstance[0].name.Substring(0, index) + 3;
-            enemyInstance[0].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            //enemyInstance[0].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             enemyHpInstance.Add(Instantiate(enemyHpPrefab[0], Vector3.zero, Quaternion.identity, canvas.transform));
             enemyHpInstance[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, -22f, 0f);
             enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[0], canvas.transform));
@@ -448,7 +448,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         enemyInstance[1].GetComponent<SpriteRenderer>().sortingOrder = -1;
         int index = enemyInstance[1].name.IndexOf("(Clone)");
         enemyInstance[1].name = enemyInstance[1].name.Substring(0, index) + "4";
-        enemyInstance[1].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        //enemyInstance[1].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         enemyHpInstance.Add(Instantiate(enemyHpPrefab[1], Vector3.zero, Quaternion.identity, canvas.transform));
         enemyHpInstance[1].GetComponent<RectTransform>().anchoredPosition = new Vector3((380f) + (200f), -22f, 0f);
         enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[1], canvas.transform));

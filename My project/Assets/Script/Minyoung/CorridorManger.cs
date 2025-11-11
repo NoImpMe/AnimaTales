@@ -7,7 +7,7 @@ public class CorridorManager : MonoBehaviour
     public static CorridorManager Instance { get; private set; }
     [SerializeField]
     public List<AnimaEntry> animaDatabase = new();  // BGDatabase에서 로드된 데이터
-
+    [SerializeField] private AudioClip bgmClip;
     void Awake()
     {
         if (Instance == null)
@@ -19,6 +19,7 @@ public class CorridorManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        AudioManager.Instance.PlayBGM(bgmClip); 
     }
 
     void Init()

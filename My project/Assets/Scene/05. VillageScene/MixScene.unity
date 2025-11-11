@@ -3229,6 +3229,9 @@ MonoBehaviour:
   mainSlot: {fileID: 1235361582}
   subSlot: {fileID: 1041122013}
   mixDataSet: {fileID: 4900000, guid: 551717dda3580ab40a6a4c0d727059a8, type: 3}
+  bgmClip: {fileID: 8300000, guid: e743435564f18484bbaf42638f6c8df8, type: 3}
+  sucessClip: {fileID: 8300000, guid: 9bd1f407d155d5f458ef317462b65fb4, type: 3}
+  failClip: {fileID: 8300000, guid: 07cf5191201c6a145b3e513b7551e70f, type: 3}
 --- !u!114 &1311033093
 MonoBehaviour:
   m_ObjectHideFlags: 0

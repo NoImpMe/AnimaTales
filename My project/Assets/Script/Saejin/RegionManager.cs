@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -24,7 +22,18 @@ public class RegionManager : MonoBehaviour
     [SerializeField] RegionManager regionPrefab;
     [SerializeField]
     private FadeEffect fadePanel;
-
+    [SerializeField]
+    private AudioClip amareBgm;
+    [SerializeField]
+    private AudioClip havetBgm;
+    [SerializeField]
+    private AudioClip felixBgm;
+    [SerializeField]
+    private AudioClip lacrimaBgm;
+    [SerializeField]
+    private AudioClip irascorBgm;
+    [SerializeField]
+    private AudioClip phobiaBgm;
     public void StageInit(int stageNum)
     {
         int randomSelectTile = Random.Range(0, 1);

@@ -28,6 +28,12 @@ public class MixManager : MonoBehaviour
     private AnimaSlotUI subSlot;
     [SerializeField]
     TextAsset mixDataSet;
+    [SerializeField]
+    private AudioClip bgmClip;
+    [SerializeField]
+    private AudioClip sucessClip;
+    [SerializeField]
+    private AudioClip failClip;
     List<MixData> mixDatas;
     List<MixData> matchedMixData;
     AbilityManager abilityManager;
@@ -36,6 +42,7 @@ public class MixManager : MonoBehaviour
         mixDatas = JsonConvert.DeserializeObject<List<MixData>>(mixDataSet.text);
         matchedMixData = new List<MixData>();
         abilityManager = GameObject.Find("Game Manager").GetComponent<AbilityManager>();
+        AudioManager.Instance.PlayBGM(bgmClip);
     }
     public void Init()
     {
@@ -93,6 +100,7 @@ public class MixManager : MonoBehaviour
             var inven = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>();
             if (matchedMixData.Count != 0 && odds < (matchedMixData[0].Odds * (1+abilityManager.MixSymbol)))
             {
+                AudioManager.Instance.PlaySFX(sucessClip);
                 resultText.text = "교감 성공!!";
                 resultImage.sprite = Resources.Load<Sprite>($"Minwoo/Portrait/{matchedMixData[0].Result}");
                 int level = mainAnima.level;
@@ -118,6 +126,7 @@ public class MixManager : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.PlaySFX(failClip);
                 resultText.text = "교감 실패..";
                 resultImage.sprite = mainImage.sprite;
                 inven.playerInfo.haveAnima.Add(mainAnima);

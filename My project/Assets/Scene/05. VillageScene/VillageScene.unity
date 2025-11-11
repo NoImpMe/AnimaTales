@@ -967,6 +967,7 @@ MonoBehaviour:
   feedbackPanel: {fileID: 925498852}
   feedbackText: {fileID: 504707907}
   feedbackDisplayTime: 2
+  itemClip: {fileID: 8300000, guid: 5fd1565509a66fd43affdc1404c4fc2a, type: 3}
 --- !u!114 &274633909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3293,13 +3294,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241740bac61ffc447ba26b891ad4832f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSource: {fileID: 0}
-  clickSound: {fileID: 0}
   buildingNamePanel: {fileID: 1980249305}
   buildingNameText: {fileID: 1726978407}
   shopManager: {fileID: 274633908}
   innUIManager: {fileID: 1882902448}
   fadeSpeed: 5
+  bgmClip: {fileID: 8300000, guid: 677c7ce73f01c6e4083c5c9aafba9825, type: 3}
+  interactClip: {fileID: 8300000, guid: be3ba2f459e6db041b562893d7a0da37, type: 3}
 --- !u!4 &852201003
 Transform:
   m_ObjectHideFlags: 0
@@ -3826,65 +3827,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 696185950}
---- !u!1 &972688918
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 972688919}
-  - component: {fileID: 972688921}
-  - component: {fileID: 972688920}
-  m_Layer: 0
-  m_Name: Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &972688919
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972688918}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1014.1662, y: 577.57947, z: 0.048854157}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &972688920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972688918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d522a8229bfb45e98e275e68f5194818, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &972688921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972688918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eabcd73fb5268848a56a145bfd36828, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goldTextObjectName: GoldText
-  goldFormat: '{0:N0}'
 --- !u!1 &985491558
 GameObject:
   m_ObjectHideFlags: 0
@@ -6379,6 +6321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPrice: 300
   priceIncreaseAmount: 50
+  innClip: {fileID: 8300000, guid: 70cc7b5e3d8ed1e4cbd4a730e361a326, type: 3}
 --- !u!1 &1904430211
 GameObject:
   m_ObjectHideFlags: 0
@@ -6877,6 +6820,10 @@ PrefabInstance:
     - target: {fileID: 1057959190526160910, guid: f7a66a18648c2e94fadccb96a3372bc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421244498778408994, guid: f7a66a18648c2e94fadccb96a3372bc5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4099817633665861297, guid: f7a66a18648c2e94fadccb96a3372bc5, type: 3}
       propertyPath: m_Name
@@ -7492,4 +7439,3 @@ SceneRoots:
   - {fileID: 1310672764}
   - {fileID: 844437144}
   - {fileID: 1257947738}
-  - {fileID: 972688919}

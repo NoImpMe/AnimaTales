@@ -3,9 +3,7 @@ using System.Collections;
 
 public class VillageController : MonoBehaviour
 {
-    [Header("오디오")]
-    [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioClip clickSound;
+    
     
     [Header("UI 관리")]
     [SerializeField] private GameObject buildingNamePanel;
@@ -14,14 +12,16 @@ public class VillageController : MonoBehaviour
     [SerializeField] private InnUIManager innUIManager;
     
     [SerializeField] private float fadeSpeed = 5f;
+    [Header("오디오")]
+    [SerializeField] private AudioClip bgmClip;
+    [SerializeField] private AudioClip interactClip;
+
     private CanvasGroup _nameCanvasGroup;
 
-    private AudioSource _sfxSource;
     private Camera _mainCamera;
     
     private void Awake()
     {
-        _sfxSource = gameObject.AddComponent<AudioSource>();
         _mainCamera = Camera.main;
         
         if (buildingNamePanel != null)
@@ -38,14 +38,12 @@ public class VillageController : MonoBehaviour
     
     private void Start()
     {
-        if (bgmSource != null && bgmSource.clip != null)
-            bgmSource.Play();
+        AudioManager.Instance.PlayBGM(bgmClip);
     }
     
     public void PlayClickSound()
     {
-        if (clickSound != null && _sfxSource != null)
-            _sfxSource.PlayOneShot(clickSound);
+        AudioManager.Instance.PlaySFX(interactClip);
     }
     
     public void ShowBuildingName(string buildingName, Vector3 worldPosition)

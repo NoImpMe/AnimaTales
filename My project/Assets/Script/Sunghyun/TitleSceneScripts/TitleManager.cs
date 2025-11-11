@@ -12,8 +12,9 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Button quitGameButton;
 
     [Header("오디오")]
-    [SerializeField] private AudioClip buttonClickSound;
-    
+    [SerializeField] private AudioClip bgmClip;
+    [SerializeField] private AudioClip btnClip;
+
     [Header("씬 전환 효과")]
     [SerializeField] private FadeEffect fadePanel;
     
@@ -22,23 +23,22 @@ public class TitleManager : MonoBehaviour
 
     [Header("씬 매니저")]
     [SerializeField] private SceneManagerCorridor sceneManagerCorridor;
-    private AudioSource _sfxSource;
-
+    
     private void Awake()
     {
-        _sfxSource = gameObject.AddComponent<AudioSource>();
+        AudioManager.Instance.PlayBGM(bgmClip);
     }
 
     public void OnNewGameClick()
     {
-        PlayButtonSound();
+        AudioManager.Instance.PlaySFX(btnClip);
         SetButtonsInteractable(false);
         StartCoroutine(fadePanel.LoadSceneWithFade("Stage0Scene"));
     }
 
     public void OnCorridorClick()
     {
-        PlayButtonSound();
+        AudioManager.Instance.PlaySFX(btnClip);
         SceneManager.sceneUnloaded -= sceneManagerCorridor.OnSceneUnloaded;
         SceneManager.sceneUnloaded += sceneManagerCorridor.OnSceneUnloaded; 
         sceneManagerCorridor.sceneName = "TitleScene";
@@ -47,27 +47,20 @@ public class TitleManager : MonoBehaviour
 
     public void OnOptionsClick()
     {
-        PlayButtonSound();
+        AudioManager.Instance.PlaySFX(btnClip);
         ToggleOptionsPanel();
     }
 
     public void OnQuitGameClick()
     {
-        PlayButtonSound();
-
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        AudioManager.Instance.PlaySFX(btnClip);
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
         #else
             Application.Quit();
         #endif
     }
 
-    private void PlayButtonSound()
-    {
-        if (buttonClickSound != null && _sfxSource != null)
-            _sfxSource.PlayOneShot(buttonClickSound);
-    }
-    
     
 
     private void SetButtonsInteractable(bool interactable)
