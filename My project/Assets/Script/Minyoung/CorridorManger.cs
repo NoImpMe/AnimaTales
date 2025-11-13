@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using BansheeGz.BGDatabase;
+using Unity.VisualScripting;
+using UnityEngine.UI;
+using TMPro;
 
 public class CorridorManager : MonoBehaviour
 {
@@ -8,6 +12,8 @@ public class CorridorManager : MonoBehaviour
     [SerializeField]
     public List<AnimaEntry> animaDatabase = new();  // BGDatabase에서 로드된 데이터
     [SerializeField] private AudioClip bgmClip;
+    [SerializeField] Transform badgePanel;
+
     void Awake()
     {
         if (Instance == null)
@@ -19,13 +25,14 @@ public class CorridorManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        AudioManager.Instance.PlayBGM(bgmClip); 
+        MedalInit();
+        AudioManager.Instance.PlayBGM(bgmClip);
     }
 
     void Init()
     {
         animaDatabase = AnimaEntry.LoadAll();
-
+       
         //// 테스트용: 앞 50개를 수집된 것처럼
         //for (int i = 0; i < 50 && i < animaDatabase.Count; i++)
         //{
@@ -34,7 +41,44 @@ public class CorridorManager : MonoBehaviour
 
         // LoadMeetedData();  나중에 저장된 meeted 불러오기
     }
-
+    void MedalInit()
+    {
+        var abilityTable = BGRepo.I.GetMeta("Ability");
+        abilityTable.ForEachEntity(entity =>
+        {
+            if (entity.Get<int>("IsGotten") == 1)
+            {
+                GameObject badge;
+                switch (entity.Get<string>("Rank"))
+                {
+                    case "Bronze":
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/BronzeMedal"), badgePanel);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
+                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                        badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
+                        break;
+                    case "Silver":
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/SilverMedal"), badgePanel);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
+                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                        badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
+                        break;
+                    case "Gold":
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/GoldMedal"), badgePanel);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
+                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                        badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
+                        break;
+                    case "Platinum":
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/PlatinumMedal"), badgePanel);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
+                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                        badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
+                        break;
+                }
+            }
+        });
+    }
     public bool IsDiscovered(AnimaEntry entry)
     {
         return entry.meeted >= 1;

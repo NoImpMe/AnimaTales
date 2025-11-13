@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class VillageController : MonoBehaviour
 {
@@ -15,7 +17,6 @@ public class VillageController : MonoBehaviour
     [Header("오디오")]
     [SerializeField] private AudioClip bgmClip;
     [SerializeField] private AudioClip interactClip;
-
     private CanvasGroup _nameCanvasGroup;
 
     private Camera _mainCamera;
@@ -45,7 +46,7 @@ public class VillageController : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(interactClip);
     }
-    
+
     public void ShowBuildingName(string buildingName, Vector3 worldPosition)
     {
         if (buildingNamePanel == null || buildingNameText == null)

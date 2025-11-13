@@ -900,8 +900,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBD84 \uC88B \uB2E4 \uB2FF \uB2F4 \uBC15 \uBC16 \uBC2A \uBC18 "
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b68dad0fed32d7847ac9bd9ffc6bc60c, type: 2}
-  m_sharedMaterial: {fileID: 7317749697390315250, guid: b68dad0fed32d7847ac9bd9ffc6bc60c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 896c0330dea7d614f86eb8bb3869e5eb, type: 2}
+  m_sharedMaterial: {fileID: -5789977998725000258, guid: 896c0330dea7d614f86eb8bb3869e5eb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

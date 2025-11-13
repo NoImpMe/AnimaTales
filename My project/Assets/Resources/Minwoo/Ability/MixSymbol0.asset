@@ -16,6 +16,6 @@ MonoBehaviour:
     id: Bronze
     name: MixSymbol
     description: "\uC544\uB2C8\uB9C8\uB4E4\uC758 \uAD50\uAC10 \uC131\uACF5 \uD655\uB960\uC774
-      \uC99D\uAC00\uD569\uB2C8\uB2E4."
+      10% \uC99D\uAC00\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: 6e4b06702d8aa3745828ac513d143b22, type: 3}
     value: 0.1

@@ -15,8 +15,8 @@ public class AnimaEntry
     public int meeted;
 
     public string objectFile;      
-    public EmotionType emotion;    
-
+    public EmotionType emotion;
+    
     public Sprite GetImage()
     {
         return Resources.Load<Sprite>($"Anima_Sprites/{objectFile}");
