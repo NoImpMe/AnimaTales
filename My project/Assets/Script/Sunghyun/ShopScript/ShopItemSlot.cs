@@ -6,7 +6,7 @@ using System;
 public class ShopItemSlot : MonoBehaviour
 {
     [Header("UI")] 
-    [SerializeField] private Image ItemImage;
+    [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemPriceText;
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
@@ -23,7 +23,7 @@ public class ShopItemSlot : MonoBehaviour
         currentRemaining = remainingCount;
         onPurchase = onPurchaseCallback;
 
-        //itemImage = ItemImage;
+        itemImage.sprite = Resources.Load<Sprite>($"Minwoo/ShopImage/{data.itemID}");
         itemNameText.text = data.itemName;
         itemPriceText.text = $"{data.price:N0}";
         itemDescriptionText.text = data.itemDescription;

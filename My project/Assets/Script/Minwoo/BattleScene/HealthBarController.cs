@@ -19,6 +19,10 @@ public class HealthBarController : MonoBehaviour
             targetColor = Color.green;
             healthBarFill.color = targetColor;
         }
+        else
+        {
+            healthBarFill.color = Color.red;
+        }
 
     }
     public void UpdateHealth(float newHealthPercentage)

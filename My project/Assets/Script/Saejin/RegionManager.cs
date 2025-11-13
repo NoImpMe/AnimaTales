@@ -6,10 +6,11 @@ using System.Collections;
 public class RegionManager : MonoBehaviour
 {
     public RegionController startRegion;
-    public int stageType;
+    public int stageNum;
     public GameObject tileMap;
     public GameObject cameraRegion;
     public GameObject cameraSet;
+    public int currentStageType;
     private RegionController currentRegion;
     private Vector3 pointerDownPos;
     private bool isDragging = false;
@@ -23,17 +24,7 @@ public class RegionManager : MonoBehaviour
     [SerializeField]
     private FadeEffect fadePanel;
     [SerializeField]
-    private AudioClip amareBgm;
-    [SerializeField]
-    private AudioClip havetBgm;
-    [SerializeField]
-    private AudioClip felixBgm;
-    [SerializeField]
-    private AudioClip lacrimaBgm;
-    [SerializeField]
-    private AudioClip irascorBgm;
-    [SerializeField]
-    private AudioClip phobiaBgm;
+    private List<AudioClip> bgmClips;
     public void StageInit(int stageNum)
     {
         int randomSelectTile = Random.Range(0, 1);
@@ -42,7 +33,7 @@ public class RegionManager : MonoBehaviour
         if (randomSelectTile == 0)
         {
             tileMap = Resources.Load<GameObject>($"Minwoo/TileMap/Stage{stageNum}");
-            stageType = 0;
+            stageNum = 0;
             GameObject map = Instantiate(tileMap, new Vector3(0, 0, 0), Quaternion.identity);
             map.name = "Tiles";
             startRegion = map.GetComponentInChildren<RegionController>();
@@ -54,6 +45,16 @@ public class RegionManager : MonoBehaviour
         }
         currentRegion = startRegion;
         var tile = GameObject.Find("StartTile").GetComponent<RegionController>();
+        string tmp = tile.transform.parent.name;
+        for (int i = 0; i < tileType.Count; i++) 
+        {
+            if (tmp == tileType[i])
+            {
+                AudioManager.Instance.PlayBGM(bgmClips[i]);
+                currentStageType = i;
+                break;
+            }
+        }
         SetNextTile(tile);
         managerOB = GameObject.Find("DontDesManager");
         manager = managerOB.GetComponent<DontDesManager>();
@@ -177,6 +178,16 @@ public class RegionManager : MonoBehaviour
             target.GetComponentInParent<IsVisitedField>().isSelected = true;
             target.transform.parent.parent.GetComponent<StageController>().EnterNewField();
             target.GetComponentInParent<IsVisitedField>().isVisited = true;
+            string tmp = target.transform.parent.name;
+            for (int i = 0; i < tileType.Count; i++)
+            {
+                if (tmp == tileType[i])
+                {
+                    AudioManager.Instance.PlayBGM(bgmClips[i]);
+                    currentStageType = i;
+                    break;
+                }
+            }
             SetNextTile(target);
         }
         else

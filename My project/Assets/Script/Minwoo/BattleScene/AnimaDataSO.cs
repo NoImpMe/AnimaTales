@@ -35,7 +35,7 @@ public class AnimaDataSO : ScriptableObject
     public string type = "";
     public List <string> skillName = new List<string>();
     public string attackName = "";
-    private int[] maxLevel = new int[10]{ 9, 12, 15, 18, 21, 24, 27, 30, 33, 36 };
+    public int[] maxLevel = new int[10]{ 9, 12, 15, 18, 21, 24, 27, 30, 33, 36 };
     public Dictionary<string, float> tmpAbility = new Dictionary<string, float>();
     public void Initialize(string name, int level)
     {

@@ -1,5 +1,4 @@
 using BansheeGz.BGDatabase;
-using DamageNumbersPro;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,6 +17,7 @@ public interface IBattleManager
     int AllyAnimaNum { get; set; }
     bool TurnRebuild { get; set; }
     bool IsZKeyPressed { get; set; }
+    bool IsXKeyPressed { get; set; }
     bool IsBoss { get; }
     public Coroutine RunningCoroutine { get; set; }
     TurnManager TurnManager { get; set; }
@@ -31,6 +31,8 @@ public interface IBattleManager
     List<AnimaDataSO> DropAnima { get; }
 
     Button AttackButton { get; }
+    Button Skill1 { get; }
+    Button Skill2 { get; }
     Button SkillButton { get; }
     GameObject AnimaActionUI { get; }
     GameObject Canvas { get; }

@@ -7,19 +7,10 @@ public static class DefaultShopItems
         return new List<ShopItemData>
         {
             new ShopItemData {
-                itemID = "heal_single_half",
-                itemName = "상처약",
-                itemDescription = "아니마 한 마리의 체력을 절반 회복",
-                itemType = ItemType.Heal,
-                targetType = TargetType.Single,
-                price = 16,
-                maxPurchaseCount = 20
-            },
-            new ShopItemData {
                 itemID = "heal_single_Full",
                 itemName = "회복약",
                 itemDescription = "아니마 한 마리의 체력을 최대로 회복",
-                itemType = ItemType.Heal,
+                itemType = ItemType.FullHeal,
                 targetType = TargetType.Single,
                 price = 30,
                 maxPurchaseCount = 10
@@ -28,7 +19,7 @@ public static class DefaultShopItems
                 itemID = "heal_all",
                 itemName = "만병통치약",
                 itemDescription = "모든 아니마의 체력을 최대로 회복",
-                itemType = ItemType.Heal,
+                itemType = ItemType.AllHeal,
                 targetType = TargetType.All,
                 price = 150,
                 maxPurchaseCount = 5

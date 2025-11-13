@@ -14,7 +14,8 @@ public class ShopItemData
 
 public enum ItemType
 {
-    Heal,
+    FullHeal,
+    AllHeal,
     Revive,
     Growth,
     Recipe,

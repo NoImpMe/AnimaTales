@@ -1139,7 +1139,7 @@ MonoBehaviour:
   buildingName: "\uCD94\uC5B5\uC758 \uD68C\uB791"
   buildingType: 2
   nameDisplayOffset: {x: 0, y: 1.5, z: 0}
-  fadePanel: {fileID: 0}
+  fadePanel: {fileID: 696185950}
 --- !u!114 &300502690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3827,6 +3827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 696185950}
+  btnClip: {fileID: 0}
 --- !u!1 &985491558
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,7 +4075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1065497940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4206,7 +4207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1089355592
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4816,7 +4817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1497172728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5950,7 +5951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1758187556
 RectTransform:
   m_ObjectHideFlags: 0

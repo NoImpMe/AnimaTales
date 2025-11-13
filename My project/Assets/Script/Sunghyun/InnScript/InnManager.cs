@@ -86,7 +86,7 @@ public class InnManager : MonoBehaviour
         
         if (GoldManager.Instance.GetCurrentGold() >= currentPrice)
         {
-            GoldManager.Instance.SpendGold(currentPrice);
+            StartCoroutine(GoldManager.Instance.SpendGold(currentPrice));
             InnEffectHandler.ApplyInnEffect();
             AudioManager.Instance.PlaySFX(innClip);
             IncreasePrice();

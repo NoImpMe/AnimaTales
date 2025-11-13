@@ -25,7 +25,7 @@ public class PlayerInfo : ScriptableObject
         int b;
         do
         {
-            b = Random.Range(0, 7);
+            b = Random.Range(3, 4);
         } while (a == b);
 
         animaData = ScriptableObject.CreateInstance<AnimaDataSO>();

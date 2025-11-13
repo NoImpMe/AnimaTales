@@ -55,7 +55,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyMultiEnemy
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2325171784518483651}
@@ -371,7 +371,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyZoomed2
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4858183317790005873}
@@ -562,7 +562,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyZoomed
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5653706856927060720}
@@ -668,7 +668,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyAttackZoom
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4009063627515463051}
@@ -695,7 +695,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyZoomed4
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 589872711738907075}
@@ -722,7 +722,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyZoomed2
-  m_Speed: 0.4
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8138035095843832330}
@@ -793,7 +793,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyZoomed3
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6890665893991468002}
@@ -1183,7 +1183,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyMultiEnemy
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4101722284710230280}
@@ -1325,7 +1325,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyHealZoom
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3694378617514821291}
@@ -1524,7 +1524,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyAttackZoom
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6734731171027360073}
@@ -1617,7 +1617,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyZoomed
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3584337124591375263}
@@ -1671,7 +1671,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyZoomed3
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6054057424108495452}
@@ -1835,7 +1835,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyZoomed1
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7261048294585589604}
@@ -1884,7 +1884,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyMultiAlly
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7998047465169563615}
@@ -1911,7 +1911,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BossZoom
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5673165709309265713}
@@ -2113,7 +2113,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AllyZoomed1
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1440319412624863153}
@@ -2140,7 +2140,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyMultiAlly
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7596498183620875932}
@@ -2181,7 +2181,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyHealZoom
-  m_Speed: 0.4
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2679576296476118426}

@@ -69,7 +69,7 @@ public class MixManager : MonoBehaviour
         if (mainAnima != null)
         {
             mainImage.gameObject.GetComponent<CanvasGroup>().alpha = 1;
-            mainImage.sprite = Resources.Load<Sprite>($"Minwoo/Portrait/{mainAnima.Objectfile}");
+            mainImage.sprite = Resources.Load<Sprite>($"Anima_Sprites/{mainAnima.Objectfile}");
             skillText1.text = mainAnima.skillName[0];
             if (mainAnima.skillName.Count > 1) 
             {
@@ -79,7 +79,7 @@ public class MixManager : MonoBehaviour
         if(subAnima != null)
         {
             subImage.gameObject.GetComponent<CanvasGroup>().alpha = 1;
-            subImage.sprite = Resources.Load<Sprite>($"Minwoo/Portrait/{subAnima.Objectfile}");
+            subImage.sprite = Resources.Load<Sprite>($"Anima_Sprites/{subAnima.Objectfile}");
         }
     }
     public void Mix() 
@@ -102,7 +102,7 @@ public class MixManager : MonoBehaviour
             {
                 AudioManager.Instance.PlaySFX(sucessClip);
                 resultText.text = "교감 성공!!";
-                resultImage.sprite = Resources.Load<Sprite>($"Minwoo/Portrait/{matchedMixData[0].Result}");
+                resultImage.sprite = Resources.Load<Sprite>($"Anima_Sprites/{matchedMixData[0].Result}");
                 int level = mainAnima.level;
                 AnimaDataSO resultAnima = ScriptableObject.CreateInstance<AnimaDataSO>();
                 resultAnima.Initialize(matchedMixData[0].Result, level);

@@ -474,6 +474,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f7d347bbd546146a3a02dad8c1d8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmClips:
+  - {fileID: 8300000, guid: 39ef6d51c73e99348902b7b424d3d200, type: 3}
+  - {fileID: 8300000, guid: a10579895ecc06c4cbf6afebab176256, type: 3}
+  - {fileID: 8300000, guid: 80ae13f8d5aae0846a5135c638ad85da, type: 3}
+  - {fileID: 8300000, guid: 10104ab255128c947950afdc0c6f0e8f, type: 3}
+  - {fileID: 8300000, guid: 279de99109b2e3e4493ada7fae53506b, type: 3}
+  - {fileID: 8300000, guid: e3a99443aba164748a2102cfcd1f157c, type: 3}
 --- !u!1 &3380049974267466877
 GameObject:
   m_ObjectHideFlags: 0

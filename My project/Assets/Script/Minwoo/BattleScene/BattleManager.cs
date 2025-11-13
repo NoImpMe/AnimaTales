@@ -136,8 +136,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
     Button skillButton;
     public Button SkillButton => skillButton;
     Button skill1;
-    
+    public Button Skill1 => skill1;
     Button skill2;
+    public Button Skill2 => skill2;
     
     bool isZKeyPressed = false;
     public bool IsZKeyPressed
@@ -147,6 +148,11 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     
     bool isXKeyPressed = false;
+    public bool IsXKeyPressed
+    {
+        get => isXKeyPressed;
+        set => isXKeyPressed = value;
+    }
     
     BGRepo database;
     BGMetaEntity animaTable;
@@ -232,7 +238,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             ExecuteEvents.Execute(attackButton.gameObject, pointerEventData, ExecuteEvents.pointerClickHandler);
 
         }
-        if (Input.GetKeyDown(KeyCode.X) && skillButton.interactable && !isXKeyPressed)
+        if (Input.GetKeyDown(KeyCode.X) && skillButton.interactable && !isXKeyPressed && turnList[0].skillName.Count > 0)
         {
             ExecuteEvents.Execute(skillButton.gameObject, pointerEventData, ExecuteEvents.pointerClickHandler);
         }
@@ -510,7 +516,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     private IEnumerator BattleStart()
     {
-
+        
         RoundSetting();
         if (isBoss && roundNum > 1)
         {
@@ -694,6 +700,10 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     void SetState(List<AnimaDataSO> turnList)
     {
+        if (arrow != null)
+        {
+            DestroyImmediate(arrow);
+        }
         if (turnList[0].turnCheck)
         {
             turnList.RemoveAt(0);
@@ -754,6 +764,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         if (state == BattleState.playerTurn)
         {
             isZKeyPressed = true;
+            isXKeyPressed = true;
             DestroyImmediate(arrow);
             runningCoroutine = StartCoroutine(PlayerAttack());
             attackButton.interactable = false;
@@ -765,28 +776,105 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
        
         selectEnemy = 0;
-
-        if (state != BattleState.playerTurn)
+        if (turnList[0].skillName.Count == 0)
         {
             return;
         }
-        if (state == BattleState.playerTurn)
+        else if (state != BattleState.playerTurn)
+        {
+            return;
+        }
+        else if (state == BattleState.playerTurn)
         {
             isZKeyPressed = true;
+            isXKeyPressed = true;
             DestroyImmediate(arrow);
-            for(int i = 0; i < 2; i++)
+            for(int i = 0; i < turnList[0].skillName.Count; i++)
             {
                 animaActionUI.transform.Find($"Skill Button Frame{i}").gameObject.SetActive(true);
             }
-            GameObject.Find("Skill Button0").GetComponent<Button>().Select();
-            
+            skill1.Select();
         }
-
+        attackButton.interactable = false;
+        skillButton.interactable = false;
+        StartCoroutine(SkillButtonClicked());
+    }
+    IEnumerator SkillButtonClicked()
+    {
+        int index = 0;
+        while (true)
+        {
+            if (Input.GetKeyUp(KeyCode.UpArrow))
+            {
+                if (EventSystem.current.currentSelectedGameObject != skill1.gameObject)
+                {
+                    skill1.Select();
+                    index = 0;
+                    AudioManager.Instance.PlaySFX(btnClip);
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                if (turnList[0].skillName.Count > 1 && EventSystem.current.currentSelectedGameObject != skill2.gameObject)
+                {
+                    skill2.Select();
+                    index = 1;
+                    AudioManager.Instance.PlaySFX(btnClip);
+                }
+                else
+                {
+                    index = 0;
+                    skill1.Select();
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                if (EventSystem.current.currentSelectedGameObject != skill1.gameObject)
+                {
+                    index = 0;
+                    skill1.Select();
+                    AudioManager.Instance.PlaySFX(btnClip);
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                if (turnList[0].skillName.Count > 1 && EventSystem.current.currentSelectedGameObject != skill2.gameObject)
+                {
+                    index = 1;
+                    skill2.Select();
+                    AudioManager.Instance.PlaySFX(btnClip);
+                    //EventSystem.current.SetSelectedGameObject(skill2.gameObject);
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.Z) && !skillButton.interactable)
+            {
+                AudioManager.Instance.PlaySFX(btnClip);
+                if (index == 0) skill1.onClick.Invoke();
+                if (index == 1) skill2.onClick.Invoke();
+                break;
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                AudioManager.Instance.PlaySFX(btnClip);
+                isXKeyPressed = false;
+                attackButton.interactable = true;
+                skillButton.interactable = true;
+                skill1.interactable = true;
+                skill2.interactable = true;
+                SetState(turnList);
+                if(runningCoroutine != null)StopCoroutine(runningCoroutine);
+                runningCoroutine = null;
+                break;
+            }
+            yield return null;
+        }
     }
     void SkillButton1()
     {
         attackButton.interactable = false;
         skillButton.interactable = false;
+        skill1.interactable = false;
+        skill2.interactable = false;
         matchedSkill = skills.Where(s => s.name == skill1.transform.Find("Skill Text0").GetComponent<TextMeshProUGUI>().text).ToList();
 
         switch (matchedSkill[0].Type)
@@ -830,6 +918,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         attackButton.interactable = false;
         skillButton.interactable = false;
+        skill1.interactable = false;
+        skill2.interactable = false;
         matchedSkill = skills.Where(s => s.name == skill2.transform.Find("Skill Text1").GetComponent<TextMeshProUGUI>().text).ToList();
         switch (matchedSkill[0].Type)
         {
@@ -1320,8 +1410,11 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 DestroyImmediate(arrow);
                 yield return new WaitForSeconds(Time.deltaTime * 30);
                 isZKeyPressed = false;
+                isXKeyPressed = false;
                 attackButton.interactable = true;
                 skillButton.interactable = true;
+                skill1.interactable = true;
+                skill2.interactable = true;
                 SetState(turnList);
                 StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
@@ -1366,6 +1459,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 isZKeyPressed = false;
                 attackButton.interactable = true;
                 skillButton.interactable = true;
+                skill1.interactable = true;
+                skill2.interactable = true;
                 SetState(turnList);
                 StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
@@ -1412,6 +1507,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 isZKeyPressed = false;
                 attackButton.interactable = true;
                 skillButton.interactable = true;
+                skill1.interactable = true;
+                skill2.interactable = true;
                 SetState(turnList);
                 StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
@@ -1452,6 +1549,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 isZKeyPressed = false;
                 attackButton.interactable = true;
                 skillButton.interactable = true;
+                skill1.interactable = true;
+                skill2.interactable = true;
                 SetState(turnList);
                 StopCoroutine(runningCoroutine);
                 runningCoroutine = null;

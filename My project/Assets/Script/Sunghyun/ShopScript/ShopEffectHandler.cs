@@ -17,10 +17,12 @@ public static class ShopEffectHandler
 
         switch (itemData.itemType)
         {
-            case ItemType.Heal:
+            case ItemType.FullHeal:
                 ApplyHeal(itemData, target, playerInfo);
                 break;
-
+            case ItemType.AllHeal:
+                ApplyHeal(itemData, target, playerInfo);
+                break;
             case ItemType.Revive:
                 ApplyRevive(itemData, target, playerInfo);
                 break;
@@ -53,11 +55,7 @@ public static class ShopEffectHandler
             }
 
             float healAmount = 0;
-            if (itemData.itemID.Contains("half"))
-            {
-                healAmount = target.Maxstamina * 0.5f;
-            }
-            else if (itemData.itemID.Contains("Full"))
+            if (itemData.itemID.Contains("Full"))
             {
                 healAmount = target.Maxstamina;
             }
@@ -106,7 +104,7 @@ public static class ShopEffectHandler
 
         if (itemData.itemID.Contains("Max_boost"))
         {
-            Debug.Log($"[성장] {target.Name}의 레벨 상한이 증가");
+            target.maxLevel[target.mood] += 1;
         }
     }
 
@@ -124,7 +122,7 @@ public static class ShopEffectHandler
 
         if (itemData.itemID.Contains("AP_buff"))
         {
-            target.Damage += 5; 
+            target.defAP += 0.01f; 
         }
     }
 }

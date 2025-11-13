@@ -89,10 +89,12 @@ public class ShopAnimaSelectUI : MonoBehaviour
             
             switch (item.itemType)
             {
-                case ItemType.Heal:
+                case ItemType.FullHeal:
                     isEligible = !anima.Animadie && anima.Stamina < anima.Maxstamina;
                     break;
-                    
+                case ItemType.AllHeal:
+                    isEligible = !anima.Animadie && anima.Stamina < anima.Maxstamina;
+                    break;
                 case ItemType.Revive:
                     isEligible = anima.Animadie;
                     break;

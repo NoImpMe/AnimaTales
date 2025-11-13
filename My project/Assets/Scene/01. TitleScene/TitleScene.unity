@@ -220,12 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144a7cfabd4a6314790b7971a51ed8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilitys:
-  - {fileID: 11400000, guid: ebf9072ae967c054bae9ca15d5c1ddf1, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  abilitys: []
 --- !u!1 &321815082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,6 +1017,18 @@ PrefabInstance:
     - target: {fileID: 8656304823291464772, guid: 494a5811d41a8f64694bc55b4aae7e94, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076287821204744740, guid: 494a5811d41a8f64694bc55b4aae7e94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2122271689}
+    - target: {fileID: 9076287821204744740, guid: 494a5811d41a8f64694bc55b4aae7e94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOptionsClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076287821204744740, guid: 494a5811d41a8f64694bc55b4aae7e94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TitleManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8567111209140816310, guid: 494a5811d41a8f64694bc55b4aae7e94, type: 3}

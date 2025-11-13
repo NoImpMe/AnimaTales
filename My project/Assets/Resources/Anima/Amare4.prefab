@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6709933792266197876}
   - component: {fileID: 7730823231519936495}
   - component: {fileID: 6263423475259782885}
+  - component: {fileID: -7762044871447869438}
   m_Layer: 0
   m_Name: Amare4
   m_TagString: Untagged
@@ -110,3 +111,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7762044871447869438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679897617046610857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc106772d254904697d240d707c6618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  performance: 
+  damage: 0
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+  isBoss: 0
+  downGold: 0

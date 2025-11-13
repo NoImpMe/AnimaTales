@@ -39,14 +39,6 @@ public class OptionButtonController : MonoBehaviour
     }
     
 
-    private void ActiveTab(int seq)
-    {
-        //if (seq < 0 || 2 < seq) seq = 0;
-        //graphicObject.SetActive(seq == 0);
-        //soundObject.SetActive(seq == 1);
-        //gamePlayObject.SetActive(seq == 2);
-    }
-
     private void OnGUI()    //PreferenceData에 저장된 값 초기화 용도. 개발 도중 변경되어 이전 값에 의해 진행이 막힐때 용도.
     {
         if (GUI.Button(new Rect(10, 10, 200, 30), "디버깅용 저장값 초기화 버튼"))

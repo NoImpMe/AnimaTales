@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 343069706800040837}
   - component: {fileID: -713380756861920205}
   - component: {fileID: -4958394300696442076}
+  - component: {fileID: 901795092497965273}
   m_Layer: 0
   m_Name: Irascor0
   m_TagString: Untagged
@@ -143,6 +144,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animaData: {fileID: 0}
   damage: 0
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+--- !u!114 &901795092497965273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8509281694756825367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc94a69880ff074eb763c4e880a97a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  damage: 820206.1
   heal: 0
   maxDamage: 0
   maxHeal: 0

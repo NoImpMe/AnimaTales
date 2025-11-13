@@ -11,8 +11,6 @@ public class AbilityManager : MonoBehaviour
     public float MixSymbol => mixSymbol;
     float dropSymbol = 0f;
     public float DropSymbol => dropSymbol;
-    float statSymbol = 0f;
-    public float StatSymbol => statSymbol;
     float shieldSymbol = 0f;
     public float ShieldSymbol => shieldSymbol;
     [SerializeField]
@@ -22,25 +20,28 @@ public class AbilityManager : MonoBehaviour
     public void GetSymbol(AbilitySO ability)
     {
         abilitys.Add(ability);
-        switch (ability.data.id) 
+        PlayerInfo playerInfo = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo;
+        switch (ability.data.name) 
         {
-            case "goldSymbol":
+            case "GoldSymbol":
                 goldSymbol += ability.data.value;
                 break;
-            case "mixSymbol":
+            case "MixSymbol":
                 mixSymbol += ability.data.value;
                 break;
-            case "dropSymbol":
+            case "DropSymbol":
                 dropSymbol += ability.data.value;
                 break;
-            case "statSymbol":
-                statSymbol += ability.data.value;
+            case "StatSymbol":
+                for (int i = 0; i < playerInfo.battleAnima.Count; i++)
+                {
+                    playerInfo.battleAnima[i].weight *= ability.data.value;
+                }
                 break;
-            case "permanShieldSymbol":
+            case "PermanShieldSymbol":
                 shieldSymbol += ability.data.value;
                 break;
-            case "temporShieldSymbol":
-                PlayerInfo playerInfo = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo;
+            case "TemporShieldSymbol":
                 for(int i =0; i < playerInfo.battleAnima.Count; i++)
                 {
                     playerInfo.battleAnima[i].Shield += ability.data.value;

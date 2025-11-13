@@ -81,7 +81,7 @@ public class ShopManager : MonoBehaviour
             ShowFeedback($"골드가 부족합니다.");
             return false;
         }
-        GoldManager.Instance.SpendGold(item.price);
+        StartCoroutine(GoldManager.Instance.SpendGold(item.price));
         remainingCounts[item.itemID] = shopState.GetRemainingCount(item.itemID);
 
         ShopUIManager.Instance.UpdateItemSlot(item.itemID, remainingCounts[item.itemID]);

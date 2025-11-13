@@ -142,7 +142,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
         animaTable.ForEachEntity(entity =>
         {
-            if (entity.Get<string>("Type") == stage)
+            if (entity.Get<string>("Type") == stage && entity.Get<int>("IsBoss") == 0)
                 objectfileList.Add(entity.Get<string>("Objectfile"));
         });
         int numberOfObjectsToAdd = Random.Range(1, 4);
@@ -169,7 +169,8 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             }
             for (int i = 0; i < numberOfObjectsToAdd; i++)
             {
-                int randomIndex = Random.Range(1, mood + 2);
+                //int randomIndex = Random.Range(1, mood + 2);
+                int randomIndex = Random.Range(1, objectfileList.Count - 1);
                 enemyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + objectfileList[randomIndex]));
                 enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
                 enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy{i}"));
@@ -277,7 +278,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
         animaTable.ForEachEntity(entity =>
         {
-            if (entity.Get<string>("Type") == stage)
+            if (entity.Get<string>("Type") == stage && entity.Get<int>("IsBoss") == 0)
                 objectfileList.Add(entity.Get<string>("Objectfile"));
         });
         int mood = 0;
@@ -304,7 +305,8 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         
         for (int i = 0; i < 1; i++)
         {
-            int randomIndex = Random.Range(mood, mood + 1);
+            //int randomIndex = Random.Range(mood, mood + 1);
+            int randomIndex = Random.Range(1, objectfileList.Count - 1);
             enemyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + objectfileList[randomIndex]));
             enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
             enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy{i}"));

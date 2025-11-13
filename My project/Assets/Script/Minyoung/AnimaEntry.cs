@@ -19,7 +19,7 @@ public class AnimaEntry
 
     public Sprite GetImage()
     {
-        return Resources.Load<Sprite>($"Minyoung/AnimaImage/{objectFile}");
+        return Resources.Load<Sprite>($"Anima_Sprites/{objectFile}");
     }
 
     public static List<AnimaEntry> LoadAll()

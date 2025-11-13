@@ -4,7 +4,7 @@ public class SceneManagerInBattle : MonoBehaviour
 {
     private GameObject regionManager;
     private FadeEffect fadePanel;
-
+    [SerializeField] private AudioClip[] bgmClips;
     private void Start()
     {
         fadePanel = GameObject.Find("Fade Panel").GetComponent<FadeEffect>();
@@ -13,7 +13,7 @@ public class SceneManagerInBattle : MonoBehaviour
     {
         regionManager = GameObject.Find("RegionManager");
         var regionScr = regionManager.GetComponent<RegionManager>();
-        var num = regionScr.stageType;
+        var num = regionScr.stageNum;
         Scene scene = SceneManager.GetActiveScene();
         if (scene.name.EndsWith("LastBossScene")){
             StartCoroutine(fadePanel.LoadSceneWithFade("TitleScene"));
@@ -23,6 +23,7 @@ public class SceneManagerInBattle : MonoBehaviour
             switch (num)
             {
                 case 0:
+                    AudioManager.Instance.PlayBGM(bgmClips[regionScr.currentStageType]);
                     StartCoroutine(fadePanel.LoadSceneWithFade("Stage0Scene"));
                     break;
                 case 1:

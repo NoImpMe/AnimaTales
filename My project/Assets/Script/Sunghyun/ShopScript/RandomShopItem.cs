@@ -17,7 +17,7 @@ public static class RandomShopItems
             },
             new ShopItemData {
                 itemID = "growth_Max_boost",
-                itemName = "학습장치",
+                itemName = "이상한 알약",
                 itemDescription = "아니마 한 마리의 레벨 상한을 증가",
                 itemType = ItemType.Growth,
                 targetType = TargetType.Single,
