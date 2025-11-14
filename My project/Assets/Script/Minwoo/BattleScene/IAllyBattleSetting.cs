@@ -8,6 +8,7 @@ public interface IAllyBattleSetting
     List<GameObject> AllyInstance { get; set; }
     List<GameObject> AllyInfoPrefab { get; set; }
     List<GameObject> AllyInfoInstance { get; set; }
+    
     string ObjName { get; set; }
     PlayerInfo PlayerInfo { get; }
     GameObject Prefab { get; set; }

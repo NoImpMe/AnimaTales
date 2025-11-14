@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public HealthBarController healthBarController;  
-    public float maxHealth; 
+    public float maxHealth;
     public float currentHealth;
-
+    public ShieldBar shieldBar;
     public void Initialize(float maxStamina, float curStamina)
     {
         maxHealth = maxStamina;

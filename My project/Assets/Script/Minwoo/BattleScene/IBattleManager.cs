@@ -16,8 +16,6 @@ public interface IBattleManager
     int EnemyAnimaNum { get; set; }
     int AllyAnimaNum { get; set; }
     bool TurnRebuild { get; set; }
-    bool IsZKeyPressed { get; set; }
-    bool IsXKeyPressed { get; set; }
     bool IsBoss { get; }
     public Coroutine RunningCoroutine { get; set; }
     TurnManager TurnManager { get; set; }
@@ -35,6 +33,7 @@ public interface IBattleManager
     Button Skill2 { get; }
     Button SkillButton { get; }
     GameObject AnimaActionUI { get; }
+    AnimaActionUIController AnimaActionUIController { get; }
     GameObject Canvas { get; }
     CameraManager CameraManager { get; }
 

@@ -479,12 +479,12 @@ public class SingleAttack:MonoBehaviour
     private void PrepareAttack(AnimaActions anima)
     {
         anima.animaData.turnCheck = true;
-        bm.IsZKeyPressed = false;
-        bm.IsXKeyPressed = false;
         bm.AttackButton.interactable = true;
         bm.SkillButton.interactable = true;
         bm.Skill1.interactable = true;
         bm.Skill2.interactable = true;
+        bm.AnimaActionUIController.selectSkill.SetActive(false);
+        bm.AnimaActionUIController.selectAction.SetActive(true);
         bm.AnimaActionUI.SetActive(false);
         bm.IsTurn[bm.TurnIndex].SetActive(false);
         bm.TurnList.RemoveAt(0);

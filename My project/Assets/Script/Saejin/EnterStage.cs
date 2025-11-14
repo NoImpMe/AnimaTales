@@ -12,7 +12,6 @@ public class EnterStage : MonoBehaviour, IPointerClickHandler
     private List<string> bossStageNames = new List<string> { "FelixBossFieldScene", "PhobiaBossFieldScene", "AmareBossFieldScene", "IrascorBossFieldScene", "LacrimaBossFieldScene", "HavetBossFieldScene" };
     private StageNode stageNode;
     private StageNode prevNode;
-    private SpawnStage spawnStage;
     private GameObject managerOB;
     private DontDesManager manager;
 
@@ -21,7 +20,6 @@ public class EnterStage : MonoBehaviour, IPointerClickHandler
         managerOB = GameObject.Find("DontDesManager");
         manager = managerOB.GetComponent<DontDesManager>();
         stageNode = GetComponent<StageNode>();
-        spawnStage = GetComponentInParent<SpawnStage>();
         sceneToLoad = stageNames[stageNode.type];
         sceneToLoadBoss = bossStageNames[stageNode.type];
 
@@ -36,7 +34,6 @@ public class EnterStage : MonoBehaviour, IPointerClickHandler
         {
             stageNode.nextNodes[i].stat = "opened";
             stageNode.stat = "cleared";
-            spawnStage.find_section(stageNode);
         }
 
         if (stageNode.isBoss)

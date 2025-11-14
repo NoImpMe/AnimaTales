@@ -11,20 +11,21 @@ public class CorridorManager : MonoBehaviour
     public static CorridorManager Instance { get; private set; }
     [SerializeField]
     public List<AnimaEntry> animaDatabase = new();  // BGDatabase에서 로드된 데이터
+    public List<RecipeEntry> recipeDatabase = new();
     [SerializeField] private AudioClip bgmClip;
     [SerializeField] Transform badgePanel;
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            Init();
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
+        else
+        {
+            Instance = this;
+        }
+        Init();
         MedalInit();
         AudioManager.Instance.PlayBGM(bgmClip);
     }
@@ -32,14 +33,7 @@ public class CorridorManager : MonoBehaviour
     void Init()
     {
         animaDatabase = AnimaEntry.LoadAll();
-       
-        //// 테스트용: 앞 50개를 수집된 것처럼
-        //for (int i = 0; i < 50 && i < animaDatabase.Count; i++)
-        //{
-        //    animaDatabase[i].meeted = 1;  
-        //}
-
-        // LoadMeetedData();  나중에 저장된 meeted 불러오기
+        recipeDatabase = RecipeEntry.LoadAll();
     }
     void MedalInit()
     {
@@ -106,7 +100,10 @@ public class CorridorManager : MonoBehaviour
     {
         return animaDatabase;
     }
-
+    public List<RecipeEntry> GetAllRecipe()
+    {
+        return recipeDatabase;
+    }
     public List<AnimaEntry> GetByEmotion(EmotionType emotion)
     {
         return animaDatabase.Where(a => a.emotion == emotion).ToList();

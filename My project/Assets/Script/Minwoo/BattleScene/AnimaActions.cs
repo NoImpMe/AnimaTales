@@ -28,7 +28,11 @@ public class AnimaActions : MonoBehaviour
         {
             damage = CalcAttackDamage(ally.animaData.Damage, enemy);
             dn.Spawn(new Vector2(enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.x - 0.1f, enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.y + 0.1f), damage);
-            yield return enemyHealthBar.TakeDamage(damage);
+            if(enemy.animaData.Shield > 0)
+            {
+                yield return enemyHealthBar.shieldBar.TakeDamage(damage);
+            }
+            yield return enemyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
             enemy.TakeDamage(damage);
             yield return damageBar.PutDamage(damage);
         }
@@ -39,7 +43,11 @@ public class AnimaActions : MonoBehaviour
         {
             damage = CalcSkillDamage(ally.animaData.Damage, enemy, weight);
             dn.Spawn(new Vector2(enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.x - 0.1f, enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.y + 0.1f), damage);
-            yield return enemyHealthBar.TakeDamage(damage);
+            if (enemy.animaData.Shield > 0)
+            {
+                yield return enemyHealthBar.shieldBar.TakeDamage(damage);
+            }
+            yield return enemyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
             enemy.TakeDamage(damage);
             yield return damageBar.PutDamage(damage);
         }
@@ -59,9 +67,12 @@ public class AnimaActions : MonoBehaviour
                     {
                         maxDamage = damage;
                     }
+                    if (enemy[i].animaData.Shield > 0)
+                    {
+                        yield return enemyHealthBar[i].shieldBar.TakeDamage(damage);
+                    }
+                    yield return enemyHealthBar[i].TakeDamage(damage - enemy[i].animaData.Shield);
                     enemy[i].TakeDamage(damage);
-                    yield return enemyHealthBar[i].TakeDamage(damage);
-                    
                 }
             }
             yield return damageBar.PutDamage(maxDamage);

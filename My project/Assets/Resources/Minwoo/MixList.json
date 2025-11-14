@@ -1,156 +1,608 @@
 [
     {
-        "Main": "felix0",
-        "Sub": "amare0",
-        "Result": "phobia1",
-        "Odds": 1
-    },
-    {
-        "Main": "felix0",
-        "Sub": "phobia0",
+        "Main": "lacrima1",
+        "Sub": "havet0",
         "Result": "felix1",
         "Odds": 1
     },
     {
-        "Main": "felix0",
+        "Main": "lacrima3",
         "Sub": "irascor0",
-        "Result": "phobia1",
+        "Result": "phobia4",
         "Odds": 1
     },
     {
-        "Main": "felix0",
+        "Main": "felix1",
+        "Sub": "irascor0",
+        "Result": "felix3",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor1",
+        "Sub": "amare2",
+        "Result": "amare4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia2",
+        "Sub": "irascor3",
+        "Result": "felix3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia1",
         "Sub": "lacrima0",
-        "Result": "irascor1",
+        "Result": "felix3",
         "Odds": 1
     },
     {
-        "Main": "felix0",
-        "Sub": "havet0",
-        "Result": "lacrima1",
+        "Main": "lacrima2",
+        "Sub": "lacrima2",
+        "Result": "phobia4",
         "Odds": 1
     },
-
     {
-        "Main": "havet0",
+        "Main": "irascor2",
+        "Sub": "havet3",
+        "Result": "irascor3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia1",
         "Sub": "amare0",
-        "Result": "lacrima1",
+        "Result": "amare2",
         "Odds": 1
     },
     {
-        "Main": "havet0",
-        "Sub": "lacrima0",
-        "Result": "irascor1",
+        "Main": "lacrima0",
+        "Sub": "havet1",
+        "Result": "felix3",
         "Odds": 1
     },
     {
-        "Main": "havet0",
-        "Sub": "irascor0",
-        "Result": "phobia1",
-        "Odds": 1
-    },
-    {
-        "Main": "havet0",
-        "Sub": "phobia0",
-        "Result": "felix1",
-        "Odds": 1
-    },
-    {
-        "Main": "havet0",
+        "Main": "felix2",
         "Sub": "felix0",
-        "Result": "amare1",
-        "Odds": 1
-    },
-
-    {
-        "Main": "lacrima0",
-        "Sub": "amare0",
-        "Result": "irascor1",
+        "Result": "irascor3",
         "Odds": 1
     },
     {
-        "Main": "lacrima0",
-        "Sub": "irascor0",
-        "Result": "phobia1",
+        "Main": "amare0",
+        "Sub": "havet4",
+        "Result": "lacrima4",
         "Odds": 1
     },
     {
-        "Main": "lacrima0",
+        "Main": "phobia3",
+        "Sub": "lacrima4",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare3",
+        "Sub": "lacrima1",
+        "Result": "amare4",
+        "Odds": 1
+    },
+    {
+        "Main": "havet3",
         "Sub": "phobia0",
-        "Result": "felix1",
-        "Odds": 1
-    },
-    {
-        "Main": "lacrima0",
-        "Sub": "havet0",
-        "Result": "amare1",
-        "Odds": 1
-    },
-    {
-        "Main": "lacrima0",
-        "Sub": "felix0",
-        "Result": "havet1",
-        "Odds": 1
-    },
-
-    {
-        "Main": "irascor0",
-        "Sub": "amare0",
-        "Result": "phobia1",
-        "Odds": 1
-    },
-    {
-        "Main": "irascor0",
-        "Sub": "phobia0",
-        "Result": "felix1",
-        "Odds": 1
-    },
-    {
-        "Main": "irascor0",
-        "Sub": "havet0",
-        "Result": "lacrima1",
+        "Result": "havet4",
         "Odds": 1
     },
     {
         "Main": "irascor0",
         "Sub": "felix0",
-        "Result": "amare1",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor1",
+        "Sub": "phobia4",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix3",
+        "Sub": "irascor1",
+        "Result": "lacrima3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia2",
+        "Sub": "havet4",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix3",
+        "Sub": "amare2",
+        "Result": "irascor4",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima4",
+        "Sub": "phobia2",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix0",
+        "Sub": "amare2",
+        "Result": "phobia2",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima2",
+        "Sub": "havet2",
+        "Result": "havet3",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor1",
+        "Sub": "felix2",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "havet0",
+        "Sub": "phobia1",
+        "Result": "havet2",
+        "Odds": 1
+    },
+    {
+        "Main": "amare2",
+        "Sub": "phobia1",
+        "Result": "havet2",
+        "Odds": 1
+    },
+    {
+        "Main": "felix4",
+        "Sub": "felix4",
+        "Result": "amare4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare1",
+        "Sub": "havet3",
+        "Result": "lacrima3",
+        "Odds": 1
+    },
+    {
+        "Main": "amare2",
+        "Sub": "amare0",
+        "Result": "havet3",
+        "Odds": 1
+    },
+    {
+        "Main": "amare3",
+        "Sub": "amare2",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare4",
+        "Sub": "irascor0",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix3",
+        "Sub": "phobia0",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare0",
+        "Sub": "amare4",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia3",
+        "Sub": "felix0",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima0",
+        "Sub": "felix3",
+        "Result": "lacrima3",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor3",
+        "Sub": "phobia2",
+        "Result": "lacrima3",
+        "Odds": 1
+    },
+    {
+        "Main": "felix4",
+        "Sub": "irascor1",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor4",
+        "Sub": "amare3",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare0",
+        "Sub": "irascor4",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia2",
+        "Sub": "felix4",
+        "Result": "lacrima4",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor2",
+        "Sub": "felix2",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare2",
+        "Sub": "phobia4",
+        "Result": "irascor4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix2",
+        "Sub": "havet4",
+        "Result": "irascor4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia1",
+        "Sub": "amare1",
+        "Result": "havet3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia3",
+        "Sub": "lacrima0",
+        "Result": "felix3",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor3",
+        "Sub": "phobia3",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia3",
+        "Sub": "felix1",
+        "Result": "irascor3",
+        "Odds": 1
+    },
+    {
+        "Main": "amare0",
+        "Sub": "felix3",
+        "Result": "amare3",
+        "Odds": 1
+    },
+    {
+        "Main": "felix3",
+        "Sub": "lacrima2",
+        "Result": "irascor3",
+        "Odds": 1
+    },
+    {
+        "Main": "felix0",
+        "Sub": "felix3",
+        "Result": "phobia3",
+        "Odds": 1
+    },
+    {
+        "Main": "amare3",
+        "Sub": "havet3",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima4",
+        "Sub": "amare2",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare2",
+        "Sub": "phobia1",
+        "Result": "amare3",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor4",
+        "Sub": "lacrima0",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor4",
+        "Sub": "amare4",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "havet1",
+        "Sub": "phobia1",
+        "Result": "havet3",
+        "Odds": 1
+    },
+    {
+        "Main": "felix1",
+        "Sub": "havet0",
+        "Result": "felix2",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia3",
+        "Sub": "felix4",
+        "Result": "amare4",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima1",
+        "Sub": "phobia4",
+        "Result": "irascor4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix3",
+        "Sub": "lacrima2",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix1",
+        "Sub": "lacrima0",
+        "Result": "amare2",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia2",
+        "Sub": "amare2",
+        "Result": "phobia3",
+        "Odds": 1
+    },
+    {
+        "Main": "amare3",
+        "Sub": "felix3",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "havet2",
+        "Sub": "phobia4",
+        "Result": "irascor4",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor3",
+        "Sub": "felix2",
+        "Result": "felix3",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima3",
+        "Sub": "phobia2",
+        "Result": "phobia3",
+        "Odds": 1
+    },
+    {
+        "Main": "felix4",
+        "Sub": "felix2",
+        "Result": "irascor4",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor2",
+        "Sub": "amare1",
+        "Result": "havet3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia4",
+        "Sub": "amare1",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare4",
+        "Sub": "felix4",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima1",
+        "Sub": "felix2",
+        "Result": "lacrima3",
+        "Odds": 1
+    },
+    {
+        "Main": "amare4",
+        "Sub": "havet4",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare4",
+        "Sub": "lacrima1",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia3",
+        "Sub": "phobia1",
+        "Result": "irascor3",
         "Odds": 1
     },
     {
         "Main": "irascor0",
-        "Sub": "lacrima0",
-        "Result": "phobia1",
-        "Odds": 1
-    },
-
-    {
-        "Main": "phobia0",
-        "Sub": "amare0",
-        "Result": "felix1",
+        "Sub": "felix2",
+        "Result": "havet2",
         "Odds": 1
     },
     {
-        "Main": "phobia0",
-        "Sub": "felix0",
-        "Result": "amare1",
+        "Main": "lacrima2",
+        "Sub": "havet1",
+        "Result": "amare2",
+        "Odds": 1
+    },
+    {
+        "Main": "havet1",
+        "Sub": "felix3",
+        "Result": "phobia3",
+        "Odds": 1
+    },
+    {
+        "Main": "amare1",
+        "Sub": "felix4",
+        "Result": "amare3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia2",
+        "Sub": "irascor2",
+        "Result": "amare3",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor3",
+        "Sub": "felix4",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima0",
+        "Sub": "amare2",
+        "Result": "felix2",
+        "Odds": 1
+    },
+    {
+        "Main": "amare0",
+        "Sub": "phobia1",
+        "Result": "irascor2",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima0",
+        "Sub": "havet3",
+        "Result": "phobia3",
         "Odds": 1
     },
     {
         "Main": "phobia0",
+        "Sub": "felix4",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "felix0",
+        "Sub": "amare3",
+        "Result": "havet3",
+        "Odds": 1
+    },
+    {
+        "Main": "havet3",
+        "Sub": "felix2",
+        "Result": "irascor3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia1",
+        "Sub": "lacrima4",
+        "Result": "amare4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare2",
+        "Sub": "irascor4",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia3",
         "Sub": "havet0",
-        "Result": "lacrima1",
+        "Result": "amare3",
         "Odds": 1
     },
     {
-        "Main": "phobia0",
-        "Sub": "lacrima0",
-        "Result": "irascor1",
+        "Main": "felix2",
+        "Sub": "phobia1",
+        "Result": "felix3",
         "Odds": 1
     },
     {
-        "Main": "phobia0",
-        "Sub": "irascor0",
-        "Result": "phobia1",
+        "Main": "lacrima4",
+        "Sub": "felix1",
+        "Result": "havet4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare1",
+        "Sub": "havet3",
+        "Result": "amare3",
+        "Odds": 1
+    },
+    {
+        "Main": "havet3",
+        "Sub": "amare2",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "lacrima1",
+        "Sub": "havet2",
+        "Result": "felix2",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia1",
+        "Sub": "felix1",
+        "Result": "phobia3",
+        "Odds": 1
+    },
+    {
+        "Main": "felix3",
+        "Sub": "phobia2",
+        "Result": "lacrima3",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia4",
+        "Sub": "amare0",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "irascor3",
+        "Sub": "irascor3",
+        "Result": "phobia4",
+        "Odds": 1
+    },
+    {
+        "Main": "phobia3",
+        "Sub": "lacrima4",
+        "Result": "felix4",
+        "Odds": 1
+    },
+    {
+        "Main": "amare2",
+        "Sub": "felix4",
+        "Result": "irascor4",
+        "Odds": 1
+    },
+    {
+        "Main": "havet1",
+        "Sub": "felix1",
+        "Result": "amare3",
         "Odds": 1
     }
 ]

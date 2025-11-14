@@ -21,7 +21,7 @@ public class InteractableBuilding : MonoBehaviour
     
     private void Awake()
     {
-        _villageController = FindObjectOfType<VillageController>();
+        _villageController = GameObject.Find("Village Controller").GetComponent<VillageController>();
     }
     
     private void OnMouseDown()

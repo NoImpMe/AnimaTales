@@ -13,7 +13,7 @@ public class AnimaDataSO : ScriptableObject
     public string Name;
     public float Maxstamina = 1;
     public float Stamina = 1;
-    public float Shield = 0;
+    public float Shield = 100f;
     public float Damage = 1;
     public int DropGold = 1;
     public float Speed = 1;
@@ -63,7 +63,7 @@ public class AnimaDataSO : ScriptableObject
                 DropRate = entity.Get<float>("DropRate");
                 Objectfile = entity.Get<string>("Objectfile");
                 attackName = entity.Get<string>("Attack");
-                skillName = entity.Get<List<string>>("Skill");
+                if(entity.Get<List<string>>("Skill") != null) skillName = entity.Get<List<string>>("Skill");
                 type = entity.Get<string>("Type");
             }
         });

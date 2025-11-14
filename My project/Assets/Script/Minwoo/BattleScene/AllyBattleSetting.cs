@@ -68,6 +68,7 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
         get => allyHpInstance;
         set => allyHpInstance = value;
     }
+    
     public List<float> DamageX
     {
         get => damagex;
@@ -122,7 +123,6 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
             allyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/AllyAnimaHP"));
             allyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Ally{i}"));
             allyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Ally{i}Name"));
-            
         }
         if (allyObjPrefab != null)
         {

@@ -1,3 +1,4 @@
+using BansheeGz.BGDatabase;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,7 @@ public class MixManager : MonoBehaviour
     List<MixData> mixDatas;
     List<MixData> matchedMixData;
     AbilityManager abilityManager;
+    BGMetaEntity recipeTable;
     private void Start()
     {
         mixDatas = JsonConvert.DeserializeObject<List<MixData>>(mixDataSet.text);
@@ -84,7 +86,8 @@ public class MixManager : MonoBehaviour
     }
     public void Mix() 
     {
-        if(checkSkill < 0)
+        
+        if (checkSkill < 0)
         {
             GetComponent<MixButtonController>().SkillError();
         }
@@ -101,6 +104,16 @@ public class MixManager : MonoBehaviour
             if (matchedMixData.Count != 0 && odds < (matchedMixData[0].Odds * (1+abilityManager.MixSymbol)))
             {
                 AudioManager.Instance.PlaySFX(sucessClip);
+                var database = BGRepo.I;
+                recipeTable = database.GetMeta("Recipe");
+                recipeTable.ForEachEntity(entity =>
+                {
+                    if (entity.Get<string>("Main") == mainAnima.Name && entity.Get<string>("Sub") == subAnima.Name && entity.Get<int>("Sucess") == 0)
+                    {
+                        entity.Set<int>("Sucess", 1);
+                        DBUpdater.Save();
+                    }
+                });
                 resultText.text = "교감 성공!!";
                 resultImage.sprite = Resources.Load<Sprite>($"Anima_Sprites/{matchedMixData[0].Result}");
                 int level = mainAnima.level;

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 700811416799556425}
   - component: {fileID: 5111073644436117481}
   - component: {fileID: -4373923906475535626}
+  - component: {fileID: 5055339759585132906}
+  - component: {fileID: 2432432243654728315}
   m_Layer: 0
   m_Name: Lacrima0
   m_TagString: Untagged
@@ -112,6 +114,40 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-4373923906475535626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792968057590276817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc94a69880ff074eb763c4e880a97a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  damage: 0
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+--- !u!114 &5055339759585132906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792968057590276817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc94a69880ff074eb763c4e880a97a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  damage: 0
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+--- !u!114 &2432432243654728315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

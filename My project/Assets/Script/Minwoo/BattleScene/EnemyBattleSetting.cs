@@ -146,27 +146,27 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
                 objectfileList.Add(entity.Get<string>("Objectfile"));
         });
         int numberOfObjectsToAdd = Random.Range(1, 4);
-            int mood = 0;
-            if (level < 7)
-            {
-                mood = 2;
-            }
-            else if (level < 11)
-            {
-                mood = 3;
-            }
-            else if (level < 16)
-            {
-                mood = 4;
-            }
-            else if (level <= 20)
-            {
-                mood = 5;
-            }
-            else
-            {
-                mood = 6;
-            }
+            //int mood = 0;
+            //if (level < 7)
+            //{
+            //    mood = 2;
+            //}
+            //else if (level < 11)
+            //{
+            //    mood = 3;
+            //}
+            //else if (level < 16)
+            //{
+            //    mood = 4;
+            //}
+            //else if (level <= 20)
+            //{
+            //    mood = 5;
+            //}
+            //else
+            //{
+            //    mood = 6;
+            //}
             for (int i = 0; i < numberOfObjectsToAdd; i++)
             {
                 //int randomIndex = Random.Range(1, mood + 2);
@@ -281,27 +281,27 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             if (entity.Get<string>("Type") == stage && entity.Get<int>("IsBoss") == 0)
                 objectfileList.Add(entity.Get<string>("Objectfile"));
         });
-        int mood = 0;
-        if (level < 7)
-        {
-            mood = 3;
-        }
-        else if (level < 11)
-        {
-            mood = 4;
-        }
-        else if (level < 16)
-        {
-            mood = 5;
-        }
-        else if (level < 20)
-        {
-            mood = 6;
-        }
-        else
-        {
-            mood = 7;
-        }
+        //int mood = 0;
+        //if (level < 7)
+        //{
+        //    mood = 3;
+        //}
+        //else if (level < 11)
+        //{
+        //    mood = 4;
+        //}
+        //else if (level < 16)
+        //{
+        //    mood = 5;
+        //}
+        //else if (level < 20)
+        //{
+        //    mood = 6;
+        //}
+        //else
+        //{
+        //    mood = 7;
+        //}
         
         for (int i = 0; i < 1; i++)
         {

@@ -106,7 +106,11 @@ public class EnemyActions : MonoBehaviour
         {
             damage = CalcAttackDamage(enemy.animaData.Damage, ally);
             dn.Spawn(new Vector2(allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.x - 0.1f, allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.y + 0.1f), damage);
-            yield return allyHealthBar.TakeDamage(damage);
+            if (ally.animaData.Shield > 0)
+            {
+                yield return allyHealthBar.shieldBar.TakeDamage(damage);
+            }
+            yield return allyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
             ally.TakeDamage(damage);
             yield return damageBar.PutDamage(damage);
         }
@@ -119,7 +123,11 @@ public class EnemyActions : MonoBehaviour
         {
             damage = CalcSkillDamage(enemy.animaData.Damage, ally, weight);
             dn.Spawn(new Vector2(allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.x - 0.1f, allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.y + 0.1f), damage);
-            yield return allyHealthBar.TakeDamage(damage);
+            if (ally.animaData.Shield > 0)
+            {
+                yield return allyHealthBar.shieldBar.TakeDamage(damage);
+            }
+            yield return allyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
             ally.TakeDamage(damage);
             yield return damageBar.PutDamage(damage);
         }
@@ -143,8 +151,12 @@ public class EnemyActions : MonoBehaviour
                     {
                         maxDamage = damage;
                     }
+                    if (ally[i].animaData.Shield > 0)
+                    {
+                        yield return allyHealthBar[i].shieldBar.TakeDamage(damage);
+                    }
+                    yield return allyHealthBar[i].TakeDamage(damage - enemy.animaData.Shield);
                     ally[i].TakeDamage(damage);
-                    yield return allyHealthBar[i].TakeDamage(damage);
                     
                 }
             }

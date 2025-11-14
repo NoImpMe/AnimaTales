@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6494741493791187957}
   - component: {fileID: 2729145345398594430}
   - component: {fileID: 678884541076678496}
+  - component: {fileID: -453808195547052928}
   m_Layer: 0
   m_Name: Amare3
   m_TagString: Untagged
@@ -126,6 +127,26 @@ MonoBehaviour:
   animaData: {fileID: 0}
   performance: Attack
   damage: 142.80836
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0
+  isBoss: 0
+  downGold: 0
+--- !u!114 &-453808195547052928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491112311236821896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc106772d254904697d240d707c6618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  performance: 
+  damage: 0
   heal: 0
   maxDamage: 0
   maxHeal: 0
