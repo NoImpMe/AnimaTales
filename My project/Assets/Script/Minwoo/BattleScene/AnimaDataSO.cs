@@ -33,7 +33,8 @@ public class AnimaDataSO : ScriptableObject
     public int enemyIndex= -1;
     public int mood = -1;
     public string type = "";
-    public List <string> skillName = new List<string>();
+    public List <string> skillName = new ();
+    public List<Sprite> skillSprite = new();
     public string attackName = "";
     public int[] maxLevel = new int[10]{ 9, 12, 15, 18, 21, 24, 27, 30, 33, 36 };
     public Dictionary<string, float> tmpAbility = new Dictionary<string, float>();
@@ -63,7 +64,14 @@ public class AnimaDataSO : ScriptableObject
                 DropRate = entity.Get<float>("DropRate");
                 Objectfile = entity.Get<string>("Objectfile");
                 attackName = entity.Get<string>("Attack");
-                if(entity.Get<List<string>>("Skill") != null) skillName = entity.Get<List<string>>("Skill");
+                if (entity.Get<List<string>>("Skill") != null)
+                {
+                    skillName = entity.Get<List<string>>("Skill");
+                    foreach(var skill in skillName)
+                    {
+                        skillSprite.Add(Resources.Load<Sprite>($"AnimaSkillImage/{skill}"));
+                    }
+                }
                 type = entity.Get<string>("Type");
             }
         });

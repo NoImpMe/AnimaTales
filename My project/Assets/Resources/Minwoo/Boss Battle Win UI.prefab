@@ -569,7 +569,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c37aae843791ddd448b72f73e7cf688c, type: 2}
   - {fileID: 11400000, guid: 2d6223348b1aeb541a9691d2aeb41370, type: 2}
   - {fileID: 11400000, guid: 275e56546d0fcf74384690f75583180a, type: 2}
-  platinumList: []
+  diamondList:
+  - {fileID: 11400000, guid: 952a185f5d2f51c4a958d71b0a8592a0, type: 2}
+  - {fileID: 11400000, guid: e72015b0fc005cd4a922e93f3e181c4f, type: 2}
+  - {fileID: 11400000, guid: 88ede9bd47b6a8240af717975b9806a9, type: 2}
+  - {fileID: 11400000, guid: 025840c98354f93418f1036f2198a282, type: 2}
+  - {fileID: 11400000, guid: adb84424f7ebf0744afb2c956da88e25, type: 2}
   rerollClip: {fileID: 8300000, guid: 974a0369b619b2b4bbc7242e82484dce, type: 3}
   selectClip: {fileID: 8300000, guid: 4967dbef8688d6148b5ee1b2058e4733, type: 3}
 --- !u!1 &2194348877655613812

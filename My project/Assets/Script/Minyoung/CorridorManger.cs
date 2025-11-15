@@ -13,7 +13,7 @@ public class CorridorManager : MonoBehaviour
     public List<AnimaEntry> animaDatabase = new();  // BGDatabase에서 로드된 데이터
     public List<RecipeEntry> recipeDatabase = new();
     [SerializeField] private AudioClip bgmClip;
-    [SerializeField] Transform badgePanel;
+    [SerializeField] Transform [] badgePanel;
 
     void Awake()
     {
@@ -46,27 +46,23 @@ public class CorridorManager : MonoBehaviour
                 switch (entity.Get<string>("Rank"))
                 {
                     case "Bronze":
-                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/BronzeMedal"), badgePanel);
-                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
-                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/BronzeMedal"), badgePanel[0]);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/Ability/{entity.Get<string>("Objectfile")}");
                         badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
                         break;
                     case "Silver":
-                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/SilverMedal"), badgePanel);
-                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
-                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/SilverMedal"), badgePanel[1]);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/Ability/{entity.Get<string>("Objectfile")}");
                         badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
                         break;
                     case "Gold":
-                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/GoldMedal"), badgePanel);
-                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
-                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/GoldMedal"), badgePanel[2]);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/Ability/{entity.Get<string>("Objectfile")}");
                         badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
                         break;
-                    case "Platinum":
-                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/PlatinumMedal"), badgePanel);
-                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/DropSymbol0");
-                        //badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/AbilityImage/{entity.Get<string>("name")}");
+                    case "Diamond":
+                        badge = Instantiate(Resources.Load<GameObject>("Minwoo/Ability/DiamondMedal"), badgePanel[3]);
+                        badge.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Minwoo/Ability/{entity.Get<string>("Objectfile")}");
                         badge.transform.Find("Description").Find("Text").GetComponent<TextMeshProUGUI>().text = entity.Get<string>("Description");
                         break;
                 }

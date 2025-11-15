@@ -13,10 +13,10 @@ public class AnimaEntry
     public float sp;               
     public float dp;
     public int meeted;
-
+    public List<string> skillName;
     public string objectFile;      
     public EmotionType emotion;
-    
+
     public Sprite GetImage()
     {
         return Resources.Load<Sprite>($"Anima_Sprites/{objectFile}");
@@ -41,9 +41,9 @@ public class AnimaEntry
                 dp = entity.Get<float>("DP"),
                 objectFile = entity.Get<string>("Objectfile"),
                 meeted = entity.Get<int>("Meeted"),
-                emotion = ParseEmotion(entity.Get<string>("Type"))
+                emotion = ParseEmotion(entity.Get<string>("Type")),
+                skillName = entity.Get<List<string>>("Skill"),
             };
-
             list.Add(entry);
         });
 

@@ -14,7 +14,7 @@ public class AbilityManager : MonoBehaviour
     float shieldSymbol = 0f;
     public float ShieldSymbol => shieldSymbol;
     [SerializeField]
-    List<AbilitySO> abilitys;
+    List<AbilitySO> abilitys = new();
     public List<AbilitySO> Abilitys => abilitys;
 
     public void GetSymbol(AbilitySO ability)

@@ -1,7 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
-using System.Collections;
+using UnityEngine.Tilemaps;
 
 public class RegionManager : MonoBehaviour
 {
@@ -119,6 +120,10 @@ public class RegionManager : MonoBehaviour
             manager.SetTile(target);
             target.isCleared = true;
             currentRegion = target;
+            
+            var targetColor = target.gameObject.GetComponent<Tilemap>().color;
+            targetColor.a = 0.37f;
+            target.gameObject.GetComponent<Tilemap>().color = targetColor;
             switch (target.type)
             {
                 case "Felix":
@@ -146,6 +151,10 @@ public class RegionManager : MonoBehaviour
             manager.SetTile(target);
             target.isCleared = true;
             currentRegion = target;
+
+            var targetColor = target.gameObject.GetComponent<Tilemap>().color;
+            targetColor.a = 0.37f;
+            target.gameObject.GetComponent<Tilemap>().color = targetColor;
             switch (target.type)
             {
                 case "Felix":
@@ -195,6 +204,10 @@ public class RegionManager : MonoBehaviour
             manager.SetTile(target);
             target.isCleared = true;
             currentRegion = target;
+
+            var targetColor = target.gameObject.GetComponent<Tilemap>().color;
+            targetColor.a = 0.37f;
+            target.gameObject.GetComponent<Tilemap>().color = targetColor;
             switch (target.type)
             {
                 case "Felix":

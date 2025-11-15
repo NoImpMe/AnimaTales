@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,7 +24,7 @@ public class AbilityCreator : MonoBehaviour
     [SerializeField]
     List<AbilitySO> goldList;
     [SerializeField]
-    List<AbilitySO> platinumList;
+    List<AbilitySO> diamondList;
     [SerializeField]
     private AudioClip rerollClip;
     [SerializeField]
@@ -38,7 +39,7 @@ public class AbilityCreator : MonoBehaviour
             GameObject oldObj = abilitys[i];
             abilitys[i] = Instantiate(Resources.Load<GameObject>($"Minwoo/Ability/{exceptAbility[i].data.id}Ability"),oldObj.transform.position, Quaternion.identity,this.transform);
             abilitys[i].GetComponent<AbilityHolder>().abilitySO = exceptAbility[i];
-            abilitys[i].transform.Find("AbilityImage").GetComponent<Image>().sprite = exceptAbility[i].data.icon;
+            abilitys[i].transform.GetComponentsInChildren<Image>(true).FirstOrDefault(t => t.name == "AbilityImage").sprite = exceptAbility[i].data.icon;
             abilitys[i].transform.Find("AbilityTxt").GetComponent<TextMeshProUGUI>().text = exceptAbility[i].data.description;
             rerollTxt[i].text = abilityReroll[i].rerollCnt.ToString();
             abilitys[i].GetComponent<Button>().onClick.AddListener(SelectAbility);
@@ -57,7 +58,7 @@ public class AbilityCreator : MonoBehaviour
             GameObject oldObj = abilitys[selectNum];
             abilitys[selectNum] = Instantiate(Resources.Load<GameObject>($"Minwoo/Ability/{newAbility.data.id}Ability"), oldObj.transform.position, Quaternion.identity, this.transform);
             abilitys[selectNum].GetComponent<AbilityHolder>().abilitySO = newAbility;
-            abilitys[selectNum].transform.Find("AbilityImage").GetComponent<Image>().sprite = newAbility.data.icon;
+            abilitys[selectNum].transform.GetComponentsInChildren<Image>(true).FirstOrDefault(t => t.name == "AbilityImage").sprite = newAbility.data.icon;
             abilitys[selectNum].transform.Find("AbilityTxt").GetComponent<TextMeshProUGUI>().text = newAbility.data.description;
             abilityReroll[selectNum].UseReroll();
             rerollTxt[selectNum].text = abilityReroll[selectNum].rerollCnt.ToString();
@@ -77,7 +78,7 @@ public class AbilityCreator : MonoBehaviour
     {
         float odds = Random.Range(0f, 1f);
         int range;
-        if (odds < 0.65)
+        if (odds < 0.05)//65
         {
             range = Random.Range(0, bronzeList.Count);
             while (exceptAbility.Contains(bronzeList[range]))
@@ -86,7 +87,7 @@ public class AbilityCreator : MonoBehaviour
             }
             return bronzeList[range];
         }
-        else if (odds < 0.85)
+        else if (odds < 0.15) //85
         {
             range = Random.Range(0, silverList.Count);
             while (exceptAbility.Contains(silverList[range]))
@@ -95,7 +96,7 @@ public class AbilityCreator : MonoBehaviour
             }
             return silverList[range];
         }
-        else if (odds < 0.95)
+        else if (odds < 0.20)//95
         {
             range = Random.Range(0, goldList.Count);
             while (exceptAbility.Contains(goldList[range]))
@@ -106,12 +107,12 @@ public class AbilityCreator : MonoBehaviour
         }
         else
         {
-            range = Random.Range(0, platinumList.Count);
-            while (exceptAbility.Contains(platinumList[range]))
+            range = Random.Range(0, diamondList.Count);
+            while (exceptAbility.Contains(diamondList[range]))
             {
-                range = Random.Range(0, platinumList.Count);
+                range = Random.Range(0, diamondList.Count);
             }
-            return platinumList[range];
+            return diamondList[range];
         }
     }
     public void SelectAbility()

@@ -17,5 +17,5 @@ MonoBehaviour:
     name: StatSymbol
     description: "\uC804\uD22C\uC5D0 \uCC38\uC5EC\uD55C \uC544\uB2C8\uB9C8\uAC00
       \uC131\uC7A5\uC2DC \uB2A5\uB825\uCE58\uAC00 \uC99D\uD3ED\uB429\uB2C8\uB2E4."
-    icon: {fileID: 21300000, guid: a0e2563d631ac9b41b20814c61a9f0e2, type: 3}
+    icon: {fileID: 21300000, guid: 4c9252b378bd15c48b11da98cdfc044a, type: 3}
     value: 0.03

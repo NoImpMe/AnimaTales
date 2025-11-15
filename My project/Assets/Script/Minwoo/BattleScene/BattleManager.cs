@@ -191,6 +191,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
     SingleAttack singleAttack;
     MultipleAttack multipleAttack;
     bool checkZ = false;
+    bool checkSkill = false;
+    bool cleared = false;
+
     void Start()
     {
         btnClip = Resources.Load<AudioClip>("Minwoo/Sounds/SFX/AttackButtonSFX");
@@ -224,7 +227,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     void Update()
     {
-        if (animaActionUIController.selectAction.activeSelf)
+        if (animaActionUIController.selectAction.activeSelf && !cleared && !checkZ)
         {
             var current = EventSystem.current.currentSelectedGameObject;
 
@@ -233,17 +236,26 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 animaActionUIController.attackButton.Select();
             }
             
-            if (Input.GetKeyUp(KeyCode.Z)&& !checkZ)
+            if (Input.GetKeyUp(KeyCode.Z) && current.GetComponent<Button>().interactable)
             {
                 checkZ = true;
                 EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
                 attackButton.interactable = false;
                 skillButton.interactable = false;
+                EventSystem.current.SetSelectedGameObject(null);
             }
         }
-        if (!animaActionUIController.selectAction.activeSelf && !animaActionUIController.skill1Frame.activeSelf)
+        if (!animaActionUIController.selectAction.activeSelf && !animaActionUIController.skill1Frame.activeSelf && !cleared)
         {
             animaActionUIController.cancleButton.Select();
+        }
+        else if (animaActionUIController.selectSkill.activeSelf && !cleared && !checkSkill)
+        {
+            var current = EventSystem.current.currentSelectedGameObject;
+            if (current == null || !current.transform.IsChildOf(animaActionUIController.selectSkill.transform))
+            {
+                animaActionUIController.skill1.Select();
+            }
         }
     }
 
@@ -704,6 +716,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     void SetState(List<AnimaDataSO> turnList)
     {
         checkZ = false;
+        checkSkill = false;
         if (arrow != null)
         {
             DestroyImmediate(arrow);
@@ -738,20 +751,19 @@ public class BattleManager : MonoBehaviour, IBattleManager
             animaActionUIController.portrait.sprite = Resources.Load<Sprite>("Anima_Sprites/" + turnList[0].Objectfile);
             animaActionUIController.animaName.text = turnList[0].Name;
             animaActionUIController.selectSkill.SetActive(true);
-            if (turnList[0].skillName.Count > 0)
+            animaActionUIController.skill1Frame.SetActive(false);
+            animaActionUIController.skill2Frame.SetActive(false);
+            if (turnList[0].skillName.Count == 1)
             {
                 animaActionUIController.skill1Des.text = turnList[0].skillName[0];
                 animaActionUIController.skill1Frame.SetActive(true);
+                animaActionUIController.skill1Image.sprite = turnList[0].skillSprite[0];
             }
-            else if (turnList[0].skillName.Count > 1)
+            else if (turnList[0].skillName.Count == 2)
             {
                 animaActionUIController.skill2Des.text = turnList[0].skillName[1];
                 animaActionUIController.skill2Frame.SetActive(true);
-            }
-            else
-            {
-                animaActionUIController.skill1Frame.SetActive(false);
-                animaActionUIController.skill2Frame.SetActive(false);
+                animaActionUIController.skill2Image.sprite = turnList[0].skillSprite[1];
             }
             animaActionUIController.selectSkill.SetActive(false);
             if (TombAlive()) skillButton.interactable = false;
@@ -787,18 +799,14 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             return;
         }
-        else if (state == BattleState.playerTurn)
-        {
-            DestroyImmediate(arrow);
-            animaActionUIController.selectAction.SetActive(false);
-            animaActionUIController.selectSkill.SetActive(true);
-            if(animaActionUIController.skill1Frame.activeSelf) skill1.Select();
-        }
         runningCoroutine = StartCoroutine(SkillButtonClicked());
     }
     IEnumerator SkillButtonClicked()
     {
         yield return null;
+        animaActionUIController.selectAction.SetActive(false);
+        animaActionUIController.selectSkill.SetActive(true);
+        if (animaActionUIController.skill1Frame.activeSelf) skill1.Select();
         while (true)
         {
             if (Input.GetKeyUp(KeyCode.Z) )
@@ -806,6 +814,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 if (EventSystem.current.currentSelectedGameObject.name.Contains("Cancle"))
                 {
                     AudioManager.Instance.PlaySFX(btnClip);
+                    EventSystem.current.currentSelectedGameObject.GetComponent<UIButtonHighlight>().DeactivateBorder();
                     EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
                     attackButton.interactable = true;
                     skillButton.interactable = true;
@@ -829,6 +838,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         skill1.interactable = false;
         skill2.interactable = false;
         animaActionUIController.cancleButton.interactable = false;
+        checkSkill = true;
         matchedSkill = skills.Where(s => s.name == animaActionUIController.skill1Des.text).ToList();
 
         switch (matchedSkill[0].Type)
@@ -873,6 +883,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
         skill1.interactable = false;
         skill2.interactable = false;
         animaActionUIController.cancleButton.interactable = false;
+        checkSkill = true;
+        EventSystem.current.currentSelectedGameObject.GetComponent<UIButtonHighlight>().DeactivateBorder();
         matchedSkill = skills.Where(s => s.name == animaActionUIController.skill2Des.text).ToList();
         switch (matchedSkill[0].Type)
         {
@@ -912,7 +924,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(AttackCursorInit());
-        
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         
         yield return runningCoroutine = StartCoroutine(singleAttack.SingleAllyAttack(tmpAnima, selectEnemy));
@@ -933,7 +945,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(AttackCursorInit());
-        
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         
         yield return runningCoroutine = StartCoroutine(singleAttack.SingleAllySkill(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
@@ -952,6 +964,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(MultiAttackCursorInit());
+        if (runningCoroutine == null) yield break;
         tmpAnima  = PresentAllyTurn();
 
         yield return runningCoroutine = StartCoroutine(multipleAttack.MultiAllySkill(tmpAnima, skillNum, matchedSkill[0].Weight));
@@ -970,7 +983,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(BuffCursorInit());
-
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(singleAttack.SingleAllyHeal(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
         if (enemyActions.Count > 0 && turnList.Count == 0)
@@ -987,7 +1000,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(MultiBuffCursorInit());
-
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(multipleAttack.MultiAllyHeal(tmpAnima, skillNum, matchedSkill[0].Weight));
         if (enemyActions.Count > 0 && turnList.Count == 0)
@@ -1004,7 +1017,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(BuffCursorInit());
-
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(singleAttack.SingleAllyShield(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
         if (enemyActions.Count > 0 && turnList.Count == 0)
@@ -1021,7 +1034,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(MultiBuffCursorInit());
-
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(multipleAttack.MultiAllyShield(tmpAnima, skillNum, matchedSkill[0].Weight));
         if (enemyActions.Count > 0 && turnList.Count == 0)
@@ -1038,6 +1051,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(BuffCursorInit());
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(singleAttack.SingleAllyBuff(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
         Buff buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, allyActions[selectEnemy].animaData, 0);
@@ -1056,6 +1070,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(MultiBuffCursorInit());
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(multipleAttack.MultiAllyBuff(tmpAnima, skillNum, matchedSkill[0].Weight));
         Buff buff;
@@ -1081,6 +1096,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(AttackCursorInit());
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(singleAttack.SingleAllyDebuff(tmpAnima, selectEnemy, skillNum, matchedSkill[0].Weight));
         Buff buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
@@ -1099,7 +1115,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         yield return null;
         yield return runningCoroutine = StartCoroutine(MultiAttackCursorInit());
-
+        if (runningCoroutine == null) yield break;
         tmpAnima = PresentAllyTurn();
         yield return runningCoroutine = StartCoroutine(multipleAttack.MultiAllyDebuff(tmpAnima, skillNum, matchedSkill[0].Weight));
         Buff buff;
@@ -1289,6 +1305,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     
     public void WinBattle()
     {
+        cleared = true;
         if (!isBoss)
         {
             AudioManager.Instance.PlaySFX(winClip);
@@ -1360,7 +1377,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 index--;
                 GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(enemyBattleSetting.EnemyInstance[index].transform.position.x, enemyBattleSetting.EnemyInstance[index].transform.position.y + 1.2f);
             }
-            else if (Input.GetKeyDown(KeyCode.Z))
+            else if (Input.GetKeyUp(KeyCode.Z))
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = index;
@@ -1368,13 +1385,17 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 yield return new WaitForSeconds(1f);
                 break;
             }
-            else if (Input.GetKeyDown(KeyCode.C))
+            else if (Input.GetKeyUp(KeyCode.C))
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
-                yield return new WaitForSeconds(1f);
                 attackButton.interactable = true;
                 skillButton.interactable = true;
+                skill1.interactable = true;
+                skill2.interactable = true;
+                animaActionUIController.cancleButton.interactable = true;
+                animaActionUIController.selectSkill.SetActive(false);
+                animaActionUIController.selectAction.SetActive(true);
                 SetState(turnList);
                 if(runningCoroutine != null )StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
@@ -1397,7 +1418,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Z) && !attackButton.interactable)
+            if (Input.GetKeyUp(KeyCode.Z) && !attackButton.interactable)
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = index;
@@ -1409,20 +1430,24 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 yield return new WaitForSeconds(1f);
                 break;
             }
-            else if (Input.GetKeyDown(KeyCode.C))
+            else if (Input.GetKeyUp(KeyCode.C))
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 foreach (var aa in tmp)
                 {
                     DestroyImmediate(aa);
                 }
-                yield return new WaitForSeconds(1f);
+
                 skill1.interactable = true;
                 skill2.interactable = true;
                 animaActionUIController.cancleButton.interactable = true;
                 animaActionUIController.selectSkill.SetActive(false);
+                animaActionUIController.selectAction.SetActive(true);
+                attackButton.interactable = true;
+                skillButton.interactable = true;
                 SetState(turnList);
                 if (runningCoroutine != null) StopCoroutine(runningCoroutine);
+                runningCoroutine = null;
                 break;
             }
             yield return null;
@@ -1451,7 +1476,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 index--;
                 GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[index].transform.position.x, allyBattleSetting.AllyInstance[index].transform.position.y + 1.2f);
             }
-            else if (Input.GetKeyDown(KeyCode.Z) && !attackButton.interactable)
+            else if (Input.GetKeyUp(KeyCode.Z) && !attackButton.interactable)
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = index;
@@ -1459,18 +1484,21 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 yield return new WaitForSeconds(1f);
                 break;
             }
-            else if (Input.GetKeyDown(KeyCode.C))
+            else if (Input.GetKeyUp(KeyCode.C))
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
-                yield return new WaitForSeconds(1f);
                 skill1.interactable = true;
                 skill2.interactable = true;
                 animaActionUIController.cancleButton.interactable = true;
                 animaActionUIController.selectSkill.SetActive(false);
+                animaActionUIController.selectAction.SetActive(true);
+                attackButton.interactable = true;
+                skillButton.interactable = true;
                 SetState(turnList);
                 if (runningCoroutine != null) StopCoroutine(runningCoroutine);
-                yield break;
+                runningCoroutine = null;
+                break;
             }
             yield return null;
         }
@@ -1489,7 +1517,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         }
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Z) && !attackButton.interactable)
+            if (Input.GetKeyUp(KeyCode.Z) && !attackButton.interactable)
             {
                 for (int i = 0; i < tmp.Count;)
                 {
@@ -1500,17 +1528,20 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 yield return new WaitForSeconds(1f);
                 break;
             }
-            else if (Input.GetKeyDown(KeyCode.C))
+            else if (Input.GetKeyUp(KeyCode.C))
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
-                yield return new WaitForSeconds(1f);
                 skill1.interactable = true;
                 skill2.interactable = true;
                 animaActionUIController.cancleButton.interactable = true;
                 animaActionUIController.selectSkill.SetActive(false);
+                animaActionUIController.selectAction.SetActive(true);
+                attackButton.interactable = true;
+                skillButton.interactable = true;
                 SetState(turnList);
                 if (runningCoroutine != null) StopCoroutine(runningCoroutine);
+                runningCoroutine = null;
                 break;
             }
             yield return null;

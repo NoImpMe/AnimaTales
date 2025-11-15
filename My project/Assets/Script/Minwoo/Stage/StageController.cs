@@ -25,7 +25,7 @@ public class StageController : MonoBehaviour
                             tile.gameObject.GetComponent<Rigidbody2D>().simulated = false;
                         }
                         tmpColor = tile.gameObject.GetComponent<Tilemap>().color;
-                        tmpColor.a = 0.67f;
+                        tmpColor.a = 0.37f;
                         tile.gameObject.GetComponent<Tilemap>().color = tmpColor;
                     }
                 }
