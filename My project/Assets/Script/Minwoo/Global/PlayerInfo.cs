@@ -21,11 +21,13 @@ public class PlayerInfo : ScriptableObject
         battleAnima.Clear();
         haveAnima.Clear();
         abilitys = new List<AbilitySO>();
-        int a = Random.Range(1, 2);
+        onBossStage = false;
+        maxLevel = 5;
+        int a = Random.Range(0, 6);
         int b;
         do
         {
-            b = Random.Range(3, 4);
+            b = Random.Range(0,6 );
         } while (a == b);
 
         animaData = ScriptableObject.CreateInstance<AnimaDataSO>();

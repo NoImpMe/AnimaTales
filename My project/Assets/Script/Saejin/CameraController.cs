@@ -1,7 +1,4 @@
-using System.Collections;
-using UnityEditor.AssetImporters;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour

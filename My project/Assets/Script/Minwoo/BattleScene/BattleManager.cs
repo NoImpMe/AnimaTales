@@ -1,6 +1,5 @@
 using BansheeGz.BGDatabase;
 using DamageNumbersPro;
-using Gamekit3D;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +10,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static Unity.Burst.Intrinsics.X86.Avx;
 public class BattleManager : MonoBehaviour, IBattleManager
 {
     [SerializeField]
@@ -22,6 +20,14 @@ public class BattleManager : MonoBehaviour, IBattleManager
     AudioClip loseClip;
     public bool isElite = false;
     public bool isBoss = false;
+    private bool isDefeat = false;
+    public bool IsDefeat
+    {
+        get => isDefeat;
+        set => isDefeat = value;
+    }
+
+
     public bool IsBoss => isBoss;
     private int bossStage = 0;
     public CameraManager CameraManager => cameraManager;
@@ -715,6 +721,13 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     void SetState(List<AnimaDataSO> turnList)
     {
+        skill1.interactable = true;
+        skill2.interactable = true;
+        animaActionUIController.cancleButton.interactable = true;
+        animaActionUIController.selectSkill.SetActive(false);
+        animaActionUIController.selectAction.SetActive(true);
+        attackButton.interactable = true;
+        skillButton.interactable = true;
         checkZ = false;
         checkSkill = false;
         if (arrow != null)
@@ -753,13 +766,13 @@ public class BattleManager : MonoBehaviour, IBattleManager
             animaActionUIController.selectSkill.SetActive(true);
             animaActionUIController.skill1Frame.SetActive(false);
             animaActionUIController.skill2Frame.SetActive(false);
-            if (turnList[0].skillName.Count == 1)
+            if (turnList[0].skillName.Count > 0)
             {
                 animaActionUIController.skill1Des.text = turnList[0].skillName[0];
                 animaActionUIController.skill1Frame.SetActive(true);
                 animaActionUIController.skill1Image.sprite = turnList[0].skillSprite[0];
             }
-            else if (turnList[0].skillName.Count == 2)
+            if (turnList[0].skillName.Count == 2)
             {
                 animaActionUIController.skill2Des.text = turnList[0].skillName[1];
                 animaActionUIController.skill2Frame.SetActive(true);
@@ -811,7 +824,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             if (Input.GetKeyUp(KeyCode.Z) )
             {
-                if (EventSystem.current.currentSelectedGameObject.name.Contains("Cancle"))
+                if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.name.Contains("Cancle"))
                 {
                     AudioManager.Instance.PlaySFX(btnClip);
                     EventSystem.current.currentSelectedGameObject.GetComponent<UIButtonHighlight>().DeactivateBorder();
@@ -884,7 +897,6 @@ public class BattleManager : MonoBehaviour, IBattleManager
         skill2.interactable = false;
         animaActionUIController.cancleButton.interactable = false;
         checkSkill = true;
-        EventSystem.current.currentSelectedGameObject.GetComponent<UIButtonHighlight>().DeactivateBorder();
         matchedSkill = skills.Where(s => s.name == animaActionUIController.skill2Des.text).ToList();
         switch (matchedSkill[0].Type)
         {
@@ -1279,6 +1291,14 @@ public class BattleManager : MonoBehaviour, IBattleManager
             }
         }
             runningCoroutine = null;
+        if (isDefeat)
+        {
+            if(GameObject.Find("Game Over UI(Clone)") == null)
+            {
+                LoseBattle();
+            }
+            yield break;
+        }
             if (turnList.Count == 0)
             {
                 runningCoroutine = StartCoroutine(BattleStart());
@@ -1389,13 +1409,6 @@ public class BattleManager : MonoBehaviour, IBattleManager
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
-                attackButton.interactable = true;
-                skillButton.interactable = true;
-                skill1.interactable = true;
-                skill2.interactable = true;
-                animaActionUIController.cancleButton.interactable = true;
-                animaActionUIController.selectSkill.SetActive(false);
-                animaActionUIController.selectAction.SetActive(true);
                 SetState(turnList);
                 if(runningCoroutine != null )StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
@@ -1438,13 +1451,6 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     DestroyImmediate(aa);
                 }
 
-                skill1.interactable = true;
-                skill2.interactable = true;
-                animaActionUIController.cancleButton.interactable = true;
-                animaActionUIController.selectSkill.SetActive(false);
-                animaActionUIController.selectAction.SetActive(true);
-                attackButton.interactable = true;
-                skillButton.interactable = true;
                 SetState(turnList);
                 if (runningCoroutine != null) StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
@@ -1488,13 +1494,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
-                skill1.interactable = true;
-                skill2.interactable = true;
-                animaActionUIController.cancleButton.interactable = true;
-                animaActionUIController.selectSkill.SetActive(false);
-                animaActionUIController.selectAction.SetActive(true);
-                attackButton.interactable = true;
-                skillButton.interactable = true;
+                
                 SetState(turnList);
                 if (runningCoroutine != null) StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
@@ -1532,13 +1532,6 @@ public class BattleManager : MonoBehaviour, IBattleManager
             {
                 AudioManager.Instance.PlaySFX(btnClip);
                 DestroyImmediate(arrow);
-                skill1.interactable = true;
-                skill2.interactable = true;
-                animaActionUIController.cancleButton.interactable = true;
-                animaActionUIController.selectSkill.SetActive(false);
-                animaActionUIController.selectAction.SetActive(true);
-                attackButton.interactable = true;
-                skillButton.interactable = true;
                 SetState(turnList);
                 if (runningCoroutine != null) StopCoroutine(runningCoroutine);
                 runningCoroutine = null;

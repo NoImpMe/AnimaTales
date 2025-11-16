@@ -17,6 +17,7 @@ public interface IBattleManager
     int AllyAnimaNum { get; set; }
     bool TurnRebuild { get; set; }
     bool IsBoss { get; }
+    bool IsDefeat { get; set; }
     public Coroutine RunningCoroutine { get; set; }
     TurnManager TurnManager { get; set; }
     List<int> DieAllyAnima { get; }

@@ -4,7 +4,11 @@ public class BuffManager
 {
     private Dictionary<Buff, int> buffList = new Dictionary<Buff, int>();
     private List<string> expiredBuff = new List<string>();
-    //public event Action<Buff> OnBuffExpired;
+    public Dictionary<Buff,int> BuffList
+    {
+        get => buffList;
+        set => buffList = value;
+    }
     public void AddOrRenuwBuff(Buff buff)
     {
 
@@ -16,6 +20,7 @@ public class BuffManager
     public List<string> TickOne(AnimaDataSO target)
     {
         expiredBuff.Clear();
+        var deleteList = new List<Buff>();
         foreach (var buff in buffList) 
         {
             if(ReferenceEquals(buff.Key.target, target))
@@ -23,29 +28,20 @@ public class BuffManager
                 buff.Key.Tick();
                 if (buff.Key.isExpired())
                 {
+                    deleteList.Add(buff.Key);
                     for (int i = 0; i < buff.Key.type.Count; i++)
                     {
                         expiredBuff.Add(buff.Key.type[i]);
                     }
-                    buffList.Remove(buff.Key);
                 }
             }
         }
-        
+        foreach (var buff in deleteList)
+        {
+            buffList.Remove(buff);
+        }
         return expiredBuff;
     }
-    //public void TickAll()
-    //{
-    //    for (int i = 0; i < buffList.Count; i++) 
-    //    {
-    //        buffList[i].Tick();
-    //        if (buffList[i].isExpired())
-    //        {
-    //            OnBuffExpired?.Invoke(buffList[i]);
-    //            buffList.RemoveAt(i--);
-    //        }
-    //    }
-    //}
     public bool IsExistAndRenewBuff(Buff buff)
     {
         foreach (var existbuff in buffList)

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using BansheeGz.BGDatabase;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting

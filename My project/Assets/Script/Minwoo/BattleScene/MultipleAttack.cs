@@ -112,7 +112,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0) 
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -392,7 +395,7 @@ public class MultipleAttack : MonoBehaviour
         }
     }
 
-    private void DefeatAlly(AnimaActions ally, int selectAlly)
+    private bool DefeatAlly(AnimaActions ally, int selectAlly)
     {
         for (int i = 0; i < bm.TmpturnList.Count; i++)
         {
@@ -421,9 +424,12 @@ public class MultipleAttack : MonoBehaviour
             {
                 StopCoroutine(bm.RunningCoroutine);
             }
+            bm.IsDefeat = true;
             bm.LoseBattle();
-
+            return true;
+            
         }
+        return false;
     }
     private void BuffUpdate(AnimaDataSO anima)
     {
@@ -484,10 +490,14 @@ public class MultipleAttack : MonoBehaviour
         for (int i = 0; i < fast; i++)
         {
             bm.TurnIndex -= 1;
-        } 
+        }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
+                
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -541,7 +551,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -595,7 +608,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -649,7 +665,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -703,7 +722,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -757,7 +779,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -805,7 +830,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -846,7 +874,10 @@ public class MultipleAttack : MonoBehaviour
         }
         while (allyList.Count > 0)
         {
-            DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]);
+            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+            {
+                yield break;
+            }
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {

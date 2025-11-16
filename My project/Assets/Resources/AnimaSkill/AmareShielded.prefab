@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 2311650715620190905}
   serializedVersion: 8
   lengthInSec: 0.3
-  simulationSpeed: 1
+  simulationSpeed: 1.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -4964,7 +4964,7 @@ ParticleSystem:
   m_GameObject: {fileID: 2709645423431143437}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 1.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -9855,7 +9855,7 @@ ParticleSystem:
   m_GameObject: {fileID: 2974497784795744663}
   serializedVersion: 8
   lengthInSec: 0.3
-  simulationSpeed: 1
+  simulationSpeed: 1.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -14773,7 +14773,7 @@ ParticleSystem:
   m_GameObject: {fileID: 5159696580853887153}
   serializedVersion: 8
   lengthInSec: 0.3
-  simulationSpeed: 1
+  simulationSpeed: 1.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -19691,7 +19691,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7239116242009210056}
   serializedVersion: 8
   lengthInSec: 0.3
-  simulationSpeed: 1
+  simulationSpeed: 1.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -24633,6 +24633,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5183840888628032356, guid: 8742ee6454eaae84598f61d02ccdc894, type: 3}
       propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183840888628032356, guid: 8742ee6454eaae84598f61d02ccdc894, type: 3}
+      propertyPath: simulationSpeed
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5183840888628032356, guid: 8742ee6454eaae84598f61d02ccdc894, type: 3}
@@ -24696,6 +24700,10 @@ PrefabInstance:
     - target: {fileID: 3153685348987686651, guid: a1ab319954542aa469f04f8a8d5905ba, type: 3}
       propertyPath: lengthInSec
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153685348987686651, guid: a1ab319954542aa469f04f8a8d5905ba, type: 3}
+      propertyPath: simulationSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3153685348987686651, guid: a1ab319954542aa469f04f8a8d5905ba, type: 3}
       propertyPath: startDelay.scalar
@@ -24859,6 +24867,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5183840888628032356, guid: 8742ee6454eaae84598f61d02ccdc894, type: 3}
       propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183840888628032356, guid: 8742ee6454eaae84598f61d02ccdc894, type: 3}
+      propertyPath: simulationSpeed
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5183840888628032356, guid: 8742ee6454eaae84598f61d02ccdc894, type: 3}

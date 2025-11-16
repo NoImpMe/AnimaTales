@@ -36,7 +36,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
             
-             yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+             yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
             
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyZoomed"))
@@ -48,7 +48,7 @@ public class CameraManager : MonoBehaviour
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
             ps = instance.GetComponent<ParticleSystem>();
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
      
             yield return animatorController.WaitForAnimationEnd(animator, "EnemyZoomed", instance);
@@ -68,7 +68,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("AllyZoomed"))
             {
@@ -79,7 +79,7 @@ public class CameraManager : MonoBehaviour
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
             ps = instance.GetComponent<ParticleSystem>();
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
             yield return animatorController.WaitForAnimationEnd(animator, "AllyZoomed", instance);
         }
@@ -102,7 +102,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
 
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyZoomed2"))
@@ -110,15 +110,14 @@ public class CameraManager : MonoBehaviour
                 yield return null;
             }
             instanceList = new List<GameObject>();
-            yield return new WaitForSeconds(0.5f);
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
 
             for (int i = 0; i < hitted.Count; i++)
             {
                 instanceList.Add(GameObject.Instantiate(prefab, new Vector3(hitted[i].transform.position.x, hitted[i].transform.position.y, hitted[i].transform.position.z), prefab.transform.rotation));
             }
-            ps = instanceList[0].GetComponent<ParticleSystem>();
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            ps = instanceList[instanceList.Count-1].GetComponent<ParticleSystem>();
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             for(int i = 0; i < instanceList.Count; i++)
             {
                 GameObject.Destroy(instanceList[i]);
@@ -143,7 +142,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("AllyZoomed3"))
             {
@@ -158,7 +157,7 @@ public class CameraManager : MonoBehaviour
             }
 
             ps = instanceList[0].GetComponent<ParticleSystem>();
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             for (int i = 0; i < instanceList.Count; i++)
             {
                 GameObject.Destroy(instanceList[i]);
@@ -184,7 +183,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
 
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("AllyZoomed1"))
@@ -196,7 +195,7 @@ public class CameraManager : MonoBehaviour
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
             ps = instance.GetComponent<ParticleSystem>();
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
 
 
@@ -217,7 +216,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyZoomed1"))
             {
@@ -228,7 +227,7 @@ public class CameraManager : MonoBehaviour
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
             ps = instance.GetComponent<ParticleSystem>();
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
             yield return animatorController.WaitForAnimationEnd(animator, "EnemyZoomed1", instance);
         }
@@ -249,7 +248,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax)/ps.main.simulationSpeed);
             GameObject.Destroy(instance);
 
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("AllyZoomed2"))
@@ -257,16 +256,15 @@ public class CameraManager : MonoBehaviour
                 yield return null;
             }
             instanceList = new List<GameObject>();
-            yield return new WaitForSeconds(0.5f);
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
             for (int i = 0; i < hitted.Count; i++)
             {
                 instanceList.Add(GameObject.Instantiate(prefab, new Vector3(hitted[i].transform.position.x, hitted[i].transform.position.y, hitted[i].transform.position.z), prefab.transform.rotation));
             }
 
-            ps = instanceList[0].GetComponent<ParticleSystem>();
+            ps = instanceList[instanceList.Count-1].GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             for (int i = 0; i < instanceList.Count; i++)
             {
                 GameObject.Destroy(instanceList[i]);
@@ -288,7 +286,7 @@ public class CameraManager : MonoBehaviour
 
             ps = instance.GetComponent<ParticleSystem>();
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             GameObject.Destroy(instance);
             while (!animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyZoomed3"))
             {
@@ -305,7 +303,7 @@ public class CameraManager : MonoBehaviour
             ps = instanceList[0].GetComponent<ParticleSystem>();
             yield return new WaitForSeconds(0.5f);
 
-            yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+            yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             for (int i = 0; i < instanceList.Count; i++)
             {
                 GameObject.Destroy(instanceList[i]);
@@ -334,7 +332,7 @@ public class CameraManager : MonoBehaviour
 
         ps = instance.GetComponent<ParticleSystem>();
 
-        yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+        yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
         GameObject.Destroy(instance);
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("AllyZoomed4"))
         {

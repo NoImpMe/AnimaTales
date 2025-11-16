@@ -13,7 +13,7 @@ public class AnimaDataSO : ScriptableObject
     public string Name;
     public float Maxstamina = 1;
     public float Stamina = 1;
-    public float Shield = 100f;
+    public float Shield = 0f;
     public float Damage = 1;
     public int DropGold = 1;
     public float Speed = 1;
