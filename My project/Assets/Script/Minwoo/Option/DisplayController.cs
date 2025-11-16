@@ -9,11 +9,9 @@ using UnityEngine.UI;
 
 public class DisplayController : MonoBehaviour
 { 
-    //옵션 중 그래픽 관련 옵션 관리
         List<(int, int)> resolutionList = new List<(int, int)>() { (960, 540), (1280, 720), (1366, 768), (1600, 900), (1920, 1080), (2560, 1440) }; //해상도 리스트. 일단 16:9만 사용. 최대 8k까지 감지
-        List<int> framerateList = new List<int>() { 30, 60, 120, 144 };     //프레임레이트 리스트.
+        List<int> framerateList = new List<int>() { 30, 60, 120, 144 };   
 
-        //엔진에서 마우스로 끌어서 참조하는 부분을 최소화. 스크립트에서 대부분 처리하도록 
         [SerializeField] private Transform resolutionObject;
         [SerializeField] private Transform fullScreenModeObject;
         [SerializeField] private Transform framerateObject;
@@ -50,7 +48,7 @@ public class DisplayController : MonoBehaviour
             InitOptionItem(framerateObject, out framerateText, out framerateButtonDown, out framerateButtonUp, OnClickFramerateDown, OnClickFramerateUp);
 
 
-        optionButtonController = GetComponentInParent<OptionButtonController>();    //옵션 내 공용 버튼을 위함. (적용, 닫기 버튼)
+        optionButtonController = GetComponentInParent<OptionButtonController>();    
         }
 
         protected void OnEnable()
@@ -66,7 +64,7 @@ public class DisplayController : MonoBehaviour
 
         }
 
-        public void OnClickApply()      //현재 적용 버튼은 그래픽 옵션에서만 사용함. 다른 기능은 즉시 반영하여 적용 버튼이 별도로 필요하지 않음
+        public void OnClickApply()      
         {
             if (CheckGraphicSettingChange())    //그래픽 변경 시 정상적으로 표시가 되지 않을 수도 있으므로 15초 이내로 사용자 입력이 없으면 이전 설정으로 되돌아 올 수 있도록 안전장치를 해둔다.
             {
@@ -185,7 +183,7 @@ public class DisplayController : MonoBehaviour
                     break;
             }
             fullScreenModeButtonDown.interactable = fullScreenMode != 0;
-            fullScreenModeButtonUp.interactable = fullScreenMode != 2;
+            fullScreenModeButtonUp.interactable = fullScreenMode != 3;
         }
         private void UpdateFramerate()
         {

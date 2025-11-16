@@ -43,8 +43,7 @@ public class StatusSync : MonoBehaviour
             battleAlly = battleManager.AllyActions;
             this.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = battleAlly[idx].animaData.Name;
             this.transform.Find("Level").GetComponent<TextMeshProUGUI>().text = "Lv. " + battleAlly[idx].animaData.level.ToString();
-            this.transform.Find("Exp").GetComponent<TextMeshProUGUI>().text = battleAlly[idx].animaData.EXP.ToString();
-            this.transform.Find("Hp").GetComponent<TextMeshProUGUI>().text = Mathf.CeilToInt(battleAlly[idx].animaData.Stamina) + " / " + battleAlly[idx].animaData.Maxstamina.ToString();            
+            this.transform.Find("Hp").GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(battleAlly[idx].animaData.Stamina) + " / " + Mathf.FloorToInt(battleAlly[idx].animaData.Maxstamina).ToString();            
             for(int i = 0; i < battleManager.BuffManager.GetBuffList().Count; i++)
             {
                 if (ReferenceEquals(battleManager.BuffManager.GetBuffList()[i].target, battleAlly[idx].animaData))
@@ -69,8 +68,7 @@ public class StatusSync : MonoBehaviour
             battleEnemy = battleManager.EnemyActions;
             this.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = battleEnemy[idx].animaData.Name;
             this.transform.Find("Level").GetComponent<TextMeshProUGUI>().text = "Lv. " + battleEnemy[idx].animaData.level.ToString();
-            this.transform.Find("Exp").GetComponent<TextMeshProUGUI>().text = battleEnemy[idx].animaData.EXP.ToString();
-            this.transform.Find("Hp").GetComponent<TextMeshProUGUI>().text = Mathf.CeilToInt(battleEnemy[idx].animaData.Stamina) + " / " + battleEnemy[idx].animaData.Maxstamina.ToString();
+            this.transform.Find("Hp").GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(battleEnemy[idx].animaData.Stamina) + " / " + Mathf.FloorToInt(battleEnemy[idx].animaData.Maxstamina).ToString();
             for (int i = 0; i < battleManager.BuffManager.GetBuffList().Count; i++)
             {
                 if (ReferenceEquals(battleManager.BuffManager.GetBuffList()[i].target, battleEnemy[idx].animaData))

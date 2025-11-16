@@ -1,8 +1,9 @@
+using BansheeGz.BGDatabase;
 using UnityEngine;
 
 public static class ShopEffectHandler
 {
-    public static void ApplyEffect(ShopItemData itemData, AnimaDataSO target = null)
+    public static void ApplyEffect(ShopItemData itemData, AnimaDataSO target = null, int randomNum = 0)
     {
         if (itemData == null)
         {
@@ -32,7 +33,7 @@ public static class ShopEffectHandler
                 break;
 
             case ItemType.Recipe:
-                ApplyRecipe(itemData, target);
+                ApplyRecipe(itemData, target, randomNum);
                 break;
 
             case ItemType.Enhance:
@@ -108,9 +109,11 @@ public static class ShopEffectHandler
         }
     }
 
-    private static void ApplyRecipe(ShopItemData itemData, AnimaDataSO target)
+    private static void ApplyRecipe(ShopItemData itemData, AnimaDataSO target, int randomNum)
     {
-        Debug.Log($"[레시피] {itemData.itemName}을(를) 획득");
+        var database = BGRepo.I;
+        var recipeTable = database.GetMeta("Recipe");
+        recipeTable[randomNum].Set<int>("Sucess", 1);
     }
 
     private static void ApplyEnhance(ShopItemData itemData, AnimaDataSO target)

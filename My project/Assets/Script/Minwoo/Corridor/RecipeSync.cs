@@ -7,6 +7,14 @@ public class RecipeSync : MonoBehaviour
     public TextMeshProUGUI desc;
     void Update()
     {
-        desc.text = obj.sprite.name;
+        if(obj.sprite.texture.name == "Unknown")
+        {
+            desc.text = "";
+        }
+        else
+        {
+            desc.text = obj.sprite.texture.name;
+        }
+        
     }
 }

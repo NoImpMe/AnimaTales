@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eabcd73fb5268848a56a145bfd36828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldTextObjectName: GoldText
+  goldTextObjectName: Player Gold Text
   goldFormat: '{0:N0}'
 --- !u!114 &286856702
 MonoBehaviour:

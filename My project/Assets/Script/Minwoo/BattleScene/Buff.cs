@@ -22,7 +22,7 @@ public class Buff
     {
         this.remainingTurns = buff.remainingTurns;
     }
-
+    public void Clear() => remainingTurns = 0;
     public bool isExpired() => remainingTurns <= 0;
 
 }

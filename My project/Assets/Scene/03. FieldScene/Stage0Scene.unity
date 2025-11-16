@@ -474,6 +474,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6780336554041957575, guid: 8c0af8c109377424da44f43189c29025, type: 3}
+      propertyPath: m_Name
+      value: Player Gold Text
+      objectReference: {fileID: 0}
     - target: {fileID: 7389003462613015803, guid: 8c0af8c109377424da44f43189c29025, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -513,6 +517,18 @@ PrefabInstance:
     - target: {fileID: 400686738064605569, guid: d1618ac891583864dba502c4066a51e7, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608336063047990709, guid: d1618ac891583864dba502c4066a51e7, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608336063047990709, guid: d1618ac891583864dba502c4066a51e7, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608336063047990709, guid: d1618ac891583864dba502c4066a51e7, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 6420200252061950183, guid: d1618ac891583864dba502c4066a51e7, type: 3}
       propertyPath: m_Pivot.x

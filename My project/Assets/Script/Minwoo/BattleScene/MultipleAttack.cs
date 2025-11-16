@@ -84,7 +84,7 @@ public class MultipleAttack : MonoBehaviour
         yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        yield return enemy.MultiSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
+        yield return enemy.MultiSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, weight, bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
         bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
         DamageParserUpdate();
@@ -174,7 +174,7 @@ public class MultipleAttack : MonoBehaviour
         }
         yield return bm.CameraManager.ZoomMultiIde(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, enemys, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
-        yield return enemy.MultiHeal(enemy, bm.EnemyActions, bm.EnemyBattleSetting, bm.EnemyHealthBar, bm.EnemyHealBar[enemy.animaData.enemyIndex], weight);
+        yield return enemy.MultiHeal(enemy, bm.EnemyActions, bm.EnemyBattleSetting, bm.EnemyHealthBar, weight, bm.EnemyHealBar[enemy.animaData.enemyIndex]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Enemys for {Mathf.Ceil(enemy.heal)} heal", false);
         bm.EnemyHealText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyHealBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         HealParserUpdate();
@@ -323,7 +323,7 @@ public class MultipleAttack : MonoBehaviour
     private void DefeatEnemy(EnemyActions enemy, int selectEnemy)
     {
         if (bm.TurnList.Contains(enemy.animaData)) bm.TurnList.Remove(enemy.animaData);
-
+        
         for (int i = 0; i < bm.TmpturnList.Count; i++)
         {
             if (ReferenceEquals(bm.TmpturnList[i], enemy.animaData))
@@ -332,7 +332,7 @@ public class MultipleAttack : MonoBehaviour
                 bm.TmpturnList.RemoveAt(i);
                 bm.Turn.RemoveAt(i);
                 bm.IsTurn.RemoveAt(i);
-                if (UnityEngine.Random.Range(0, 101) <= (enemy.animaData.DropRate * (1 + abilityManager.DropSymbol)))
+                if (UnityEngine.Random.Range(0, 101) <= (enemy.animaData.DropRate * (1 + abilityManager.DropSymbol)) && !enemy.animaData.isClone)
                 {
                     AnimaDataSO animadata = ScriptableObject.CreateInstance<AnimaDataSO>();
                     animadata.GetAnima(enemy.animaData.Name, enemy.animaData.level);
@@ -340,20 +340,19 @@ public class MultipleAttack : MonoBehaviour
                     bm.DropAnima.Add(animadata);
                     bm.AnimaTable.ForEachEntity(entity =>
                     {
-                        if (entity.Get<string>("name") == enemy.animaData.Name)
+                        if (entity.Get<string>("name") == enemy.animaData.Name && entity.Get<int>("Meeted") != 2)
                         {
                             entity.Set<int>("Meeted", 2);
                             DBUpdater.Save();
-
                         }
                     });
                 }
                 foreach (var tmp in bm.AllyActions)
                 {
-                    if (!tmp.animaData.Animadie)
+                    if (!tmp.animaData.Animadie && !enemy.animaData.isClone)
                     {
                         tmp.animaData.LevelUp();
-                        bm.AllyHealthBar[bm.AllyActions.IndexOf(tmp)].UpdateHealthBar();
+                        StartCoroutine(bm.AllyHealthBar[bm.AllyActions.IndexOf(tmp)].UpdateHealthBar());
                         GameObject.Find($"AllyAnimaHP{tmp.animaData.location}").transform.Find("LV UI").transform.Find("Current LV").GetComponent<TextMeshProUGUI>().text = tmp.animaData.level.ToString();
                     }
                 }
@@ -364,12 +363,22 @@ public class MultipleAttack : MonoBehaviour
                 }
             }
         }
+        if (enemy.animaData.isClone)
+        {
+            DestroyImmediate(bm.EnemyBattleSetting.EnemyParserInstance[selectEnemy]);
+            bm.EnemyBattleSetting.EnemyParserInstance.RemoveAt(selectEnemy);
+            bm.EnemyDamageBar.RemoveAt(selectEnemy);
+            bm.EnemyDamageText.RemoveAt(selectEnemy);
+            bm.EnemyHealBar.RemoveAt(selectEnemy);
+            bm.EnemyHealText.RemoveAt(selectEnemy);
+        }
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name}is dead", false);
         GoldManager.Instance.AddGold((int)(enemy.animaData.DropGold * (1 + abilityManager.GoldSymbol)));
         
         DestroyImmediate(bm.EnemyBattleSetting.EnemyHpInstance[selectEnemy]);
         bm.EnemyBattleSetting.EnemyHpInstance.RemoveAt(selectEnemy);
         bm.EnemyHealthBar.RemoveAt(selectEnemy);
+        bm.EnemyShieldBar.RemoveAt(selectEnemy);
         bm.EnemyActions.RemoveAt(selectEnemy);
         DestroyImmediate(bm.EnemyBattleSetting.EnemyInstance[selectEnemy]);
         DestroyImmediate(bm.EnemyBattleSetting.EnemyInfoInstance[selectEnemy]);

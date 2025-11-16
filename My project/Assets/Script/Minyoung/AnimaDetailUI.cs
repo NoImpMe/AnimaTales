@@ -27,6 +27,7 @@ public class AnimaDetailUI : MonoBehaviour
         else
         {
             var color = skillImage.color;
+            skillName.text = "";
             color.a = 0f;
             skillImage.color = color;
         }

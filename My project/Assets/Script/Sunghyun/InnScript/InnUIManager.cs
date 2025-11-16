@@ -67,10 +67,6 @@ public class InnUIManager : MonoBehaviour
             UpdatePriceUI();
             UpdateGoldUI();
             
-            if (GoldManager.Instance != null)
-            {
-                GoldManager.Instance.OnGoldChanged += OnGoldChanged;
-            }
         }
     }
     
@@ -79,18 +75,10 @@ public class InnUIManager : MonoBehaviour
         if (innPanel != null)
         {
             innPanel.SetActive(false);
-            
-            if (GoldManager.Instance != null)
-            {
-                GoldManager.Instance.OnGoldChanged -= OnGoldChanged;
-            }
+           
         }
     }
     
-    private void OnGoldChanged(int currentGold)
-    {
-        UpdateGoldUI();
-    }
     
     private void UpdatePriceUI()
     {

@@ -26,8 +26,11 @@ public class ParserData : MonoBehaviour
     
     public void OnClickParser()
     {
-        if (!init)
+        if (!parsercheck)
         {
+            battleParser.GetComponent<CanvasGroup>().alpha = 1;
+            battleParser.GetComponent<CanvasGroup>().interactable = true;
+            parsercheck = true;
             for (int i = 0; i < 3; i++)
             {
                 if (GameObject.Find($"Ally{i}Name") != null)
@@ -44,13 +47,6 @@ public class ParserData : MonoBehaviour
                     enemyHeal.Add(GameObject.Find($"E{i}Heal"));
                 }
             }
-            init = true;
-        }
-        if (!parsercheck)
-        {
-            battleParser.GetComponent<CanvasGroup>().alpha = 1;
-            battleParser.GetComponent<CanvasGroup>().interactable = true;
-            parsercheck = true;
         }
         else
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using JetBrains.Annotations;
+using BansheeGz.BGDatabase;
 
 public class ShopManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class ShopManager : MonoBehaviour
     private Dictionary<string, int> remainingCounts = new Dictionary<string, int>();
     private Coroutine feedbackCoroutine;
     [SerializeField] private AudioClip itemClip;
-
+    Coroutine runningCoroutine;
     
     private void Start()
     {
@@ -49,46 +50,66 @@ public class ShopManager : MonoBehaviour
                 break;
             
             case TargetType.None:
-            case TargetType.All:
-                if (ProcessItemPurchase(item))
+                StartCoroutine(ProcessItemPurchase(item, result =>
                 {
-                    ShopEffectHandler.ApplyEffect(item);
-                    AudioManager.Instance.PlaySFX(itemClip);
-                    ShowFeedback($"'{item.itemName}'을(를)\n사용했습니다.");
-                }
+                    if (result)
+                    {
+                        int randomNum = UnityEngine.Random.Range(0, 102);
+                        ShowFeedback($"{randomNum}번 교감의 두루마리를 얻었습니다.");
+                        ShopEffectHandler.ApplyEffect(item);
+                        AudioManager.Instance.PlaySFX(itemClip);
+                    }
+                }));
+                break;
+            case TargetType.All:
+                StartCoroutine(ProcessItemPurchase(item, result =>
+                {
+                    if (result)
+                    {
+                        ShopEffectHandler.ApplyEffect(item);
+                        AudioManager.Instance.PlaySFX(itemClip);
+                        ShowFeedback($"'{item.itemName}'을(를)\n사용했습니다.");
+                    }
+                }));
                 break;
         }
     }
     
     private void OnAnimaSelected(ShopItemData item, AnimaDataSO selectedAnima)
     {
-        if (ProcessItemPurchase(item))
+        StartCoroutine(ProcessItemPurchase(item, result =>
         {
-            ShopEffectHandler.ApplyEffect(item, selectedAnima);
-            ShowFeedback($"'{item.itemName}'을(를)\n'{selectedAnima.Name}'에게\n사용했습니다.");
-        }
+            if (result)
+            {
+                ShopEffectHandler.ApplyEffect(item, selectedAnima);
+                ShowFeedback($"'{item.itemName}'을(를)\n'{selectedAnima.Name}'에게\n사용했습니다.");
+            }
+        }));
     }
 
-    private bool ProcessItemPurchase(ShopItemData item)
+    private IEnumerator ProcessItemPurchase(ShopItemData item, System.Action<bool> callback)
     {
         if (!VillageDataManager.Instance.PurchaseItem(villageID, item.itemID))
         {
             ShowFeedback("품절 상태입니다.");
-            return false;
+            callback?.Invoke(false);
+            yield break;
         }
         if (GoldManager.Instance.GetCurrentGold() < item.price)
         {
             ShowFeedback($"골드가 부족합니다.");
-            return false;
+            callback?.Invoke(false);
+            yield break;
         }
-        StartCoroutine(GoldManager.Instance.SpendGold(item.price));
-        remainingCounts[item.itemID] = shopState.GetRemainingCount(item.itemID);
-
-        ShopUIManager.Instance.UpdateItemSlot(item.itemID, remainingCounts[item.itemID]);
-    
-        return true;
+        yield return StartCoroutine(SucessPurchase(item));
+        callback?.Invoke(true);
     }
-    
+    IEnumerator SucessPurchase(ShopItemData item)
+    {
+        yield return StartCoroutine(GoldManager.Instance.SpendGold(item.price));
+        remainingCounts[item.itemID] = shopState.GetRemainingCount(item.itemID);
+        ShopUIManager.Instance.UpdateItemSlot(item.itemID, remainingCounts[item.itemID]);
+    }
     private void ShowFeedback(string message)
     {
         if (feedbackPanel == null || feedbackText == null)

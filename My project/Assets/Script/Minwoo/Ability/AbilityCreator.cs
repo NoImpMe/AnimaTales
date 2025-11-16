@@ -78,7 +78,7 @@ public class AbilityCreator : MonoBehaviour
     {
         float odds = Random.Range(0f, 1f);
         int range;
-        if (odds < 0.05)//65
+        if (odds < 0.75)//65
         {
             range = Random.Range(0, bronzeList.Count);
             while (exceptAbility.Contains(bronzeList[range]))
@@ -87,7 +87,7 @@ public class AbilityCreator : MonoBehaviour
             }
             return bronzeList[range];
         }
-        else if (odds < 0.15) //85
+        else if (odds < 0.88) //85
         {
             range = Random.Range(0, silverList.Count);
             while (exceptAbility.Contains(silverList[range]))
@@ -96,7 +96,7 @@ public class AbilityCreator : MonoBehaviour
             }
             return silverList[range];
         }
-        else if (odds < 0.20)//95
+        else if (odds < 0.98)//95
         {
             range = Random.Range(0, goldList.Count);
             while (exceptAbility.Contains(goldList[range]))

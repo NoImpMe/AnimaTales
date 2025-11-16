@@ -9,19 +9,19 @@ public static class RandomShopItems
             new ShopItemData {
                 itemID = "Recipe_Common",
                 itemName = "교감의 두루마리",
-                itemDescription = "흔한 교감식을 하나 획득",
+                itemDescription = "교감의 두루마리를 하나 획득",
                 itemType = ItemType.Recipe,
                 targetType = TargetType.None,
-                price = 200,
+                price = 500,
                 maxPurchaseCount = 1
             },
             new ShopItemData {
                 itemID = "growth_Max_boost",
                 itemName = "이상한 알약",
-                itemDescription = "아니마 한 마리의 레벨 상한을 증가",
+                itemDescription = "아니마 한 마리의 레벨 상한을 1증가",
                 itemType = ItemType.Growth,
                 targetType = TargetType.Single,
-                price = 200,
+                price = 500,
                 maxPurchaseCount = 2
             },
             new ShopItemData {
@@ -30,7 +30,7 @@ public static class RandomShopItems
                 itemDescription = "아니마 한 마리의 공격력 스테이터스를 증가",
                 itemType = ItemType.Enhance,
                 targetType = TargetType.Single,
-                price = 120,
+                price = 400,
                 maxPurchaseCount = 5
             },
         };

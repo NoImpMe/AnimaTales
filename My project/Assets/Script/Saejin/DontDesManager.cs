@@ -96,15 +96,11 @@ public class DontDesManager : MonoBehaviour
             var tManager = tileManager.GetComponent<RegionManager>();
             tManager.SetNextTile(tile);
         }
-        else if (scene.name.EndsWith("FieldScene"))
-        {
-            var regionManager = GameObject.Find("RegionManager");
-            tileManager = regionManager;
-            var tManager = tileManager.GetComponent<RegionManager>();
-            DontDestroyOnLoad(tileManager);
-            
-        }
         if (scene.name.EndsWith("BattleScene"))
+        {
+            grid.SetActive(false);
+        }
+        if (scene.name.StartsWith("Village"))
         {
             grid.SetActive(false);
         }

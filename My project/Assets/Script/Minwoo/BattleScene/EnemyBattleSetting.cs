@@ -406,7 +406,6 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
                 enemyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                 int index = enemyInstance[i].name.IndexOf("(Clone)");
                 enemyInstance[i].name = enemyInstance[i].name.Substring(0, index) + (i + 3);
-                //enemyInstance[i].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
                 enemyHpInstance.Add(Instantiate(enemyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                 enemyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i * 380f)+ (200f * i), -22f, 0f);
                 enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[i], canvas.transform));
@@ -426,7 +425,6 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
             enemyInstance[0].GetComponent<SpriteRenderer>().sortingOrder = -1;
             int index = enemyInstance[0].name.IndexOf("(Clone)");
             enemyInstance[0].name = enemyInstance[0].name.Substring(0, index) + 3;
-            //enemyInstance[0].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             enemyHpInstance.Add(Instantiate(enemyHpPrefab[0], Vector3.zero, Quaternion.identity, canvas.transform));
             enemyHpInstance[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, -22f, 0f);
             enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[0], canvas.transform));
@@ -446,19 +444,18 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy1"));
         enemyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Enemy1Name"));
         battleEnemyAnima.Add(charmedAnima);
-        enemyInstance.Add(Instantiate(enemyObjPrefab[1], new Vector3(5.3f, 1.5f, 0), Quaternion.identity));
+        enemyInstance.Add(Instantiate(enemyObjPrefab[1], new Vector3(3.7f, 1.5f, 0), Quaternion.identity));
+        enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[1], canvas.transform));
+        enemyParserInstance.Add(Instantiate(enemyParserPrefab[1], battleParser.transform));
         enemyInstance[1].GetComponent<SpriteRenderer>().sortingOrder = -1;
         int index = enemyInstance[1].name.IndexOf("(Clone)");
         enemyInstance[1].name = enemyInstance[1].name.Substring(0, index) + "4";
-        //enemyInstance[1].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         enemyHpInstance.Add(Instantiate(enemyHpPrefab[1], Vector3.zero, Quaternion.identity, canvas.transform));
-        enemyHpInstance[1].GetComponent<RectTransform>().anchoredPosition = new Vector3((380f) + (200f), -22f, 0f);
-        enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[1], canvas.transform));
+        enemyHpInstance[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(  (400f), -22f, 0f);
         index = enemyHpInstance[1].name.IndexOf("(Clone)");
         enemyHpInstance[1].name = enemyHpInstance[1].name.Substring(0, index) + "1";
         index = enemyInfoInstance[1].name.IndexOf("(Clone)");
         enemyInfoInstance[1].name = enemyInfoInstance[1].name.Substring(0, index);
-        enemyParserInstance.Add(Instantiate(enemyParserPrefab[1], battleParser.transform));
         index = enemyParserInstance[1].name.IndexOf("(Clone)");
         enemyParserInstance[1].name = enemyParserInstance[1].name.Substring(0, index);
     }

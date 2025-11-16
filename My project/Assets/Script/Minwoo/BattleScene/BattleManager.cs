@@ -551,6 +551,10 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     yield return singleAttack.PhobiaRoundSkill(enemyActions[0], turnList, selectAlly);
                     break;
                 case "Amare":
+                    if (enemyActions[0].animaData.Name != "amare5")
+                    {
+                        yield break;
+                    }
                     if (enemyActions.Count > 1)
                     {
                         DestroyImmediate(enemyBattleSetting.EnemyHpInstance[1]);
@@ -561,7 +565,6 @@ public class BattleManager : MonoBehaviour, IBattleManager
                         DestroyImmediate(enemyBattleSetting.EnemyInfoInstance[1]);
                         enemyBattleSetting.EnemyInstance.RemoveAt(1);
                         enemyBattleSetting.EnemyInfoInstance.RemoveAt(1);
-                        enemyBattleSetting.EnemyParserInstance.RemoveAt(1);
                         enemyAnimaNum -= 1;
                     }
                     while (enemyBattleSetting.EnemyInfoInstance.Count != 1)
@@ -583,13 +586,14 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     enemyActions[1].animaData.Initialize(enemyBattleSetting.BattleEnemyAnima[1], playerInfo.haveAnima[rannum].level);
                     enemyActions[1].animaData.location = 1;
                     enemyActions[1].animaData.enemyIndex = 1;
+                    enemyActions[1].animaData.isClone = true;
                     var enemyStatus = GameObject.Find($"Enemy{1}");
                     var enemyParser = GameObject.Find($"Enemy{1}Name");
                     enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + enemyActions[1].animaData.Objectfile);
-                    enemyHealthBar.Add(GameObject.Find($"EnemyAnimaHP{1}").transform.Find("HP").GetComponent<HealthBar>());
-                    enemyShieldBar.Add(GameObject.Find($"EnemyAnimaHP{1}").transform.Find("SD").GetComponent<ShieldBar>());
                     enemyDamageBar.Add(enemyParser.transform.Find($"E{1}Damage").transform.Find($"E{1} Damage Bar").GetComponent<ParserBar>());
                     enemyHealBar.Add(enemyParser.transform.Find($"E{1}Heal").transform.Find($"E{1} Heal Bar").GetComponent<ParserBar>());
+                    enemyHealthBar.Add(GameObject.Find($"EnemyAnimaHP{1}").transform.Find("HP").GetComponent<HealthBar>());
+                    enemyShieldBar.Add(GameObject.Find($"EnemyAnimaHP{1}").transform.Find("SD").GetComponent<ShieldBar>());
                     enemyHealthBar[1].Initialize(enemyActions[1].animaData.Maxstamina, enemyActions[1].animaData.Stamina);
                     enemyShieldBar[1].Initialize(enemyActions[1].animaData.Maxstamina, enemyActions[1].animaData.Shield);
                     enemyDamageBar[1].Initialize();
@@ -721,6 +725,13 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     void SetState(List<AnimaDataSO> turnList)
     {
+        if(enemyBattleSetting.Stage == "Amare" && isBoss)
+        {
+            if (enemyActions[0].animaData.Name != "amare5")
+            {
+                return;
+            }
+        }
         skill1.interactable = true;
         skill2.interactable = true;
         animaActionUIController.cancleButton.interactable = true;
@@ -1330,6 +1341,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             AudioManager.Instance.PlaySFX(winClip);
             Instantiate(Resources.Load<GameObject>("Minwoo/Battle Win UI"), canvas.transform);
+            BuffDelete();
             for (int i = 0; i < allyActions.Count; i++)
             {
                 GameObject animaImage = GameObject.Find("Entry Anima List").transform.Find($"Anima {i}").gameObject;
@@ -1547,6 +1559,30 @@ public class BattleManager : MonoBehaviour, IBattleManager
             if (enemyActions[i].animaData.isTomb) return true;
         }
         return false;
+    }
+    private void BuffDelete()
+    {
+        List<string > buffList = new List<string>();
+        foreach(var ally in AllyActions)
+        {
+            buffList = buffManager.TickClear(ally.animaData);
+            while (buffList.Count > 0)
+            {
+                switch (buffList[0])
+                {
+                    case "strength":
+                        ally.animaData.Damage = ally.animaData.tmpAbility["strength"];
+                        break;
+                    case "speed":
+                        ally.animaData.Speed = ally.animaData.tmpAbility["speed"];
+                        break;
+                    case "defense":
+                        ally.animaData.Defense = ally.animaData.tmpAbility["defense"];
+                        break;
+                    }
+                    buffList.RemoveAt(0);
+                }
+            }
     }
 }
 

@@ -32,6 +32,7 @@ public class TitleManager : MonoBehaviour
     public void OnNewGameClick()
     {
         AudioManager.Instance.PlaySFX(btnClip);
+        GameObject.Find("Game Manager").GetComponent<GoldManager>().Init();
         SetButtonsInteractable(false);
         StartCoroutine(fadePanel.LoadSceneWithFade("Stage0Scene"));
     }

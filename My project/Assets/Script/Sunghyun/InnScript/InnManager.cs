@@ -18,8 +18,8 @@ public class InnManager : MonoBehaviour
     }
     
     [Header("여관 설정")]
-    [SerializeField] private int initialPrice = 300;
-    [SerializeField] private int priceIncreaseAmount = 50;
+    [SerializeField] private int initialPrice = 600;
+    [SerializeField] private int priceIncreaseAmount = 200;
     
     private int currentPrice;
     private VillageDataManager dataManager;

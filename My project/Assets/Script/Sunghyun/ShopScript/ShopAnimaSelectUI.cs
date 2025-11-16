@@ -45,9 +45,6 @@ public class ShopAnimaSelectUI : MonoBehaviour
         if (AnimaInventoryManager.Instance != null)
         {
             allAnimas.AddRange(AnimaInventoryManager.Instance.GetAllAnima());
-            allAnimas.AddRange(AnimaInventoryManager.Instance.GetActiveAnima());
-            
-            allAnimas = new List<AnimaDataSO>(new HashSet<AnimaDataSO>(allAnimas));
         }
         
         List<AnimaDataSO> filteredAnimas = FilterAnimasByItem(allAnimas, item);
@@ -98,13 +95,10 @@ public class ShopAnimaSelectUI : MonoBehaviour
                 case ItemType.Revive:
                     isEligible = anima.Animadie;
                     break;
-                    
                 case ItemType.Growth:
-                case ItemType.Enhance:
-                    isEligible = !anima.Animadie;
+                    isEligible = true;
                     break;
-                    
-                default:
+                case ItemType.Enhance:
                     isEligible = true;
                     break;
             }

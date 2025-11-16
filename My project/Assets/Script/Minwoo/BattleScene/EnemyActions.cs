@@ -53,6 +53,11 @@ public class EnemyActions : MonoBehaviour
     public void DecideAction()
     {
         float totalWeight = 0f;
+        if (animaData.type == "Irascor")
+        {
+            SetAction(ActionType.Attack);
+            return;
+        }
         foreach (ActionWeight actionWeight in actionWeights)
         {
             totalWeight += actionWeight.weight;
@@ -99,7 +104,7 @@ public class EnemyActions : MonoBehaviour
         }
             
     }
-    public IEnumerator Attack(EnemyActions enemy, AnimaActions ally, IAllyBattleSetting allyPos, HealthBar allyHealthBar, ParserBar damageBar)
+    public IEnumerator Attack(EnemyActions enemy, AnimaActions ally, IAllyBattleSetting allyPos, HealthBar allyHealthBar, ParserBar damageBar = null)
     {
         
         if (!enemy.animaData.Animadie && !ally.animaData.Animadie)
@@ -116,7 +121,7 @@ public class EnemyActions : MonoBehaviour
         }
         
     }
-    public IEnumerator Skill(EnemyActions enemy, AnimaActions ally, IAllyBattleSetting allyPos, HealthBar allyHealthBar, ParserBar damageBar, float weight)
+    public IEnumerator Skill(EnemyActions enemy, AnimaActions ally, IAllyBattleSetting allyPos, HealthBar allyHealthBar, float weight, ParserBar damageBar = null)
     {
 
         if (!enemy.animaData.Animadie && !ally.animaData.Animadie)
@@ -135,7 +140,7 @@ public class EnemyActions : MonoBehaviour
     }
   
     
-    public IEnumerator MultiSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, ParserBar damageBar, float weight)
+    public IEnumerator MultiSkill(EnemyActions enemy, List<AnimaActions> ally, IAllyBattleSetting allyPos, List<HealthBar> allyHealthBar, float weight, ParserBar damageBar = null)
     {
         if (!enemy.animaData.Animadie)
         {
@@ -163,7 +168,7 @@ public class EnemyActions : MonoBehaviour
             yield return damageBar.PutDamage(maxDamage);
         }
     }
-    public IEnumerator Heal(EnemyActions healer, EnemyActions target, IEnemyBattleSetting targetPos, HealthBar enemyHealthBar, ParserBar healBar, float weight)
+    public IEnumerator Heal(EnemyActions healer, EnemyActions target, IEnemyBattleSetting targetPos, HealthBar enemyHealthBar, float weight, ParserBar healBar = null)
     {
         if (!healer.animaData.Animadie && !target.animaData.Animadie)
         {
@@ -175,7 +180,7 @@ public class EnemyActions : MonoBehaviour
         }
     }
 
-    public IEnumerator MultiHeal(EnemyActions healer, List<EnemyActions> target, IEnemyBattleSetting targetPos, List<HealthBar> enemyHealthBar, ParserBar healBar, float weight)
+    public IEnumerator MultiHeal(EnemyActions healer, List<EnemyActions> target, IEnemyBattleSetting targetPos, List<HealthBar> enemyHealthBar, float weight, ParserBar healBar = null)
     {
         if (!healer.animaData.Animadie)
         {

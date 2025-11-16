@@ -21,12 +21,6 @@ EditorBuildSettings:
     path: Assets/Scene/05. VillageScene/MixScene.unity
     guid: 4058c9054f12e1b4cb4b09cd26ee595c
   - enabled: 1
-    path: Assets/Scene/04. BattleScene/GameOverScene.unity
-    guid: 818eb0a171daab84c8a51285f2a4f022
-  - enabled: 1
-    path: Assets/Scene/04. BattleScene/GameClearScene.unity
-    guid: 02bc8b28c2e9c1e4995cf5b09bd6dc27
-  - enabled: 1
     path: Assets/Scene/03. FieldScene/Stage0Scene.unity
     guid: a8a132c268f22b941a9e9128f2a6887a
   - enabled: 1
@@ -98,12 +92,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/04. BattleScene/LacrimaEliteBattleScene.unity
     guid: 7880fb10da5b6f34c9fd1977eba1314e
-  - enabled: 1
-    path: Assets/Scene/04. BattleScene/OdiumBattleScene.unity
-    guid: 9b2ac486f9d0c624d997bea3a2d9ba9c
-  - enabled: 1
-    path: Assets/Scene/04. BattleScene/OdiumEliteBattleScene.unity
-    guid: 46d2cade00a027e46816c1afd5833df7
   - enabled: 1
     path: Assets/Scene/04. BattleScene/PhobiaBattleScene.unity
     guid: efa654ed5bc163a42a2a928a25115297

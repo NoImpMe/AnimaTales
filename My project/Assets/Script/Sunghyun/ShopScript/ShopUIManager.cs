@@ -21,23 +21,6 @@ public class ShopUIManager : MonoBehaviour
         Instance = this;
     }
 
-    private void OnEnable()
-    {
-        if (GoldManager.Instance != null)
-        {
-            GoldManager.Instance.OnGoldChanged += UpdateGoldUI;
-            
-            UpdateGoldUI(GoldManager.Instance.GetCurrentGold());
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (GoldManager.Instance != null)
-        {
-            GoldManager.Instance.OnGoldChanged -= UpdateGoldUI;
-        }
-    }
 
     public void ShowShopItems(List<ShopItemData> items, Dictionary<string, int> remainingCounts, Action<ShopItemData> onPurchase)
     {
@@ -53,11 +36,6 @@ public class ShopUIManager : MonoBehaviour
             slot.Setup(item, remaining, onPurchaseCallback);
             activeSlots[item.itemID] = slot;
         }
-    }
-
-    public void UpdateGoldUI(int gold)
-    {
-        playerGoldText.text = $"{gold:N0}";
     }
 
     public void UpdateItemSlot(string itemID, int newRemaining)

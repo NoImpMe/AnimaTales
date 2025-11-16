@@ -68,22 +68,31 @@ public class AnimaInventoryDetailUI : MonoBehaviour
 
         if (hpText != null) 
         {
-            hpText.text = $"{anima.Stamina} / {anima.Maxstamina}";
+            hpText.text = $"{Mathf.FloorToInt(anima.Stamina)} / {Mathf.FloorToInt(anima.Maxstamina)}";
             
             bool isDefeated = anima.Animadie || anima.Stamina <= 0;
             hpText.color = isDefeated ? defeatedHpColor : normalHpColor;
         }
 
-        if (apText != null) apText.text = anima.Damage.ToString();
-        if (dpText != null) dpText.text = anima.Defense.ToString();
-        if (spText != null) spText.text = anima.Speed.ToString();
+        if (apText != null) apText.text = Mathf.FloorToInt(anima.Damage).ToString();
+        if (dpText != null) dpText.text = Mathf.FloorToInt(anima.Defense).ToString();
+        if (spText != null) spText.text = Mathf.FloorToInt(anima.Speed).ToString();
         if(anima.skillName.Count == 0)
         {
             skill1NameText.text = "";
             skill2NameText.text = "";
         }
-        if (anima.skillName.Count > 0) skill1NameText.text = anima.skillName[0];
-        if (anima.skillName.Count > 1) skill2NameText.text = anima.skillName[1];
+        if (anima.skillName.Count == 1)
+        {
+            skill1NameText.text = anima.skillName[0];
+            skill2NameText.text = "";
+        }
+
+        if (anima.skillName.Count == 2)
+        {
+            skill1NameText.text = anima.skillName[0];
+            skill2NameText.text = anima.skillName[1];
+        }
     
         if (skill1DescriptionText != null) skill1DescriptionText.text = "";
         if (skill2DescriptionText != null) skill2DescriptionText.text = "";

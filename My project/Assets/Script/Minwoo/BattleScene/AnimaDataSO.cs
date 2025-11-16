@@ -9,6 +9,7 @@ public class AnimaDataSO : ScriptableObject
     public bool turnCheck = false;
     public bool isTomb = false;
     public bool isBoss = false;
+    public bool isClone = false;
     public int level = 1;
     public string Name;
     public float Maxstamina = 1;
@@ -27,8 +28,6 @@ public class AnimaDataSO : ScriptableObject
     public string Objectfile;
     public int location = -1;
     public float Defense = 0;
-    public float EXP = 0;
-    public float MAX_EXP = 0;
     public float weight;
     public int enemyIndex= -1;
     public int mood = -1;
@@ -100,7 +99,14 @@ public class AnimaDataSO : ScriptableObject
                 DropRate = entity.Get<float>("DropRate");
                 Objectfile = entity.Get<string>("Objectfile");
                 attackName = entity.Get<string>("Attack");
-                skillName = entity.Get<List<string>>("Skill");
+                if (entity.Get<List<string>>("Skill") != null)
+                {
+                    skillName = entity.Get<List<string>>("Skill");
+                    foreach (var skill in skillName)
+                    {
+                        skillSprite.Add(Resources.Load<Sprite>($"AnimaSkillImage/{skill}"));
+                    }
+                }
                 type = entity.Get<string>("Type");
             }
         });

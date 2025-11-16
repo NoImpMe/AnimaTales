@@ -42,6 +42,25 @@ public class BuffManager
         }
         return expiredBuff;
     }
+    public List<string> TickClear(AnimaDataSO target)
+    {
+        expiredBuff.Clear();
+        foreach (var buff in buffList)
+        {
+            if (ReferenceEquals(buff.Key.target, target))
+            {
+                buff.Key.Clear();
+                if (buff.Key.isExpired())
+                {
+                    for (int i = 0; i < buff.Key.type.Count; i++)
+                    {
+                        expiredBuff.Add(buff.Key.type[i]);
+                    }
+                }
+            }
+        }
+        return expiredBuff;
+    }
     public bool IsExistAndRenewBuff(Buff buff)
     {
         foreach (var existbuff in buffList)

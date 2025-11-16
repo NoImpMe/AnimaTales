@@ -39,6 +39,7 @@ public class MixManager : MonoBehaviour
     List<MixData> matchedMixData;
     AbilityManager abilityManager;
     BGMetaEntity recipeTable;
+    BGMetaEntity animaTable;
     private void Start()
     {
         mixDatas = JsonConvert.DeserializeObject<List<MixData>>(mixDataSet.text);
@@ -114,6 +115,7 @@ public class MixManager : MonoBehaviour
                         DBUpdater.Save();
                     }
                 });
+                
                 resultText.text = "교감 성공!!";
                 resultImage.sprite = Resources.Load<Sprite>($"Anima_Sprites/{matchedMixData[0].Result}");
                 int level = mainAnima.level;
@@ -123,11 +125,22 @@ public class MixManager : MonoBehaviour
                 {
                     case 0:
                         resultAnima.skillName.Add(skillText1.text);
+                        resultAnima.skillSprite.Add(Resources.Load<Sprite>("AnimaSkillImage/"+skillText1.text));
                         break;
                     case 1:
                         resultAnima.skillName.Add(skillText2.text);
+                        resultAnima.skillSprite.Add(Resources.Load<Sprite>("AnimaSkillImage/" + skillText2.text));
                         break;
                 }
+                animaTable = database.GetMeta("Anima");
+                animaTable.ForEachEntity(entity =>
+                {
+                    if (entity.Get<string>("name") == resultAnima.Name && entity.Get<int>("Meeted") != 2)
+                    {
+                        entity.Set<int>("Meeted", 2);
+                        DBUpdater.Save();
+                    }
+                });
                 inven.playerInfo.haveAnima.Add(resultAnima);
                 mainAnima = null;
                 subAnima = null;

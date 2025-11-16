@@ -52,5 +52,6 @@ public class SceneManagerInBattle : MonoBehaviour
     {
         StartCoroutine(fadePanel.LoadSceneWithFade("TitleScene"));
         GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo.Initialize();
+        GoldManager.Instance.Init();
     }
 }

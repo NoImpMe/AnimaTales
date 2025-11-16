@@ -16,7 +16,7 @@ public class GoldManager : MonoBehaviour
         set => goldText = value;
     }
 
-    [SerializeField] private string goldTextObjectName = "GoldText";
+    [SerializeField] private string goldTextObjectName = "Player Gold Text";
     [SerializeField] private string goldFormat = "{0:N0}";
 
     private BGRepo database;
@@ -24,19 +24,17 @@ public class GoldManager : MonoBehaviour
     private BGEntity entity;
     private int currentGold;
     
-    public event System.Action<int> OnGoldChanged;
 
-    private void Awake()
+    public void Init()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-            
             database = BGRepo.I;
             goldTable = database.GetMeta("GoldData");
             entity = goldTable.FirstOrDefault(e => e.Get<string>("name").Equals("GoldData"));
             currentGold = entity.Get<int>("Gold");
+            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
@@ -44,7 +42,6 @@ public class GoldManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -76,13 +73,12 @@ public class GoldManager : MonoBehaviour
         if (amount <= 0) return;
         
         currentGold += amount;
-        entity = goldTable.FirstOrDefault(e => e.Get<string>("name").Equals("GoldData"));
         entity.Set<int>("Gold", currentGold);
-        OnGoldChanged?.Invoke(currentGold);
     }
     
     public IEnumerator SpendGold(int amount)
     {
+        FindGoldTextInScene();
         float elapsed = 0f;
         float duration = 1f;
         int resultGold = currentGold - amount;
@@ -96,9 +92,8 @@ public class GoldManager : MonoBehaviour
             yield return null;
         }
         goldText.text = string.Format(goldFormat, resultGold);
-        entity = goldTable.FirstOrDefault(e => e.Get<string>("name").Equals("GoldData"));
-        entity.Set<int>("Gold", currentGold);
-        OnGoldChanged?.Invoke(currentGold);
+        entity.Set<int>("Gold", resultGold);
+        currentGold = resultGold;
         
     }
     public int GetCurrentGold()
