@@ -33,7 +33,7 @@ public static class ShopEffectHandler
                 break;
 
             case ItemType.Recipe:
-                ApplyRecipe(itemData, target, randomNum);
+                ApplyRecipe(itemData, randomNum);
                 break;
 
             case ItemType.Enhance:
@@ -109,11 +109,12 @@ public static class ShopEffectHandler
         }
     }
 
-    private static void ApplyRecipe(ShopItemData itemData, AnimaDataSO target, int randomNum)
+    private static void ApplyRecipe(ShopItemData itemData, int randomNum)
     {
         var database = BGRepo.I;
         var recipeTable = database.GetMeta("Recipe");
-        recipeTable[randomNum].Set<int>("Sucess", 1);
+        recipeTable.GetEntity(randomNum).Set<int>("Sucess", 1);
+        DBUpdater.Save();
     }
 
     private static void ApplyEnhance(ShopItemData itemData, AnimaDataSO target)

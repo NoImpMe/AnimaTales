@@ -210,13 +210,13 @@ public class EnemyActions : MonoBehaviour
             {
                 switch (stat)
                 {
-                    case "strength":
+                    case "strengthup":
                         StrengthUp(buffer, target[i], weight); 
                         break;
-                    case "speed":
+                    case "speedup":
                         SpeedUp(buffer, target[i], weight);
                         break;
-                    case "defense":
+                    case "defenseup":
                         DefenseUp(buffer, target[i], weight);
                         break;
                 }
@@ -231,13 +231,13 @@ public class EnemyActions : MonoBehaviour
         {
             switch (stat)
             {
-                case "strength":
+                case "strengthup":
                     yield return StrengthUp(buffer, target, weight);
                     break;
-                case "speed":
+                case "speedup":
                     yield return SpeedUp(buffer, target, weight);
                     break;
-                case "defense":
+                case "defenseup":
                     yield return DefenseUp(buffer, target, weight);
                     break;
             }
@@ -245,55 +245,55 @@ public class EnemyActions : MonoBehaviour
     }
     private IEnumerator StrengthUp(EnemyActions buffer, EnemyActions target, float weight)
     {
-        if (!buffer.animaData.Animadie && !target.animaData.Animadie)
+        if (!buffer.animaData.Animadie && !target.animaData.Animadie && !target.animaData.tmpAbility.ContainsKey("strengthup"))
         {
-            target.animaData.tmpAbility["strength"] = target.animaData.Damage;
+            target.animaData.tmpAbility["strengthup"] = target.animaData.Damage;
             target.animaData.Damage *= CalcBuffRatio(buffer.damage, weight);
         }
         yield return null;
     }
     private IEnumerator StrengthDown(EnemyActions debuffer, AnimaActions target, float weight)
     {
-        if (!debuffer.animaData.Animadie && !target.animaData.Animadie)
+        if (!debuffer.animaData.Animadie && !target.animaData.Animadie && !target.animaData.tmpAbility.ContainsKey("strengthdown"))
         {
-            target.animaData.tmpAbility["strength"] = target.animaData.Damage;
-            target.animaData.Damage *= CalcDebuffRatio(debuffer.damage, weight);
+            target.animaData.tmpAbility["strengthdown"] = target.animaData.Damage;
+            target.animaData.Damage = CalcDebuffRatio(target.animaData.Damage, debuffer.damage, weight) < 0 ? 0 : CalcDebuffRatio(target.animaData.Damage, debuffer.damage, weight);
         }
         yield return null;
     }
     private IEnumerator SpeedUp(EnemyActions buffer, EnemyActions target, float weight)
     {
-        if (!buffer.animaData.Animadie && !target.animaData.Animadie)
+        if (!buffer.animaData.Animadie && !target.animaData.Animadie && !target.animaData.tmpAbility.ContainsKey("speedup"))
         {
-            target.animaData.tmpAbility["speed"] = target.animaData.Speed;
+            target.animaData.tmpAbility["speedup"] = target.animaData.Speed;
             target.animaData.Speed *= CalcBuffRatio(buffer.damage, weight);
         }
         yield return null;
     }
     private IEnumerator SpeedDown(EnemyActions debuffer, AnimaActions target, float weight)
     {
-        if (!debuffer.animaData.Animadie && !target.animaData.Animadie)
+        if (!debuffer.animaData.Animadie && !target.animaData.Animadie && !target.animaData.tmpAbility.ContainsKey("speeddown"))
         {
-            target.animaData.tmpAbility["speed"] = target.animaData.Speed;
-            target.animaData.Speed *= CalcDebuffRatio(debuffer.damage, weight);
+            target.animaData.tmpAbility["speeddown"] = target.animaData.Speed;
+            target.animaData.Speed = CalcDebuffRatio(target.animaData.Speed, debuffer.damage, weight) < 0 ? 0 : CalcDebuffRatio(target.animaData.Speed, debuffer.damage, weight);
         }
         yield return null;
     }
     private IEnumerator DefenseUp(EnemyActions buffer, EnemyActions target, float weight)
     {
-        if (!buffer.animaData.Animadie && !target.animaData.Animadie)
+        if (!buffer.animaData.Animadie && !target.animaData.Animadie && !target.animaData.tmpAbility.ContainsKey("defenseup"))
         {
-            target.animaData.tmpAbility["defense"] = target.animaData.Defense;
+            target.animaData.tmpAbility["defenseup"] = target.animaData.Defense;
             target.animaData.Defense *= CalcBuffRatio(buffer.damage, weight);
         }
         yield return null;
     }
     private IEnumerator DefenseDown(EnemyActions debuffer, AnimaActions target, float weight)
     {
-        if (!debuffer.animaData.Animadie && !target.animaData.Animadie)
+        if (!debuffer.animaData.Animadie && !target.animaData.Animadie && !target.animaData.tmpAbility.ContainsKey("defensedown"))
         {
-            target.animaData.tmpAbility["defense"] = target.animaData.Defense;
-            target.animaData.Defense *= CalcDebuffRatio(debuffer.damage, weight);
+            target.animaData.tmpAbility["defensedown"] = target.animaData.Defense;
+            target.animaData.Defense = CalcDebuffRatio(target.animaData.Defense, debuffer.damage, weight) < 0 ? 0 : CalcDebuffRatio(target.animaData.Defense, debuffer.damage, weight);
         }
         yield return null;
     }
@@ -303,13 +303,13 @@ public class EnemyActions : MonoBehaviour
         {
             switch (stat)
             {
-                case "strength":
+                case "strengthdown":
                     yield return StrengthDown(debuffer, target, weight);
                     break;
-                case "speed":
+                case "speeddown":
                     yield return SpeedDown(debuffer, target, weight);
                     break;
-                case "defense":
+                case "defensedown":
                     yield return DefenseDown(debuffer, target, weight);
                     break;
             }
@@ -323,13 +323,13 @@ public class EnemyActions : MonoBehaviour
             {
                 switch (stat)
                 {
-                    case "strength":
+                    case "strengthdown":
                         StrengthDown(debuffer, target[i], weight);
                         break;
-                    case "speed":
+                    case "speeddown":
                         SpeedDown(debuffer, target[i], weight);
                         break;
-                    case "defense":
+                    case "defensedown":
                         DefenseDown(debuffer, target[i], weight);
                         break;
                 }
@@ -339,12 +339,12 @@ public class EnemyActions : MonoBehaviour
     }
     private float CalcAttackDamage(float damage, AnimaActions ally)
     {
-        return damage * (1 - ally.animaData.Defense * 0.002f) * Random.Range(0.95f, 1.11f);
+        return damage * (1000f / (1000f + ally.animaData.Defense)) * UnityEngine.Random.Range(0.95f, 1.11f);
     }
 
     private float CalcSkillDamage(float damage, AnimaActions ally, float weight)
     {
-        return damage * (1 - ally.animaData.Defense * 0.002f) * Random.Range(0.95f, 1.11f) * 1.13f;
+        return damage * (900f / (900f + ally.animaData.Defense)) * UnityEngine.Random.Range(0.95f, 1.11f);
     }
     private float CalcHealAmount(float damage, EnemyActions target, float weight)
     {
@@ -354,11 +354,11 @@ public class EnemyActions : MonoBehaviour
     }
     private float CalcBuffRatio(float damage, float weight)
     {
-        return 0.0004f * damage + 1.02f;
+        return 0.0002f * damage + weight;
     }
-    private float CalcDebuffRatio(float damage, float weight)
+    private float CalcDebuffRatio(float stat, float damage, float weight)
     {
-        return -0.0002f * damage + 0.94f;
+        return (damage * -0.0002f + (weight - 1)) * (damage);
     }
     public void TakeDamage(float damage)
     {

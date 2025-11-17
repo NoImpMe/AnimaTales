@@ -9,7 +9,7 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
     private List<float> damagey;
     private List<GameObject> enemyObjPrefab;
     private List<GameObject> enemyInstance;
-    private string objname;
+    private string objname; 
     private List<string> objectfileList;
     private List<string> battleEnemyAnima;
     private List<GameObject> enemyHpPrefab;

@@ -56,7 +56,7 @@ public class ShopManager : MonoBehaviour
                     {
                         int randomNum = UnityEngine.Random.Range(0, 102);
                         ShowFeedback($"{randomNum}번 교감의 두루마리를 얻었습니다.");
-                        ShopEffectHandler.ApplyEffect(item);
+                        ShopEffectHandler.ApplyEffect(item, null, randomNum);
                         AudioManager.Instance.PlaySFX(itemClip);
                     }
                 }));

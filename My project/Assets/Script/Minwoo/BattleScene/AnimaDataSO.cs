@@ -65,8 +65,9 @@ public class AnimaDataSO : ScriptableObject
                 attackName = entity.Get<string>("Attack");
                 if (entity.Get<List<string>>("Skill") != null)
                 {
-                    skillName = entity.Get<List<string>>("Skill");
-                    foreach(var skill in skillName)
+                    skillName = new List<string>(entity.Get<List<string>>("Skill"));
+                    skillSprite.Clear();
+                    foreach (var skill in skillName)
                     {
                         skillSprite.Add(Resources.Load<Sprite>($"AnimaSkillImage/{skill}"));
                     }
@@ -101,7 +102,8 @@ public class AnimaDataSO : ScriptableObject
                 attackName = entity.Get<string>("Attack");
                 if (entity.Get<List<string>>("Skill") != null)
                 {
-                    skillName = entity.Get<List<string>>("Skill");
+                    skillName = new List<string> (entity.Get<List<string>>("Skill"));
+                    skillSprite.Clear();
                     foreach (var skill in skillName)
                     {
                         skillSprite.Add(Resources.Load<Sprite>($"AnimaSkillImage/{skill}"));

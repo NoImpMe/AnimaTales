@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 public class SingleAttack:MonoBehaviour
 {
@@ -500,24 +501,6 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"\"¿ì·ç·çÄçÄç\"À¸·Î {bm.AllyActions[selectAlly].animaData.Name}Àº ÅÏ ºÀÀÎµÊ", false);
     }
     
-    public IEnumerator AmareRoundSkill(EnemyActions enemy, int selectAlly)
-    {
-        yield return new WaitForSeconds(0.5f);
-        bm.Canvas.SetActive(false);
-        yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[2]);
-        bm.Canvas.SetActive(true);
-        yield return enemy.AmareRound(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly]);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"¿ì·ç·çÄçÄç\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
-        {
-            yield return new WaitForSeconds(1f);
-            if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
-            {
-                yield break;
-            }
-        }
-
-    }
     
     
     private void PrepareAttack(AnimaActions anima)
@@ -643,6 +626,11 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name}is dead", false);
         GoldManager.Instance.AddGold((int)(enemy.animaData.DropGold * (1 + abilityManager.GoldSymbol)));
         DestroyImmediate(bm.EnemyBattleSetting.EnemyHpInstance[selectEnemy]);
+        bm.EnemyBattleSetting.EnemyObjPrefab.RemoveAt(selectEnemy);
+        bm.EnemyBattleSetting.EnemyInfoPrefab.RemoveAt(selectEnemy);
+        bm.EnemyBattleSetting.EnemyHpPrefab.RemoveAt(selectEnemy);
+        bm.EnemyBattleSetting.EnemyParserPrefab.RemoveAt(selectEnemy);
+        bm.EnemyBattleSetting.BattleEnemyAnima.RemoveAt(selectEnemy);
         bm.EnemyBattleSetting.EnemyHpInstance.RemoveAt(selectEnemy);
         bm.EnemyHealthBar.RemoveAt(selectEnemy);
         bm.EnemyShieldBar.RemoveAt(selectEnemy);
@@ -709,18 +697,33 @@ public class SingleAttack:MonoBehaviour
     private void BuffUpdate(AnimaDataSO anima)
     {
         expiredBuffList = bm.BuffManager.TickOne(anima);
-        while (expiredBuffList.Count < 0)
+        while (expiredBuffList.Count > 0)
         {
             switch (expiredBuffList[0])
             {
-                case "strength":
-                    anima.Damage = anima.tmpAbility["strength"];
+                case "strengthup":
+                    anima.Damage = anima.CalcStat(anima.level, anima.weight, anima.defAP);
+                    anima.tmpAbility.Remove("strengthup");
                     break;
-                case "speed":
-                    anima.Speed = anima.tmpAbility["speed"];
+                case "speedup":
+                    anima.Speed = anima.CalcStat(anima.level, anima.weight, anima.defSP);
+                    anima.tmpAbility.Remove("speedup");
                     break;
-                case "defense":
-                    anima.Defense = anima.tmpAbility["defense"];
+                case "defenseup":
+                    anima.Defense = anima.CalcStat(anima.level, anima.weight, anima.defDP);
+                    anima.tmpAbility.Remove("defenseup");
+                    break;
+                case "strengthdown":
+                    anima.Damage = anima.CalcStat(anima.level, anima.weight, anima.defAP);
+                    anima.tmpAbility.Remove("strengthdown");
+                    break;
+                case "speeddown":
+                    anima.Speed = anima.CalcStat(anima.level, anima.weight, anima.defSP);
+                    anima.tmpAbility.Remove("speeddown");
+                    break;
+                case "defensedown":
+                    anima.Defense = anima.CalcStat(anima.level, anima.weight, anima.defDP);
+                    anima.tmpAbility.Remove("defensedown");
                     break;
             }
             expiredBuffList.RemoveAt(0);

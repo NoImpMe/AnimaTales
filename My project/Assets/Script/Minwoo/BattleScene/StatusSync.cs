@@ -3,6 +3,7 @@ using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class StatusSync : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class StatusSync : MonoBehaviour
                     }
                 }
             }
+            this.transform.Find("Type").GetComponent<TextMeshProUGUI>().text = battleAlly[idx].animaData.type;
             this.transform.Find("Buff").GetComponent<TextMeshProUGUI>().text = allyBuff.ToString();
             this.transform.Find("Debuff").GetComponent<TextMeshProUGUI>().text = allyDebuff.ToString();
             allyBuff.Clear();
@@ -83,6 +85,7 @@ public class StatusSync : MonoBehaviour
                     }
                 }
             }
+            this.transform.Find("Type").GetComponent<TextMeshProUGUI>().text = battleEnemy[idx].animaData.type;
             this.transform.Find("Buff").GetComponent<TextMeshProUGUI>().text = enemyBuff.ToString();
             this.transform.Find("Debuff").GetComponent<TextMeshProUGUI>().text = enemyDebuff.ToString();
             enemyBuff.Clear();

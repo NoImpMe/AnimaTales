@@ -1,11 +1,11 @@
 [
-  { "name": "FelixBuff", "Type": "SingleBuff", "Weight": 1.3 ,"Affect":["strength"], "Turn" : 3},
+  { "name": "FelixBuff", "Type": "SingleBuff", "Weight": 1.7 ,"Affect":["strengthup"], "Turn" : 3},
   { "name": "AmareHeal", "Type": "SingleHeal", "Weight": 1.13 },
   { "name": "AmareShield", "Type": "SingleShield", "Weight": 1.13 },
   { "name": "AmareWideHeal", "Type": "MultiHeal", "Weight": 1.13 , "Turn" : 3},
-  { "name": "HavetSkill", "Type": "SingleAttack", "Weight": 1.25 },
-  { "name": "LacrimaWideSkill", "Type": "MultiAttack", "Weight": 1.2 ,"Turn" : 3},
-  { "name": "PhobiaDebuff", "Type": "SingleDebuff","Affect":["strength"], "Weight": 1.3 }
+  { "name": "HavetSkill", "Type": "SingleAttack", "Weight": 1.8 },
+  { "name": "LacrimaWideSkill", "Type": "MultiAttack", "Weight": 0.7 ,"Turn" : 3},
+  { "name": "PhobiaDebuff", "Type": "SingleDebuff","Affect":["defensedown"], "Weight": 1.7, "Turn" :  3 }
   //{ "name": "FelixAttackBuff", "Type": "MultiDebuff", "Weight": 1.13 ,"Affect":["strength"], "Turn" : 3},
   //{ "name": "FelixSkillBuff", "Type": "MultiBuff", "Weight": 1.13 ,"Affect":["strength"], "Turn" : 3},
   //{ "name": "FelixAdvancedBuff", "Type": "MultiAttack", "Weight": 1.13 },

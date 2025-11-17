@@ -13,7 +13,7 @@ public static class RandomShopItems
                 itemType = ItemType.Recipe,
                 targetType = TargetType.None,
                 price = 500,
-                maxPurchaseCount = 1
+                maxPurchaseCount = 3
             },
             new ShopItemData {
                 itemID = "growth_Max_boost",

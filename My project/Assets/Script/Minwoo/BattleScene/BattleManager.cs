@@ -558,13 +558,25 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     if (enemyActions.Count > 1)
                     {
                         DestroyImmediate(enemyBattleSetting.EnemyHpInstance[1]);
-                        enemyBattleSetting.EnemyHpInstance.RemoveAt(1);
-                        enemyHealthBar.RemoveAt(1);
-                        enemyActions.RemoveAt(1);
                         DestroyImmediate(enemyBattleSetting.EnemyInstance[1]);
                         DestroyImmediate(enemyBattleSetting.EnemyInfoInstance[1]);
+                        DestroyImmediate(enemyBattleSetting.EnemyParserInstance[1]);
+                        enemyBattleSetting.EnemyObjPrefab.RemoveAt(1);
+                        enemyBattleSetting.EnemyInfoPrefab.RemoveAt(1);
+                        enemyBattleSetting.EnemyHpPrefab.RemoveAt(1);
+                        enemyBattleSetting.EnemyParserPrefab.RemoveAt(1);
+                        enemyBattleSetting.BattleEnemyAnima.RemoveAt(1);
+                        enemyBattleSetting.EnemyHpInstance.RemoveAt(1);
+                        enemyHealthBar.RemoveAt(1);
+                        enemyShieldBar.RemoveAt(1);
+                        enemyActions.RemoveAt(1);
                         enemyBattleSetting.EnemyInstance.RemoveAt(1);
                         enemyBattleSetting.EnemyInfoInstance.RemoveAt(1);
+                        enemyBattleSetting.EnemyParserInstance.RemoveAt(1);
+                        enemyDamageBar.RemoveAt(1);
+                        enemyDamageText.RemoveAt(1);
+                        enemyHealBar.RemoveAt(1);
+                        enemyHealText.RemoveAt(1);
                         enemyAnimaNum -= 1;
                     }
                     while (enemyBattleSetting.EnemyInfoInstance.Count != 1)
@@ -1317,8 +1329,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
             else
             {
                 SetState(turnList);
-            }
-        
+        }
+
     }
     public int selectNoDieAnima()
     {
@@ -1329,7 +1341,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         } while (dieAllyAnima.Contains(randomNumber));
         return randomNumber;
     }
-    
+
     public List<AnimaActions> GetAllyActions(){ return allyActions; }
     public List<EnemyActions> GetEnemyActions(){ return enemyActions; }
     
@@ -1478,21 +1490,41 @@ public class BattleManager : MonoBehaviour, IBattleManager
         arrow = GameObject.Find("Arrow_down(Clone)");
         DestroyImmediate(arrow);
         index = 0;
-        Instantiate(Resources.Load<GameObject>("Minwoo/Arrow_down"), new Vector2(allyBattleSetting.AllyInstance[index].transform.position.x, allyBattleSetting.AllyInstance[index].transform.position.y + 1.2f), Quaternion.identity);
+        List<int> noDieAnimaIndex = new() { 0,1,2};
+        foreach(int tmp in dieAllyAnima)
+        {
+            noDieAnimaIndex.Remove(tmp);
+        }
+        Instantiate(Resources.Load<GameObject>("Minwoo/Arrow_down"), new Vector2(allyBattleSetting.AllyInstance[noDieAnimaIndex[0]].transform.position.x, allyBattleSetting.AllyInstance[noDieAnimaIndex[0]].transform.position.y + 1.2f), Quaternion.identity);
         arrow = GameObject.Find("Arrow_down(Clone)");
         while (true)
         {
-            if (index != 2 && index < (allyAnimaNum - 1) && Input.GetKeyUp(KeyCode.RightArrow))
+            if (index != 2 && Input.GetKeyUp(KeyCode.RightArrow))
             {
-                AudioManager.Instance.PlaySFX(btnClip);
-                index++;
-                GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[index].transform.position.x, allyBattleSetting.AllyInstance[index].transform.position.y + 1.2f);
+                index += 1;
+                if(index < noDieAnimaIndex.Count)
+                {
+                    AudioManager.Instance.PlaySFX(btnClip);
+                    GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.x, allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.y + 1.2f);
+                }
+                else
+                {
+                    index -= 1;
+                }
+
             }
             if (index != 0 && Input.GetKeyUp(KeyCode.LeftArrow))
             {
-                AudioManager.Instance.PlaySFX(btnClip);
-                index--;
-                GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[index].transform.position.x, allyBattleSetting.AllyInstance[index].transform.position.y + 1.2f);
+                index -= 1;
+                if(index >= 0)
+                {
+                    AudioManager.Instance.PlaySFX(btnClip);
+                    GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.x, allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.y + 1.2f);
+                }
+                else
+                {
+                    index += 1;
+                }
             }
             else if (Input.GetKeyUp(KeyCode.Z) && !attackButton.interactable)
             {
@@ -1570,16 +1602,31 @@ public class BattleManager : MonoBehaviour, IBattleManager
             {
                 switch (buffList[0])
                 {
-                    case "strength":
-                        ally.animaData.Damage = ally.animaData.tmpAbility["strength"];
+                    case "strengthup":
+                        ally.animaData.Damage = ally.animaData.CalcStat(ally.animaData.level, ally.animaData.weight, ally.animaData.defAP);
+                        ally.animaData.tmpAbility.Remove("strengthup");
                         break;
-                    case "speed":
-                        ally.animaData.Speed = ally.animaData.tmpAbility["speed"];
+                    case "speedup":
+                        ally.animaData.Speed = ally.animaData.CalcStat(ally.animaData.level, ally.animaData.weight, ally.animaData.defSP);
+                        ally.animaData.tmpAbility.Remove("speedup");
                         break;
-                    case "defense":
-                        ally.animaData.Defense = ally.animaData.tmpAbility["defense"];
+                    case "defenseup":
+                        ally.animaData.Defense = ally.animaData.CalcStat(ally.animaData.level, ally.animaData.weight, ally.animaData.defDP);
+                        ally.animaData.tmpAbility.Remove("defenseup");
                         break;
-                    }
+                    case "strengthdown":
+                        ally.animaData.Damage = ally.animaData.CalcStat(ally.animaData.level, ally.animaData.weight, ally.animaData.defAP);
+                        ally.animaData.tmpAbility.Remove("strengthdown");
+                        break;
+                    case "speeddown":
+                        ally.animaData.Speed = ally.animaData.CalcStat(ally.animaData.level, ally.animaData.weight, ally.animaData.defSP);
+                        ally.animaData.tmpAbility.Remove("speeddown");
+                        break;
+                    case "defensedown":
+                        ally.animaData.Defense = ally.animaData.CalcStat(ally.animaData.level, ally.animaData.weight, ally.animaData.defDP);
+                        ally.animaData.tmpAbility.Remove("defensedown");
+                        break;
+                }
                     buffList.RemoveAt(0);
                 }
             }
