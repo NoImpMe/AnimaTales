@@ -12,7 +12,6 @@ public class StageController : MonoBehaviour
     {
         for (int i = 0; i < field.Count; i++)
         {
-            
             if (field[i].gameObject.activeSelf)
             {
                 checkField = field[i].gameObject.GetComponent<IsVisitedField>();
@@ -48,5 +47,9 @@ public class StageController : MonoBehaviour
                 }
             }
         }
+    }
+    public void ShowLastField()
+    {
+        field[5].gameObject.SetActive(true);
     }
 }

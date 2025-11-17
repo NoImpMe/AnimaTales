@@ -113,11 +113,19 @@ public class EnemyActions : MonoBehaviour
             dn.Spawn(new Vector2(allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.x - 0.1f, allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.y + 0.1f), damage);
             if (ally.animaData.Shield > 0)
             {
-                yield return allyHealthBar.shieldBar.TakeDamage(damage);
+                yield return StartCoroutine(allyHealthBar.shieldBar.TakeDamage(damage));
+                if (ally.animaData.Shield < damage)
+                {
+                    yield return StartCoroutine(allyHealthBar.TakeDamage(damage - enemy.animaData.Shield));
+                }
+                ally.TakeDamage(damage);
             }
-            yield return allyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
-            ally.TakeDamage(damage);
-            yield return damageBar.PutDamage(damage);
+            else
+            {
+                yield return StartCoroutine(allyHealthBar.TakeDamage(damage));
+                ally.TakeDamage(damage);
+            }
+            yield return StartCoroutine(damageBar.PutDamage(damage));
         }
         
     }
@@ -128,13 +136,21 @@ public class EnemyActions : MonoBehaviour
         {
             damage = CalcSkillDamage(enemy.animaData.Damage, ally, weight);
             dn.Spawn(new Vector2(allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.x - 0.1f, allyPos.AllyInstance[allyPos.BattleManager.AllyActions.IndexOf(ally)].transform.position.y + 0.1f), damage);
-            if (ally.animaData.Shield > 0)
+            if(ally.animaData.Shield > 0)
             {
-                yield return allyHealthBar.shieldBar.TakeDamage(damage);
+                yield return StartCoroutine(allyHealthBar.shieldBar.TakeDamage(damage));
+                if(ally.animaData.Shield < damage)
+                {
+                    yield return StartCoroutine(allyHealthBar.TakeDamage(damage - enemy.animaData.Shield));
+                }
+                ally.TakeDamage(damage);
             }
-            yield return allyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
-            ally.TakeDamage(damage);
-            yield return damageBar.PutDamage(damage);
+            else
+            {
+                yield return StartCoroutine(allyHealthBar.TakeDamage(damage));
+                ally.TakeDamage(damage);
+            }
+            yield return StartCoroutine(damageBar.PutDamage(damage));
         }
         
     }
@@ -158,14 +174,23 @@ public class EnemyActions : MonoBehaviour
                     }
                     if (ally[i].animaData.Shield > 0)
                     {
-                        yield return allyHealthBar[i].shieldBar.TakeDamage(damage);
+                        yield return StartCoroutine(allyHealthBar[i].shieldBar.TakeDamage(damage));
+                        if (ally[i].animaData.Shield < damage)
+                        {
+                            yield return StartCoroutine(allyHealthBar[i].TakeDamage(damage - enemy.animaData.Shield));
+                        }
+                        ally[i].TakeDamage(damage);
                     }
-                    yield return allyHealthBar[i].TakeDamage(damage - enemy.animaData.Shield);
-                    ally[i].TakeDamage(damage);
-                    
+                    else
+                    {
+                        yield return StartCoroutine(allyHealthBar[i].TakeDamage(damage));
+                        ally[i].TakeDamage(damage);
+                    }
+
+
                 }
             }
-            yield return damageBar.PutDamage(maxDamage);
+            yield return StartCoroutine(damageBar.PutDamage(maxDamage));
         }
     }
     public IEnumerator Heal(EnemyActions healer, EnemyActions target, IEnemyBattleSetting targetPos, HealthBar enemyHealthBar, float weight, ParserBar healBar = null)

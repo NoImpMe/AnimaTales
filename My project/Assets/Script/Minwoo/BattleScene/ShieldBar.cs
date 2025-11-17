@@ -28,7 +28,6 @@ public class ShieldBar : MonoBehaviour
             currentshield = 0; 
         }
         yield return StartCoroutine(shieldBarController.SmoothshieldChange(shieldBarController.shieldBarFill.fillAmount, currentshield / maxshield, 1.0f));
-        
     }
     public IEnumerator TakeShield(float damage)
     {

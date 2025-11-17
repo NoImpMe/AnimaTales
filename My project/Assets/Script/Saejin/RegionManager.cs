@@ -26,6 +26,7 @@ public class RegionManager : MonoBehaviour
     private FadeEffect fadePanel;
     [SerializeField]
     private List<AudioClip> bgmClips;
+    private int count = 0;
     public void StageInit(int stageNum)
     {
         int randomSelectTile = Random.Range(0, 1);
@@ -167,9 +168,11 @@ public class RegionManager : MonoBehaviour
                     yield return StartCoroutine(fadePanel.LoadSceneWithFade("AmareBossBattleScene"));
                     break;
                 case "Irascor":
+                    count += 1;
                     yield return StartCoroutine(fadePanel.LoadSceneWithFade("IrascorBossBattleScene"));
                     break;
                 case "Lacrima":
+                    count += 1;
                     yield return StartCoroutine(fadePanel.LoadSceneWithFade("LacrimaBossBattleScene"));
                     break;
                 case "Havet":
@@ -178,9 +181,20 @@ public class RegionManager : MonoBehaviour
             }
             target.GetComponentInParent<IsVisitedField>().isVisited = true;
             target.transform.parent.parent.GetComponent<StageController>().ShowNextField();
+            if(count == 2)
+            {
+                target.transform.parent.parent.GetComponent<StageController>().ShowLastField();
+            }
         }
         else if (target.name.StartsWith("Start"))
         {
+            if(target.type == "Phobia")
+            {
+                target.otherStartPoint.isCleared = true;
+                target.otherStartPoint.GetComponentInParent<IsVisitedField>().isSelected = true;
+                target.otherStartPoint.GetComponentInParent<IsVisitedField>().isVisited = true;
+                target.otherStartPoint.gameObject.GetComponent<Rigidbody2D>().simulated = false;
+            }
             manager.SetTile(target);
             target.isCleared = true;
             currentRegion = target;

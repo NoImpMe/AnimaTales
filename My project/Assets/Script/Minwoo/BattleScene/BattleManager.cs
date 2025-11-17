@@ -199,6 +199,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     bool checkZ = false;
     bool checkSkill = false;
     bool cleared = false;
+    bool isPhobia = false;
 
     void Start()
     {
@@ -336,14 +337,14 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         for (int i = 0; i < allyBattleSetting.AllyObjPrefab.Count; i++)
         {
-            ally.Add(allyBattleSetting.AllyObjPrefab[i]);
+            ally.Add(allyBattleSetting.AllyInstance[i]);
         }
     }
     void setEnemyanima()
     {
         for (int i = 0; i < enemyBattleSetting.EnemyObjPrefab.Count; i++)
         {
-            enemy.Add(enemyBattleSetting.EnemyObjPrefab[i]);
+            enemy.Add(enemyBattleSetting.EnemyInstance[i]);
         }
     }
     void setAllyActions()
@@ -542,6 +543,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             //Buff buff;
             int selectAlly = selectNoDieAnima();
+            yield return new WaitForSeconds(0.5f);
 
             switch (enemyBattleSetting.Stage)
             {
@@ -549,7 +551,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     yield return singleAttack.FelixRoundSkill(enemyActions[0], selectAlly);
                     break;
                 case "Phobia":
-                    yield return singleAttack.PhobiaRoundSkill(enemyActions[0], turnList, selectAlly);
+                    isPhobia = true;
                     break;
                 case "Amare":
                     if (enemyActions[0].animaData.Name != "amare5")
@@ -652,6 +654,11 @@ public class BattleManager : MonoBehaviour, IBattleManager
         turnIndex = 0;
         
         TurnUISetting(turnList);
+        if (isPhobia)
+        {
+            int selectAlly = selectNoDieAnima();
+            yield return singleAttack.PhobiaRoundSkill(enemyActions[0], turnList, selectAlly);
+        }
         
         SetState(turnList);
     }
@@ -765,9 +772,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
         if (turnList[0].turnCheck)
         {
             turnList.RemoveAt(0);
-            if(turnList.Count == 0)
+            turnIndex += 1;
+            if (turnList.Count == 0)
             {
-                turnIndex += 1;
                 runningCoroutine = StartCoroutine(BattleStart());
                 return;
             }
@@ -1176,7 +1183,9 @@ public class BattleManager : MonoBehaviour, IBattleManager
     }
     IEnumerator EnemyTurn()
     {
+        
         int selectAlly = selectNoDieAnima();
+        yield return new WaitForSeconds(0.5f);
         selectEnemy = Random.Range(0, enemyActions.Count);
         foreach (EnemyActions enemy in enemyActions)
         {
@@ -1510,19 +1519,19 @@ public class BattleManager : MonoBehaviour, IBattleManager
         arrow = GameObject.Find("Arrow_down(Clone)");
         DestroyImmediate(arrow);
         index = 0;
-        List<int> noDieAnimaIndex = new() { 0,1,2};
+        List<int> noDieAnimaIndex = new() { 0,1,2 };
         foreach(int tmp in dieAllyAnima)
         {
             noDieAnimaIndex.Remove(tmp);
         }
-        Instantiate(Resources.Load<GameObject>("Minwoo/Arrow_down"), new Vector2(allyBattleSetting.AllyInstance[noDieAnimaIndex[0]].transform.position.x, allyBattleSetting.AllyInstance[noDieAnimaIndex[0]].transform.position.y + 1.2f), Quaternion.identity);
+        Instantiate(Resources.Load<GameObject>("Minwoo/Arrow_down"), new Vector2(allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.x, allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.y + 1.2f), Quaternion.identity);
         arrow = GameObject.Find("Arrow_down(Clone)");
         while (true)
         {
             if (index != 2 && Input.GetKeyUp(KeyCode.RightArrow))
             {
                 index += 1;
-                if(index < noDieAnimaIndex.Count)
+                if(index <= noDieAnimaIndex.Count)
                 {
                     AudioManager.Instance.PlaySFX(btnClip);
                     GameObject.Find("Arrow_down(Clone)").transform.position = new Vector2(allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.x, allyBattleSetting.AllyInstance[noDieAnimaIndex[index]].transform.position.y + 1.2f);
@@ -1549,7 +1558,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
             else if (Input.GetKeyUp(KeyCode.Z) && !attackButton.interactable)
             {
                 AudioManager.Instance.PlaySFX(btnClip);
-                selectEnemy = index;
+                selectEnemy = noDieAnimaIndex[index];
                 DestroyImmediate(arrow);
                 yield return new WaitForSeconds(1f);
                 break;

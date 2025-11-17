@@ -22,6 +22,10 @@ public class SingleAttack:MonoBehaviour
 
         yield return bm.CameraManager.ZoomSingleOpp(bm.AllyBattleSetting.AllyInstance[bm.AllyActions.IndexOf(anima)].transform, bm.EnemyBattleSetting.EnemyInstance[selectEnemy].transform, true, anima.animaData.attackName);
         bm.Canvas.SetActive(true);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return anima.Attack(anima, bm.EnemyActions[selectEnemy], bm.EnemyBattleSetting ,bm.EnemyHealthBar[selectEnemy], bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)]);
         bm.BattleLogManager.AddLog($"{anima.animaData.Name} hit {bm.EnemyActions[selectEnemy].animaData.Name} for {Mathf.Ceil(anima.damage)}damage", true);
         bm.AllyDamageText[bm.AllyActions.IndexOf(anima)].text = Mathf.Ceil(bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)].thisPoint).ToString();
@@ -53,6 +57,10 @@ public class SingleAttack:MonoBehaviour
         yield return bm.CameraManager.ZoomSingleOpp(bm.AllyBattleSetting.AllyInstance[bm.AllyActions.IndexOf(anima)].transform, bm.EnemyBattleSetting.EnemyInstance[selectEnemy].transform, true, anima.animaData.skillName[skillNum]);
 
         bm.Canvas.SetActive(true);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return anima.Skill(anima, bm.EnemyActions[selectEnemy], bm.EnemyBattleSetting, bm.EnemyHealthBar[selectEnemy], bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)], weight);
         bm.BattleLogManager.AddLog($"{anima.animaData.Name} used \"{anima.animaData.skillName[skillNum]}\" on {bm.EnemyActions[selectEnemy].animaData.Name} for {Mathf.Ceil(anima.damage)}damage", true);
         bm.AllyDamageText[bm.AllyActions.IndexOf(anima)].text = Mathf.Ceil(bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)].thisPoint).ToString();
@@ -88,13 +96,16 @@ public class SingleAttack:MonoBehaviour
 
         yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.attackName);
         bm.Canvas.SetActive(true);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.Attack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} hit {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -105,9 +116,10 @@ public class SingleAttack:MonoBehaviour
             }
             if(DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
             {
-                
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
+
         }
         else
         {
@@ -126,13 +138,16 @@ public class SingleAttack:MonoBehaviour
 
         yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.Skill(enemy, bm.AllyActions[selectAlly],bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], weight, bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -145,6 +160,8 @@ public class SingleAttack:MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
+
         }
         else
         {
@@ -204,8 +221,8 @@ public class SingleAttack:MonoBehaviour
         yield return bm.CameraManager.ZoomSingleIde(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.EnemyBattleSetting.EnemyInstance[selectEnemy].transform, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
         yield return enemy.Shield(enemy, bm.EnemyActions[selectEnemy], bm.EnemyBattleSetting, bm.EnemyShieldBar[selectEnemy], weight);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name}이 \"{enemy.animaData.skillName[0]}\"를 사용해 {bm.EnemyActions[selectEnemy].animaData.Name} 에게{Mathf.Ceil(enemy.heal)}배리어 줌", true);
-        bm.Turn[bm.TurnIndex++].transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+        bm.BattleLogManager.AddLog($"{enemy.animaData.Name}이 \"{enemy.animaData.skillName[0]}\"를 사용해 {bm.EnemyActions[selectEnemy].animaData.Name} 에게{Mathf.Ceil(enemy.heal)}배리어 줌", false);
+        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         BuffUpdate(enemy.animaData);
     }
     public IEnumerator SingleAllyBuff(AnimaActions anima, int selectAlly, int skillNum, float weight)
@@ -272,7 +289,6 @@ public class SingleAttack:MonoBehaviour
         DamageParserUpdate();
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -285,6 +301,7 @@ public class SingleAttack:MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
         }
         else
         {
@@ -309,7 +326,6 @@ public class SingleAttack:MonoBehaviour
         DamageParserUpdate();
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -322,6 +338,8 @@ public class SingleAttack:MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
+
         }
         else
         {
@@ -346,7 +364,6 @@ public class SingleAttack:MonoBehaviour
         DamageParserUpdate();
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -359,6 +376,8 @@ public class SingleAttack:MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
+
         }
         else
         {
@@ -383,7 +402,6 @@ public class SingleAttack:MonoBehaviour
         DamageParserUpdate();
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -396,6 +414,7 @@ public class SingleAttack:MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
         }
         else
         {
@@ -420,7 +439,6 @@ public class SingleAttack:MonoBehaviour
         DamageParserUpdate();
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -433,6 +451,7 @@ public class SingleAttack:MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
         }
         else
         {
@@ -458,7 +477,6 @@ public class SingleAttack:MonoBehaviour
 
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
                 bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
@@ -471,6 +489,7 @@ public class SingleAttack:MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
         }
         else
         {
@@ -485,15 +504,20 @@ public class SingleAttack:MonoBehaviour
         bm.Canvas.SetActive(false);
         yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.FelixRound(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting,bm.EnemyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyHealthBar[0]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"우루루쾅쾅\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         if (bm.AllyActions[selectAlly].animaData.Animadie)
         {
-            yield return new WaitForSeconds(1f);
             if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
             {
                 yield break;
             }
+            yield return new WaitForSeconds(1f);
+
         }
 
 
@@ -504,11 +528,15 @@ public class SingleAttack:MonoBehaviour
         bm.Canvas.SetActive(false);
         yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
+        bm.AllyActions[selectAlly].animaData.turnCheck = true;
         foreach(var anima in turnList)
         {
             if(ReferenceEquals(anima, bm.AllyActions[selectAlly].animaData))
             {
-                anima.turnCheck = true;
                 bm.Turn[turnList.IndexOf(anima)].transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(0f / 255f, 0f / 255f, 0f / 255f);
             }
         }
@@ -597,7 +625,7 @@ public class SingleAttack:MonoBehaviour
                 bm.TmpturnList.RemoveAt(i);
                 bm.Turn.RemoveAt(i);
                 bm.IsTurn.RemoveAt(i);
-                if (UnityEngine.Random.Range(0, 101) <= (enemy.animaData.DropRate * (1+abilityManager.DropSymbol)) && !enemy.animaData.isClone)
+                if (UnityEngine.Random.Range(0, 101) < (enemy.animaData.DropRate * (1+abilityManager.DropSymbol)) && !enemy.animaData.isClone)
                 {
                     AnimaDataSO animadata = ScriptableObject.CreateInstance<AnimaDataSO>();
                     animadata.GetAnima(enemy.animaData.Name, enemy.animaData.level);

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1922275844895948357}
   - component: {fileID: 3396521877121548623}
   - component: {fileID: 2714668454937806453}
+  - component: {fileID: 2859454108078920270}
   m_Layer: 0
   m_Name: Phobia0
   m_TagString: Untagged
@@ -110,3 +111,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2859454108078920270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249559921021412979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc94a69880ff074eb763c4e880a97a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animaData: {fileID: 0}
+  damage: 156.19289
+  heal: 0
+  maxDamage: 0
+  maxHeal: 0

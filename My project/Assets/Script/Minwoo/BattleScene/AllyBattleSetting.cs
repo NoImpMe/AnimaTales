@@ -131,7 +131,7 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
                     allyInstance.Add(Instantiate(allyObjPrefab[i], new Vector3((i * 3.5f) - 3.5f, -2.2f, 0f), Quaternion.identity));
                     allyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                     int index = allyInstance[i].name.IndexOf("(Clone)");
-                    allyInstance[i].name = allyInstance[i].name.Substring(0, index) + i;
+                    allyInstance[i].name = allyInstance[i].name.Substring(0, index);
                     //allyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     allyHpInstance.Add(Instantiate(allyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                     allyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i*380f) - 380f, -390f, 0f);
@@ -152,7 +152,7 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
                     allyInstance.Add(Instantiate(allyObjPrefab[i], new Vector3((i * 3.5f) - 1.75f, -2.2f, 0f), Quaternion.identity));
                     allyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                     int index = allyInstance[i].name.IndexOf("(Clone)");
-                    allyInstance[i].name = allyInstance[i].name.Substring(0, index) + i;
+                    allyInstance[i].name = allyInstance[i].name.Substring(0, index);
                     //allyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     allyHpInstance.Add(Instantiate(allyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                     allyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i * 380f) - 200f, -390f, 0f);
@@ -171,7 +171,7 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
                 allyInstance.Add(Instantiate(allyObjPrefab[0], new Vector3(0f, -2.2f, 0), Quaternion.identity));
                 allyInstance[0].GetComponent<SpriteRenderer>().sortingOrder = -1;
                 int index = allyInstance[0].name.IndexOf("(Clone)");
-                allyInstance[0].name = allyInstance[0].name.Substring(0, index) + 0;
+                allyInstance[0].name = allyInstance[0].name.Substring(0, index);
                 allyInstance[0].transform.Rotate(0, 180f, 0);
                 //allyInstance[0].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);//-195f 185f 
                 allyHpInstance.Add(Instantiate(allyHpPrefab[0], Vector3.zero, Quaternion.identity, canvas.transform));

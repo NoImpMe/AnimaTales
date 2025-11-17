@@ -190,12 +190,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraManager: {fileID: 2128924734}
+  isElite: 0
+  isBoss: 0
   turnUI: {fileID: 1006071827}
   battleLogManager: {fileID: 2114633342}
   battleManager: {fileID: 230224972}
   canvas: {fileID: 599841604}
   playerInfo: {fileID: 0}
-  damageNumber: {fileID: 0}
 --- !u!4 &230224974
 Transform:
   m_ObjectHideFlags: 0
@@ -597,7 +598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -919.45264, y: -503.2973}
+  m_AnchoredPosition: {x: -429, y: -503.2973}
   m_SizeDelta: {x: 65.3948, y: 56.3654}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &628076326
@@ -616,6 +617,8 @@ MonoBehaviour:
   battleLog: {fileID: 1747086202}
   maxButton: {fileID: 628076324}
   minButton: {fileID: 1176424864}
+  damageButton: {fileID: 0}
+  healButton: {fileID: 0}
 --- !u!114 &628076327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1625,6 +1628,8 @@ MonoBehaviour:
   battleLog: {fileID: 1747086202}
   maxButton: {fileID: 628076324}
   minButton: {fileID: 1176424864}
+  damageButton: {fileID: 0}
+  healButton: {fileID: 0}
 --- !u!114 &1176424867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2990,6 +2995,8 @@ MonoBehaviour:
   battleLog: {fileID: 0}
   maxButton: {fileID: 0}
   minButton: {fileID: 0}
+  damageButton: {fileID: 0}
+  healButton: {fileID: 0}
 --- !u!1 &1979973751
 GameObject:
   m_ObjectHideFlags: 0

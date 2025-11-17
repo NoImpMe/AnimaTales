@@ -27,7 +27,10 @@ public class MultipleAttack : MonoBehaviour
         PrepareAttack(anima);
         yield return bm.CameraManager.ZoomMultiOpp(bm.AllyBattleSetting.AllyInstance[bm.AllyActions.IndexOf(anima)].transform, enemys, true, anima.animaData.skillName[skillNum]);
         bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return anima.MultiSkill(anima, bm.EnemyActions, bm.EnemyBattleSetting, bm.EnemyHealthBar, bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)], weight);
         bm.BattleLogManager.AddLog($"{anima.animaData.Name} used \"{anima.animaData.skillName[skillNum]}\" on Enemys for {Mathf.Ceil(anima.maxDamage)}damage", true);
         bm.AllyDamageText[bm.AllyActions.IndexOf(anima)].text = Mathf.Ceil(bm.AllyDamageBar[bm.AllyActions.IndexOf(anima)].thisPoint).ToString();
@@ -83,7 +86,10 @@ public class MultipleAttack : MonoBehaviour
         }
         yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.MultiSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, weight, bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
         bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
@@ -116,6 +122,7 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -332,7 +339,7 @@ public class MultipleAttack : MonoBehaviour
                 bm.TmpturnList.RemoveAt(i);
                 bm.Turn.RemoveAt(i);
                 bm.IsTurn.RemoveAt(i);
-                if (UnityEngine.Random.Range(0, 101) <= (enemy.animaData.DropRate * (1 + abilityManager.DropSymbol)) && !enemy.animaData.isClone)
+                if (UnityEngine.Random.Range(0, 101) < (enemy.animaData.DropRate * (1 + abilityManager.DropSymbol)) && !enemy.animaData.isClone)
                 {
                     AnimaDataSO animadata = ScriptableObject.CreateInstance<AnimaDataSO>();
                     animadata.GetAnima(enemy.animaData.Name, enemy.animaData.level);
@@ -526,7 +533,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
-                
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -584,6 +592,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -641,6 +651,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -667,7 +679,10 @@ public class MultipleAttack : MonoBehaviour
         }
         yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.AmareSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
         bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
@@ -698,6 +713,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -724,7 +741,10 @@ public class MultipleAttack : MonoBehaviour
         }
         yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.IrascorSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
         bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
@@ -755,6 +775,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -781,7 +803,10 @@ public class MultipleAttack : MonoBehaviour
         }
         yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
         bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.HavetSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
         bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
@@ -812,6 +837,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -835,7 +862,10 @@ public class MultipleAttack : MonoBehaviour
         }
         yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys,false, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.IrascorRound(enemy,bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar);
         bm.BattleLogManager.AddLog($"\"¿ì·ç·çÄçÄç\" À¸·Î ¾Æ´Ï¸¶µéÀÌ for {Mathf.Ceil(enemy.damage)} ¶ß°Å¿ö", false);
         List<int> allyList = new List<int>();
@@ -863,6 +893,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {
@@ -879,7 +911,10 @@ public class MultipleAttack : MonoBehaviour
         bm.Canvas.SetActive(false);
         yield return bm.CameraManager.ZoomSingleIde(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, false, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        while (!bm.Canvas.activeSelf)
+        {
+            yield return null;
+        }
         yield return enemy.HavetRound(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name}°¡ \"¿ì·ç·çÄçÄç\"À» »ç¿ëÇØ {enemy.downGold}°ñµå°¡ µµµÏ¸Â¾Ò´Ù! ", false);
         List<int> allyList = new List<int>();
@@ -907,6 +942,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
+            yield return new WaitForSeconds(0.3f);
+
             allyList.RemoveAt(0);
             if (allyList.Count != 0)
             {

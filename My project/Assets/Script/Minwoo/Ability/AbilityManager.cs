@@ -35,7 +35,7 @@ public class AbilityManager : MonoBehaviour
             case "StatSymbol":
                 for (int i = 0; i < playerInfo.battleAnima.Count; i++)
                 {
-                    playerInfo.battleAnima[i].weight *= ability.data.value;
+                    playerInfo.battleAnima[i].weight *= (1 + ability.data.value);
                 }
                 break;
             case "PermanShieldSymbol":

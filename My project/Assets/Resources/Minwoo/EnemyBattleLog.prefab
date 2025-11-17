@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: test2 damaged for test1's 15 poisoned
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 896c0330dea7d614f86eb8bb3869e5eb, type: 2}
-  m_sharedMaterial: {fileID: -5789977998725000258, guid: 896c0330dea7d614f86eb8bb3869e5eb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3eeadac780f3cc045bd3b0be1d16e9ed, type: 2}
+  m_sharedMaterial: {fileID: 8905385995747410004, guid: 3eeadac780f3cc045bd3b0be1d16e9ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

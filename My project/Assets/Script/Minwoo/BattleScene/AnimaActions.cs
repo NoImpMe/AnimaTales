@@ -30,11 +30,20 @@ public class AnimaActions : MonoBehaviour
             dn.Spawn(new Vector2(enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.x - 0.1f, enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.y + 0.1f), damage);
             if(enemy.animaData.Shield > 0)
             {
-                yield return enemyHealthBar.shieldBar.TakeDamage(damage);
+                yield return StartCoroutine(enemyHealthBar.shieldBar.TakeDamage(damage));
+                if(enemy.animaData.Shield < damage)
+                {
+                    yield return StartCoroutine(enemyHealthBar.TakeDamage(damage - enemy.animaData.Shield));
+                }
+                enemy.TakeDamage(damage);
             }
-            yield return enemyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
-            enemy.TakeDamage(damage);
-            yield return damageBar.PutDamage(damage);
+            else
+            {
+                yield return StartCoroutine(enemyHealthBar.TakeDamage(damage));
+                enemy.TakeDamage(damage);
+            }
+
+            yield return StartCoroutine(damageBar.PutDamage(damage));
         }
     }
     public IEnumerator Skill(AnimaActions ally, EnemyActions enemy, IEnemyBattleSetting enemyPos, HealthBar enemyHealthBar, ParserBar damageBar, float weight)
@@ -45,11 +54,22 @@ public class AnimaActions : MonoBehaviour
             dn.Spawn(new Vector2(enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.x - 0.1f, enemyPos.EnemyInstance[enemyPos.BattleManager.EnemyActions.IndexOf(enemy)].transform.position.y + 0.1f), damage);
             if (enemy.animaData.Shield > 0)
             {
-                yield return enemyHealthBar.shieldBar.TakeDamage(damage);
+                yield return StartCoroutine(enemyHealthBar.shieldBar.TakeDamage(damage));
+                if (enemy.animaData.Shield < damage)
+                {
+                    yield return StartCoroutine(enemyHealthBar.TakeDamage(damage - enemy.animaData.Shield));
+                }
+                enemy.TakeDamage(damage);
+
             }
-            yield return enemyHealthBar.TakeDamage(damage - enemy.animaData.Shield);
+            else
+            {
+                yield return StartCoroutine(enemyHealthBar.TakeDamage(damage));
+                enemy.TakeDamage(damage);
+
+            }
             enemy.TakeDamage(damage);
-            yield return damageBar.PutDamage(damage);
+            yield return StartCoroutine(damageBar.PutDamage(damage));
         }
     }
     public IEnumerator MultiSkill(AnimaActions ally, List<EnemyActions> enemy, IEnemyBattleSetting enemyPos, List<HealthBar> enemyHealthBar, ParserBar damageBar, float weight)
@@ -69,13 +89,24 @@ public class AnimaActions : MonoBehaviour
                     }
                     if (enemy[i].animaData.Shield > 0)
                     {
-                        yield return enemyHealthBar[i].shieldBar.TakeDamage(damage);
+                        yield return StartCoroutine(enemyHealthBar[i].shieldBar.TakeDamage(damage));
+                        if (enemy[i].animaData.Shield < damage)
+                        {
+                            yield return StartCoroutine(enemyHealthBar[i].TakeDamage(damage - enemy[i].animaData.Shield));
+                        }
+                        enemy[i].TakeDamage(damage);
+
                     }
-                    yield return enemyHealthBar[i].TakeDamage(damage - enemy[i].animaData.Shield);
-                    enemy[i].TakeDamage(damage);
+                    else
+                    {
+                        yield return StartCoroutine(enemyHealthBar[i].TakeDamage(damage));
+                        enemy[i].TakeDamage(damage);
+
+                    }
+
                 }
             }
-            yield return damageBar.PutDamage(maxDamage);
+            yield return StartCoroutine(damageBar.PutDamage(maxDamage));
         }
     }
     public IEnumerator Heal(AnimaActions healer, AnimaActions target, IAllyBattleSetting targetPos, HealthBar allyHealthBar, ParserBar healBar, float weight)
