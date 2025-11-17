@@ -194,6 +194,20 @@ public class SingleAttack:MonoBehaviour
         bm.Turn[bm.TurnIndex++].transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         BuffUpdate(anima.animaData);
     }
+    public IEnumerator SingleEnemyShield(EnemyActions enemy, int selectEnemy, float weight)
+    {
+        enemy.animaData.turnCheck = true;
+        yield return new WaitForSeconds(0.5f);
+        bm.IsTurn[bm.TurnIndex].SetActive(false);
+        bm.TurnList.RemoveAt(0);
+        bm.Canvas.SetActive(false);
+        yield return bm.CameraManager.ZoomSingleIde(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.EnemyBattleSetting.EnemyInstance[selectEnemy].transform, false, enemy.animaData.skillName[0]);
+        bm.Canvas.SetActive(true);
+        yield return enemy.Shield(enemy, bm.EnemyActions[selectEnemy], bm.EnemyBattleSetting, bm.EnemyShieldBar[selectEnemy], weight);
+        bm.BattleLogManager.AddLog($"{enemy.animaData.Name}이 \"{enemy.animaData.skillName[0]}\"를 사용해 {bm.EnemyActions[selectEnemy].animaData.Name} 에게{Mathf.Ceil(enemy.heal)}배리어 줌", true);
+        bm.Turn[bm.TurnIndex++].transform.Find("Player Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+        BuffUpdate(enemy.animaData);
+    }
     public IEnumerator SingleAllyBuff(AnimaActions anima, int selectAlly, int skillNum, float weight)
     {
         PrepareAttack(anima);
@@ -469,7 +483,7 @@ public class SingleAttack:MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         bm.Canvas.SetActive(false);
-        yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[2]);
+        yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
         yield return enemy.FelixRound(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting,bm.EnemyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyHealthBar[0]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"우루루쾅쾅\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
@@ -488,7 +502,7 @@ public class SingleAttack:MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         bm.Canvas.SetActive(false);
-        yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[2]);
+        yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
         foreach(var anima in turnList)
         {
@@ -688,6 +702,7 @@ public class SingleAttack:MonoBehaviour
             {
                 StopCoroutine(bm.RunningCoroutine);
             }
+            bm.RunningCoroutine = null;
             bm.IsDefeat = true;
             bm.LoseBattle();
             return true;

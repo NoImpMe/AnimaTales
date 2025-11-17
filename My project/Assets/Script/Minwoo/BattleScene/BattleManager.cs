@@ -448,6 +448,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 if (enemyActions[i].animaData.Name == "tombstone0") enemyActions[i].animaData.isTomb = true;
                 enemyActions[i].animaData.location = i;
                 enemyActions[i].animaData.enemyIndex = i;
+                enemyActions[i].isBoss = true;
                 enemyActions[i].animaData.isBoss = true;
                 var enemyStatus = GameObject.Find($"Enemy{i}");
                 var enemyParser = GameObject.Find($"Enemy{i}Name");
@@ -588,6 +589,10 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     if (PlayerInfo.haveAnima.Count > 0)
                     {
                         enemyBattleSetting.AmareSpawn(playerInfo.haveAnima[rannum].Objectfile);
+                    }
+                    else
+                    {
+                        break;
                     }
                     enemy.Add(enemyBattleSetting.EnemyObjPrefab[1]);
                     enemyActions.Add(enemy[1].AddComponent<EnemyActions>());
@@ -1175,6 +1180,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         selectEnemy = Random.Range(0, enemyActions.Count);
         foreach (EnemyActions enemy in enemyActions)
         {
+            if (isDefeat) yield break;
             if (turnList.Count == 0)
             {
                 break;
@@ -1189,6 +1195,61 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 else if (enemy.performance.Equals("Skill"))
                 {
                     matchedSkill = skills.Where(s => s.name == enemy.animaData.skillName[0]).ToList();
+                    Buff buff;
+                    switch (matchedSkill[0].Type)
+                    {
+                        case "SingleAttack":
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemySkill(enemy, selectAlly, matchedSkill[0].Weight));
+                            break;
+                        case "SingleHeal":
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyHeal(enemy, selectEnemy, matchedSkill[0].Weight));
+                            break;
+                        case "SingleBuff":
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyBuff(enemy, selectEnemy, matchedSkill[0].Weight));
+                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 0);
+                            buffManager.AddOrRenuwBuff(buff);
+                            break;
+                        case "SingleDebuff":
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyDebuff(enemy, selectAlly, matchedSkill[0].Weight));
+                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, allyActions[selectAlly].animaData, 1);
+                            buffManager.AddOrRenuwBuff(buff);
+                            break;
+                        case "SingleShield":
+                            yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyShield(enemy, selectEnemy, matchedSkill[0].Weight));
+                                break;
+                        case "MultiAttack":
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemySkill(enemy, matchedSkill[0].Weight));
+                            break;
+                        case "MultiHeal":
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyHeal(enemy, matchedSkill[0].Weight));
+                            break;
+                        case "MultiBuff":
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyBuff(enemy, matchedSkill[0].Weight));
+                            for (int i = 0; i < enemyActions.Count; i++)
+                            {
+                                buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[i].animaData, 0);
+                                buffManager.AddOrRenuwBuff(buff);
+                            }
+                            break;
+                        case "MultiDebuff":
+                            yield return runningCoroutine = StartCoroutine(multipleAttack.MultiEnemyDebuff(enemy, matchedSkill[0].Weight));
+                            for (int i = 0; i < allyActions.Count; i++)
+                            {
+                                if (allyActions[i].animaData.Animadie) continue;
+                                buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, allyActions[i].animaData, 1);
+                                buffManager.AddOrRenuwBuff(buff);
+                            }
+                            break;
+                    }
+                    break;
+                }
+                else if (enemy.performance.Equals("BossAttack"))
+                {
+                    yield return runningCoroutine = StartCoroutine(singleAttack.SingleEnemyAttack(enemy, selectAlly));
+                }
+                else if (enemy.performance.Equals("BossSkill"))
+                {
+                    matchedSkill = skills.Where(s => s.name == enemy.animaData.skillName[1]).ToList();
                     Buff buff;
                     switch (matchedSkill[0].Type)
                     {
@@ -1233,82 +1294,41 @@ public class BattleManager : MonoBehaviour, IBattleManager
                             break;
                     }
                     break;
-                }
-                else if (enemy.performance.Equals("BossAttack"))
-                {
-                    matchedSkill = skills.Where(s => s.name == enemy.animaData.skillName[0]).ToList();
-                    Buff buff;
-                    switch (matchedSkill[0].Type)
-                    {
-                        case "FelixSingle":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.FelixSingleAttack(enemy, selectAlly));
-                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
-                            buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "PhobiaSingle":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.PhobiaSingleAttack(enemy, selectAlly));
-                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
-                            buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "LacrimaSingle":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.LacrimaSingleAttack(enemy, selectAlly));
-                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
-                            buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "AmareSingle":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.AmareSingleAttack(enemy, selectAlly));
-                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
-                            buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "IrascorSingle":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.IrascorSingleAttack(enemy, selectAlly));
-                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
-                            buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "HavetSingle":
-                            yield return runningCoroutine = StartCoroutine(singleAttack.HavetSingleAttack(enemy, selectAlly));
-                            buff = new Buff(matchedSkill[0].Affect, matchedSkill[0].Weight, matchedSkill[0].Turn, enemyActions[selectEnemy].animaData, 1);
-                            buffManager.AddOrRenuwBuff(buff);
-                            break;
-                    }
-                }
-                else if (enemy.performance.Equals("BossSkill"))
-                {
-                    matchedSkill = skills.Where(s => s.name == enemy.animaData.skillName[1]).ToList();
-                    //Buff buff;
-                    switch (matchedSkill[1].Type)
-                    {
-                        case "FelixMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.FelixMultiSkill(enemy, matchedSkill[1].Weight));
-                            //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
-                            //buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "PhobiaMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.PhobiaMultiSkill(enemy, matchedSkill[1].Weight));
-                            //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
-                            //buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "LacrimaMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.LacrimaMultiSkill(enemy, matchedSkill[1].Weight));
-                            //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
-                            //buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "AmareMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.AmareMultiSkill(enemy, matchedSkill[1].Weight));
-                            //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
-                            //buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "IrascorMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.IrascorMultiSkill(enemy, matchedSkill[1].Weight));
-                            //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
-                            //buffManager.AddOrRenuwBuff(buff);
-                            break;
-                        case "HavetMulti":
-                            yield return runningCoroutine = StartCoroutine(multipleAttack.HavetMultiSkill(enemy, matchedSkill[1].Weight));
-                            //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
-                            //buffManager.AddOrRenuwBuff(buff);
-                            break;
-                    }
+                    //matchedSkill = skills.Where(s => s.name == enemy.animaData.skillName[1]).ToList();
+                    ////Buff buff;
+                    //switch (matchedSkill[1].Type)
+                    //{
+                    //    case "FelixMulti":
+                    //        yield return runningCoroutine = StartCoroutine(multipleAttack.FelixMultiSkill(enemy, matchedSkill[1].Weight));
+                    //        //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
+                    //        //buffManager.AddOrRenuwBuff(buff);
+                    //        break;
+                    //    case "PhobiaMulti":
+                    //        yield return runningCoroutine = StartCoroutine(multipleAttack.PhobiaMultiSkill(enemy, matchedSkill[1].Weight));
+                    //        //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
+                    //        //buffManager.AddOrRenuwBuff(buff);
+                    //        break;
+                    //    case "LacrimaMulti":
+                    //        yield return runningCoroutine = StartCoroutine(multipleAttack.LacrimaMultiSkill(enemy, matchedSkill[1].Weight));
+                    //        //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
+                    //        //buffManager.AddOrRenuwBuff(buff);
+                    //        break;
+                    //    case "AmareMulti":
+                    //        yield return runningCoroutine = StartCoroutine(multipleAttack.AmareMultiSkill(enemy, matchedSkill[1].Weight));
+                    //        //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
+                    //        //buffManager.AddOrRenuwBuff(buff);
+                    //        break;
+                    //    case "IrascorMulti":
+                    //        yield return runningCoroutine = StartCoroutine(multipleAttack.IrascorMultiSkill(enemy, matchedSkill[1].Weight));
+                    //        //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
+                    //        //buffManager.AddOrRenuwBuff(buff);
+                    //        break;
+                    //    case "HavetMulti":
+                    //        yield return runningCoroutine = StartCoroutine(multipleAttack.HavetMultiSkill(enemy, matchedSkill[1].Weight));
+                    //        //buff = new Buff(matchedSkill[1].Affect, matchedSkill[1].Weight, matchedSkill[1].Turn, enemyActions[selectEnemy].animaData, 1);
+                    //        //buffManager.AddOrRenuwBuff(buff);
+                    //        break;
+                    //}
                 }
 
             }

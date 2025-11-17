@@ -833,7 +833,7 @@ public class MultipleAttack : MonoBehaviour
             if (bm.AllyActions[i].animaData.Animadie) continue;
             allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
         }
-        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys,false, enemy.animaData.skillName[2]);
+        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys,false, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         yield return enemy.IrascorRound(enemy,bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar);
@@ -877,7 +877,7 @@ public class MultipleAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         bm.Canvas.SetActive(false);
-        yield return bm.CameraManager.ZoomSingleIde(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, false, enemy.animaData.skillName[2]);
+        yield return bm.CameraManager.ZoomSingleIde(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, false, enemy.animaData.skillName[1]);
         bm.Canvas.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         yield return enemy.HavetRound(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar);

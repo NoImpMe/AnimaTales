@@ -202,6 +202,37 @@ public class EnemyActions : MonoBehaviour
             yield return healBar.PutDamage(maxHeal);
         }
     }
+    public IEnumerator Shield(EnemyActions healer, EnemyActions target, IEnemyBattleSetting targetPos, ShieldBar enemyShieldBar, float weight)
+    {
+        if (!healer.animaData.Animadie && !target.animaData.Animadie)
+        {
+            heal = CalcShieldAmount(healer.animaData.Damage, target, weight);
+            hn.Spawn(new Vector2(targetPos.EnemyInstance[targetPos.BattleManager.EnemyActions.IndexOf(target)].transform.position.x - 0.1f, targetPos.EnemyInstance[targetPos.BattleManager.EnemyActions.IndexOf(target)].transform.position.y + 0.1f), heal);
+            yield return enemyShieldBar.TakeShield(heal);
+            target.TakeShield(heal);
+        }
+    }
+    public IEnumerator MultiShield(EnemyActions healer, List<EnemyActions> target, IEnemyBattleSetting targetPos, List<ShieldBar> enemyShieldBar, float weight)
+    {
+        if (!healer.animaData.Animadie)
+        {
+            maxHeal = 0f;
+            for (int i = 0; i < target.Count; i++)
+            {
+                if (!target[i].animaData.Animadie)
+                {
+                    heal = CalcShieldAmount(healer.animaData.Damage, target[i], weight);
+                    hn.Spawn(new Vector2(targetPos.EnemyInstance[i].transform.position.x - 0.1f, targetPos.EnemyInstance[i].transform.position.y + 0.1f), heal);
+                    if (maxHeal < heal)
+                    {
+                        maxHeal = heal;
+                    }
+                    target[i].TakeShield(heal);
+                    yield return enemyShieldBar[i].TakeShield(heal);
+                }
+            }
+        }
+    }
     public IEnumerator MultiIncreaseAbility(EnemyActions buffer, List<EnemyActions> target, string[] abi, float weight)
     {
         for(int i = 0; i < target.Count; i++)
@@ -682,5 +713,9 @@ public class EnemyActions : MonoBehaviour
                 yield return GoldManager.Instance.SpendGold(downGold);
             }
         }
+    }
+    private float CalcShieldAmount(float damage, EnemyActions target, float weight)
+    {
+        return damage * UnityEngine.Random.Range(0.95f, 1.11f) * weight;
     }
 }
