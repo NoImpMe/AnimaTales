@@ -449,8 +449,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 if (enemyActions[i].animaData.Name == "tombstone0") enemyActions[i].animaData.isTomb = true;
                 enemyActions[i].animaData.location = i;
                 enemyActions[i].animaData.enemyIndex = i;
+                if (enemyActions[i].animaData.Name != "tombstone0") enemyActions[i].animaData.isBoss = true;
                 enemyActions[i].isBoss = true;
-                enemyActions[i].animaData.isBoss = true;
                 var enemyStatus = GameObject.Find($"Enemy{i}");
                 var enemyParser = GameObject.Find($"Enemy{i}Name");
                 enemyStatus.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Anima_Sprites/" + enemyActions[i].animaData.Objectfile);

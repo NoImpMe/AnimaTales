@@ -180,6 +180,8 @@ MonoBehaviour:
   - {fileID: 3820382637359602333}
   - {fileID: 4446407062891142808}
   - {fileID: 7828832189020780348}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &9010568462079383631
 Rigidbody2D:
   serializedVersion: 5
@@ -1220,6 +1222,8 @@ MonoBehaviour:
   - {fileID: 6941263216885604961}
   - {fileID: 4063351852330164540}
   - {fileID: 2964308134727275368}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &7659825589980862780
 Rigidbody2D:
   serializedVersion: 5
@@ -2259,6 +2263,8 @@ MonoBehaviour:
   - {fileID: 5465197184381487990}
   - {fileID: 5010290282937620669}
   - {fileID: 8929532516766484367}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &5575931062576143934
 Rigidbody2D:
   serializedVersion: 5
@@ -4933,6 +4939,8 @@ MonoBehaviour:
   isCleared: 0
   isVillaged: 0
   neighbors: []
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &8838811699657744938
 Rigidbody2D:
   serializedVersion: 5
@@ -6622,6 +6630,8 @@ MonoBehaviour:
   - {fileID: 865336261867976128}
   - {fileID: 5239368110437150937}
   - {fileID: 4878090852230484762}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &7659012848617683214
 Rigidbody2D:
   serializedVersion: 5
@@ -7661,6 +7671,8 @@ MonoBehaviour:
   - {fileID: 3820382637359602333}
   - {fileID: 4312567876691406761}
   - {fileID: 5178401265367886995}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &798931902472319586
 Rigidbody2D:
   serializedVersion: 5
@@ -8700,6 +8712,8 @@ MonoBehaviour:
   - {fileID: 6095572278447903802}
   - {fileID: 3820382637359602333}
   - {fileID: 4312567876691406761}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &5226025977254118097
 Rigidbody2D:
   serializedVersion: 5
@@ -9738,6 +9752,8 @@ MonoBehaviour:
   - {fileID: 7596863970395657483}
   - {fileID: 2964308134727275368}
   - {fileID: 6348804716011241278}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &4118865838763425308
 Rigidbody2D:
   serializedVersion: 5
@@ -10775,6 +10791,8 @@ MonoBehaviour:
   neighbors:
   - {fileID: 6095572278447903802}
   - {fileID: 4446407062891142808}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &8800234477125635554
 Rigidbody2D:
   serializedVersion: 5
@@ -11815,6 +11833,8 @@ MonoBehaviour:
   - {fileID: 5239368110437150937}
   - {fileID: 7596863970395657483}
   - {fileID: 2964308134727275368}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &2037403683402870174
 Rigidbody2D:
   serializedVersion: 5
@@ -12855,6 +12875,8 @@ MonoBehaviour:
   - {fileID: 4063351852330164540}
   - {fileID: 6348804716011241278}
   - {fileID: 5010290282937620669}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &2187739283439619272
 Rigidbody2D:
   serializedVersion: 5
@@ -13892,6 +13914,8 @@ MonoBehaviour:
   neighbors:
   - {fileID: 7828832189020780348}
   - {fileID: 5155125850393206298}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &1115151005684538002
 Rigidbody2D:
   serializedVersion: 5
@@ -14932,6 +14956,8 @@ MonoBehaviour:
   - {fileID: 3820382637359602333}
   - {fileID: 865336261867976128}
   - {fileID: 4548818887832759255}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &8383278712985164687
 Rigidbody2D:
   serializedVersion: 5
@@ -15970,6 +15996,8 @@ MonoBehaviour:
   - {fileID: 4548818887832759255}
   - {fileID: 328358567339145459}
   - {fileID: 926560381966789268}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &7398363305872192157
 Rigidbody2D:
   serializedVersion: 5
@@ -17008,6 +17036,8 @@ MonoBehaviour:
   - {fileID: 8929532516766484367}
   - {fileID: 5155125850393206298}
   - {fileID: 8208764981431993816}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &4549527166303174415
 Rigidbody2D:
   serializedVersion: 5
@@ -17792,6 +17822,8 @@ MonoBehaviour:
   - {fileID: 5155125850393206298}
   - {fileID: 8208764981431993816}
   - {fileID: 5465197184381487990}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &8973812344747145779
 Rigidbody2D:
   serializedVersion: 5
@@ -18830,6 +18862,8 @@ MonoBehaviour:
   - {fileID: 5465197184381487990}
   - {fileID: 8929532516766484367}
   - {fileID: 5178401265367886995}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &7583675778947207829
 Rigidbody2D:
   serializedVersion: 5
@@ -19869,6 +19903,8 @@ MonoBehaviour:
   - {fileID: 4878090852230484762}
   - {fileID: 4548818887832759255}
   - {fileID: 5239368110437150937}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &11920294373375498
 Rigidbody2D:
   serializedVersion: 5
@@ -20945,6 +20981,8 @@ MonoBehaviour:
   isVillaged: 0
   neighbors:
   - {fileID: 4878090852230484762}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &9071755960574147780
 Rigidbody2D:
   serializedVersion: 5
@@ -21986,6 +22024,8 @@ MonoBehaviour:
   - {fileID: 865336261867976128}
   - {fileID: 7828832189020780348}
   - {fileID: 4312567876691406761}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &5735926265155584977
 Rigidbody2D:
   serializedVersion: 5
@@ -22770,6 +22810,8 @@ MonoBehaviour:
   - {fileID: 2964308134727275368}
   - {fileID: 5010290282937620669}
   - {fileID: 1299811609359293015}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &5075345944317850021
 Rigidbody2D:
   serializedVersion: 5
@@ -23811,6 +23853,8 @@ MonoBehaviour:
   - {fileID: 6095572278447903802}
   - {fileID: 5239368110437150937}
   - {fileID: 6941263216885604961}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &1457410533081262001
 Rigidbody2D:
   serializedVersion: 5
@@ -24849,6 +24893,8 @@ MonoBehaviour:
   - {fileID: 328358567339145459}
   - {fileID: 5239368110437150937}
   - {fileID: 7596863970395657483}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &440469885466328992
 Rigidbody2D:
   serializedVersion: 5
@@ -25633,6 +25679,8 @@ MonoBehaviour:
   - {fileID: 865336261867976128}
   - {fileID: 6941263216885604961}
   - {fileID: 7828832189020780348}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &4185875182467709063
 Rigidbody2D:
   serializedVersion: 5
@@ -26637,6 +26685,8 @@ MonoBehaviour:
   neighbors:
   - {fileID: 5621177577758879169}
   - {fileID: 926560381966789268}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &7885978957660124621
 Rigidbody2D:
   serializedVersion: 5
@@ -27554,6 +27604,8 @@ MonoBehaviour:
   - {fileID: 865336261867976128}
   - {fileID: 6941263216885604961}
   - {fileID: 7596863970395657483}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &3963943729229327155
 Rigidbody2D:
   serializedVersion: 5
@@ -28594,6 +28646,8 @@ MonoBehaviour:
   - {fileID: 8929532516766484367}
   - {fileID: 8208764981431993816}
   - {fileID: 1299811609359293015}
+  type: 
+  otherStartPoint: {fileID: 0}
 --- !u!50 &7930053807064779157
 Rigidbody2D:
   serializedVersion: 5

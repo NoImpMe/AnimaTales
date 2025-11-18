@@ -88,6 +88,14 @@ public class SingleAttack:MonoBehaviour
 
     public IEnumerator SingleEnemyAttack(EnemyActions enemy, int selectAlly)
     {
+        List<AnimaActions> aliveBeforeSkill = new();
+        foreach (var ally in bm.AllyActions)
+        {
+            if (!ally.animaData.Animadie)
+            {
+                aliveBeforeSkill.Add(ally);
+            }
+        }
         enemy.animaData.turnCheck = true;
         yield return new WaitForSeconds(0.5f);
         bm.IsTurn[bm.TurnIndex].SetActive(false);
@@ -104,7 +112,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} hit {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
+        if (bm.AllyActions[selectAlly].animaData.Animadie && aliveBeforeSkill.Contains(bm.AllyActions[selectAlly]))
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
@@ -130,6 +138,14 @@ public class SingleAttack:MonoBehaviour
     }
     public IEnumerator SingleEnemySkill(EnemyActions enemy, int selectAlly, float weight)
     {
+        List<AnimaActions> aliveBeforeSkill = new();
+        foreach (var ally in bm.AllyActions)
+        {
+            if (!ally.animaData.Animadie)
+            {
+                aliveBeforeSkill.Add(ally);
+            }
+        }
         enemy.animaData.turnCheck = true;
         yield return new WaitForSeconds(0.5f);
         bm.IsTurn[bm.TurnIndex].SetActive(false);
@@ -146,7 +162,7 @@ public class SingleAttack:MonoBehaviour
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
         bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
         DamageParserUpdate();
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
+        if (bm.AllyActions[selectAlly].animaData.Animadie && aliveBeforeSkill.Contains(bm.AllyActions[selectAlly]))
         {
             if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
             {
@@ -273,233 +289,241 @@ public class SingleAttack:MonoBehaviour
         bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         BuffUpdate(enemy.animaData);
     }
-    public IEnumerator FelixSingleAttack(EnemyActions enemy, int selectAlly)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
+    //public IEnumerator FelixSingleAttack(EnemyActions enemy, int selectAlly)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
 
-        yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return enemy.FelixAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
-        DamageParserUpdate();
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
-        {
-            if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
-            {
-                bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            else
-            {
-                bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(1f);
-        }
-        else
-        {
-            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        }
-        BuffUpdate(enemy.animaData);
+    //    yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return enemy.FelixAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
+    //    bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    if (bm.AllyActions[selectAlly].animaData.Animadie)
+    //    {
+    //        if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
+    //        {
+    //            bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        else
+    //        {
+    //            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //    else
+    //    {
+    //        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    }
+    //    BuffUpdate(enemy.animaData);
 
-    }
-    public IEnumerator PhobiaSingleAttack(EnemyActions enemy, int selectAlly)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
+    //}
+    //public IEnumerator PhobiaSingleAttack(EnemyActions enemy, int selectAlly)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
 
-        yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return enemy.PhobiaAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
-        DamageParserUpdate();
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
-        {
-            if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
-            {
-                bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            else
-            {
-                bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(1f);
+    //    yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return enemy.PhobiaAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
+    //    bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    if (bm.AllyActions[selectAlly].animaData.Animadie)
+    //    {
+    //        if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
+    //        {
+    //            bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        else
+    //        {
+    //            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(1f);
 
-        }
-        else
-        {
-            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        }
-        BuffUpdate(enemy.animaData);
+    //    }
+    //    else
+    //    {
+    //        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    }
+    //    BuffUpdate(enemy.animaData);
 
-    }
-    public IEnumerator LacrimaSingleAttack(EnemyActions enemy, int selectAlly)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
+    //}
+    //public IEnumerator LacrimaSingleAttack(EnemyActions enemy, int selectAlly)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
 
-        yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return enemy.LacrimaAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
-        DamageParserUpdate();
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
-        {
-            if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
-            {
-                bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            else
-            {
-                bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(1f);
+    //    yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return enemy.LacrimaAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
+    //    bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    if (bm.AllyActions[selectAlly].animaData.Animadie)
+    //    {
+    //        if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
+    //        {
+    //            bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        else
+    //        {
+    //            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(1f);
 
-        }
-        else
-        {
-            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        }
-        BuffUpdate(enemy.animaData);
+    //    }
+    //    else
+    //    {
+    //        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    }
+    //    BuffUpdate(enemy.animaData);
 
-    }
-    public IEnumerator AmareSingleAttack(EnemyActions enemy, int selectAlly)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
+    //}
+    //public IEnumerator AmareSingleAttack(EnemyActions enemy, int selectAlly)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
 
-        yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return enemy.AmareAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
-        DamageParserUpdate();
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
-        {
-            if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
-            {
-                bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            else
-            {
-                bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(1f);
-        }
-        else
-        {
-            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        }
-        BuffUpdate(enemy.animaData);
+    //    yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return enemy.AmareAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
+    //    bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    if (bm.AllyActions[selectAlly].animaData.Animadie)
+    //    {
+    //        if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
+    //        {
+    //            bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        else
+    //        {
+    //            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //    else
+    //    {
+    //        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    }
+    //    BuffUpdate(enemy.animaData);
 
-    }
-    public IEnumerator IrascorSingleAttack(EnemyActions enemy, int selectAlly)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
+    //}
+    //public IEnumerator IrascorSingleAttack(EnemyActions enemy, int selectAlly)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
 
-        yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return enemy.IrascorAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
-        DamageParserUpdate();
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
-        {
-            if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
-            {
-                bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            else
-            {
-                bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(1f);
-        }
-        else
-        {
-            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        }
-        BuffUpdate(enemy.animaData);
+    //    yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return enemy.IrascorAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
+    //    bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    if (bm.AllyActions[selectAlly].animaData.Animadie)
+    //    {
+    //        if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
+    //        {
+    //            bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        else
+    //        {
+    //            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //    else
+    //    {
+    //        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    }
+    //    BuffUpdate(enemy.animaData);
 
-    }
-    public IEnumerator HavetSingleAttack(EnemyActions enemy, int selectAlly)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
+    //}
+    //public IEnumerator HavetSingleAttack(EnemyActions enemy, int selectAlly)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
 
-        yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return enemy.HavetAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
-        DamageParserUpdate();
+    //    yield return bm.CameraManager.ZoomSingleOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return enemy.HavetAttack(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyDamageBar[enemy.animaData.enemyIndex]);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
+    //    bm.EnemyDamageText[enemy.animaData.enemyIndex].text = Mathf.Ceil(bm.EnemyDamageBar[enemy.animaData.enemyIndex].thisPoint).ToString();
+    //    DamageParserUpdate();
 
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
-        {
-            if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
-            {
-                bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            else
-            {
-                bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-            }
-            if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(1f);
-        }
-        else
-        {
-            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        }
-        BuffUpdate(enemy.animaData);
+    //    if (bm.AllyActions[selectAlly].animaData.Animadie)
+    //    {
+    //        if (enemy.animaData.Speed < bm.AllyActions[selectAlly].animaData.Speed)
+    //        {
+    //            bm.Turn[bm.TurnIndex].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        else
+    //        {
+    //            bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //        }
+    //        if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //    else
+    //    {
+    //        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    }
+    //    BuffUpdate(enemy.animaData);
 
-    }
+    //}
     public IEnumerator FelixRoundSkill(EnemyActions enemy, int selectAlly)
     {
+        List<AnimaActions> aliveBeforeSkill = new();
+        foreach (var ally in bm.AllyActions)
+        {
+            if (!ally.animaData.Animadie)
+            {
+                aliveBeforeSkill.Add(ally);
+            }
+        }
         yield return new WaitForSeconds(0.5f);
         bm.Canvas.SetActive(false);
         yield return bm.CameraManager.ZoomRoundOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.AllyBattleSetting.AllyInstance[selectAlly].transform, enemy.animaData.skillName[1]);
@@ -510,7 +534,7 @@ public class SingleAttack:MonoBehaviour
         }
         yield return enemy.FelixRound(enemy, bm.AllyActions[selectAlly], bm.AllyBattleSetting,bm.EnemyBattleSetting, bm.AllyHealthBar[selectAlly], bm.EnemyHealthBar[0]);
         bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"¿ì·ç·çÄçÄç\" on {bm.AllyActions[selectAlly].animaData.Name} for {Mathf.Ceil(enemy.damage)} damage", false);
-        if (bm.AllyActions[selectAlly].animaData.Animadie)
+        if (bm.AllyActions[selectAlly].animaData.Animadie && aliveBeforeSkill.Contains(bm.AllyActions[selectAlly]))
         {
             if (DefeatAlly(bm.AllyActions[selectAlly], selectAlly))
             {
@@ -681,7 +705,7 @@ public class SingleAttack:MonoBehaviour
         DestroyImmediate(bm.EnemyBattleSetting.EnemyInfoInstance[selectEnemy]);
         bm.EnemyBattleSetting.EnemyInstance.RemoveAt(selectEnemy);
         bm.EnemyBattleSetting.EnemyInfoInstance.RemoveAt(selectEnemy);
-        bm.EnemyAnimaNum--;
+        bm.EnemyAnimaNum -= 1;
         for (int i = 0; i < 3; i++)
         {
             var rebuild = GameObject.Find($"Enemy{i}");
@@ -720,7 +744,7 @@ public class SingleAttack:MonoBehaviour
         bm.AllyBattleSetting.AllyHpInstance[ally.animaData.location].SetActive(false);
         bm.AllyBattleSetting.AllyInstance[ally.animaData.location].SetActive(false);
         bm.AllyBattleSetting.AllyInfoInstance[selectAlly].SetActive(false);
-        bm.AllyAnimaNum--;
+        bm.AllyAnimaNum -= 1;
 
 
         if (bm.AllyAnimaNum == 0)

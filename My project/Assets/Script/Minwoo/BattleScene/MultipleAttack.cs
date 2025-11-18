@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -73,6 +74,14 @@ public class MultipleAttack : MonoBehaviour
     }
     public IEnumerator MultiEnemySkill(EnemyActions enemy, float weight) 
     {
+        List<AnimaActions> aliveBeforeSkill = new();
+        foreach(var ally in bm.AllyActions)
+        {
+            if (!ally.animaData.Animadie)
+            {
+                aliveBeforeSkill.Add(ally);
+            }
+        }
         enemy.animaData.turnCheck = true;
         yield return new WaitForSeconds(0.5f);
         bm.IsTurn[bm.TurnIndex].SetActive(false);
@@ -101,7 +110,7 @@ public class MultipleAttack : MonoBehaviour
 
         int fast = 0;
         float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
+        foreach (var ally in aliveBeforeSkill)
         {
             if (ally.animaData.Animadie)
             {
@@ -122,15 +131,8 @@ public class MultipleAttack : MonoBehaviour
             {
                 yield break;
             }
-            yield return new WaitForSeconds(0.3f);
             allyList.RemoveAt(0);
-            if (allyList.Count != 0)
-            {
-                for (int j = 0; j < allyList.Count; j++)
-                {
-                    allyList[j] -= 1;
-                }
-            }
+            yield return new WaitForSeconds(0.3f);
         }
     }
     public IEnumerator MultiAllyHeal(AnimaActions anima, int skillNum, float weight)
@@ -435,7 +437,7 @@ public class MultipleAttack : MonoBehaviour
         bm.AllyBattleSetting.AllyHpInstance[ally.animaData.location].SetActive(false);
         bm.AllyBattleSetting.AllyInstance[ally.animaData.location].SetActive(false);
         bm.AllyBattleSetting.AllyInfoInstance[selectAlly].SetActive(false);
-        bm.AllyAnimaNum--;
+        bm.AllyAnimaNum -= 1;
 
 
         if (bm.AllyAnimaNum == 0)
@@ -487,371 +489,379 @@ public class MultipleAttack : MonoBehaviour
             expiredBuffList.RemoveAt(0);
         }
     }
-    public IEnumerator FelixMultiSkill(EnemyActions enemy, float weight)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
-        allys = new List<Transform>();
-        for (int i = 0; i < bm.AllyActions.Count; i++)
-        {
-            if (bm.AllyActions[i].animaData.Animadie) continue;
-            allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
-        }
-        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        yield return enemy.FelixSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
-        bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
-        DamageParserUpdate();
-        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        List<int> allyList = new List<int>();
+    //public IEnumerator FelixMultiSkill(EnemyActions enemy, float weight)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
+    //    allys = new List<Transform>();
+    //    for (int i = 0; i < bm.AllyActions.Count; i++)
+    //    {
+    //        if (bm.AllyActions[i].animaData.Animadie) continue;
+    //        allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
+    //    }
+    //    yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return new WaitForSeconds(0.1f);
+    //    yield return enemy.FelixSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
+    //    bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    List<int> allyList = new List<int>();
 
-        int fast = 0;
-        float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
-        {
-            if (ally.animaData.Animadie)
-            {
-                if (enemySpeed <= ally.animaData.Speed)
-                {
-                    fast += 1;
-                }
-                allyList.Add(bm.AllyActions.IndexOf(ally));
-            }
-        }
-        for (int i = 0; i < fast; i++)
-        {
-            bm.TurnIndex -= 1;
-        }
-        while (allyList.Count > 0)
-        {
-            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(0.3f);
+    //    int fast = 0;
+    //    float enemySpeed = enemy.animaData.Speed;
+    //    foreach (var ally in bm.AllyActions)
+    //    {
+    //        if (ally.animaData.Animadie)
+    //        {
+    //            if (enemySpeed <= ally.animaData.Speed)
+    //            {
+    //                fast += 1;
+    //            }
+    //            allyList.Add(bm.AllyActions.IndexOf(ally));
+    //        }
+    //    }
+    //    for (int i = 0; i < fast; i++)
+    //    {
+    //        bm.TurnIndex -= 1;
+    //    }
+    //    while (allyList.Count > 0)
+    //    {
+    //        if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(0.3f);
 
-            allyList.RemoveAt(0);
-            if (allyList.Count != 0)
-            {
-                for (int j = 0; j < allyList.Count; j++)
-                {
-                    allyList[j] -= 1;
-                }
-            }
-        }
-        BuffUpdate(enemy.animaData);
-    }
-    public IEnumerator PhobiaMultiSkill(EnemyActions enemy, float weight)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
-        allys = new List<Transform>();
-        for (int i = 0; i < bm.AllyActions.Count; i++)
-        {
-            if (bm.AllyActions[i].animaData.Animadie) continue;
-            allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
-        }
-        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        yield return enemy.PhobiaSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
-        bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
-        DamageParserUpdate();
-        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        List<int> allyList = new List<int>();
+    //        allyList.RemoveAt(0);
+    //        if (allyList.Count != 0)
+    //        {
+    //            for (int j = 0; j < allyList.Count; j++)
+    //            {
+    //                allyList[j] -= 1;
+    //            }
+    //        }
+    //    }
+    //    BuffUpdate(enemy.animaData);
+    //}
+    //public IEnumerator PhobiaMultiSkill(EnemyActions enemy, float weight)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
+    //    allys = new List<Transform>();
+    //    for (int i = 0; i < bm.AllyActions.Count; i++)
+    //    {
+    //        if (bm.AllyActions[i].animaData.Animadie) continue;
+    //        allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
+    //    }
+    //    yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return new WaitForSeconds(0.1f);
+    //    yield return enemy.PhobiaSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
+    //    bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    List<int> allyList = new List<int>();
 
-        int fast = 0;
-        float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
-        {
-            if (ally.animaData.Animadie)
-            {
-                if (enemySpeed <= ally.animaData.Speed)
-                {
-                    fast += 1;
-                }
-                allyList.Add(bm.AllyActions.IndexOf(ally));
-            }
-        }
-        for (int i = 0; i < fast; i++)
-        {
-            bm.TurnIndex -= 1;
-        }
-        while (allyList.Count > 0)
-        {
-            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(0.3f);
+    //    int fast = 0;
+    //    float enemySpeed = enemy.animaData.Speed;
+    //    foreach (var ally in bm.AllyActions)
+    //    {
+    //        if (ally.animaData.Animadie)
+    //        {
+    //            if (enemySpeed <= ally.animaData.Speed)
+    //            {
+    //                fast += 1;
+    //            }
+    //            allyList.Add(bm.AllyActions.IndexOf(ally));
+    //        }
+    //    }
+    //    for (int i = 0; i < fast; i++)
+    //    {
+    //        bm.TurnIndex -= 1;
+    //    }
+    //    while (allyList.Count > 0)
+    //    {
+    //        if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(0.3f);
 
-            allyList.RemoveAt(0);
-            if (allyList.Count != 0)
-            {
-                for (int j = 0; j < allyList.Count; j++)
-                {
-                    allyList[j] -= 1;
-                }
-            }
-        }
-        BuffUpdate(enemy.animaData);
-    }
-    public IEnumerator LacrimaMultiSkill(EnemyActions enemy, float weight)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
-        allys = new List<Transform>();
-        for (int i = 0; i < bm.AllyActions.Count; i++)
-        {
-            if (bm.AllyActions[i].animaData.Animadie) continue;
-            allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
-        }
-        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        yield return enemy.LacrimaSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
-        bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
-        DamageParserUpdate();
-        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        List<int> allyList = new List<int>();
+    //        allyList.RemoveAt(0);
+    //        if (allyList.Count != 0)
+    //        {
+    //            for (int j = 0; j < allyList.Count; j++)
+    //            {
+    //                allyList[j] -= 1;
+    //            }
+    //        }
+    //    }
+    //    BuffUpdate(enemy.animaData);
+    //}
+    //public IEnumerator LacrimaMultiSkill(EnemyActions enemy, float weight)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
+    //    allys = new List<Transform>();
+    //    for (int i = 0; i < bm.AllyActions.Count; i++)
+    //    {
+    //        if (bm.AllyActions[i].animaData.Animadie) continue;
+    //        allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
+    //    }
+    //    yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    yield return new WaitForSeconds(0.1f);
+    //    yield return enemy.LacrimaSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
+    //    bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    List<int> allyList = new List<int>();
 
-        int fast = 0;
-        float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
-        {
-            if (ally.animaData.Animadie)
-            {
-                if (enemySpeed <= ally.animaData.Speed)
-                {
-                    fast += 1;
-                }
-                allyList.Add(bm.AllyActions.IndexOf(ally));
-            }
-        }
-        for (int i = 0; i < fast; i++)
-        {
-            bm.TurnIndex -= 1;
-        }
-        while (allyList.Count > 0)
-        {
-            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(0.3f);
+    //    int fast = 0;
+    //    float enemySpeed = enemy.animaData.Speed;
+    //    foreach (var ally in bm.AllyActions)
+    //    {
+    //        if (ally.animaData.Animadie)
+    //        {
+    //            if (enemySpeed <= ally.animaData.Speed)
+    //            {
+    //                fast += 1;
+    //            }
+    //            allyList.Add(bm.AllyActions.IndexOf(ally));
+    //        }
+    //    }
+    //    for (int i = 0; i < fast; i++)
+    //    {
+    //        bm.TurnIndex -= 1;
+    //    }
+    //    while (allyList.Count > 0)
+    //    {
+    //        if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(0.3f);
 
-            allyList.RemoveAt(0);
-            if (allyList.Count != 0)
-            {
-                for (int j = 0; j < allyList.Count; j++)
-                {
-                    allyList[j] -= 1;
-                }
-            }
-        }
-        BuffUpdate(enemy.animaData);
-    }
-    public IEnumerator AmareMultiSkill(EnemyActions enemy, float weight)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
-        allys = new List<Transform>();
-        for (int i = 0; i < bm.AllyActions.Count; i++)
-        {
-            if (bm.AllyActions[i].animaData.Animadie) continue;
-            allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
-        }
-        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        while (!bm.Canvas.activeSelf)
-        {
-            yield return null;
-        }
-        yield return enemy.AmareSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
-        bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
-        DamageParserUpdate();
-        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        List<int> allyList = new List<int>();
+    //        allyList.RemoveAt(0);
+    //        if (allyList.Count != 0)
+    //        {
+    //            for (int j = 0; j < allyList.Count; j++)
+    //            {
+    //                allyList[j] -= 1;
+    //            }
+    //        }
+    //    }
+    //    BuffUpdate(enemy.animaData);
+    //}
+    //public IEnumerator AmareMultiSkill(EnemyActions enemy, float weight)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
+    //    allys = new List<Transform>();
+    //    for (int i = 0; i < bm.AllyActions.Count; i++)
+    //    {
+    //        if (bm.AllyActions[i].animaData.Animadie) continue;
+    //        allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
+    //    }
+    //    yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    while (!bm.Canvas.activeSelf)
+    //    {
+    //        yield return null;
+    //    }
+    //    yield return enemy.AmareSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
+    //    bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    List<int> allyList = new List<int>();
 
-        int fast = 0;
-        float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
-        {
-            if (ally.animaData.Animadie)
-            {
-                if (enemySpeed <= ally.animaData.Speed)
-                {
-                    fast += 1;
-                }
-                allyList.Add(bm.AllyActions.IndexOf(ally));
-            }
-        }
-        for (int i = 0; i < fast; i++)
-        {
-            bm.TurnIndex -= 1;
-        }
-        while (allyList.Count > 0)
-        {
-            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(0.3f);
+    //    int fast = 0;
+    //    float enemySpeed = enemy.animaData.Speed;
+    //    foreach (var ally in bm.AllyActions)
+    //    {
+    //        if (ally.animaData.Animadie)
+    //        {
+    //            if (enemySpeed <= ally.animaData.Speed)
+    //            {
+    //                fast += 1;
+    //            }
+    //            allyList.Add(bm.AllyActions.IndexOf(ally));
+    //        }
+    //    }
+    //    for (int i = 0; i < fast; i++)
+    //    {
+    //        bm.TurnIndex -= 1;
+    //    }
+    //    while (allyList.Count > 0)
+    //    {
+    //        if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(0.3f);
 
-            allyList.RemoveAt(0);
-            if (allyList.Count != 0)
-            {
-                for (int j = 0; j < allyList.Count; j++)
-                {
-                    allyList[j] -= 1;
-                }
-            }
-        }
-        BuffUpdate(enemy.animaData);
-    }
-    public IEnumerator IrascorMultiSkill(EnemyActions enemy, float weight)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
-        allys = new List<Transform>();
-        for (int i = 0; i < bm.AllyActions.Count; i++)
-        {
-            if (bm.AllyActions[i].animaData.Animadie) continue;
-            allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
-        }
-        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        while (!bm.Canvas.activeSelf)
-        {
-            yield return null;
-        }
-        yield return enemy.IrascorSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
-        bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
-        DamageParserUpdate();
-        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        List<int> allyList = new List<int>();
+    //        allyList.RemoveAt(0);
+    //        if (allyList.Count != 0)
+    //        {
+    //            for (int j = 0; j < allyList.Count; j++)
+    //            {
+    //                allyList[j] -= 1;
+    //            }
+    //        }
+    //    }
+    //    BuffUpdate(enemy.animaData);
+    //}
+    //public IEnumerator IrascorMultiSkill(EnemyActions enemy, float weight)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
+    //    allys = new List<Transform>();
+    //    for (int i = 0; i < bm.AllyActions.Count; i++)
+    //    {
+    //        if (bm.AllyActions[i].animaData.Animadie) continue;
+    //        allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
+    //    }
+    //    yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    while (!bm.Canvas.activeSelf)
+    //    {
+    //        yield return null;
+    //    }
+    //    yield return enemy.IrascorSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
+    //    bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    List<int> allyList = new List<int>();
 
-        int fast = 0;
-        float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
-        {
-            if (ally.animaData.Animadie)
-            {
-                if (enemySpeed <= ally.animaData.Speed)
-                {
-                    fast += 1;
-                }
-                allyList.Add(bm.AllyActions.IndexOf(ally));
-            }
-        }
-        for (int i = 0; i < fast; i++)
-        {
-            bm.TurnIndex -= 1;
-        }
-        while (allyList.Count > 0)
-        {
-            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(0.3f);
+    //    int fast = 0;
+    //    float enemySpeed = enemy.animaData.Speed;
+    //    foreach (var ally in bm.AllyActions)
+    //    {
+    //        if (ally.animaData.Animadie)
+    //        {
+    //            if (enemySpeed <= ally.animaData.Speed)
+    //            {
+    //                fast += 1;
+    //            }
+    //            allyList.Add(bm.AllyActions.IndexOf(ally));
+    //        }
+    //    }
+    //    for (int i = 0; i < fast; i++)
+    //    {
+    //        bm.TurnIndex -= 1;
+    //    }
+    //    while (allyList.Count > 0)
+    //    {
+    //        if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(0.3f);
 
-            allyList.RemoveAt(0);
-            if (allyList.Count != 0)
-            {
-                for (int j = 0; j < allyList.Count; j++)
-                {
-                    allyList[j] -= 1;
-                }
-            }
-        }
-        BuffUpdate(enemy.animaData);
-    }
-    public IEnumerator HavetMultiSkill(EnemyActions enemy, float weight)
-    {
-        enemy.animaData.turnCheck = true;
-        yield return new WaitForSeconds(0.5f);
-        bm.IsTurn[bm.TurnIndex].SetActive(false);
-        bm.TurnList.RemoveAt(0);
-        bm.Canvas.SetActive(false);
-        allys = new List<Transform>();
-        for (int i = 0; i < bm.AllyActions.Count; i++)
-        {
-            if (bm.AllyActions[i].animaData.Animadie) continue;
-            allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
-        }
-        yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
-        bm.Canvas.SetActive(true);
-        while (!bm.Canvas.activeSelf)
-        {
-            yield return null;
-        }
-        yield return enemy.HavetSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
-        bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
-        bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
-        DamageParserUpdate();
-        bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
-        List<int> allyList = new List<int>();
+    //        allyList.RemoveAt(0);
+    //        if (allyList.Count != 0)
+    //        {
+    //            for (int j = 0; j < allyList.Count; j++)
+    //            {
+    //                allyList[j] -= 1;
+    //            }
+    //        }
+    //    }
+    //    BuffUpdate(enemy.animaData);
+    //}
+    //public IEnumerator HavetMultiSkill(EnemyActions enemy, float weight)
+    //{
+    //    enemy.animaData.turnCheck = true;
+    //    yield return new WaitForSeconds(0.5f);
+    //    bm.IsTurn[bm.TurnIndex].SetActive(false);
+    //    bm.TurnList.RemoveAt(0);
+    //    bm.Canvas.SetActive(false);
+    //    allys = new List<Transform>();
+    //    for (int i = 0; i < bm.AllyActions.Count; i++)
+    //    {
+    //        if (bm.AllyActions[i].animaData.Animadie) continue;
+    //        allys.Add(bm.AllyBattleSetting.AllyInstance[i].transform);
+    //    }
+    //    yield return bm.CameraManager.ZoomMultiOpp(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, allys, false, enemy.animaData.skillName[0]);
+    //    bm.Canvas.SetActive(true);
+    //    while (!bm.Canvas.activeSelf)
+    //    {
+    //        yield return null;
+    //    }
+    //    yield return enemy.HavetSkill(enemy, bm.AllyActions, bm.AllyBattleSetting, bm.AllyHealthBar, bm.EnemyDamageBar[enemy.animaData.enemyIndex], weight);
+    //    bm.BattleLogManager.AddLog($"{enemy.animaData.Name} used \"{enemy.animaData.skillName[0]}\" on Allys for {Mathf.Ceil(enemy.maxDamage)}damage", true);
+    //    bm.EnemyDamageText[bm.EnemyActions.IndexOf(enemy)].text = Mathf.Ceil(bm.EnemyDamageBar[bm.EnemyActions.IndexOf(enemy)].thisPoint).ToString();
+    //    DamageParserUpdate();
+    //    bm.Turn[bm.TurnIndex++].transform.Find("Enemy Turn Portrait").GetComponent<UnityEngine.UI.Image>().color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+    //    List<int> allyList = new List<int>();
 
-        int fast = 0;
-        float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
-        {
-            if (ally.animaData.Animadie)
-            {
-                if (enemySpeed <= ally.animaData.Speed)
-                {
-                    fast += 1;
-                }
-                allyList.Add(bm.AllyActions.IndexOf(ally));
-            }
-        }
-        for (int i = 0; i < fast; i++)
-        {
-            bm.TurnIndex -= 1;
-        }
-        while (allyList.Count > 0)
-        {
-            if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(0.3f);
+    //    int fast = 0;
+    //    float enemySpeed = enemy.animaData.Speed;
+    //    foreach (var ally in bm.AllyActions)
+    //    {
+    //        if (ally.animaData.Animadie)
+    //        {
+    //            if (enemySpeed <= ally.animaData.Speed)
+    //            {
+    //                fast += 1;
+    //            }
+    //            allyList.Add(bm.AllyActions.IndexOf(ally));
+    //        }
+    //    }
+    //    for (int i = 0; i < fast; i++)
+    //    {
+    //        bm.TurnIndex -= 1;
+    //    }
+    //    while (allyList.Count > 0)
+    //    {
+    //        if (DefeatAlly(bm.AllyActions[allyList[0]], allyList[0]))
+    //        {
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(0.3f);
 
-            allyList.RemoveAt(0);
-            if (allyList.Count != 0)
-            {
-                for (int j = 0; j < allyList.Count; j++)
-                {
-                    allyList[j] -= 1;
-                }
-            }
-        }
-        BuffUpdate(enemy.animaData);
-    }
+    //        allyList.RemoveAt(0);
+    //        if (allyList.Count != 0)
+    //        {
+    //            for (int j = 0; j < allyList.Count; j++)
+    //            {
+    //                allyList[j] -= 1;
+    //            }
+    //        }
+    //    }
+    //    BuffUpdate(enemy.animaData);
+    //}
     public IEnumerator IrascorRoundSkill(EnemyActions enemy)
     {
+        List<AnimaActions> aliveBeforeSkill = new();
+        foreach (var ally in bm.AllyActions)
+        {
+            if (!ally.animaData.Animadie)
+            {
+                aliveBeforeSkill.Add(ally);
+            }
+        }
         yield return new WaitForSeconds(0.5f);
         bm.Canvas.SetActive(false);
         allys = new List<Transform>();
@@ -872,7 +882,7 @@ public class MultipleAttack : MonoBehaviour
 
         int fast = 0;
         float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
+        foreach (var ally in aliveBeforeSkill)
         {
             if (ally.animaData.Animadie)
             {
@@ -907,6 +917,14 @@ public class MultipleAttack : MonoBehaviour
     }
     public IEnumerator HavetRoundSkill(EnemyActions enemy)
     {
+        List<AnimaActions> aliveBeforeSkill = new();
+        foreach (var ally in bm.AllyActions)
+        {
+            if (!ally.animaData.Animadie)
+            {
+                aliveBeforeSkill.Add(ally);
+            }
+        }
         yield return new WaitForSeconds(0.5f);
         bm.Canvas.SetActive(false);
         yield return bm.CameraManager.ZoomSingleIde(bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, bm.EnemyBattleSetting.EnemyInstance[bm.EnemyActions.IndexOf(enemy)].transform, false, enemy.animaData.skillName[1]);
@@ -921,7 +939,7 @@ public class MultipleAttack : MonoBehaviour
 
         int fast = 0;
         float enemySpeed = enemy.animaData.Speed;
-        foreach (var ally in bm.AllyActions)
+        foreach (var ally in aliveBeforeSkill)
         {
             if (ally.animaData.Animadie)
             {

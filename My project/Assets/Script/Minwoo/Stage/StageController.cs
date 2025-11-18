@@ -44,6 +44,20 @@ public class StageController : MonoBehaviour
                     {
                         tile.SetActive(true);
                     }
+                    foreach(GameObject chkfield in checkField.nearFields)
+                    {
+                        foreach (Transform tile in chkfield.transform)
+                        {
+                            if (tile.gameObject.GetComponent<Rigidbody2D>() != null)
+                            {
+                                tile.gameObject.GetComponent<Rigidbody2D>().simulated = true;
+                            }
+                            tmpColor = tile.gameObject.GetComponent<Tilemap>().color;
+                            tmpColor.a = 1f;
+                            tile.gameObject.GetComponent<Tilemap>().color = tmpColor;
+                        }
+                    }
+                    
                 }
             }
         }
