@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ParserData : MonoBehaviour
 {
-    bool init = false;
     bool parsercheck = false;
     [SerializeField]
     GameObject battleParser;

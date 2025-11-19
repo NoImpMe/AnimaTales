@@ -26592,7 +26592,7 @@ GameObject:
   - component: {fileID: 1767691405049010229}
   - component: {fileID: 6217120525015182920}
   m_Layer: 0
-  m_Name: VillageTile0Amare
+  m_Name: VillageTile0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37085,7 +37085,7 @@ GameObject:
   - component: {fileID: 8519323813537736626}
   - component: {fileID: 5650102334107755013}
   m_Layer: 0
-  m_Name: VillageTile1Felix
+  m_Name: VillageTile4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45309,7 +45309,7 @@ GameObject:
   - component: {fileID: 6984829978821709463}
   - component: {fileID: 7184615268782137365}
   m_Layer: 0
-  m_Name: VillageTile2Amare
+  m_Name: VillageTile2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49772,7 +49772,7 @@ GameObject:
   - component: {fileID: 3841296037878187055}
   - component: {fileID: 396297526490789372}
   m_Layer: 0
-  m_Name: VillageTile0Felix
+  m_Name: VillageTile3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51863,7 +51863,7 @@ GameObject:
   - component: {fileID: 9094460929832524153}
   - component: {fileID: 5865454214283090035}
   m_Layer: 0
-  m_Name: VillageTile1Amare
+  m_Name: VillageTile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58270,7 +58270,7 @@ GameObject:
   - component: {fileID: 8101071765303224893}
   - component: {fileID: 1386816039950674959}
   m_Layer: 0
-  m_Name: VillageTile3
+  m_Name: VillageTile14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74844,7 +74844,7 @@ GameObject:
   - component: {fileID: 1097538839780522855}
   - component: {fileID: 4476976077533231717}
   m_Layer: 0
-  m_Name: VillageTile0Havet
+  m_Name: VillageTile5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105206,7 +105206,7 @@ GameObject:
   - component: {fileID: 3342957982790795659}
   - component: {fileID: 7189129109467348543}
   m_Layer: 0
-  m_Name: VillageTile1Havet
+  m_Name: VillageTile6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111606,6 +111606,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5992066471213440069, guid: dfd0d691caecf504a8ecf0682c412d98, type: 3}
+      propertyPath: m_Name
+      value: VillageTile7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992066471213440069, guid: dfd0d691caecf504a8ecf0682c412d98, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -111736,6 +111740,10 @@ PrefabInstance:
     - target: {fileID: 6745554199177028405, guid: dfd0d691caecf504a8ecf0682c412d98, type: 3}
       propertyPath: m_ColliderPaths.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755181079406104899, guid: dfd0d691caecf504a8ecf0682c412d98, type: 3}
+      propertyPath: m_Name
+      value: VillageTile8
       objectReference: {fileID: 0}
     - target: {fileID: 6755181079406104899, guid: dfd0d691caecf504a8ecf0682c412d98, type: 3}
       propertyPath: m_IsActive
@@ -132722,8 +132730,16 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2562357180793641243, guid: 14b07673aa4375841a7fa81c81594ea4, type: 3}
+      propertyPath: m_Name
+      value: VillageTile13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562357180793641243, guid: 14b07673aa4375841a7fa81c81594ea4, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608315922779215973, guid: 14b07673aa4375841a7fa81c81594ea4, type: 3}
+      propertyPath: m_Name
+      value: VillageTile11
       objectReference: {fileID: 0}
     - target: {fileID: 2608315922779215973, guid: 14b07673aa4375841a7fa81c81594ea4, type: 3}
       propertyPath: m_IsActive
@@ -148656,6 +148672,10 @@ PrefabInstance:
     - target: {fileID: 9097573137997067132, guid: 14b07673aa4375841a7fa81c81594ea4, type: 3}
       propertyPath: isSelected
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9170153074838884854, guid: 14b07673aa4375841a7fa81c81594ea4, type: 3}
+      propertyPath: m_Name
+      value: VillageTile12
       objectReference: {fileID: 0}
     - target: {fileID: 9170153074838884854, guid: 14b07673aa4375841a7fa81c81594ea4, type: 3}
       propertyPath: m_IsActive
@@ -173811,6 +173831,10 @@ PrefabInstance:
     - target: {fileID: 4399808556989029979, guid: df25eff8fff48e24487ecab3226feb86, type: 3}
       propertyPath: m_LocalPosition.y
       value: 19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546823673339165909, guid: df25eff8fff48e24487ecab3226feb86, type: 3}
+      propertyPath: m_Name
+      value: VillageTile10
       objectReference: {fileID: 0}
     - target: {fileID: 4546823673339165909, guid: df25eff8fff48e24487ecab3226feb86, type: 3}
       propertyPath: m_IsActive
@@ -211275,6 +211299,10 @@ PrefabInstance:
     - target: {fileID: 9101876865657104261, guid: df25eff8fff48e24487ecab3226feb86, type: 3}
       propertyPath: m_LocalPosition.y
       value: 19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217368711166265482, guid: df25eff8fff48e24487ecab3226feb86, type: 3}
+      propertyPath: m_Name
+      value: VillageTile9
       objectReference: {fileID: 0}
     - target: {fileID: 9217368711166265482, guid: df25eff8fff48e24487ecab3226feb86, type: 3}
       propertyPath: m_IsActive

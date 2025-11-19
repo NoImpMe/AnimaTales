@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class ShopItemData
 {
+    public Button itemButton;
     public string itemID;
     public string itemName;
     public string itemDescription;

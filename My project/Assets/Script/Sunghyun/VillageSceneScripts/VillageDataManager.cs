@@ -9,7 +9,7 @@ public class VillageDataManager : MonoBehaviour
     private string currentVillageID;
     
     private Dictionary<string, VillageShopState> villageShops = new Dictionary<string, VillageShopState>(10);
-    private int innCurrentPrice = 300;
+    private int innCurrentPrice = 1000;
     
     private void Awake()
     {

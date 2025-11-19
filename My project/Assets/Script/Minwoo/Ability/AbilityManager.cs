@@ -44,7 +44,7 @@ public class AbilityManager : MonoBehaviour
             case "TemporShieldSymbol":
                 for(int i =0; i < playerInfo.battleAnima.Count; i++)
                 {
-                    playerInfo.battleAnima[i].Shield += ability.data.value;
+                    playerInfo.battleAnima[i].Shield += playerInfo.battleAnima[i].Maxstamina * ability.data.value;
                 }
                 break;
         }

@@ -12,8 +12,8 @@ public static class DefaultShopItems
                 itemDescription = "아니마 한 마리의 체력을 최대로 회복",
                 itemType = ItemType.FullHeal,
                 targetType = TargetType.Single,
-                price = 150,
-                maxPurchaseCount = 10
+                price = 500,
+                maxPurchaseCount = 15
             },
             new ShopItemData {
                 itemID = "heal_all",
@@ -21,8 +21,8 @@ public static class DefaultShopItems
                 itemDescription = "모든 아니마의 체력을 최대로 회복",
                 itemType = ItemType.AllHeal,
                 targetType = TargetType.All,
-                price = 800,
-                maxPurchaseCount = 5
+                price = 3000,
+                maxPurchaseCount = 10
             },
             new ShopItemData {
                 itemID = "revive_single",
@@ -30,8 +30,8 @@ public static class DefaultShopItems
                 itemDescription = "아니마 한 마리의 기절 상태를 회복",
                 itemType = ItemType.Revive,
                 targetType = TargetType.Single,
-                price = 300,
-                maxPurchaseCount = 3
+                price = 700,
+                maxPurchaseCount = 10
             }
         };
     }

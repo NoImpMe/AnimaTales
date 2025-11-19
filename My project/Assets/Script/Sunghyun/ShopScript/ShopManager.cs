@@ -43,6 +43,7 @@ public class ShopManager : MonoBehaviour
     
     private void OnItemPurchase(ShopItemData item)
     {
+        
         switch (item.targetType)
         {
             case TargetType.Single:
@@ -106,9 +107,12 @@ public class ShopManager : MonoBehaviour
     }
     IEnumerator SucessPurchase(ShopItemData item)
     {
+        item.itemButton.interactable = false;
         yield return StartCoroutine(GoldManager.Instance.SpendGold(item.price));
         remainingCounts[item.itemID] = shopState.GetRemainingCount(item.itemID);
         ShopUIManager.Instance.UpdateItemSlot(item.itemID, remainingCounts[item.itemID]);
+        item.itemButton.interactable = true;
+
     }
     private void ShowFeedback(string message)
     {

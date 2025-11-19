@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using Gamekit3D;
 
 public class InnUIManager : MonoBehaviour
 {
@@ -64,9 +65,7 @@ public class InnUIManager : MonoBehaviour
         if (innPanel != null)
         {
             innPanel.SetActive(true);
-            UpdatePriceUI();
-            UpdateGoldUI();
-            
+            UpdatePriceUI();            
         }
     }
     
@@ -89,37 +88,27 @@ public class InnUIManager : MonoBehaviour
         }
     }
     
-    private void UpdateGoldUI()
-    {
-        if (playerGoldText != null && GoldManager.Instance != null)
-        {
-            int gold = GoldManager.Instance.GetCurrentGold();
-            playerGoldText.text = $"{gold:N0}";
-            
-            if (useInnButton != null && innManager != null)
-            {
-                useInnButton.interactable = gold >= innManager.GetCurrentPrice();
-            }
-        }
-    }
     
     private void OnUseButtonClick()
     {
         if (innManager == null) return;
-        
-        bool success = innManager.UseInn();
-        
-        if (!success)
+        if(innManager.GetCurrentPrice() > GoldManager.Instance.GetCurrentGold())
         {
             ShowFeedback("골드가 부족합니다.");
+        }
+        
+        else 
+        {
+            useInnButton.interactable = false;
+            StartCoroutine(innManager.UseInn());
         }
     }
     
     private void OnInnUsedSuccessfully()
     {
         ShowFeedback("모든 아니마가 회복되었습니다.");
+        useInnButton.interactable = true;
         UpdatePriceUI();
-        UpdateGoldUI();
     }
     
     private void ShowFeedback(string message)

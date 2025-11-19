@@ -12,8 +12,8 @@ public static class RandomShopItems
                 itemDescription = "교감의 두루마리를 하나 획득",
                 itemType = ItemType.Recipe,
                 targetType = TargetType.None,
-                price = 500,
-                maxPurchaseCount = 3
+                price = 5000,
+                maxPurchaseCount = 1
             },
             new ShopItemData {
                 itemID = "growth_Max_boost",
@@ -21,8 +21,8 @@ public static class RandomShopItems
                 itemDescription = "아니마 한 마리의 레벨 상한을 1증가",
                 itemType = ItemType.Growth,
                 targetType = TargetType.Single,
-                price = 500,
-                maxPurchaseCount = 2
+                price = 3000,
+                maxPurchaseCount = 20
             },
             new ShopItemData {
                 itemID = "enhance_AP_buff",
@@ -30,8 +30,8 @@ public static class RandomShopItems
                 itemDescription = "아니마 한 마리의 공격력 스테이터스를 증가",
                 itemType = ItemType.Enhance,
                 targetType = TargetType.Single,
-                price = 400,
-                maxPurchaseCount = 5
+                price = 5000,
+                maxPurchaseCount = 20
             },
         };
     }

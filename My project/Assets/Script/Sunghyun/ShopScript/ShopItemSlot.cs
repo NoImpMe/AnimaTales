@@ -20,6 +20,7 @@ public class ShopItemSlot : MonoBehaviour
     public void Setup(ShopItemData data, int remainingCount, Action<ShopItemData> onPurchaseCallback)
     {
         itemData = data;
+        itemData.itemButton = purchaseButton;
         currentRemaining = remainingCount;
         onPurchase = onPurchaseCallback;
 

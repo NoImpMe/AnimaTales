@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using System.Collections;
 
 public class InnManager : MonoBehaviour
 {
@@ -17,9 +19,8 @@ public class InnManager : MonoBehaviour
         }
     }
     
-    [Header("여관 설정")]
-    [SerializeField] private int initialPrice = 600;
-    [SerializeField] private int priceIncreaseAmount = 200;
+    private int initialPrice = 1200;
+    private int priceIncreaseAmount = 700;
     
     private int currentPrice;
     private VillageDataManager dataManager;
@@ -77,7 +78,7 @@ public class InnManager : MonoBehaviour
         return currentPrice;
     }
     
-    public bool UseInn()
+    public IEnumerator UseInn()
     {
         if (!isInitialized)
         {
@@ -86,17 +87,12 @@ public class InnManager : MonoBehaviour
         
         if (GoldManager.Instance.GetCurrentGold() >= currentPrice)
         {
-            StartCoroutine(GoldManager.Instance.SpendGold(currentPrice));
+            yield return StartCoroutine(GoldManager.Instance.SpendGold(currentPrice));
             InnEffectHandler.ApplyInnEffect();
             AudioManager.Instance.PlaySFX(innClip);
             IncreasePrice();
-            
             OnInnUsed?.Invoke();
-            
-            return true;
         }
-        
-        return false;
     }
     
     private void IncreasePrice()

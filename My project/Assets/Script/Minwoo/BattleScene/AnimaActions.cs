@@ -60,7 +60,6 @@ public class AnimaActions : MonoBehaviour
                     yield return StartCoroutine(enemyHealthBar.TakeDamage(damage - enemy.animaData.Shield));
                 }
                 enemy.TakeDamage(damage);
-
             }
             else
             {
@@ -68,7 +67,6 @@ public class AnimaActions : MonoBehaviour
                 enemy.TakeDamage(damage);
 
             }
-            enemy.TakeDamage(damage);
             yield return StartCoroutine(damageBar.PutDamage(damage));
         }
     }
