@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: c10af4be693bfb04f914239d20fe8bcc
+guid: 9e14e9a530dd563468636181081ebb2c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5735211644073849138
-    second: havet2_0
+      213: -4938926121677652693
+    second: odium9_0
+  - first:
+      213: 7732867798323214871
+    second: odium9_1
+  - first:
+      213: -6720577648885579646
+    second: odium9_2
+  - first:
+      213: 8037856003458500433
+    second: odium9_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +105,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: havet2_0
+      name: odium9_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 61
-        width: 964
-        height: 912
+        x: 110
+        y: 412
+        width: 66
+        height: 158
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +137,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ece4b4b656f6860b0800000000000000
-      internalID: -5735211644073849138
+      spriteID: b2d71812cd8657bb0800000000000000
+      internalID: -4938926121677652693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: odium9_1
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 560
+        width: 56
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71abc16ca4aa05b60800000000000000
+      internalID: 7732867798323214871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: odium9_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 36
+        width: 798
+        height: 940
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 280ceb84c36bbb2a0800000000000000
+      internalID: -6720577648885579646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: odium9_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 396
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15782e1e2733c8f60800000000000000
+      internalID: 8037856003458500433
       vertices: []
       indices: 
       edges: []
@@ -135,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      havet2_0: -5735211644073849138
+      odium9_0: -4938926121677652693
+      odium9_1: 7732867798323214871
+      odium9_2: -6720577648885579646
+      odium9_3: 8037856003458500433
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

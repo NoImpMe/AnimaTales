@@ -105,6 +105,72 @@ public class EnemyBattleSetting : MonoBehaviour, IEnemyBattleSetting
         get => stage;
         set => stage = value;
     }
+    public void SpawnTutorial()
+    {
+        var database = BGRepo.I;
+        var animaTable = database.GetMeta("TutorialAnima");
+        canvas = GameObject.Find("Main Battle UI");
+        if (objectfileList != null)
+        {
+            objectfileList.Clear();
+            enemyObjPrefab.Clear();
+            enemyInstance.Clear();
+            enemyHpPrefab.Clear();
+            enemyHpInstance.Clear();
+            damagex.Clear();
+            damagey.Clear();
+            battleEnemyAnima.Clear();
+            enemyObjPrefab.Clear();
+        }
+        else
+        {
+            objectfileList = new List<string>();
+            enemyObjPrefab = new List<GameObject>();
+            enemyInstance = new List<GameObject>();
+            enemyHpPrefab = new List<GameObject>();
+            enemyHpInstance = new List<GameObject>();
+            enemyInfoInstance = new List<GameObject>();
+            enemyInfoPrefab = new List<GameObject>();
+            enemyParserPrefab = new List<GameObject>();
+            enemyParserInstance = new List<GameObject>();
+            damagex = new List<float>();
+            damagey = new List<float>();
+            battleEnemyAnima = new List<string>();
+            enemyObjPrefab = new List<GameObject>();
+            battleParser = GameObject.Find("Battle Parser");
+        }
+        battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
+        animaTable.ForEachEntity(entity =>
+        {
+            if (entity.Get<string>("Type") == stage)
+                objectfileList.Add(entity.Get<string>("Objectfile"));
+        });
+        for (int i = 0; i < 1; i++)
+        {
+            enemyObjPrefab.Add(Resources.Load<GameObject>("Anima/" + objectfileList[0]));
+            enemyHpPrefab.Add(Resources.Load<GameObject>("Minwoo/EnemyAnimaHP"));
+            enemyInfoPrefab.Add(Resources.Load<GameObject>($"Minwoo/Enemy{i}"));
+            enemyParserPrefab.Add(Resources.Load<GameObject>($"Minwoo/Battle Parser/Enemy{i}Name"));
+            battleEnemyAnima.Add(objectfileList[0]);
+        }
+        if (enemyObjPrefab.Count == 1 && enemyObjPrefab != null && enemyHpPrefab != null)
+        {
+            enemyInstance.Add(Instantiate(enemyObjPrefab[0], new Vector3(0f, 1.2f, 0), Quaternion.identity));
+            enemyInstance[0].GetComponent<SpriteRenderer>().sortingOrder = -1;
+            int index = enemyInstance[0].name.IndexOf("(Clone)");
+            enemyInstance[0].name = enemyInstance[0].name.Substring(0, index);
+            enemyHpInstance.Add(Instantiate(enemyHpPrefab[0], Vector3.zero, Quaternion.identity, canvas.transform));
+            enemyHpInstance[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, -22f, 0f);
+            enemyInfoInstance.Add(Instantiate(enemyInfoPrefab[0], canvas.transform));
+            index = enemyHpInstance[0].name.IndexOf("(Clone)");
+            enemyHpInstance[0].name = enemyHpInstance[0].name.Substring(0, index) + 0;
+            index = enemyInfoInstance[0].name.IndexOf("(Clone)");
+            enemyInfoInstance[0].name = enemyInfoInstance[0].name.Substring(0, index);
+            enemyParserInstance.Add(Instantiate(enemyParserPrefab[0], battleParser.transform));
+            index = enemyParserInstance[0].name.IndexOf("(Clone)");
+            enemyParserInstance[0].name = enemyParserInstance[0].name.Substring(0, index);
+        }
+    }
     public void SpawnEnemy(int level)
     {
         var database = BGRepo.I;

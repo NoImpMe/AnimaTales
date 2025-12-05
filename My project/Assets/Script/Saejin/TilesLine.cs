@@ -44,7 +44,7 @@ public class TilesLine : MonoBehaviour
     {
         if (regionController == null) return;
 
-        if (!regionController.isCleared && lines != null)
+        if ( lines != null)
         {
             float t = (Mathf.Sin(Time.time * blinkSpeed) + 1f) * 0.5f;
             Color blinkCol = Color.Lerp(Color.white, Color.yellow, t);

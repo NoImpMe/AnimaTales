@@ -30,21 +30,25 @@ public class AnimaEntry
 
         animaTable.ForEachEntity(entity =>
         {
-            var entry = new AnimaEntry
+            if(entity.Get<int>("IsBoss") != 1)
             {
-                name = entity.Get<string>("name"),
-                type = entity.Get<string>("Type"),
-                description = entity.Get<string>("Description"),
-                hp = entity.Get<float>("HP"),
-                ap = entity.Get<float>("AP"),
-                sp = entity.Get<float>("SP"),
-                dp = entity.Get<float>("DP"),
-                objectFile = entity.Get<string>("Objectfile"),
-                meeted = entity.Get<int>("Meeted"),
-                emotion = ParseEmotion(entity.Get<string>("Type")),
-                skillName = entity.Get<List<string>>("Skill"),
-            };
-            list.Add(entry);
+                var entry = new AnimaEntry
+                {
+                    name = entity.Get<string>("name"),
+                    type = entity.Get<string>("Type"),
+                    description = entity.Get<string>("Description"),
+                    hp = entity.Get<float>("HP"),
+                    ap = entity.Get<float>("AP"),
+                    sp = entity.Get<float>("SP"),
+                    dp = entity.Get<float>("DP"),
+                    objectFile = entity.Get<string>("Objectfile"),
+                    meeted = entity.Get<int>("Meeted"),
+                    emotion = ParseEmotion(entity.Get<string>("Type")),
+                    skillName = entity.Get<List<string>>("Skill"),
+                };
+                list.Add(entry);
+            }
+            
         });
 
         return list;

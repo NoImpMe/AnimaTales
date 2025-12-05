@@ -1,3 +1,4 @@
+using BansheeGz.BGDatabase;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,13 +9,10 @@ public class DontDesManager : MonoBehaviour
     public GameObject manager;
     public GameObject mapScreen;
     public GameObject grid;
-    private StageNode stageNode;
     private GameObject tileManager;
-    private RegionController tile;
     private string lastUnloaded;
     private Camera tileCam;
-    private Vector3 camPosition;
-
+    public bool tutoCleared = false;
     void Awake()
     {
         if (Instance == null)
@@ -22,8 +20,17 @@ public class DontDesManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(manager);
-            DontDestroyOnLoad(regionManager);
-            regionManager.GetComponent<RegionManager>().StageInit(0);
+            var database = BGRepo.I;
+            var meta = database.GetMeta("GoldData");
+            meta.ForEachEntity(e => { tutoCleared = e.Get<bool>("TutoCleared");});
+            if (!tutoCleared)
+            {
+                regionManager.GetComponent<RegionManager>().StageInit(999);
+            }
+            else
+            {
+                regionManager.GetComponent<RegionManager>().StageInit(0);
+            }
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
@@ -40,6 +47,7 @@ public class DontDesManager : MonoBehaviour
         {
             Destroy(manager);
             Destroy(this);
+            Destroy(regionManager);
             Destroy(gameObject);
             Destroy(grid);
             Destroy(tileManager);
@@ -91,10 +99,8 @@ public class DontDesManager : MonoBehaviour
             }
             var cam = GameObject.Find("Main Camera");
             tileCam = cam.GetComponent<Camera>();
-            tileCam.transform.position = camPosition;
+            tileCam.transform.position = new Vector3(RegionManager.Instance.wp.x, RegionManager.Instance.wp.y, -10f);
             grid.SetActive(true);
-            var tManager = tileManager.GetComponent<RegionManager>();
-            tManager.SetNextTile(tile);
         }
         if (scene.name.EndsWith("BattleScene"))
         {
@@ -116,25 +122,20 @@ public class DontDesManager : MonoBehaviour
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 
-    public void SetStage(StageNode node)
-    {
-        stageNode = node;
-    }
-
-    public void SetTile(RegionController target)
-    {
-        tile = target;
-        
-    }
-
-    public void setCamPosition(Vector3 cp)
-    {
-        camPosition = cp;
-    }
-
     public void setDesGrid()
     {
         grid = GameObject.Find("Tiles");
         DontDestroyOnLoad(grid);
+    }
+    public void TutorialClear()
+    {
+        var database = BGRepo.I;
+        var meta = database.GetMeta("GoldData");
+        meta.ForEachEntity(e => { 
+            e.Set<bool>("TutoCleared", true);
+            DBUpdater.Save();
+        });
+        
+
     }
 }

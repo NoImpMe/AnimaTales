@@ -13,6 +13,7 @@ public class PlayerInfo : ScriptableObject
     int tmp = 0;
     public int maxLevel = 5;
     public List<AbilitySO> abilitys;
+    public int stageNum = 0;
     public void Initialize()
     {
 
@@ -54,6 +55,34 @@ public class PlayerInfo : ScriptableObject
         }
 
     }
+    public void TutorInitialize()
+    {
+        var database = BGRepo.I;
+        var animaTable = database.GetMeta("TutorialAnima");
+        battleAnima.Clear();
+        haveAnima.Clear();
+        abilitys = new List<AbilitySO>();
+        onBossStage = false;
+        maxLevel = 211;
+        int a = Random.Range(0, 1);
+
+        animaData = ScriptableObject.CreateInstance<AnimaDataSO>();
+        animaData.TutorInitialize(animaTable[a].Get<string>("name"), 1000);
+        animaData.location = tmp;
+        GetAnima(animaData);
+        BattleSetting(haveAnima[tmp]);
+        for (int i = 0; i < 1; i++)
+        {
+            animaTable.ForEachEntity(entity =>
+            {
+                if (entity.Get<string>("name") == battleAnima[i].Name && entity.Get<int>("Meeted") == 0)
+                {
+                    entity.Set<int>("Meeted", 1);
+                    DBUpdater.Save();
+                }
+            });
+        }
+    }
     public void BattleSetting(AnimaDataSO animaData)
     {
         if (haveAnima.Contains(animaData) && battleAnima.Count < maxAnimaNum)
@@ -77,6 +106,10 @@ public class PlayerInfo : ScriptableObject
     }
     public void MaxLevelChanged()
     {
+        if(maxLevel == 211)
+        {
+            return;
+        }
         if (haveAnima.Count > 0)
         {
             foreach (var anima in haveAnima)

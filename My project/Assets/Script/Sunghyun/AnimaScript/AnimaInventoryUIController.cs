@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class AnimaInventoryUIController : MonoBehaviour
 {
@@ -15,7 +13,6 @@ public class AnimaInventoryUIController : MonoBehaviour
     [SerializeField] private AnimaInventoryDetailUI detailUI;
     private List<AnimaSlotUI> inventorySlots = new List<AnimaSlotUI>();
     private List<AnimaSlotUI> PartySlots = new List<AnimaSlotUI>();
-    private MixManager mixManager;
     private void Start()
     {
         if (AnimaInventoryManager.Instance != null)

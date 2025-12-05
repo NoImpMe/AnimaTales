@@ -1,3 +1,4 @@
+using BansheeGz.BGDatabase;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,7 @@ public class AnimaInventoryManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        playerInfo = ScriptableObject.CreateInstance<PlayerInfo>();
         if (!File.Exists(Path.Combine(Application.persistentDataPath, "save.dat")))
         {
             Debug.Log("¾øÀ½");
@@ -35,8 +37,8 @@ public class AnimaInventoryManager : MonoBehaviour
         {
             DBUpdater.Load();
         }
-        playerInfo = ScriptableObject.CreateInstance<PlayerInfo>();
-        playerInfo.Initialize();
+        
+        
     }
 
     private void OnDestroy()

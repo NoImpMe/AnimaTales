@@ -34,6 +34,7 @@ public class VillageController : MonoBehaviour
             if (_nameCanvasGroup == null)
                 _nameCanvasGroup = buildingNamePanel.AddComponent<CanvasGroup>();
         }
+        buildingNamePanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     

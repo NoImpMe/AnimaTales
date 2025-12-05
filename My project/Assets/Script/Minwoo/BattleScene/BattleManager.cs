@@ -200,7 +200,8 @@ public class BattleManager : MonoBehaviour, IBattleManager
     bool checkSkill = false;
     bool cleared = false;
     bool isPhobia = false;
-
+    GameObject tuto;
+    public bool isTuto = false;
     void Start()
     {
         btnClip = Resources.Load<AudioClip>("Minwoo/Sounds/SFX/AttackButtonSFX");
@@ -230,6 +231,12 @@ public class BattleManager : MonoBehaviour, IBattleManager
         AllyBattlePrepare();
         EnemyBattlePrepare();
         AudioManager.Instance.PlayBGM(bgmClip);
+        tuto = GameObject.Find("BattleTutorialCanvas");
+        if (tuto != null)
+        {
+            tuto.GetComponent<BattleTutorialController>().TutoInit();
+            isTuto = true;
+        }
         StartCoroutine(BattleStart());
     }
     void Update()
@@ -237,13 +244,16 @@ public class BattleManager : MonoBehaviour, IBattleManager
         if (animaActionUIController.selectAction.activeSelf && !cleared && !checkZ)
         {
             var current = EventSystem.current.currentSelectedGameObject;
-
-            if (current == null || !current.transform.IsChildOf(animaActionUIController.selectAction.transform))
+            if(tuto != null)
+            {
+                animaActionUIController.skillButton.Select();
+            }
+            else if (current == null || !current.transform.IsChildOf(animaActionUIController.selectAction.transform))
             {
                 animaActionUIController.attackButton.Select();
             }
             
-            if (Input.GetKeyUp(KeyCode.Z) && current.GetComponent<Button>().interactable)
+            if (Input.GetKeyUp(KeyCode.Z) && current.GetComponent<Button>().interactable && !isTuto)
             {
                 checkZ = true;
                 EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
@@ -318,6 +328,14 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             enemyBattleSetting.Stage = SceneManager.GetActiveScene().name.Substring(0, SceneManager.GetActiveScene().name.IndexOf("BossBattle"));
             enemyBattleSetting.SpawnBoss();
+            setEnemyanima();
+            setEnemyActions();
+            initializeEnemyAnima();
+        }
+        else if (!DontDesManager.Instance.tutoCleared)
+        {
+            enemyBattleSetting.Stage = SceneManager.GetActiveScene().name.Substring(0, SceneManager.GetActiveScene().name.IndexOf("Battle"));
+            enemyBattleSetting.SpawnTutorial();
             setEnemyanima();
             setEnemyActions();
             initializeEnemyAnima();
@@ -486,7 +504,11 @@ public class BattleManager : MonoBehaviour, IBattleManager
             for (int i = 0; i < enemyActions.Count; i++)
             {
                 enemyActions[i].animaData = ScriptableObject.CreateInstance<AnimaDataSO>();
-                enemyActions[i].animaData.Initialize(enemyBattleSetting.BattleEnemyAnima[i], level);
+                if (!DontDesManager.Instance.tutoCleared)
+                {
+                    enemyActions[i].animaData.TutorInitialize(enemyBattleSetting.BattleEnemyAnima[i], level);
+                }
+                else enemyActions[i].animaData.Initialize(enemyBattleSetting.BattleEnemyAnima[i], level);
                 animaTable.ForEachEntity(entity =>
                 {
                     if (entity.Get<string>("name") == enemyActions[i].animaData.Name && entity.Get<int>("Meeted") == 0)
@@ -494,7 +516,6 @@ public class BattleManager : MonoBehaviour, IBattleManager
                         entity.Set<int>("Meeted", 1);
                         DBUpdater.Save();
                     }
-
                 });
                 enemyActions[i].animaData.location = i;
                 enemyActions[i].animaData.enemyIndex = i;

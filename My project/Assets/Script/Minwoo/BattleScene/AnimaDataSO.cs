@@ -35,7 +35,7 @@ public class AnimaDataSO : ScriptableObject
     public List <string> skillName = new ();
     public List<Sprite> skillSprite = new();
     public string attackName = "";
-    public int[] maxLevel = new int[10]{ 9, 12, 15, 18, 21, 24, 27, 30, 33, 36 };
+    public int[] maxLevel = new int[10]{ 14, 20, 27, 35, 43, 52, 60, 70, 80, 100 };
     public Dictionary<string, float> tmpAbility = new Dictionary<string, float>();
     public void Initialize(string name, int level)
     {
@@ -47,7 +47,7 @@ public class AnimaDataSO : ScriptableObject
             if (entity.Get<string>("name") == name)
             {
 
-                mood = int.Parse(Name.Substring(Name.Length - 1));
+                mood = entity.Get<int>("Mood");
                 this.level = level;
                 weight = entity.Get<float>("Weight");
                 defHP = entity.Get<float>("HP");
@@ -76,6 +76,44 @@ public class AnimaDataSO : ScriptableObject
             }
         });
     }
+    public void TutorInitialize(string name, int level)
+    {
+        Name = name;
+        var database = BGRepo.I;
+        var animaTable = database.GetMeta("TutorialAnima");
+        animaTable.ForEachEntity(entity => {
+            if (entity.Get<string>("name") == name)
+            {
+
+                mood = entity.Get<int>("Mood");
+                this.level = level;
+                weight = entity.Get<float>("Weight");
+                defHP = entity.Get<float>("HP");
+                defAP = entity.Get<float>("AP");
+                defDP = entity.Get<float>("DP");
+                defSP = entity.Get<float>("SP");
+                DropGold = entity.Get<int>("DropGold");
+                DropRate = entity.Get<float>("DropRate");
+                Maxstamina = Mathf.Ceil(CalcStat(level, weight, defHP));
+                Stamina = Maxstamina;
+                Damage = Mathf.Ceil(CalcStat(level, weight, defAP));
+                Defense = Mathf.Ceil(CalcStat(level, weight, defDP));
+                Speed = Mathf.Ceil(CalcStat(level, weight, defSP));
+                Objectfile = entity.Get<string>("Objectfile");
+                attackName = entity.Get<string>("Attack");
+                if (entity.Get<List<string>>("Skill") != null)
+                {
+                    skillName = new List<string>(entity.Get<List<string>>("Skill"));
+                    skillSprite.Clear();
+                    foreach (var skill in skillName)
+                    {
+                        skillSprite.Add(Resources.Load<Sprite>($"AnimaSkillImage/{skill}"));
+                    }
+                }
+                type = entity.Get<string>("Type");
+            }
+        });
+    }
     public void GetAnima(string name, int level)
     {
         Name = name;
@@ -84,7 +122,7 @@ public class AnimaDataSO : ScriptableObject
         animaTable.ForEachEntity(entity => {
             if (entity.Get<string>("name") == name)
             {
-                mood = int.Parse(Name.Substring(Name.Length - 1));
+                mood = entity.Get<int>("Mood");
                 this.level = level;
                 weight = entity.Get<float>("Weight");
                 defHP = entity.Get<float>("HP");

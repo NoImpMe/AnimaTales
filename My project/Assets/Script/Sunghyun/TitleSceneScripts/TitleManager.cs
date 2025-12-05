@@ -1,7 +1,8 @@
+using BansheeGz.BGDatabase;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
 
 public class TitleManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Button corridorButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button quitGameButton;
+    [SerializeField] private Button tutorialButton;
 
     [Header("오디오")]
     [SerializeField] private AudioClip bgmClip;
@@ -27,12 +29,30 @@ public class TitleManager : MonoBehaviour
     private void Awake()
     {
         AudioManager.Instance.PlayBGM(bgmClip);
+        var database = BGRepo.I;
+        var table = database.GetMeta("GoldData");
+        table.ForEachEntity(e =>
+        {
+            if (!e.Get<bool>("TutoCleared"))
+            {
+                tutorialButton.gameObject.SetActive(true);
+            }
+        });
     }
-
+    public void TutorialClick()
+    {
+        AudioManager.Instance.PlaySFX(btnClip);
+        GameObject.Find("Game Manager").GetComponent<GoldManager>().Init();
+        GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo.TutorInitialize();
+        DestroyImmediate(tutorialButton);
+        SetButtonsInteractable(false);
+        StartCoroutine(fadePanel.LoadSceneWithFade("Stage0Scene"));
+    }
     public void OnNewGameClick()
     {
         AudioManager.Instance.PlaySFX(btnClip);
         GameObject.Find("Game Manager").GetComponent<GoldManager>().Init();
+        GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>().playerInfo.Initialize();
         SetButtonsInteractable(false);
         StartCoroutine(fadePanel.LoadSceneWithFade("Stage0Scene"));
     }

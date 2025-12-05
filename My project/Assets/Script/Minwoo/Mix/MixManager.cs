@@ -17,6 +17,7 @@ public class MixManager : MonoBehaviour
     public Toggle skill1;
     public Toggle skill2;
     public int checkSkill = -1;
+    bool tutoCleared = false;
     [SerializeField]
     GameObject resultCanvas;
     [SerializeField]
@@ -45,6 +46,7 @@ public class MixManager : MonoBehaviour
         mixDatas = JsonConvert.DeserializeObject<List<MixData>>(mixDataSet.text);
         matchedMixData = new List<MixData>();
         abilityManager = GameObject.Find("Game Manager").GetComponent<AbilityManager>();
+        tutoCleared =DontDesManager.Instance.tutoCleared;
         AudioManager.Instance.PlayBGM(bgmClip);
     }
     public void Init()
@@ -87,14 +89,32 @@ public class MixManager : MonoBehaviour
     }
     public void Mix() 
     {
-        
         if (checkSkill < 0)
         {
             GetComponent<MixButtonController>().SkillError();
         }
-        else if(mainAnima == null || subAnima == null)
+        else if (mainAnima == null || subAnima == null)
         {
             GetComponent<MixButtonController>().MixError();
+        }
+        else if (!tutoCleared)
+        {
+            resultCanvas.SetActive(true);
+            var inven = GameObject.Find("Game Manager").GetComponent<AnimaInventoryManager>();
+            AudioManager.Instance.PlaySFX(sucessClip);
+            resultText.text = "교감 성공!!";
+            resultImage.sprite = Resources.Load<Sprite>($"Anima_Sprites/고미니");
+            int level = mainAnima.level;
+            AnimaDataSO resultAnima = ScriptableObject.CreateInstance<AnimaDataSO>();
+            resultAnima.TutorInitialize("고미니", level);
+            AnimaInventoryManager.Instance.AddAnima(resultAnima);
+            mainAnima = null;
+            subAnima = null;
+            mainImage.sprite = null;
+            mainImage.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            subImage.sprite = null;
+            subImage.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+
         }
         else
         {
@@ -141,7 +161,7 @@ public class MixManager : MonoBehaviour
                         DBUpdater.Save();
                     }
                 });
-                inven.playerInfo.haveAnima.Add(resultAnima);
+                AnimaInventoryManager.Instance.AddAnima(resultAnima);
                 mainAnima = null;
                 subAnima = null;
                 mainImage.sprite = null;
@@ -155,7 +175,7 @@ public class MixManager : MonoBehaviour
                 AudioManager.Instance.PlaySFX(failClip);
                 resultText.text = "교감 실패..";
                 resultImage.sprite = mainImage.sprite;
-                inven.playerInfo.haveAnima.Add(mainAnima);
+                AnimaInventoryManager.Instance.AddAnima(mainAnima);
                 mainAnima = null;
                 subAnima = null;
                 mainImage.sprite = null;

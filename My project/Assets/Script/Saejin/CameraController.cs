@@ -12,7 +12,8 @@ public class CameraController : MonoBehaviour
     private float mapMinX, mapMaxX , mapMinY, mapMaxY;
     private GameObject camDesOB;
     private DontDesManager camDes;
-    private Vector3 dragOrigin;
+    Vector3 dragStartWorldPos;
+    bool isDragging;
 
     private void Awake()
     {
@@ -28,43 +29,64 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        PanCamera();
+        HandleCameraDrag();
     }
 
-    private void PanCamera()
+    private void HandleCameraDrag()
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
-        }
 
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButtonDown(1))
+            BeginDrag();
 
-            cam.transform.position = ClampCamera(cam.transform.position + difference);
-            camDes.setCamPosition(cam.transform.position);
-        }
+        if (Input.GetMouseButton(1) && isDragging)
+            DragCamera();
+
+        if (Input.GetMouseButtonUp(1))
+            EndDrag();
+    }
+    private void BeginDrag()
+    {
+        isDragging = true;
+        dragStartWorldPos = GetMouseWorldPos();
     }
 
-    private Vector3 ClampCamera(Vector3 targetPosition)
+    private void DragCamera()
+    {
+        Vector3 currentWorldPos = GetMouseWorldPos();
+        Vector3 delta = dragStartWorldPos - currentWorldPos;
+
+        cam.transform.position = ClampCamera(cam.transform.position + delta);
+    }
+
+    private void EndDrag()
+    {
+        isDragging = false;
+    }
+
+    private Vector3 GetMouseWorldPos()
+    {
+        return cam.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.nearClipPlane)
+        );
+    }
+    private Vector3 ClampCamera(Vector3 targetPos)
     {
         float camHeight = cam.orthographicSize;
-        float camWIdth = cam.orthographicSize * cam.aspect;
+        float camWidth = camHeight * cam.aspect;
 
-        float minX = mapMinX + camWIdth;
-        float maxX = mapMaxX - camWIdth;
+        float minX = mapMinX + camWidth;
+        float maxX = mapMaxX - camWidth;
 
         float minY = mapMinY + camHeight;
         float maxY = mapMaxY - camHeight;
 
-        float newX = Mathf.Clamp(targetPosition.x, minX, maxX);
-        float newY = Mathf.Clamp(targetPosition.y, minY, maxY);
+        float clampedX = Mathf.Clamp(targetPos.x, minX, maxX);
+        float clampedY = Mathf.Clamp(targetPos.y, minY, maxY);
 
-        return new Vector3(newX, newY, targetPosition.z);
+        // Z는 원래 값 유지
+        return new Vector3(clampedX, clampedY, targetPos.z);
     }
     public void setMaxMin()
     {

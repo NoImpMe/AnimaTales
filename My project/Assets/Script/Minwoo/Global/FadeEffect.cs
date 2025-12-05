@@ -55,7 +55,7 @@ public class FadeEffect : MonoBehaviour
 
     public IEnumerator LoadSceneWithFade(string sceneName)
     {
-        yield return FadeIn();
+        yield return StartCoroutine(FadeIn());
         SceneManager.LoadScene(sceneName);
     }
 }

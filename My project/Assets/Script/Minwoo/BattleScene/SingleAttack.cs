@@ -652,7 +652,11 @@ public class SingleAttack:MonoBehaviour
                 if (UnityEngine.Random.Range(0, 101) < (enemy.animaData.DropRate * (1+abilityManager.DropSymbol)) && !enemy.animaData.isClone)
                 {
                     AnimaDataSO animadata = ScriptableObject.CreateInstance<AnimaDataSO>();
-                    animadata.GetAnima(enemy.animaData.Name, enemy.animaData.level);
+                    if (!DontDesManager.Instance.tutoCleared)
+                    {
+                        animadata.TutorInitialize(enemy.animaData.Name, enemy.animaData.level);
+                    }
+                    else animadata.GetAnima(enemy.animaData.Name, enemy.animaData.level);
                     bm.AllyBattleSetting.PlayerInfo.GetAnima(animadata);
                     bm.DropAnima.Add(animadata);
                     bm.AnimaTable.ForEachEntity(entity =>

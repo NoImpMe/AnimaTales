@@ -5,7 +5,6 @@ public class BackToScene : MonoBehaviour
 {
 
     private GameObject gameManager;
-    private List<string> tileType = new List<string> { "Amare", "Felix", "Havet", "Irascor", "Lacrima", "Phobia" };
     [SerializeField]
     private FadeEffect fadePanel;
     [SerializeField]
@@ -24,5 +23,11 @@ public class BackToScene : MonoBehaviour
         gameManager = GameObject.Find("Game Manager");
         var gameM = gameManager.GetComponent<SceneManagerCorridor>();   
         StartCoroutine(fadePanel.LoadSceneWithFade(gameM.tileSceneName));
+    }
+    public void BackToTitle()
+    {
+        DontDesManager.Instance.TutorialClear();
+        StartCoroutine(fadePanel.LoadSceneWithFade("TitleScene"));
+        GoldManager.Instance.Init();
     }
 }

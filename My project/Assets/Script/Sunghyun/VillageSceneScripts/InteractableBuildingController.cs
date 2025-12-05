@@ -10,7 +10,7 @@ public class InteractableBuilding : MonoBehaviour
     [SerializeField] private Vector3 nameDisplayOffset = new Vector3(0, 1.5f, 0);
     [SerializeField] private FadeEffect fadePanel;
     private VillageController _villageController;
-    
+    public System.Action onBuildingClicked;
     public enum BuildingType
     {
         Inn,
@@ -26,6 +26,7 @@ public class InteractableBuilding : MonoBehaviour
     
     private void OnMouseDown()
     {
+        onBuildingClicked?.Invoke();
         if (EventSystem.current.IsPointerOverGameObject())
             return;
         
@@ -46,7 +47,11 @@ public class InteractableBuilding : MonoBehaviour
                 break;
                 
             case BuildingType.MagicTree:
-                LoadMixScene();
+                if (SceneManager.GetActiveScene().name.Contains("Tuto"))
+                {
+                    LoadTutoMixScene();
+                }
+                else LoadMixScene();
                 break;
         }
     }
@@ -55,7 +60,10 @@ public class InteractableBuilding : MonoBehaviour
     {
         StartCoroutine(fadePanel.LoadSceneWithFade("CorridorScene"));
     }
-
+    private void LoadTutoMixScene()
+    {
+        StartCoroutine(fadePanel.LoadSceneWithFade("TutorialMixScene"));
+    }
     private void LoadMixScene()
     {
         StartCoroutine(fadePanel.LoadSceneWithFade("MixScene"));

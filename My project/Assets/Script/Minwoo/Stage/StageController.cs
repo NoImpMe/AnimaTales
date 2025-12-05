@@ -19,9 +19,9 @@ public class StageController : MonoBehaviour
                 {
                     foreach (Transform tile in field[i].transform)
                     {
-                        if (tile.gameObject.GetComponent<Rigidbody2D>() != null)
+                        if (tile.gameObject.GetComponent<TilemapCollider2D>() != null)
                         {
-                            tile.gameObject.GetComponent<Rigidbody2D>().simulated = false;
+                            tile.gameObject.GetComponent<TilemapCollider2D>().enabled = false;
                         }
                         tmpColor = tile.gameObject.GetComponent<Tilemap>().color;
                         tmpColor.a = 0.37f;
@@ -48,9 +48,9 @@ public class StageController : MonoBehaviour
                     {
                         foreach (Transform tile in chkfield.transform)
                         {
-                            if (tile.gameObject.GetComponent<Rigidbody2D>() != null)
+                            if (tile.gameObject.GetComponent<TilemapCollider2D>() != null)
                             {
-                                tile.gameObject.GetComponent<Rigidbody2D>().simulated = true;
+                                tile.gameObject.GetComponent<TilemapCollider2D>().enabled = true;
                             }
                             tmpColor = tile.gameObject.GetComponent<Tilemap>().color;
                             tmpColor.a = 1f;

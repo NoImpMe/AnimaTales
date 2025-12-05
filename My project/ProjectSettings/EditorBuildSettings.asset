@@ -98,6 +98,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/04. BattleScene/PhobiaEliteBattleScene.unity
     guid: e154b482fc7c44646af8014a549139f7
+  - enabled: 1
+    path: Assets/Scene/04. BattleScene/TutorialBattleScene.unity
+    guid: b71bb5910a82fc14e811478ac341e195
+  - enabled: 1
+    path: Assets/Scene/05. VillageScene/TutorialVillageScene.unity
+    guid: 4ccf0a029c694d749982638fafae736b
+  - enabled: 1
+    path: Assets/Scene/05. VillageScene/TutorialMixScene.unity
+    guid: 0b9a46fcb49c4f94998107a02ce48891
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
