@@ -490,6 +490,7 @@ MonoBehaviour:
   battleManager: {fileID: 230224972}
   canvas: {fileID: 599841604}
   playerInfo: {fileID: 0}
+  isTuto: 0
 --- !u!4 &230224974
 Transform:
   m_ObjectHideFlags: 0

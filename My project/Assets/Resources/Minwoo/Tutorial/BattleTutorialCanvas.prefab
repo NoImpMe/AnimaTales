@@ -654,9 +654,14 @@ MonoBehaviour:
   logBlock: {fileID: 1449672843786218075}
   parserButton: {fileID: 0}
   parserBlock: {fileID: 1387501933522019933}
-  infoButton: {fileID: 0}
+  allyInfoButton: {fileID: 0}
+  enemyInfoButton: {fileID: 0}
   allyInfoBlock: {fileID: 698571781329250197}
   enemyInfoBlock: {fileID: 4095406342690312321}
+  upFinger: {fileID: 4636525405587933106, guid: 119f3aca2ff681b47bdf43da1ec2c9a4, type: 3}
+  leftFinger: {fileID: 8202105366792076622, guid: 517c72a113624714caea9e1680958e23, type: 3}
+  rightFinger: {fileID: 3837250709234953180, guid: c218d97ad54096e4d9dbe2a46cb9231b, type: 3}
+  actionUI: {fileID: 0}
 --- !u!1 &8703280666793732146
 GameObject:
   m_ObjectHideFlags: 0

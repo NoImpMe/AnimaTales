@@ -769,7 +769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.5425, y: -0.000009536743}
+  m_AnchoredPosition: {x: 4.5425, y: -0.000015258789}
   m_SizeDelta: {x: -9.085, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &605122625
@@ -1361,9 +1361,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 456543441324235355, guid: 7467db92eb5f33941a9642e9b5abe77f, type: 3}
+      propertyPath: actionUI
+      value: 
+      objectReference: {fileID: 1305154663}
+    - target: {fileID: 456543441324235355, guid: 7467db92eb5f33941a9642e9b5abe77f, type: 3}
+      propertyPath: upFinger
+      value: 
+      objectReference: {fileID: 4636525405587933106, guid: 119f3aca2ff681b47bdf43da1ec2c9a4, type: 3}
+    - target: {fileID: 456543441324235355, guid: 7467db92eb5f33941a9642e9b5abe77f, type: 3}
       propertyPath: logButton
       value: 
       objectReference: {fileID: 1997889220}
+    - target: {fileID: 456543441324235355, guid: 7467db92eb5f33941a9642e9b5abe77f, type: 3}
+      propertyPath: leftFinger
+      value: 
+      objectReference: {fileID: 8202105366792076622, guid: 517c72a113624714caea9e1680958e23, type: 3}
     - target: {fileID: 456543441324235355, guid: 7467db92eb5f33941a9642e9b5abe77f, type: 3}
       propertyPath: skillButton
       value: 
@@ -2202,6 +2214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1305154663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8085752419833939154, guid: 93a2da44f4bd23747aeb980811f49692, type: 3}
+  m_PrefabInstance: {fileID: 696821951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1318213307
 GameObject:
   m_ObjectHideFlags: 0

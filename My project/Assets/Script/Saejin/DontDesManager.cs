@@ -97,7 +97,7 @@ public class DontDesManager : MonoBehaviour
                     }
                 }
             }
-            var cam = GameObject.Find("Main Camera");
+            var cam = GameObject.Find("Main Cam");
             tileCam = cam.GetComponent<Camera>();
             tileCam.transform.position = new Vector3(RegionManager.Instance.wp.x, RegionManager.Instance.wp.y, -10f);
             grid.SetActive(true);

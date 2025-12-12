@@ -12,7 +12,7 @@ public class DialogueSystem : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public List<string> textList;
     public int index = 0;
-    public float typingSpeed = 0.03f;     
+    public float typingSpeed = 0.01f;     
 
     private System.Action onFinished;     
     private Coroutine typingCoroutine;

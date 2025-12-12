@@ -501,6 +501,8 @@ MonoBehaviour:
   villageTile: {fileID: 0}
   stageBlock: {fileID: 5790454467098733289}
   invenBlock: {fileID: 4487092627740284955}
+  upFinger: {fileID: 4636525405587933106, guid: 119f3aca2ff681b47bdf43da1ec2c9a4, type: 3}
+  downFinger: {fileID: 6121100672733460977, guid: dbf5466a582d4484caee97a1d3a5ef94, type: 3}
 --- !u!1 &8703280666793732146
 GameObject:
   m_ObjectHideFlags: 0

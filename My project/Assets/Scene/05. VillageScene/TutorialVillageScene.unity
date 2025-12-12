@@ -3181,6 +3181,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 811100970}
     - target: {fileID: 6093624792574418488, guid: 7d33bf6ec77ac1b4fb0c50ed07ab1058, type: 3}
+      propertyPath: upFinger
+      value: 
+      objectReference: {fileID: 4636525405587933106, guid: 119f3aca2ff681b47bdf43da1ec2c9a4, type: 3}
+    - target: {fileID: 6093624792574418488, guid: 7d33bf6ec77ac1b4fb0c50ed07ab1058, type: 3}
       propertyPath: shopBlock
       value: 
       objectReference: {fileID: 811100972}

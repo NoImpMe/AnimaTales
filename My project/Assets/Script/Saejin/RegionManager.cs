@@ -40,7 +40,7 @@ public class RegionManager : MonoBehaviour
     }
     public void StageInit(int stageNum)
     {
-        cameraSet = GameObject.Find("Main Camera");
+        cameraSet = GameObject.Find("Main Cam");
         var camSet = cameraSet.GetComponent<CameraController>();
         tileMap = Resources.Load<GameObject>($"Minwoo/TileMap/Stage{stageNum}");
         this.stageNum = stageNum;

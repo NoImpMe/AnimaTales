@@ -655,6 +655,7 @@ MonoBehaviour:
   innBlock: {fileID: 0}
   mix: {fileID: 0}
   mixBlock: {fileID: 0}
+  upFinger: {fileID: 6702422314644821853, guid: 1c3cdfcaa32b89044afc4acdb741e44f, type: 3}
 --- !u!1 &8703280666793732146
 GameObject:
   m_ObjectHideFlags: 0
