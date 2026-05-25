@@ -109,7 +109,7 @@ public class RegionManager : MonoBehaviour
             {
                 yield return StartCoroutine(fadePanel.LoadSceneWithFade("TutorialVillageScene"));
             }
-            else yield return StartCoroutine(fadePanel.LoadSceneWithFade("VillgeScene"));
+            else yield return StartCoroutine(fadePanel.LoadSceneWithFade("VillageScene"));
             
 
         }
