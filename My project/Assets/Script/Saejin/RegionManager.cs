@@ -100,6 +100,10 @@ public class RegionManager : MonoBehaviour
     public IEnumerator EnterBattle(RegionController target)
     {
         
+        if(!target.isVillaged && AnimaInventoryManager.Instance.playerInfo.battleAnima.Count <= 0)
+        {
+            errorPanel.SetActive(true);
+        }
         if (target.isVillaged)
         {
             string villageID = target.name;
@@ -110,12 +114,6 @@ public class RegionManager : MonoBehaviour
                 yield return StartCoroutine(fadePanel.LoadSceneWithFade("TutorialVillageScene"));
             }
             else yield return StartCoroutine(fadePanel.LoadSceneWithFade("VillageScene"));
-            
-
-        }
-        if(AnimaInventoryManager.Instance.playerInfo.battleAnima.Count <= 0)
-        {
-            errorPanel.SetActive(true);
         }
         else if (target.name.StartsWith("EliteBattle"))
         {

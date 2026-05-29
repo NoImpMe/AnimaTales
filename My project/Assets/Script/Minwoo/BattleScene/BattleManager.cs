@@ -202,6 +202,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     bool isPhobia = false;
     GameObject tuto;
     public bool isTuto = false;
+    private WaitForSeconds delay = new WaitForSeconds(1f);
     void Start()
     {
         btnClip = Resources.Load<AudioClip>("Minwoo/Sounds/SFX/AttackButtonSFX");
@@ -564,7 +565,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
         {
             //Buff buff;
             int selectAlly = selectNoDieAnima();
-            yield return new WaitForSeconds(0.5f);
+            yield return delay;
 
             switch (enemyBattleSetting.Stage)
             {
@@ -1206,7 +1207,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
     {
         
         int selectAlly = selectNoDieAnima();
-        yield return new WaitForSeconds(0.5f);
+        yield return delay;
         selectEnemy = Random.Range(0, enemyActions.Count);
         foreach (EnemyActions enemy in enemyActions)
         {
@@ -1476,7 +1477,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = index;
                 DestroyImmediate(arrow);
-                yield return new WaitForSeconds(1f);
+                yield return delay;
                 break;
             }
             else if (Input.GetKeyUp(KeyCode.C))
@@ -1514,7 +1515,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     DestroyImmediate(tmp[i]);
                     tmp.RemoveAt(i);
                 }
-                yield return new WaitForSeconds(1f);
+                yield return delay;
                 break;
             }
             else if (Input.GetKeyUp(KeyCode.C))
@@ -1581,7 +1582,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                 AudioManager.Instance.PlaySFX(btnClip);
                 selectEnemy = noDieAnimaIndex[index];
                 DestroyImmediate(arrow);
-                yield return new WaitForSeconds(1f);
+                yield return delay;
                 break;
             }
             else if (Input.GetKeyUp(KeyCode.C))
@@ -1619,7 +1620,7 @@ public class BattleManager : MonoBehaviour, IBattleManager
                     DestroyImmediate(tmp[i]);
                     tmp.RemoveAt(i);
                 }
-                yield return new WaitForSeconds(1f);
+                yield return delay;
                 break;
             }
             else if (Input.GetKeyUp(KeyCode.C))

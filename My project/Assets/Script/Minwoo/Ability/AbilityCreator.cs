@@ -10,12 +10,9 @@ public class AbilityCreator : MonoBehaviour
     [SerializeField]
     GameObject[] abilitys;
     [SerializeField]
-    TextMeshProUGUI[] abilityTxt = new TextMeshProUGUI[3];
-    [SerializeField]
     TextMeshProUGUI[] rerollTxt = new TextMeshProUGUI[3];
     [SerializeField]
     AbilityReroll[] abilityReroll;
-    int[] ranNums = new int[3];
     List<AbilitySO> exceptAbility;
     [SerializeField]
     List<AbilitySO> bronzeList;

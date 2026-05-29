@@ -19,6 +19,7 @@ public class CameraManager : MonoBehaviour
     List<GameObject> instanceList;
     ParticleSystem ps;
     GameObject prefab;
+    private WaitForSeconds cameraDelay = new WaitForSeconds(0.5f);
     public IEnumerator ZoomSingleOpp(Transform hitter,Transform hitted,  bool isAlly, string skill)
     {
         
@@ -30,7 +31,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -43,7 +44,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
@@ -62,7 +63,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -74,7 +75,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
@@ -96,7 +97,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -125,7 +126,7 @@ public class CameraManager : MonoBehaviour
             
 
             yield return animatorController.WaitForAnimationEnd(animator, "EnemyZoomed2", instanceList[0]);
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
 
         }
         else
@@ -136,7 +137,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -149,7 +150,7 @@ public class CameraManager : MonoBehaviour
                 yield return null;
             }
             instanceList = new List<GameObject>();
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
             for (int i = 0; i < hitted.Count; i++)
             {
@@ -163,7 +164,7 @@ public class CameraManager : MonoBehaviour
                 GameObject.Destroy(instanceList[i]);
             }
             yield return animatorController.WaitForAnimationEnd(animator, "AllyZoomed3", instanceList[0]);
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
 
         }
     }
@@ -177,7 +178,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -190,7 +191,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
@@ -210,7 +211,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -222,7 +223,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
             instance = GameObject.Instantiate(prefab, new Vector3(hitted.transform.position.x, hitted.transform.position.y, hitted.transform.position.z), prefab.transform.rotation);
 
@@ -242,7 +243,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -280,7 +281,7 @@ public class CameraManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill);
             instance = GameObject.Instantiate(prefab, new Vector3(hitter.transform.position.x, hitter.transform.position.y, hitter.transform.position.z), prefab.transform.rotation);
 
@@ -293,7 +294,7 @@ public class CameraManager : MonoBehaviour
                 yield return null;
             }
             instanceList = new List<GameObject>();
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
             prefab = Resources.Load<GameObject>("AnimaSkill/" + skill + "ed");
             for (int i = 0; i < hitted.Count; i++)
             {
@@ -301,7 +302,7 @@ public class CameraManager : MonoBehaviour
             }
 
             ps = instanceList[0].GetComponent<ParticleSystem>();
-            yield return new WaitForSeconds(0.5f);
+            yield return cameraDelay;
 
             yield return new WaitForSeconds((ps.main.duration + ps.main.startLifetime.constantMax) / ps.main.simulationSpeed);
             for (int i = 0; i < instanceList.Count; i++)

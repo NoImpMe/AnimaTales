@@ -132,7 +132,6 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
                     allyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                     int index = allyInstance[i].name.IndexOf("(Clone)");
                     allyInstance[i].name = allyInstance[i].name.Substring(0, index);
-                    //allyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     allyHpInstance.Add(Instantiate(allyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                     allyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i*380f) - 380f, -390f, 0f);
                     index = allyHpInstance[i].name.IndexOf("(Clone)");
@@ -153,7 +152,6 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
                     allyInstance[i].GetComponent<SpriteRenderer>().sortingOrder = -1;
                     int index = allyInstance[i].name.IndexOf("(Clone)");
                     allyInstance[i].name = allyInstance[i].name.Substring(0, index);
-                    //allyInstance[i].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     allyHpInstance.Add(Instantiate(allyHpPrefab[i], Vector3.zero, Quaternion.identity, canvas.transform));
                     allyHpInstance[i].GetComponent<RectTransform>().anchoredPosition = new Vector3((i * 380f) - 200f, -390f, 0f);
                     index = allyHpInstance[i].name.IndexOf("(Clone)");
@@ -173,7 +171,6 @@ public class AllyBattleSetting : MonoBehaviour,IAllyBattleSetting
                 int index = allyInstance[0].name.IndexOf("(Clone)");
                 allyInstance[0].name = allyInstance[0].name.Substring(0, index);
                 allyInstance[0].transform.Rotate(0, 180f, 0);
-                //allyInstance[0].transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);//-195f 185f 
                 allyHpInstance.Add(Instantiate(allyHpPrefab[0], Vector3.zero, Quaternion.identity, canvas.transform));
                 allyHpInstance[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, -390f, 0f);
                 index = allyHpInstance[0].name.IndexOf("(Clone)");

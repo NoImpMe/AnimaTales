@@ -1,10 +1,8 @@
-using BansheeGz.BGDatabase;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class AnimaInventoryManager : MonoBehaviour
 {
